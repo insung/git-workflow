@@ -1,0 +1,16 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "git-workflow",
+  "version": "0.1.0",
+  "description": "Scope Git changes, plan branches and releases, and draft evidence-based release notes.",
+  "author": {
+    "name": "insung",
+    "url": "https://github.com/insung"
+  },
+  "repository": "https://github.com/insung/git-workflow",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "workflow"
+  ]
+}

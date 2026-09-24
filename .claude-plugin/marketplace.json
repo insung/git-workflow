@@ -1,0 +1,15 @@
+{
+  "name": "git-workflow",
+  "owner": {
+    "name": "insung",
+    "url": "https://github.com/insung"
+  },
+  "plugins": [
+    {
+      "name": "git-workflow",
+      "source": ".",
+      "description": "Scope Git changes, plan branches and releases, and draft evidence-based release notes."
+    }
+  ],
+  "description": "Install the git-workflow skill as a Claude Code plugin."
+}
