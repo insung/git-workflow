@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Workflow"
+  short_description: "Git 변경·브랜치·PR·릴리즈 노트 운영 규칙"
+  default_prompt: "$git-workflow을 사용해 이번 세션의 변경 범위를 확인하고 커밋 계획을 만들어줘."
