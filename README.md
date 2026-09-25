@@ -72,6 +72,32 @@ Include only user-visible or operational changes supported by the diff.
 
 The skill checks that the base is an ancestor of the target, reads first-parent history and full commit bodies, and compares the actual changed files. It groups related changes and distinguishes a draft from a published release. When no previous release point is known, it can draft an `Unreleased` section without inventing a version or date.
 
+## See the workflow
+
+```mermaid
+flowchart TD
+    A["Git request"] --> B["Inspect repository rules and actual state"]
+    B --> C{"Requested outcome"}
+    C -->|Commit or PR| D["Select changes owned by this request"]
+    C -->|Branch strategy| E["Check CI, review, and deployment flow"]
+    C -->|Release notes| F["Compare base..target history with the diff"]
+    D --> G["Perform authorized work and recheck status"]
+    E --> H["Propose branch, merge, and hotfix paths"]
+    F --> I["Draft user-facing changes supported by evidence"]
+```
+
+For example, suppose you explicitly identify `src/retry.ts` and `tests/retry.test.ts` as this request's changes, while `docs/team-plan.md` belongs to another task:
+
+```text
+ M src/retry.ts
+ M tests/retry.test.ts
+ M docs/team-plan.md
+```
+
+After reviewing the diffs and obtaining the applicable commit approval, the agent stages only the two retry files, checks the staged diff, runs the repository's relevant verification, and makes a scoped commit. A final `git status --short` should still show `docs/team-plan.md`. If ownership is unclear or changes share a file, the agent resolves the exact hunks before staging. This is an illustrative scenario, not a claim about this repository's working tree.
+
+The installed skill includes [worked examples](skills/git-workflow/references/examples.md) for this commit case, a branch-strategy decision, and a release-note draft.
+
 ## Boundaries
 
 The skill respects repository-specific instructions over its suggested commit format and branch defaults. It does not infer ownership of unrelated dirty changes, invent an issue number, claim tests or deployment that did not happen, or publish a release from commit subjects alone. A request for notes does not authorize a tag or GitHub Release. Push, PR, issue, merge, tag, and release actions each require the authorization applicable to that action.

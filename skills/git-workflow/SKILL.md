@@ -151,6 +151,8 @@ git log --first-parent --pretty=format:'%s' <이전-태그>..<현재-태그>
 
 커밋 이력에서 릴리즈 노트나 배포 PR의 변경 요약을 만들 때 [release-notes.md](references/release-notes.md)를 읽는다. 이전 배포 지점과 이번 대상 지점을 확인하고, 해당 범위의 커밋·PR·실제 변경을 대조해 사용자에게 의미 있는 결과로 묶는다. 릴리즈 노트 작성은 태그 생성, GitHub Release 발행 또는 배포 권한을 포함하지 않는다.
 
+각 작업의 입력 근거와 결과물 형태가 필요하면 [examples.md](references/examples.md)의 가상 사례를 참고한다. 사례의 파일·커밋·운영 조건은 실제 저장소에서 다시 확인한다.
+
 ## 금지 사항
 
 - 범위 스캔 없이 커밋 시작
