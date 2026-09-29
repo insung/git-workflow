@@ -84,7 +84,7 @@ git log --first-parent <기본-또는-통합-브랜치>
 3. 태그가 실제로 어떤 배포를 일으키는가
 4. 되돌릴 이전 배포 지점을 알고 있는가
 
-버전 증가는 저장소 정책이 없을 때만 Conventional Commits를 참고한다. `BREAKING CHANGE`는 major, `feat`는 minor, `fix`와 `perf`는 patch 후보다.
+버전 증가는 저장소 정책이 없을 때만 Conventional Commits와 실제 변경을 함께 참고한다. `feat`는 minor, `fix`와 `perf`는 patch 후보다. 호환성 영향은 diff와 소비자 전환 필요성을 확인해 판단한다.
 
 ## hotfix
 
