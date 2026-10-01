@@ -8,8 +8,8 @@
     {
       "name": "git-workflow",
       "source": ".",
-      "description": "Scope Git changes, plan branches and releases, and draft evidence-based release notes."
+      "description": "Issue-first implementation, spec-it review, approved merge and Wiki, plus scoped commits and releases."
     }
   ],
-  "description": "Install the git-workflow skill as a Claude Code plugin."
+  "description": "Install the git-workflow skills as a Claude Code plugin."
 }

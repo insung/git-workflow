@@ -1,0 +1,81 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { validatePackage } from '../scripts/check-package.mjs';
+
+const names = ['git-workflow', 'issue-create', 'plan-create', 'pr-create', 'pr-review', 'pr-merge', 'commit-rule', 'git-release'];
+const references = ['git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-create/references/feature-issue.md', 'issue-create/references/bug-issue.md', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-review/references/review.md', 'pr-merge/references/wiki.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'commit-rule/references/branch.md', 'git-release/references/release-notes.md'];
+function fixture(t) {
+  const root = mkdtempSync(join(tmpdir(), 'git-workflow-package-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  function put(path, data) {
+    const dest = join(root, path);
+    mkdirSync(join(dest, '..'), { recursive: true });
+    writeFileSync(dest, data);
+  }
+  for (const name of names) put(`skills/${name}/SKILL.md`, `---\nname: ${name}\ndescription: Use when testing ${name}.\n---\n\n# Skill\n`);
+  for (const path of references) put(`skills/${path}`, '# Reference\n');
+  for (const path of ['plugin.json', '.codex-plugin/plugin.json', '.claude-plugin/plugin.json'])
+    put(path, JSON.stringify({ name: 'git-workflow', version: '0.2.0', ...(path.includes('codex') ? { skills: './skills/' } : {}) }));
+  put('.claude-plugin/marketplace.json', JSON.stringify({ name: 'git-workflow', plugins: [{ name: 'git-workflow', source: '.' }] }));
+  return { root, put };
+}
+test('accepts a complete dual-host package', t => {
+  const { root } = fixture(t);
+  assert.deepEqual(validatePackage(root), []);
+});
+test('rejects a missing workflow stage', t => {
+  const { root } = fixture(t);
+  rmSync(join(root, 'skills/pr-review'), { recursive: true });
+  assert.ok(validatePackage(root).some(e => e.includes('pr-review')));
+});
+test('rejects a skill name that does not match its discovery directory', t => {
+  const { root, put } = fixture(t);
+  put('skills/pr-review/SKILL.md', '---\nname: wrong-name\ndescription: Use when reviewing.\n---\n');
+  assert.ok(validatePackage(root).some(e => e.includes('name mismatch')));
+});
+test('rejects versions that differ between plugin hosts', t => {
+  const { root, put } = fixture(t);
+  put('.claude-plugin/plugin.json', JSON.stringify({ name: 'git-workflow', version: '0.1.0' }));
+  assert.ok(validatePackage(root).some(e => e.includes('version mismatch')));
+});
+test('rejects broken relative handoff links', t => {
+  const { root, put } = fixture(t);
+  put('README.md', '[review](skills/missing/SKILL.md)');
+  assert.ok(validatePackage(root).some(e => e.includes('broken link')));
+});
+test('allows external URLs and local fragments without fetching them', t => {
+  const { root, put } = fixture(t);
+  put('README.md', '[web](https://example.invalid/x) [anchor](#test) [issue](skills/issue-create/SKILL.md#input)');
+  assert.deepEqual(validatePackage(root), []);
+});
+test('rejects a Codex manifest that loads the wrong skill directory', t => {
+  const { root, put } = fixture(t);
+  put('.codex-plugin/plugin.json', JSON.stringify({ name: 'git-workflow', version: '0.2.0', skills: './missing/' }));
+  assert.ok(validatePackage(root).some(e => e.includes('skills root')));
+});
+test('returns a readable error for malformed JSON', t => {
+  const { root, put } = fixture(t);
+  put('plugin.json', '{broken');
+  assert.ok(validatePackage(root).some(e => e.includes('invalid manifest')));
+});
+test('rejects an absent plan form even when no link points to it', t => {
+  const { root } = fixture(t);
+  rmSync(join(root, 'skills/plan-create/references/plan.md'));
+  assert.ok(validatePackage(root).some(e => e.includes('plan-create/references/plan.md')));
+});
+test('rejects missing shared label guidance', t => {
+  const { root } = fixture(t);
+  rmSync(join(root, 'skills/git-workflow/references/labels.md'));
+  assert.ok(validatePackage(root).some(e => e.includes('git-workflow/references/labels.md')));
+});
+
+for (const path of ['git-workflow/references/issue-link.md', 'issue-create/references/feature-issue.md', 'issue-create/references/bug-issue.md']) {
+  test(`rejects missing required form or contract: ${path}`, t => {
+    const { root } = fixture(t);
+    rmSync(join(root, 'skills', path));
+    assert.ok(validatePackage(root).some(e => e.includes(`missing reference: skills/${path}`)));
+  });
+}

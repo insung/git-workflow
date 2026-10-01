@@ -1,126 +1,32 @@
 # git-workflow
 
-[English](README.md) · [MIT 라이선스](LICENSE)
+변경 요청을 Issue의 의도·영향 범위·달성 조건으로 정리하고, 계획·구현·테스트·PR 검토·머지까지 같은 근거로 이어가는 Codex·Claude Code용 플러그인이다. 작업 기록은 docs/에 두고, 각 단계가 이전 단계의 의도와 실제 결과를 확인한다.
 
-Git 작업 트리의 변경을 검토 가능한 커밋, 브랜치, PR 또는 릴리즈 노트로 전달할 때 쓰는 스킬입니다. 실제 저장소 상태를 확인한 뒤 다음 행동을 판단합니다. Codex와 Claude Code 플러그인이 동일한 `skills/git-workflow/` 원본을 읽습니다.
+Issue → plan/todo → 구현·테스트·커밋 → PR → spec-it 검토 → 사용자 승인 → 머지 → Wiki로 연결한다.
 
-## 왜 필요한가
+| 스킬 | 역할 |
+| --- | --- |
+| git-workflow | 전체 단계 선택·공통 경계·plan/todo 구현 조율 |
+| issue-create | 기존 Issue 확인·생성/보완, 의도·영향·달성 조건 |
+| plan-create | Issue 기반 계획·단위 todo·검증·배포/롤백 계획 |
+| pr-create | 구현 후 PR 본문과 검토 인계 |
+| pr-review | 사용자 의도·plan/todo·diff/commit·정책·테스트 증거 검토 |
+| pr-merge | 승인된 HEAD의 머지 확인과 Wiki 기록 |
+| commit-rule | 범위·메시지·index 보존·브랜치 규칙 |
+| git-release | 태그·릴리즈·이력 기반 노트 |
 
-Git 작업은 `git commit` 한 번으로 끝나지 않습니다. 작업 트리에는 다른 작업의 변경이 섞일 수 있고, 브랜치 이름만으로 실제 배포 경로를 알 수 없으며, 커밋 제목만 나열한 노트는 배포된 결과와 다를 수 있습니다. 이 스킬은 범위와 근거를 먼저 확인하는 반복 가능한 절차를 제공합니다. 이 문제의식은 현재 스킬의 규칙에서 읽은 것이며, 제작 당시의 개인적 동기라고 단정하지 않습니다.
+[흐름도·필수 조건·양식](docs/workflow.md), [로컬 시험](docs/testing/local-pilot.md), [사용 가상 사례](README.md#examples-illustrative)를 참고한다. 상세와 양식의 정본은 각 스킬 references/에 있다. 기능·버그 Issue는 별도 템플릿을 사용한다. 공통 type·scope·문체는 git-workflow/references/에서 참조한다. 이동된 옛 파일과 안내용 별칭은 남기지 않는다.
 
-다음 상황에 사용할 수 있습니다.
+## 작업 문서와 외부 기록
 
-- 이번 요청의 변경과 다른 미완료 작업을 구분해 커밋할 때
-- 저장소의 검토·배포 방식에 맞는 브랜치와 머지 전략을 정할 때
-- 실제 변경과 검증 결과로 이슈나 PR 초안을 작성할 때
-- 기존 규칙에 맞는 태그·릴리즈 후보를 검토할 때
-- 고정된 `base..target` 범위의 이력과 diff로 릴리즈 노트를 쓸 때
+대상 리포 `docs/git-workflows/{yyyy-MM}/{dd}_{issue-number}_{title}/`에 plan.md, todos.md 또는 01-todos.md 등을 기록한다. 실제 Issue 번호 확인 후 경로를 확정하며 원격 불가 파일럿은 `{dd}_draft_{title}`로 구분한다. 계획에는 Issue 맥락·사용자 의도·단위 실행 흐름·검증·배포/롤백이 필수다. unit test와 사례별 실제 결과는 구현 담당이 기록하고 리뷰 담당이 AC·코드·commit과 대조한다.
 
-## 플러그인 설치
+PR 생성·머지 전에 본문의 Issue 항목을 실제 원격 Issue와 대조한다. PR 오연결·접근 불가·내용 불일치이면 보류하며 local-draft는 대신할 수 없다.
 
-플러그인과 마켓플레이스 이름은 모두 `git-workflow`입니다. 이 저장소에 필요한 파일이 들어 있으며 `ai-workflow`는 필요하지 않습니다.
+Issue/PR에는 전문을 복사하지 않고 핵심 결과·판단·남은 일과 확인된 문서 링크를 남긴다. 라벨은 저장소의 기존 분류를 우선하고 필요한 누락 라벨만 승인·권한 범위에서 생성한다. 전체 라벨 목록을 미리 만들지 않는다.
 
-### Codex
+## 시험과 설치
 
-```bash
-codex plugin marketplace add insung/git-workflow
-codex plugin add git-workflow@git-workflow
-```
+0.2.0은 `feat/issue-review-workflow` 작업 브랜치에서 제공한다. 브랜치가 push된 뒤 [README의 브랜치 지정 명령](README.md#installation)으로 Codex·Claude에 설치한다. 기존 마켓플레이스가 있으면 등록된 ref와 설치 버전을 확인하고 해당 마켓플레이스·플러그인만 갱신한다. 기본 브랜치 반영은 머지 승인 후 별도 단계다. 새 세션에서 설치된 스킬을 확인하며, 미발행 로컬 변경 시험은 실제 소스 파일 경로를 지정한다.
 
-목록에 바로 나타나지 않으면 새 Codex 작업을 시작합니다. `$git-workflow`로 명시 호출하거나 해당 Git 작업을 설명합니다.
-
-### Claude Code
-
-```bash
-claude plugin marketplace add insung/git-workflow
-claude plugin install git-workflow@git-workflow
-```
-
-필요하면 새 Claude Code 세션을 시작합니다. 플러그인 스킬의 호출 이름은 `/git-workflow:git-workflow`입니다.
-
-루트의 범용 `plugin.json`, Codex 호환 매니페스트·마켓플레이스, Claude Code 매니페스트·마켓플레이스가 모두 같은 [`skills/git-workflow/`](skills/git-workflow/)를 가리킵니다.
-
-## 어떻게 활용하나
-
-**범위를 나눈 커밋**
-
-```text
-$git-workflow
-현재 작업 트리를 살펴보고 이번 요청의 변경과 다른 작업을 구분해줘.
-이번 요청의 변경만 적절한 단위로 커밋해줘.
-```
-
-스킬은 저장소 상태와 최근 커밋 규칙을 확인한 뒤 허가된 파일이나 hunk만 stage합니다. 커밋 후 같은 범위를 다시 확인합니다. 커밋 요청만으로 push까지 허가된 것은 아닙니다.
-
-**브랜치 전략**
-
-```text
-$git-workflow
-현재 브랜치, CI, 릴리즈 주기와 리뷰 경로를 조사해 브랜치 전략을 제안해줘.
-긴급 수정이 기본 브랜치로 돌아오는 경로도 설명해줘.
-```
-
-제안에는 각 브랜치의 역할, 분기·병합 지점, 릴리즈 기준, 보호 규칙과 도입 비용이 포함됩니다. 브랜치 이름만으로 배포 역할을 추측하지 않으며, 전략 요청만으로 브랜치를 만들거나 설정을 바꾸지 않습니다.
-
-**커밋 이력으로 릴리즈 노트 작성**
-
-```text
-$git-workflow
-v1.4.0부터 현재 main 커밋까지의 릴리즈 노트를 초안으로 만들어줘.
-사용자나 운영자에게 영향을 주는 변경만 실제 diff를 근거로 포함해줘.
-```
-
-스킬은 이전 지점이 대상 커밋의 조상인지 확인하고, first-parent 이력·전체 커밋 본문·변경 파일을 대조합니다. 관련 커밋은 하나의 결과로 묶고 초안과 실제 발행을 구분합니다. 이전 배포 지점이 불명확하면 버전과 날짜를 지어내지 않고 `Unreleased` 초안으로 남깁니다.
-
-## 작업 흐름 한눈에 보기
-
-```mermaid
-flowchart TD
-    A["Git 작업 요청"] --> B["저장소 규칙과 실제 상태 확인"]
-    B --> C{"요청한 결과"}
-    C -->|커밋 또는 PR| D["이번 요청의 변경만 선택"]
-    C -->|브랜치 전략| E["CI·리뷰·배포 흐름 확인"]
-    C -->|릴리즈 노트| F["base..target 이력과 diff 대조"]
-    D --> G["허가된 작업 수행 후 상태 재확인"]
-    E --> H["분기·병합·긴급 수정 경로 제안"]
-    F --> I["근거가 있는 사용자 영향으로 초안 작성"]
-```
-
-예를 들어 사용자가 `src/retry.ts`와 `tests/retry.test.ts`를 이번 요청의 변경으로, `docs/team-plan.md`를 다른 작업의 변경으로 명시했다고 가정합니다.
-
-```text
- M src/retry.ts
- M tests/retry.test.ts
- M docs/team-plan.md
-```
-
-Diff를 검토하고 해당 커밋 승인을 받은 뒤, 에이전트는 재시도 관련 두 파일만 stage합니다. Stage된 diff를 확인하고 저장소에 맞는 검증을 실행한 뒤 범위를 표시한 커밋을 만듭니다. 마지막 `git status --short`에는 `docs/team-plan.md`가 남아야 합니다. 변경 출처가 불명확하거나 한 파일에 다른 작업이 섞여 있으면 먼저 정확한 hunk를 구분합니다. 이 사례는 가상이며 이 저장소의 현재 작업 트리를 설명하지 않습니다.
-
-설치된 스킬에서도 커밋 사례, 브랜치 전략 판단, 릴리즈 노트 초안을 담은 [상세 예시](skills/git-workflow/references/examples.md)를 읽을 수 있습니다.
-
-## 책임 경계
-
-저장소의 명시 규칙이 이 스킬의 기본 커밋 형식이나 브랜치 제안보다 우선합니다. 다른 작업의 변경 소유자를 추측하거나 이슈 번호, 테스트·배포 결과를 만들어내지 않습니다. 노트 작성은 태그나 GitHub Release 발행 권한이 아닙니다. Push, PR, 이슈, 머지, 태그, 릴리즈는 각각 해당 행동에 필요한 권한 안에서 실행합니다.
-
-이 스킬은 작업 지침이며 Git 훅이나 정책 엔진이 아닙니다. spec-it을 쓰는 프로젝트의 고정된 정책은 별도로 적용합니다. 이 스킬은 그 정책을 복사하거나 대체하지 않습니다.
-
-## 파일과 업데이트
-
-정본은 [`skills/git-workflow/SKILL.md`](skills/git-workflow/SKILL.md)입니다. 브랜치와 릴리즈 노트의 상세 기준은 연결된 `references/`에 있습니다. 현재 플러그인 버전은 `0.1.0`이며, 새 버전을 배포할 때 매니페스트 버전을 함께 갱신해야 합니다.
-
-Codex에서 마켓플레이스를 갱신하고 다시 설치하려면 다음 명령을 사용합니다.
-
-```bash
-codex plugin marketplace upgrade git-workflow
-codex plugin remove git-workflow@git-workflow
-codex plugin add git-workflow@git-workflow
-```
-
-Claude Code에서는 다음 명령을 사용합니다.
-
-```bash
-claude plugin marketplace update git-workflow
-claude plugin update git-workflow@git-workflow
-```
-
-제거하려면 해당 도구에서 `codex plugin remove git-workflow@git-workflow` 또는 `claude plugin uninstall git-workflow@git-workflow`을 실행합니다.
+현재 세션에서 단계별 실행할 수 있으며 별도 에이전트는 필수가 아니다. 스킬만으로 자동 트리거·강제 검증·무오류를 보장하지 않는다. commit·push·PR·머지·배포·Wiki는 각각 요청된 범위에서 실행한다. 공유 계획은 docs/에, 임시 실행 자료는 git ignore된 .superpowers/에 둔다.
