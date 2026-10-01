@@ -1,6 +1,6 @@
 # 파이썬 업그레이드 구현 인계
 
-설명용 미실행 양식이다. 현재 구현/커밋·원격 PR·테스트 결과 없음.
+상태: 구현/커밋·원격 PR·테스트 결과 없음.
 
 - Issue: [로컬 초안](issue.md); 원격 연결 전 실제 Issue 조회 필요
 - 계획과 단위 작업: [plan](plan.md), [01](01-todos-runtime-compatibility.md), [02](02-todos-runtime-upgrade.md), [03](03-todos-release-handoff.md)
