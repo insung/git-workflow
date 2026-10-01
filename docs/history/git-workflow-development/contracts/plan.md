@@ -1,3 +1,5 @@
+> 작업 이력 / Historical record: 당시 구현·검증 기록을 보존한다. 현재 실행 상태나 사용 예시가 아니다. 현재 사용 방식은 [README](../../../../README.ko.md)를 따른다.
+
 ---
 issue: null
 status: completed
@@ -28,7 +30,7 @@ baseline:
 
 ## 맥락과 사용자 의도
 
-Issue에서 시작해 원래 요청과 배경을 잃지 않고 구현·검증 역할이 문서로 인계되기를 원한다. 기존 단일 스킬을 부르기 쉬운 단계로 나누고, AI가 핵심 요소를 빠뜨리지 않도록 예제와 상세 양식을 보강한다. GitHub 인증 실패로 [기존 로컬 Issue 초안](../../../issues/2026-10-01-issue-review-workflow.md)을 이어 사용하며 원격 Issue 번호는 없다.
+Issue에서 시작해 원래 요청과 배경을 잃지 않고 구현·검증 역할이 문서로 인계되기를 원한다. 기존 단일 스킬을 부르기 쉬운 단계로 나누고, AI가 핵심 요소를 빠뜨리지 않도록 예제와 상세 양식을 보강한다. GitHub 인증 실패로 [기존 로컬 Issue 초안](../initial/issue.md)을 이어 사용하며 원격 Issue 번호는 없다.
 
 ## Review Focus
 

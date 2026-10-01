@@ -1,6 +1,8 @@
+> 작업 이력 / Historical record: 당시 구현·검증 기록을 보존한다. 현재 실행 상태나 사용 예시가 아니다. 현재 사용 방식은 [README](../../../../README.ko.md)를 따른다.
+
 # Issue Review Workflow Implementation Plan
 
-> 이전 후보의 기록이다. 현재 정본과 양식은 [전체 흐름](../../workflow.md) 및 새 docs/git-workflows 계획·검증 기록을 따른다. 아래 이전 절차와 결과를 현재 실행 증거로 재사용하지 않는다.
+> 이전 후보의 기록이다. 현재 정본과 양식은 [전체 흐름](../../../../README.ko.md#사용-시나리오) 및 새 docs/git-workflows 계획·검증 기록을 따른다. 아래 이전 절차와 결과를 현재 실행 증거로 재사용하지 않는다.
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -10,7 +12,7 @@
 
 **Tech Stack:** Markdown, JSON plugin manifests, Node.js 18+ built-in test runner.
 
-**Spec:** docs/superpowers/specs/2026-10-01-issue-review-workflow-design.md
+**Spec:** docs/history/git-workflow-development/initial/design.md
 
 ## Global Constraints
 
@@ -36,7 +38,7 @@
 - Modify: skills/git-workflow/SKILL.md, skills/git-workflow/references/issue.md, skills/git-workflow/references/pr.md, skills/git-workflow/references/scope.md
 - Create: skills/{issue-create,pr-create,pr-review,pr-merge,commit-rule,git-release}/SKILL.md
 - Create: skills/issue-create/templates/issue.md, skills/pr-create/templates/handoff.md, skills/pr-review/templates/review.md, skills/pr-merge/templates/wiki.md
-- Test: docs/testing/issue-review-scenarios.md
+- Test: docs/history/git-workflow-development/initial/issue-review-scenarios.md
 
 **Interfaces:**
 - Consumes: 사용자 요청, 기존 Git 참조, 대상 프로젝트의 spec-it pin과 증거
@@ -54,7 +56,7 @@
 ### Task 2: 패키지 검사와 로컬 시험 안내
 
 **Files:**
-- Create: scripts/check-package.mjs, tests/package.test.mjs, docs/testing/local-pilot.md
+- Create: scripts/check-package.mjs, tests/package.test.mjs, docs/examples/python-version-upgrade/local-pilot.md
 - Modify: README.md, README.ko.md, plugin.json, .codex-plugin/plugin.json, .claude-plugin/plugin.json, .claude-plugin/marketplace.json
 
 **Interfaces:**

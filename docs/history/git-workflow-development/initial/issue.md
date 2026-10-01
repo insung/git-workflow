@@ -1,3 +1,5 @@
+> 작업 이력 / Historical record: 당시 구현·검증 기록을 보존한다. 현재 실행 상태나 사용 예시가 아니다. 현재 사용 방식은 [README](../../../../README.ko.md)를 따른다.
+
 # feat(issue-review): Issue에서 Wiki까지 단계별 Git 워크플로우
 
 상태: local-draft. GitHub 인증 실패로 원격 Issue를 생성하지 않았다. 번호와 URL은 없다.
@@ -14,7 +16,7 @@
 
 ## 달성 조건
 
-아래 완료 표시는 로컬 스킬 계약과 시험 안내 구현에 대한 것이다. 실제 GitHub 실행이나 모델의 판정 정확도는 [검증 결과](../testing/verification.md)의 미확인 범위로 남긴다.
+아래 완료 표시는 로컬 스킬 계약과 시험 안내 구현에 대한 것이다. 실제 GitHub 실행이나 모델의 판정 정확도는 [검증 결과](verification.md)의 미확인 범위로 남긴다.
 
 - [x] Issue·구현/PR·검증·머지/Wiki를 개별 스킬로 호출
 - [x] 의도·영향 범위·완료 기준 없는 Issue에서 구현 차단
