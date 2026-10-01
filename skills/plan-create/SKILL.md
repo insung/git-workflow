@@ -29,4 +29,4 @@ description: '“Issue #12의 구현 계획을 작성해줘”, “이 Issue 계
 plan의 상태는 [status 값](references/plan.md#프론트메터-규칙)을 따른다.
 Issue 식별자와 문서 경로, plan/todo 링크, 검토 기준 브랜치 이름, 준비된 작업과 보류 이유, 승인 범위를 반환한다.
 계획 작성 완료와 구현 완료를 구분한다.
-준비된 단위의 구현은 [git-workflow](../git-workflow/SKILL.md#구현-진행)에 전달한다.
+준비된 단위의 구현은 [task-implement](../task-implement/SKILL.md)에 전달한다.
