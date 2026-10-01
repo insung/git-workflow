@@ -2,8 +2,9 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const requiredSkills = ['git-workflow', 'issue-create', 'plan-create', 'pr-create', 'pr-review', 'pr-merge', 'commit-rule', 'branch-strategy', 'git-release'];
-const requiredReferences = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-create/references/feature-issue.md', 'issue-create/references/bug-issue.md', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-review/references/review.md', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'branch-strategy/references/branch.md', 'git-release/references/release-notes.md'];
+const requiredSkills = ['git-workflow', 'issue-create', 'plan-create', 'pr-create', 'pr-review', 'pr-merge', 'commit-rule', 'branch-strategy', 'git-release', 'template-init'];
+const requiredReferences = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'template-init/assets/.github/ISSUE_TEMPLATE/feature_request.md', 'template-init/assets/.github/ISSUE_TEMPLATE/bug_report.md', 'template-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-review/references/review.md', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'branch-strategy/references/branch.md', 'git-release/references/release-notes.md'];
+const issueTemplates = ['template-init/assets/.github/ISSUE_TEMPLATE/feature_request.md', 'template-init/assets/.github/ISSUE_TEMPLATE/bug_report.md'];
 const manifests = ['plugin.json', '.codex-plugin/plugin.json', '.claude-plugin/plugin.json'];
 
 // Structural checks only: this does not execute skills or judge spec-it compliance.
@@ -39,6 +40,14 @@ export function validatePackage(root) {
   }
   for (const path of requiredReferences) {
     if (!existsSync(join(root, 'skills', path))) errors.push(`missing reference: skills/${path}`);
+  }
+  for (const path of issueTemplates) {
+    const file = join(root, 'skills', path);
+    if (!existsSync(file)) continue;
+    const frontmatter = readFileSync(file, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/)?.[1] ?? '';
+    for (const key of ['name', 'about', 'title', 'labels']) {
+      if (!new RegExp(`^${key}:\\s*\\S`, 'm').test(frontmatter)) errors.push(`missing issue template ${key}: skills/${path}`);
+    }
   }
   function scan(dir) {
     if (!existsSync(dir)) return;
