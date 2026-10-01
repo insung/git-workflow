@@ -58,7 +58,7 @@ created: "2026-10-02"
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 필요 승인 | 결과 |
 | --- | --- | --- | --- | --- | --- |
-| <a id="tc-f01"></a>TC-F01 | AC-15 | `node --test tests/package.test.mjs`, `node scripts/check-package.mjs`, `claude plugin validate .claude-plugin/plugin.json`, `claude plugin validate .claude-plugin/marketplace.json`, `git diff --check`, 리포 루트 | 모두 통과 | 없음 | 통과 (af57a04, 2026-10-02). `node --test` 22/22, `check-package` 통과, `claude plugin validate` 두 매니페스트 통과, `git diff --check` 종료 코드 0. 미커밋 변경 없음 |
+| <a id="tc-f01"></a>TC-F01 | AC-15 | `node --test tests/package.test.mjs`, `node scripts/check-package.mjs`, `claude plugin validate .claude-plugin/plugin.json`, `claude plugin validate .claude-plugin/marketplace.json`, `git diff --check`, 리포 루트 | 모두 통과 | 없음 | 통과 (669db22, 2026-10-02 04:10). `node --test` 23/23, `check-package` 통과, `claude plugin validate` 두 매니페스트 통과, `git diff --check` 종료 코드 0. 미커밋 변경 없음. 이전 결과: af57a04 22/22 통과 |
 | <a id="tc-f02"></a>TC-F02 | AC-05, AC-06 | Issue #4의 `review-criteria.md`·`review-input-<topic>.md`로 pr-review 실행 | 고정 입력으로 다시 실행한 결과가 review.md에 기록 | 검토 기준 작성 세션 지정(D5) | 미실행. 구현 세션은 `review/issue-4`의 검토 기준·검증 입력을 읽지 않으므로(task-implement 입력 규칙) 실행할 수 없음. 다른 세션의 pr-review가 실행 |
 
 문서·지시 변경이라 유닛 테스트 대상 코드는 패키지 검사 스크립트뿐이다. 구조는 패키지 테스트로, 지시의 효과는 하위 에이전트 시나리오의 변경 전·후 비교로 확인한다.
@@ -91,3 +91,7 @@ created: "2026-10-02"
 | 2026-10-02 | 결정 | D4 플러그인 버전 0.4.0 | 전달, 03 | 승인 |
 | 2026-10-02 | 결정 | D5 Issue #4의 검토 기준·검증 입력은 01 시작 전에 구현과 다른 세션이 `review/issue-4` 브랜치에 작성. 양식은 Issue #1의 검토 기준 파일을 따르고, 02 완료 후 새 양식과 다르면 리뷰 세션이 맞춤 | AC-05, TC-F02 | 승인 |
 | 2026-10-02 | 계획 이탈 | 03 단계에서 변경 대상에 없던 `skills/git-workflow/references/document-links.md`의 「구현 진행 기록」을 「구현 기록」으로 변경. TC-05 검색에서 구현 절차가 아닌 문구가 잡히지 않게 함. 동작 변경 없음 | AC-03, 03 | 보류 |
+| 2026-10-02 | 계획 이탈 | 최종 리뷰 I-1: 검토 기준·검증 입력을 작성하거나 읽은 세션의 같은 Issue 구현 금지를 `review-criteria.md` 「보관 위치」 6에 추가. task-implement 반환 표에 멈추고 보고 행, git-workflow 한 세션 실행 문장에 링크. 한 세션이 모든 역할을 실행하면 독립 검토가 무너짐 | AC-05, 02·03 | 보류 |
+| 2026-10-02 | 계획 이탈 | 최종 리뷰 M-1: fail·human-review review.md의 고정 입력 비공개를 「고정 입력 재실행」 행에서 문서 전체로 확장. `pr-review/references/review.md` 작성 규칙에 한 행, `pr-review/SKILL.md` 기록 커밋 3에서 링크 | AC-06, AC-08, 02 | 보류 |
+| 2026-10-02 | 계획 이탈 | 최종 리뷰 M-2: 검증 입력 템플릿의 RED 필수 행을 스킬 지시 변경일 때만 쓰게 함. 코드 변경인 python-version-upgrade 예제에서 RED 행 제거 | AC-04, AC-10, 02·05 | 보류 |
+| 2026-10-02 | 계획 이탈 | 최종 리뷰 M-3·M-4: task-implement 진입점 누락 거부 테스트 추가. task-implement 입력 표에 작업 브랜치의 fail·human-review review.md(읽음), `review/draft-{title}`(읽지 않음) 추가 | AC-05, AC-15, 03 | 보류 |
