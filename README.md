@@ -114,6 +114,7 @@ The [examples](docs/examples/README.md) show filled document sets and flows.
 
 | Example | Flow |
 | --- | --- |
+| [git-workflow v0.3.0 (real case)](docs/examples/git-workflow-v0.3.0/README.md) | Review, Issue, plan with comments, fixed review criteria, separate implementation session, independent review, merge and release |
 | [Python version upgrade](docs/examples/python-version-upgrade/README.md) | Issue, plan, step todos, handoff, PR and review |
 | [Resume an existing Issue](docs/examples/resume-existing-issue/README.md) | Continue another session's work from its documents |
 | [Review rework](docs/examples/review-rework/README.md) | Fix review findings and review the new HEAD |
