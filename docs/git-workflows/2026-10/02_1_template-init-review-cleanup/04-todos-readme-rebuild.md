@@ -8,14 +8,15 @@
 | --- | --- | --- |
 | Modify | `README.md`, `README.ko.md` | sideband-comments README 구성 기준 재작성, spec-it 절 추가 |
 | Modify | `docs/examples/README.md`, `docs/examples/*/README.md` | 반복 면책 문구·규칙 재서술 정리 |
+| Modify | `docs/examples/python-version-upgrade/*.md`, `skills/git-workflow/SKILL.md` | 「설명용」 문구 정리, 삭제된 README 절 링크 갱신 |
 
 ## 작업
 
 | # | 작업 | 완료 | 처리 내용 |
 | --- | --- | --- | --- |
-| 1 | README.md를 아래 절 구성으로 재작성 | [ ] | |
-| 2 | README.ko.md를 같은 절 순서·내용으로 재작성 | [ ] | |
-| 3 | 가상 예제 안내를 `docs/examples/README.md`에 한 번만 두고 각 예제의 면책 문장과 규칙 재서술 제거 | [ ] | |
+| 1 | README.md를 아래 절 구성으로 재작성 | [x] | 표의 절 구성으로 재작성, spec-it 절·template-init 첫 실행 추가 (2ebf196) |
+| 2 | README.ko.md를 같은 절 순서·내용으로 재작성 | [x] | README.md와 같은 절 순서·내용, git-workflow 스킬의 README 링크 갱신 (2ebf196) |
+| 3 | 가상 예제 안내를 `docs/examples/README.md`에 한 번만 두고 각 예제의 면책 문장과 규칙 재서술 제거 | [x] | 예제 4개 README의 면책 문장·공통 인계 문단, python 예제 문서의 「설명용」 문구와 규칙 재서술 제거 (e3e78be) |
 
 | sideband-comments 절 | git-workflow 절 |
 | --- | --- |
@@ -34,7 +35,7 @@
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 결과 |
 | --- | --- | --- | --- | --- |
-| <a id="tc-09"></a>TC-09 | AC-01, AC-02, AC-03 | README.md·README.ko.md `##` 제목 비교, “local-draft”·“--force”·“번호 누락” 검색, spec-it 절 확인, 리포 루트 | 절 일치, 재서술 0, spec-it 절에 역할·채택·미채택 동작 존재 | 미실행 |
+| <a id="tc-09"></a>TC-09 | AC-01, AC-02, AC-03 | README.md·README.ko.md `##` 제목 비교, “local-draft”·“--force”·“번호 누락” 검색, spec-it 절 확인, 리포 루트 | 절 일치, 재서술 0, spec-it 절에 역할·채택·미채택 동작 존재 | 통과 (e3e78be). `##`·`###` 11개 순서 일치, 검색어 0건 |
 
 ## 제외 범위
 

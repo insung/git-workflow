@@ -27,7 +27,7 @@
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 결과 |
 | --- | --- | --- | --- | --- |
 | <a id="tc-01"></a>TC-01 | AC-04, AC-05, AC-06 | 하위 에이전트에 같은 가상 PR 입력과 pr-review를 주고 변경 전·후 각 3회 실행 | 변경 후 3회 모두 빠진 실패 사례 테스트를 지적 | 통과 (a7e084c). 변경 후 누락 지적 3/3, 미채택 저장소 정책 human-review 0/3 |
-| <a id="tc-02"></a>TC-02 | AC-04 | `wc -w skills/pr-review/SKILL.md`, 리포 루트 | 500 이하 | 통과, 401단어 (a7e084c) |
+| <a id="tc-02"></a>TC-02 | AC-04 | `wc -w skills/pr-review/SKILL.md`, 리포 루트 | 500 이하 | 통과, 401단어 (a7e084c), description 변경 후 412단어 (74aa5ae) |
 | <a id="tc-03"></a>TC-03 | AC-05, AC-07 | `grep -rn "spec_it_verify\|local-verification" skills docs/examples README.md README.ko.md`, 리포 루트 | 결과 없음 | 통과 (a7e084c) |
 
 ## 제외 범위

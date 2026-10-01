@@ -1,6 +1,6 @@
 ---
 issue: "#1"
-status: in-progress
+status: review-pending
 branch: "feat/issue-review-workflow"
 base: "main"
 created: "2026-10-02"
@@ -42,7 +42,7 @@ created: "2026-10-02"
 | [01](01-todos-pr-review-rework.md) | pr-review 재구성과 spec-it 분리 | 의도 파악 → 구현 대조 → 테스트 누락 확인 순서로 재작성. spec-it 정책 검사는 채택 프로젝트 전용 reference로 분리 | [TC-01](01-todos-pr-review-rework.md#tc-01)<br>[TC-02](01-todos-pr-review-rework.md#tc-02)<br>[TC-03](01-todos-pr-review-rework.md#tc-03) | [x] |
 | [02](02-todos-template-init.md) | GitHub 템플릿 정본화와 template-init | 기능·버그·PR 템플릿을 스킬 필수 항목과 일치. 대상 프로젝트에 복사하는 template-init 추가 | [TC-04](02-todos-template-init.md#tc-04)<br>[TC-05](02-todos-template-init.md#tc-05) | [x] |
 | [03](03-todos-skill-cleanup.md) | description·중복 규칙·조건 정리 | 트리거 T1~T7 한정, 중복 규칙 링크화, 조건 없는 지시 정리, 매니페스트 Wiki 제거 | [TC-06](03-todos-skill-cleanup.md#tc-06)<br>[TC-07](03-todos-skill-cleanup.md#tc-07)<br>[TC-08](03-todos-skill-cleanup.md#tc-08) | [x] |
-| [04](04-todos-readme-rebuild.md) | README 재구성과 예제 정리 | sideband-comments README 구성 기준 재작성, spec-it 절 추가, 예제 반복 문구 정리 | [TC-09](04-todos-readme-rebuild.md#tc-09) | [ ] |
+| [04](04-todos-readme-rebuild.md) | README 재구성과 예제 정리 | sideband-comments README 구성 기준 재작성, spec-it 절 추가, 예제 반복 문구 정리 | [TC-09](04-todos-readme-rebuild.md#tc-09) | [x] |
 | [05](05-todos-plan-template.md) | plan·todo 양식 개선 | 디렉토리·프론트메터 규칙 번호화, 템플릿 우선 배치, 표 중심 양식, todo 파일 이름 규칙 | [TC-11](05-todos-plan-template.md#tc-11) | [x] |
 
 실행 순서: 05 → 01 → 02 → 03 → 04 → 최종 검증. 05는 사용자 코멘트에 따라 계획 작성 중 먼저 반영했다. 04는 01~03의 최종 스킬 구성을 설명하므로 마지막에 둔다. 검증이 실패하면 해당 단계로 돌아가 같은 사례를 다시 실행한다.
@@ -51,7 +51,7 @@ created: "2026-10-02"
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 필요 승인 | 결과 |
 | --- | --- | --- | --- | --- | --- |
-| <a id="tc-f01"></a>TC-F01 | AC-13 | `node --test tests/package.test.mjs`, `node scripts/check-package.mjs`, `claude plugin validate .claude-plugin/plugin.json`, `claude plugin validate .claude-plugin/marketplace.json`, `git diff --check`, 리포 루트 | 모두 통과 | 없음 | 미실행 |
+| <a id="tc-f01"></a>TC-F01 | AC-13 | `node --test tests/package.test.mjs`, `node scripts/check-package.mjs`, `claude plugin validate .claude-plugin/plugin.json`, `claude plugin validate .claude-plugin/marketplace.json`, `git diff --check`, 리포 루트 | 모두 통과 | 없음 | 통과 (561e491) |
 | <a id="tc-f02"></a>TC-F02 | AC-09 | 로컬 소스로 플러그인 갱신 후 새 세션에서 template-init과 assets 확인 | 스킬 10개, 템플릿 파일 존재 | 플러그인 갱신 승인 | 미실행 |
 
 문서·지시 변경이라 유닛 테스트 대상 코드가 없다. 구조는 패키지 테스트로, 지시의 효과는 하위 에이전트 시나리오의 변경 전·후 비교로 확인한다.
