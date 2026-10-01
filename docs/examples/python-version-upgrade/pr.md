@@ -12,7 +12,7 @@
 
 ## 구현과 문서
 
-[plan](plan.md)·[todos](02-todos-runtime-upgrade.md)·[handoff](handoff.md)에 상세 배경과 결과를 기록한다. 원격 PR에는 실제 접근 가능한 commit/branch 문서 링크로 교체하고 핵심만 요약한다.
+[plan](plan.md)·[todos](task-02-runtime-upgrade.md)·[handoff](handoff.md)에 상세 배경과 결과를 기록한다. 원격 PR에는 실제 접근 가능한 commit/branch 문서 링크로 교체하고 핵심만 요약한다.
 
 ## 검증 상태
 

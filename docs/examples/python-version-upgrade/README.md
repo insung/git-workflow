@@ -21,9 +21,9 @@ flowchart TD
 | --- | --- |
 | [issue.md](issue.md) | 의도·영향 범위·달성 조건을 원격 Issue에 요약할 초안 |
 | [plan.md](plan.md) | Issue 기반 맥락·작업 순서·검증·배포/롤백 계획 |
-| [01-todos-runtime-compatibility.md](01-todos-runtime-compatibility.md) | 현재 실행 경로와 목표 버전 호환성 조사 |
-| [02-todos-runtime-upgrade.md](02-todos-runtime-upgrade.md) | 런타임·의존성 구현과 테스트 |
-| [03-todos-release-handoff.md](03-todos-release-handoff.md) | 배포 준비·PR 인계·독립 검토 |
+| [task-01-runtime-compatibility.md](task-01-runtime-compatibility.md) | 현재 실행 경로와 목표 버전 호환성 조사 |
+| [task-02-runtime-upgrade.md](task-02-runtime-upgrade.md) | 런타임·의존성 구현과 테스트 |
+| [task-03-release-handoff.md](task-03-release-handoff.md) | 배포 준비·PR 인계·독립 검토 |
 | [handoff.md](handoff.md) | 실제 구현 커밋·테스트 결과를 리뷰 세션에 인계 |
 | [pr.md](pr.md) | 실제 Issue 연결과 변경/검증 요약·docs 링크 |
 | [review.md](review.md) | 검토 HEAD·의도·정책·테스트 근거 판단 |

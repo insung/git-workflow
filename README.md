@@ -43,7 +43,7 @@ flowchart TD
 | [git-release](skills/git-release/SKILL.md) | Prepare release notes, tags and GitHub Releases |
 | [template-init](skills/template-init/SKILL.md) | Install the Issue and PR templates into a target repository |
 
-Work documents (plan.md, `{nn}-todos-{step-title}.md`, handoff.md, review.md) live in the target repository under the [directory rules](skills/plan-create/references/plan.md#디렉토리-규칙).
+Work documents (plan.md, `task-{nn}-{step-title}.md`, handoff.md, review.md) live in the target repository under the [directory rules](skills/plan-create/references/plan.md#디렉토리-규칙).
 
 ## spec-it
 

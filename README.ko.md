@@ -43,7 +43,7 @@ flowchart TD
 | [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
 | [template-init](skills/template-init/SKILL.md) | 대상 저장소에 Issue·PR 템플릿 설치 |
 
-작업 문서(plan.md, `{nn}-todos-{step-title}.md`, handoff.md, review.md)는 대상 저장소의 [디렉토리 규칙](skills/plan-create/references/plan.md#디렉토리-규칙)에 따라 둔다.
+작업 문서(plan.md, `task-{nn}-{step-title}.md`, handoff.md, review.md)는 대상 저장소의 [디렉토리 규칙](skills/plan-create/references/plan.md#디렉토리-규칙)에 따라 둔다.
 
 ## spec-it
 

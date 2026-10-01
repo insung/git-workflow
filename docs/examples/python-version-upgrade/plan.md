@@ -35,9 +35,9 @@ created: "2026-10-01"
 
 | 단계 | 제목 | 설명 | 검증 사례 | 완료 |
 | --- | --- | --- | --- | --- |
-| [01](01-todos-runtime-compatibility.md) | 실행 환경과 목표 버전 호환성 조사 | 현재 실행 경로·의존성·배포 트리거 확인, 목표 버전 결정 | [TC-00](01-todos-runtime-compatibility.md#tc-00) | [ ] |
-| [02](02-todos-runtime-upgrade.md) | 런타임·의존성과 호환 코드 변경 | 런타임 선언·CI·이미지 정렬, 호환 코드와 유닛 테스트 | [TC-01](02-todos-runtime-upgrade.md#tc-01)<br>[TC-02](02-todos-runtime-upgrade.md#tc-02) | [ ] |
-| [03](03-todos-release-handoff.md) | 통합·배포 준비와 PR 인계 | fixture 회귀 테스트, 배포·롤백 확인, 커밋·PR | [TC-03](03-todos-release-handoff.md#tc-03)<br>[TC-04](03-todos-release-handoff.md#tc-04)<br>[TC-05](03-todos-release-handoff.md#tc-05) | [ ] |
+| [01](task-01-runtime-compatibility.md) | 실행 환경과 목표 버전 호환성 조사 | 현재 실행 경로·의존성·배포 트리거 확인, 목표 버전 결정 | [TC-00](task-01-runtime-compatibility.md#tc-00) | [ ] |
+| [02](task-02-runtime-upgrade.md) | 런타임·의존성과 호환 코드 변경 | 런타임 선언·CI·이미지 정렬, 호환 코드와 유닛 테스트 | [TC-01](task-02-runtime-upgrade.md#tc-01)<br>[TC-02](task-02-runtime-upgrade.md#tc-02) | [ ] |
+| [03](task-03-release-handoff.md) | 통합·배포 준비와 PR 인계 | fixture 회귀 테스트, 배포·롤백 확인, 커밋·PR | [TC-03](task-03-release-handoff.md#tc-03)<br>[TC-04](task-03-release-handoff.md#tc-04)<br>[TC-05](task-03-release-handoff.md#tc-05) | [ ] |
 
 실행 순서: 01 → 목표 버전 결정 → 02 → 03 → 최종 검증. 검증이 실패하면 해당 단계로 돌아가 같은 사례를 다시 실행한다.
 
