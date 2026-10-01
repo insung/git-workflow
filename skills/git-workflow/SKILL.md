@@ -7,6 +7,7 @@ description: '“Issue #12 작업을 이어서 진행해줘”, “git workflow�
 
 Issue → plan/todo → 구현·테스트·커밋 → PR → 검토 → 사용자 승인 → 머지로 연결한다.
 역할은 현재 대화 세션에서도 실행할 수 있다.
+단, 검토 기준·검증 입력을 작성하거나 읽은 세션은 그 Issue를 구현하지 않는다 ([보관 위치](../plan-create/references/review-criteria.md#보관-위치)).
 스킬은 실행 지침이며 scheduler/정책 validator가 아니다.
 
 ## 단계 선택
