@@ -76,5 +76,5 @@ pass도 머지 승인이 아니다. 다음 단계는 [pr-merge](../pr-merge/SKIL
 
 1. review.md 기록 뒤 PR 머지 전에 작업 브랜치에 docs 커밋 하나를 만든다. 커밋 승인은 별도다.
 2. pass·warn이면 검토 기준·검증 입력을 `git checkout <리뷰 브랜치> -- <경로>`로 가져와 같은 커밋에 넣는다.
-3. fail·human-review이면 review.md만 커밋한다.
+3. fail·human-review이면 [작성 규칙](references/review.md#작성-규칙)을 지킨 review.md만 커밋한다.
 4. 검토 HEAD 뒤 커밋이 이 기록 커밋 하나이고 작업 디렉토리의 review.md·검토 기준·검증 입력만 바꿨으면 재검토하지 않는다. 머지의 HEAD 일치 확인에는 기록 커밋을 쓴다.
