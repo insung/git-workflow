@@ -52,7 +52,7 @@
 | TC-08 / AC-11, AC-12 | Wiki, 「번호 누락」, 「minor」 검색 | Wiki 0, 규칙은 정본에만 | pass | `grep -rn`, 리포 루트 | 63cad15 |
 | TC-09 / AC-01~03 | README 절 비교, 재서술 검색, spec-it 절 | 절 일치, 0건 | pass | `grep '^##'`, `grep -n`, 리포 루트 | e3e78be |
 | TC-F01 / AC-13 | 패키지 테스트 19개, 구조 검사, 매니페스트 검증 2개, `git diff --check` | 모두 통과 | pass. 첫 실행(e3e78be)에서 `git diff --check main...HEAD`가 템플릿 줄 끝 공백을 찾아 561e491에서 수정 | 계획의 명령, 리포 루트 | 561e491, Node v23.11.0, 2026-10-02 |
-| TC-F02 / AC-09 | 설치된 플러그인의 template-init과 assets | 스킬 10개, 템플릿 존재 | not-run. 플러그인 갱신 승인과 push 필요 | — | — |
+| TC-F02 / AC-09 | 설치된 플러그인의 template-init과 assets | 스킬 10개, 템플릿 존재 | 부분 pass. 0.3.0 설치본의 스킬 10개와 `assets/.github/` 세 파일이 소스와 같음. 새 세션의 스킬 표시는 not-run(헤드리스 세션 인증 만료) | `claude plugin update git-workflow@git-workflow`, `diff -r -q skills <설치 경로>/skills` | 4fff0ca |
 
 - 유닛 테스트 대상 코드는 패키지 검사 스크립트뿐이다. 새 검사(spec-it-policy, template-init, Issue 템플릿 front matter)에 대응하는 테스트를 `tests/package.test.mjs`에 추가했다.
 - 하위 에이전트 판정 입력과 결과 메모는 세션 scratchpad에 있고 저장소에는 없다.
