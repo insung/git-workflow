@@ -20,9 +20,8 @@ git log --first-parent --pretty=format:'%s' <이전-태그>..<현재-태그>
 ```
 
 - 검증된 커밋에만 배포 태그를 붙인다.
-- `feat`는 minor, `fix`와 `perf`는 patch 후보로 본다.
-  호환성 영향은 실제 변경을 확인해 별도로 판단한다.
-- 실제 버전 정책과 자동화가 다르면 저장소 규칙을 따른다.
+- type별 버전 후보는 [공통 표기의 type 표](../git-workflow/references/change-conventions.md#제목)를 따른다.
+  저장소에 버전 정책이나 자동화가 있으면 그 규칙이 우선이다.
 - hotfix 분기·반영은 [브랜치 전략](../branch-strategy/SKILL.md)을 따른다.
 
 ### 릴리즈 노트 작성

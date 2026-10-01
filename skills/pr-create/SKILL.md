@@ -9,9 +9,8 @@ description: “PR을 만들어줘”, “PR 본문을 작성해줘”처럼 구
 제목·본문·라벨·문서 링크는 라우터 references의 [표기](../git-workflow/references/change-conventions.md), [문체](../git-workflow/references/writing-conventions.md), [labels](../git-workflow/references/labels.md), [document-links](../git-workflow/references/document-links.md)를 읽는다.
 
 1. 실제 Issue, plan, todo, 구현 diff/commit, 테스트 결과를 확인한다.
-   PR 본문에 Issue 항목을 넣고 [Issue 연결 검사](../git-workflow/references/issue-link.md)로 실제 Issue 여부·허용 참조 형식·의도/영향/달성 조건의 연결을 확인한다.
-   번호 누락·잘못된 참조·접근 불가·내용 불일치이면 원격 PR 생성을 보류하고 원인을 기록한 로컬 초안으로 반환한다.
-   local-draft는 원격 Issue를 대신하지 않는다.
+   PR 본문에 Issue 항목을 넣고 [Issue 연결 검사](../git-workflow/references/issue-link.md)를 적용한다.
+   보류 조건에 해당하면 원격 PR 생성을 보류하고 원인을 기록한 local-pr-draft로 반환한다.
    구현이 아직이면 [구현 진행](../git-workflow/SKILL.md#구현-진행)으로 돌아간다.
    테스트 미실행/부족은 review-pending이며 초안에 그대로 기록한다.
    필요한 저장소 검사를 우회해 ready로 만들지 않는다.

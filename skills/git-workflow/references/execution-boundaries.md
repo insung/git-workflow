@@ -17,3 +17,16 @@ Issue 기반 기능 구현 단계에서는 의도·영향 범위·달성 조건�
 문서 위치는 [plan의 경로 규칙](../../plan-create/references/plan.md#디렉토리-규칙)을 따른다. 비밀값·원시 로그·머신 절대 경로는 공유 문서에 복사하지 않는다.
 
 대상 저장소에 spec-it manifest/lock이 있으면 그 파일이 고정한 spec-it 원문을 읽는다. 규칙을 복제하거나 자동으로 최신판으로 바꾸지 않는다. 확인되지 않은 번호·테스트 결과·URL·머지·배포 상태를 만들지 않는다.
+
+## 결과 상태
+
+스킬이 반환하는 상태 이름의 정본이다. 리뷰 판정(pass·warn·fail·human-review)은 [pr-review](../../pr-review/SKILL.md#6-결과)가 정의한다.
+
+| 상태 | 조건 | 반환하는 스킬 |
+| --- | --- | --- |
+| issue-incomplete | Issue에 의도·영향 범위·달성 조건 중 하나가 없음 | issue-create |
+| local-draft | 원격 Issue를 만들거나 조회할 수 없는 로컬 파일럿. 원격 Issue를 대신하지 않음 | issue-create, plan-create |
+| local-pr-draft | Issue 연결 검사 실패 또는 원격 접근 불가로 PR을 만들지 않은 본문 초안 | pr-create |
+| review-pending | 구현 인계 후 리뷰나 테스트 증거 보완 대기 | pr-create |
+| merge-unconfirmed | 머지 명령 후 실제 `state=MERGED`와 merge commit을 확인하지 못함 | pr-merge |
+

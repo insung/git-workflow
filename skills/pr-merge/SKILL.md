@@ -9,14 +9,10 @@ description: “검토한 PR을 머지해줘”, “PR 머지 결과를 확인�
 
 ## 실제 Issue 연결: 머지 필수 조건
 
-PR 본문의 Issue 항목에서 `#번호`, `owner/repository#번호` 또는 전체 Issue URL을 읽고 [Issue 연결 검사](../git-workflow/references/issue-link.md)를 적용한다.
-GitHub의 실제 Issue이며 PR이 아닌지, 변경 의도·영향 범위·달성 조건이 이번 PR과 최종 검토 결과에 연결되는지 확인한다.
-
-번호 누락·잘못된 참조·접근 불가·필수 내용 부족·내용 불일치이면 머지를 보류하고 원인을 보고한다.
-local-draft는 대신할 수 없다.
-closed Issue는 현재 작업과의 관계로 판단한다.
+PR 본문의 Issue 항목에 [Issue 연결 검사](../git-workflow/references/issue-link.md)를 최종 검토 결과까지 포함해 적용한다.
+보류 조건에 해당하면 머지를 보류하고 원인을 보고한다.
 이 검사 통과는 사용자 머지 승인이 아니다.
-머지 직전 최신 본문과 Issue를 확인한다.
+머지 직전 최신 본문과 Issue를 다시 확인한다.
 
 ## 머지 전
 
