@@ -41,6 +41,15 @@ created: "2026-10-01"
 
 실행 순서: 01 → 목표 버전 결정 → 02 → 03 → 최종 검증. 검증이 실패하면 해당 단계로 돌아가 같은 사례를 다시 실행한다.
 
+## 검토 기준
+
+구현 전에 `review/draft-python-version-upgrade` 브랜치에 고정한다. 구현 세션은 읽지 않으며, 작업 디렉토리에는 기록 커밋 뒤에 나타난다. 보관 규칙은 [검토 기준·검증 입력 양식](../../../skills/plan-create/references/review-criteria.md#보관-위치)을 따른다.
+
+| 파일 | 내용 |
+| --- | --- |
+| [review-criteria.md](review-criteria.md) | AC별 기계 확인·판단 질문·실패 예 |
+| [review-input-runtime-compat.md](review-input-runtime-compat.md) | TC-02 고정 입력 |
+
 ## 최종 검증
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 필요 승인 | 결과 |

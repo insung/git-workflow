@@ -4,7 +4,7 @@
 
 ## 흐름
 
-Issue 참조 확인 → git-workflow로 현재 단계 선택 → plan/todo와 실제 브랜치·HEAD·테스트 근거 대조 → 미완료 구현·검증 → commit-rule·pr-create → 독립 pr-review → 사용자 승인·pr-merge
+Issue 참조 확인 → git-workflow로 현재 단계 선택 → plan/todo와 실제 브랜치·HEAD·테스트 근거 대조 → task-implement로 미완료 구현·검증 → commit-rule·pr-create → 독립 pr-review → 사용자 승인·pr-merge
 
 ## 확인할 경계
 
