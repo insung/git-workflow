@@ -9,7 +9,7 @@
 - Plan / Todo: <원본 상대 링크와 현재 상태>
 - base / 구현 코드 commit / 검토 HEAD / 미커밋 변경 파일·patch/digest / 확인 시각:
 - 실제 실행 담당과 검토 방식: <현재 또는 별도 세션; 미확인 ID를 만들지 않음>
-- spec-it manifest/lock·policy pin·정본 위치/접근 상태:
+- spec-it: <미채택, 또는 manifest/lock·policy pin·정본 위치와 접근 상태>
 
 ## 사용자 의도와 구현 결과
 

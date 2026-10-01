@@ -23,7 +23,7 @@ closed Issue는 현재 작업과의 관계로 판단한다.
 Issue, plan/todo, PR URL, 검토한 HEAD와 결과, docs 증거와 전달/배포 계획을 확인한다.
 기록은 [문체](../git-workflow/references/writing-conventions.md), 원격 요약은 [document-links](../git-workflow/references/document-links.md)를 따른다.
 fail/human-review가 남아 있으면 수정·추가 증거 또는 명시적 인간 결정이 먼저다.
-정책 예외가 필요하면 spec-it의 예외 절차로 기록해야 하며 머지 승인만으로 예외를 만들지 않는다.
+spec-it을 채택한 프로젝트에서 정책 예외가 필요하면 spec-it의 예외 절차로 기록하며, 머지 승인만으로 예외를 만들지 않는다.
 
 1. 위 Issue 연결 검사가 통과했는지 확인하고 PR headRefOid를 다시 조회해 검토 HEAD와 일치하는지 확인한다.
    바뀌면 재검토하고 새 HEAD에 대한 승인을 받는다.

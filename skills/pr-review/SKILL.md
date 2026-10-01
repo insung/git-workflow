@@ -1,78 +1,70 @@
 ---
 name: pr-review
-description: “PR을 리뷰해줘”, “diff를 검증해줘”, “커밋의 코드와 테스트를 검토해줘”처럼 구현 동작·의도·정책·테스트 근거의 검토를 요청할 때 사용한다.
+description: “PR을 리뷰해줘”, “이 커밋의 코드와 테스트를 검토해줘”처럼 구현이 Issue 의도대로 되었는지와 테스트 누락의 검토를 요청할 때 사용한다.
 ---
 
 # PR 검토
 
 [공통 실행 경계](../git-workflow/references/execution-boundaries.md)를 적용한다.
+Issue·plan·todo로 사용자 의도를 먼저 파악하고, 구현과 테스트가 그 의도를 채우는지 교차 확인한다.
+현재 세션이나 이미 위임된 리뷰 에이전트가 직접 수행하고 별도 모델을 중첩 호출하지 않는다.
 
-## 읽기 전용 검토 입력
+## 1. 검토 대상 고정
 
-Issue 원문과 변경 의도·영향 범위·달성 조건, plan, 모든 관련 todo, PR/로컬 diff와 commit 범위, docs 인계, 기준 commit과 검토 HEAD, 테스트 증거를 받는다.
-제목·본문을 검토할 때 [표기](../git-workflow/references/change-conventions.md)와 [문체](../git-workflow/references/writing-conventions.md)를 읽는다.
-기준 커밋과 검토할 커밋을 확인한다.
-작업본 diff와 index에 올라간 변경을 각각 확인한다.
-GitHub PR을 검토할 때 실제 PR의 headRefOid와 로컬 검토 대상이 같은지 확인한다.
-미추적 파일은 diff 외에서 따로 확인한다.
+1. base, 검토 HEAD, commit 범위를 확인한다.
+2. 작업본 diff, index의 변경, 미추적 파일을 각각 확인한다.
+3. GitHub PR이면 실제 headRefOid가 로컬 검토 대상과 같은지 확인한다.
+4. 검토 중 HEAD나 관련 소스가 바뀌면 이전 증거는 과거 기록으로 두고 바뀐 범위를 다시 검토한다.
 
-## diff 우선, 배경까지 검토
+## 2. 의도 파악
 
-1. 변경된 코드·파일·계약을 diff에서 확인하고 관련 미변경 소비자까지 영향 경로를 조사한다.
-   변경 밖의 기존 문제와 이번에 도입한 문제를 구분한다.
-2. 원래 Issue와 승인된 plan 결정 → todo/AC/기대 시나리오 → 실제 commit·구현 → 검증 증거를 양방향으로 대조한다.
-   todo 체크 완료와 작성자의 completed 주장은 증거가 아니다.
-   계획 밖 파일/기능·빠진 작업·검증/배포 계획의 실행 여부와 배경을 확인한다.
-   코드가 선택한 정책·실패 처리·호환성의 배경을 확인한다.
-   작성자의 설명이나 테스트 내부 일관성만으로 원래 의도의 충족을 판정하지 않는다.
-3. 대상 AGENTS.md, `.architecture/manifest.yaml`, `.architecture/lock.yaml`, 예외와 정확한 pinned 규칙 원문을 읽는다.
-   spec-it-check의 사용 가능한 설치 진입점 또는 고정된 정책 소스의 SKILL.md를 읽어 적용한다.
+1. Issue의 목표·영향 범위·달성 조건(AC ID), plan의 결정과 변경 기록, 모든 관련 todo의 작업·검증 표를 읽는다.
+2. AC마다 기대 시나리오를 정상·실패·경계·유지 동작으로 나눠 적는다.
+3. Issue나 plan이 없으면 PR 본문과 요청자 설명으로 의도를 정리하고, 결과에 추정이라고 적는다.
 
-   영향 조사가 필요하면 설치된 spec-it-impact가 있는지 확인한다.
-   설치되어 있지 않으면 대상 프로젝트의 manifest/lock이나 제공된 경로가 가리키는 정책 소스에서 `skills/spec-it-impact/SKILL.md`를 확인하고 직접 읽는다.
-   `../spec-it/skills/`는 후보 위치이며 모든 환경에 있다고 가정하지 않는다.
+PR 제목·본문을 검토하면 [표기](../git-workflow/references/change-conventions.md)와 [문체](../git-workflow/references/writing-conventions.md)를 읽는다.
 
-   설치와 고정 소스 모두 접근할 수 없으면 이 스킬의 diff·소비자 영향 조사를 수행하고 검사하지 못한 정책 범위를 human-review로 남긴다.
-   임의 설치나 설정 변경을 하지 않는다.
-   스킬 호출 성공을 꾸미지 않는다.
-   규칙을 복제하거나 새로운 의무를 만들지 않는다.
-4. manifest/lock이 없으면 shadow assessment로 후보 기준만 제안하고 정책 준수/위반 판정은 하지 않는다.
-   규칙별 상태는 pass/warn/fail/not-applicable/human-review를 사용한다.
-   결정·증거 부재나 미구현 검사는 pass가 아니다.
+## 3. 구현 대조
 
-## 테스트 증거
+1. diff의 변경을 AC와 todo 작업에 양방향으로 대응시킨다.
+2. 계획 밖 파일·기능, 빠진 작업, 미변경 소비자에 미치는 영향을 확인한다.
+3. 이번 변경이 만든 문제와 변경 밖의 기존 문제를 구분한다.
 
-변경 동작에 대한 유닛 테스트 파일과 사례별 기대/실제 결과를 요구한다.
-정상·실패·경계·관련 유지 동작을 달성 조건에 대응시킨다.
-명령, 실행 커밋과 미커밋 변경 근거, 환경, 실행일, 통과/실패/미실행, 누락 범위를 확인한다.
-테스트 존재나 녹색 결과만으로 의미를 충족했다고 하지 않는다.
+todo 체크, handoff의 완료 주장, 테스트 내부의 일관성은 의도 충족의 증거가 아니다.
 
-문서 전용 등 유닛 테스트가 적용되지 않으면 이유와 링크·구조 등 대체 검사를 기록한다.
-테스트가 없거나 결과가 오래됐거나 환경 증거가 부족하면 human-review와 필요한 재검증을 보고한다.
-프로젝트에서 허용한 저비용 명령만 실행하고 live/유료/credential 실행은 해당 승인 없이는 하지 않는다.
-실행하지 않은 명령은 미실행으로 남긴다.
+## 4. 테스트 누락 확인
 
-PR HEAD나 관련 소스가 검토 중/후 바뀌면 이전 증거는 과거 상태의 기록이며 현재 변경의 pass로 재사용하지 않는다.
-변경된 범위와 필요한 검사를 재검토한다.
+1. AC 기대 시나리오마다 테스트 파일과 assertion을 찾는다.
+   대응 assertion이 없는 시나리오는 테스트 누락이다.
+2. Issue의 AC ID 중 todo 검증 표에 없는 ID는 계획의 테스트 누락이다.
+3. assertion이 동작을 고정하는지 확인한다.
+   해당 구현을 지워도 통과하는 테스트는 그 시나리오를 검증하지 않는다.
+4. 실행 증거로 명령·실행 커밋·환경·시각·결과를 확인한다.
+   없거나 검토 HEAD와 다르면 미검증이다.
 
-## 결과와 실행 방식
+유닛 테스트 대상이 없는 변경이면 이유와 링크·구조 같은 대체 검사를 확인한다.
+프로젝트가 허용한 저비용 명령만 실행한다.
+live·유료·credential 실행은 해당 승인이 있을 때만 하고, 실행하지 않은 명령은 미실행으로 적는다.
 
-[검토 계약과 양식](references/review.md)으로 결과를 반환한다.
-규칙 지적은 ID·적용 계기·위치·구체 관찰·프로젝트 영향·추가 증거/조치와 묶는다.
-고정 규칙에 없는 의견은 advisory로 분리한다.
-대상 docs/git-workflows 작업 디렉토리의 review.md에는 호출자/구현 담당이 승인된 문서 범위에서 결과를 기록한다.
-Issue/PR에는 [document-links](../git-workflow/references/document-links.md)에 따라 핵심 결과와 검토 HEAD·남은 증거·확인된 문서 링크만 남긴다.
-댓글 게시와 상태 라벨 갱신은 승인 범위를 확인하며 라벨은 [labels](../git-workflow/references/labels.md)를 따른다.
-spec-it 검사기는 대상 코드·정책을 수정하지 않는다.
-정책 JSON을 저장할 때는 canonical spec-it의 스키마와 허용 위치를 따른다.
+## 5. 정책 검사
 
-현재 세션 또는 이미 위임된 리뷰 에이전트가 직접 수행할 수 있다.
-별도 모델을 중첩 호출하지 않는다.
-사용자가 독립 검증 실행을 명시한 경우에만 canonical spec-it의 `tools/spec_it_verify.py`와 `docs/local-verification.md` 존재·현재 계약을 확인하고 사용한다.
-후보 runner가 없으면 직접 스킬 검토로 진행하고 실행되지 않은 runner를 주장하지 않는다.
-API 키 인증이나 유료 요청으로 자동 전환하지 않는다.
+대상 저장소에 `.architecture/manifest.yaml`과 `.architecture/lock.yaml`이 있으면 [spec-it 정책 검사](references/spec-it-policy.md)를 적용한다.
+없으면 결과에 「spec-it 미채택」만 적고 정책 판정·human-review 항목을 만들지 않는다.
 
-fail은 구현 담당에게 수정 인계, human-review는 결정·증거 요청으로 반환한다.
-수정 후에는 새 HEAD와 영향 범위를 재검토한다.
-pass/warn도 머지 승인이 아니다.
-다음 단계는 [pr-merge](../pr-merge/SKILL.md)다.
+## 6. 결과
+
+[검토 양식](references/review.md)으로 결과를 반환한다.
+
+| 상태 | 조건 |
+| --- | --- |
+| fail | 테스트 누락, 의도 미충족, 이번 변경의 결함 |
+| human-review | 사람의 결정이나 확보할 수 없는 증거가 필요함 |
+| warn | 머지를 막지 않는 위험 |
+| pass | 모든 AC 시나리오가 구현·테스트·실행 증거로 확인됨 |
+
+AC·todo·정책 근거가 없는 의견은 advisory로 분리한다.
+review.md 기록을 요청받았으면 대상 작업 디렉토리의 review.md에 쓰고, 아니면 대화로 반환한다.
+Issue/PR 댓글과 라벨은 요청된 경우에 [document-links](../git-workflow/references/document-links.md)와 [labels](../git-workflow/references/labels.md)를 따른다.
+
+fail은 구현 담당에게 수정을 인계하고, 수정 후 새 HEAD를 다시 검토한다.
+pass도 머지 승인이 아니다. 다음 단계는 [pr-merge](../pr-merge/SKILL.md)다.
