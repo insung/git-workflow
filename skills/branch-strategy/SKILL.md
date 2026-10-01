@@ -1,6 +1,6 @@
 ---
 name: branch-strategy
-description: “브랜치 전략을 정해줘”, “feature 브랜치를 만들어줘”, “hotfix 경로를 정해줘”처럼 브랜치 정책이나 분기 작업을 요청할 때 사용한다.
+description: “브랜치 전략을 정해줘”, “dev에서 feature 브랜치를 만들어줘”, “hotfix 경로를 정해줘”처럼 브랜치 역할·분기·역반영 규칙의 결정이나 브랜치 생성을 요청할 때 사용한다.
 ---
 
 # 브랜치 전략

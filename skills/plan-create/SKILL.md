@@ -1,6 +1,6 @@
 ---
 name: plan-create
-description: “이슈의 계획을 작성해줘”, “todo를 만들어줘”, “검증·배포 계획을 보완해줘”처럼 Issue 기반 작업 계획을 요청할 때 사용한다.
+description: “Issue #12의 구현 계획을 작성해줘”, “이 Issue 계획의 todo를 보완해줘”처럼 GitHub Issue에 대한 plan·todo 작성이나 보완을 요청할 때 사용한다. Issue와 무관한 개인 할 일 목록에는 쓰지 않는다.
 ---
 
 # 계획과 Todo 작성

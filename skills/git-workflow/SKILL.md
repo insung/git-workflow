@@ -1,6 +1,6 @@
 ---
 name: git-workflow
-description: “Issue부터 진행해줘”, “git workflow 진행해줘”처럼 변경의 전체 흐름·단계 선택·계획 구현을 요청할 때 사용한다.
+description: “Issue #12 작업을 이어서 진행해줘”, “git workflow로 진행해줘”처럼 Issue 기반 변경의 시작·재개, 다음 단계 선택, 준비된 plan·todo의 구현을 요청할 때 사용한다.
 ---
 
 # Git 워크플로우
@@ -22,6 +22,7 @@ Issue → plan/todo → 구현·테스트·커밋 → PR → 검토 → 사용�
 | 커밋 실행·메시지·범위 검토 요청 | [commit-rule](../commit-rule/SKILL.md) | 승인된 범위의 commit |
 | 브랜치 전략·분기·hotfix 요청 | [branch-strategy](../branch-strategy/SKILL.md) | 확정 전략·분기 결과·미정 항목 |
 | 릴리즈 요청 | [git-release](../git-release/SKILL.md) | 고정 범위의 노트·발행 상태 |
+| 대상 저장소의 Issue·PR 템플릿 설치 요청 | [template-init](../template-init/SKILL.md) | 복사한 파일·기존 파일 차이·라벨 상태 |
 
 “커밋 검토”는 메시지·범위·분리라면 commit-rule, 코드 동작·의도·정책·테스트라면 pr-review로 선택한다.
 두 종류를 모두 요청하면 각 범위를 적용한다.
