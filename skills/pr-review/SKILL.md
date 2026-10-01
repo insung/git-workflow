@@ -7,7 +7,7 @@ description: “PR이 Issue 계획대로 구현됐는지 리뷰해줘”, “이
 
 [공통 실행 경계](../git-workflow/references/execution-boundaries.md)를 적용한다.
 Issue·plan·todo로 사용자 의도를 먼저 파악하고, 구현과 테스트가 그 의도를 채우는지 교차 확인한다.
-현재 세션이나 이미 위임된 리뷰 에이전트가 직접 수행하고 별도 모델을 중첩 호출하지 않는다.
+판정과 하위 에이전트 사용은 [검증 실행 주체](../git-workflow/references/execution-boundaries.md#검증-실행-주체)를 따른다.
 
 ## 1. 검토 대상 고정
 
@@ -20,7 +20,8 @@ Issue·plan·todo로 사용자 의도를 먼저 파악하고, 구현과 테스�
 
 1. Issue의 목표·영향 범위·달성 조건(AC ID), plan의 결정과 변경 기록, 모든 관련 todo의 작업·검증 표를 읽는다.
 2. AC마다 기대 시나리오를 정상·실패·경계·유지 동작으로 나눠 적는다.
-3. Issue나 plan이 없으면 PR 본문과 요청자 설명으로 의도를 정리하고, 결과에 추정이라고 적는다.
+3. `review/issue-{n}` 브랜치에 [검토 기준](../plan-create/references/review-criteria.md)이 있으면 그 브랜치에서 읽고 AC별 기준으로 판정한다.
+4. Issue나 plan이 없으면 PR 본문과 요청자 설명으로 의도를 정리하고, 결과에 추정이라고 적는다.
 
 PR 제목·본문을 검토하면 [표기](../git-workflow/references/change-conventions.md)와 [문체](../git-workflow/references/writing-conventions.md)를 읽는다.
 
@@ -41,6 +42,8 @@ todo 체크, handoff의 완료 주장, 테스트 내부의 일관성은 의도 �
    해당 구현을 지워도 통과하는 테스트는 그 시나리오를 검증하지 않는다.
 4. 실행 증거로 명령·실행 커밋·환경·시각·결과를 확인한다.
    없거나 검토 HEAD와 다르면 미검증이다.
+5. 검증 입력(`review-input-<topic>.md`)이 있으면 그 고정 입력으로 다시 실행한다.
+   구현 세션의 입력과 결과는 참고로만 적고 판정 근거로 쓰지 않는다.
 
 유닛 테스트 대상이 없는 변경이면 이유와 링크·구조 같은 대체 검사를 확인한다.
 프로젝트가 허용한 저비용 명령만 실행한다.
@@ -68,3 +71,10 @@ Issue/PR 댓글과 라벨은 요청된 경우에 [document-links](../git-workflo
 
 fail은 구현 담당에게 수정을 인계하고, 수정 후 새 HEAD를 다시 검토한다.
 pass도 머지 승인이 아니다. 다음 단계는 [pr-merge](../pr-merge/SKILL.md)다.
+
+## 7. 기록 커밋
+
+1. review.md 기록 뒤 PR 머지 전에 작업 브랜치에 docs 커밋 하나를 만든다. 커밋 승인은 별도다.
+2. fail이 아니면 검토 기준·검증 입력을 `git checkout review/issue-{n} -- <경로>`로 가져와 같은 커밋에 넣는다.
+3. fail이면 review.md만 커밋한다. 수정하는 구현 세션이 기준을 보지 않게 한다.
+4. 이 문서 전용 커밋은 재검토 대상이 아니다.
