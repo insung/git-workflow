@@ -15,4 +15,4 @@
 - GitHub Release·태그만으로 서버 배포를 완료했다고 하지 않는다.
 - 배포 실패·복구·태그/Release 발행 상태는 각각 사실에 맞게 기록한다.
 
-다음 세션에는 실제 Issue·plan/todos 위치·브랜치·HEAD·검증 근거·미결정을 전달한다. 상세 문서는 대상 리포의 [plan 경로 정본](../../../skills/plan-create/references/plan.md#경로와-준비-조건)을 따른다. 규칙과 필수 입력은 [한국어 README](../../../README.ko.md#스킬양식과-필수-입력) 및 [English scenarios](../../../README.md#workflow-scenarios)를 참고한다.
+다음 세션에는 실제 Issue·plan/todos 위치·브랜치·HEAD·검증 근거·미결정을 전달한다. 상세 문서는 대상 리포의 [plan 경로 정본](../../../skills/plan-create/references/plan.md#디렉토리-규칙)을 따른다. 규칙과 필수 입력은 [한국어 README](../../../README.ko.md#스킬양식과-필수-입력) 및 [English scenarios](../../../README.md#workflow-scenarios)를 참고한다.

@@ -37,7 +37,7 @@ Read the current stage's reference when writing the corresponding output. Forms 
 
 ## Documentation and labels
 
-Store plan.md, todos.md or 01-todos.md, handoff.md and review.md according to the [canonical plan path rules](skills/plan-create/references/plan.md#경로와-준비-조건). Every plan connects the Issue context and intent to work units, verification and deployment/rollback. Issue/PR updates contain summaries and verified document links.
+Store plan.md, `{nn}-todos-{step-title}.md`, handoff.md and review.md according to the [canonical plan path rules](skills/plan-create/references/plan.md#디렉토리-규칙). Every plan connects the Issue context and intent to work units, verification and deployment/rollback. Issue/PR updates contain summaries and verified document links.
 
 PR creation and merging require an Issue field verified against an actual remote Issue, its scope and acceptance criteria. PR references, inaccessible or mismatched Issues block those actions; a local-draft is not a substitute. See the [Issue linkage contract](skills/git-workflow/references/issue-link.md).
 
@@ -96,7 +96,7 @@ flowchart TD
 > dmp.crawler needs a Python version upgrade. Use issue-create to create the GitHub Issue and plan-create to write the plan, then proceed.
 
 1. Inspect the actual repository, current Python runtime, dependency declarations, container and CI configuration, tests and deployment entry points. Resolve the target version and material compatibility decisions. Record the intent, impact and acceptance criteria; reuse an existing matching Issue or create one with issue-create. Initial investigation precedes the Issue; detailed implementation planning follows it.
-2. Use plan-create to write plan.md and numbered todos. Include dependency/runtime changes, behavioral regression cases, staged verification, deployment checks and rollback. The [filled document set](docs/examples/python-version-upgrade/README.md) is a fictional example; real target-repository paths follow the [plan contract](skills/plan-create/references/plan.md#경로와-준비-조건).
+2. Use plan-create to write plan.md and numbered todos. Include dependency/runtime changes, behavioral regression cases, staged verification, deployment checks and rollback. The [filled document set](docs/examples/python-version-upgrade/README.md) is a fictional example; real target-repository paths follow the [plan contract](skills/plan-create/references/plan.md#디렉토리-규칙).
 3. In the implementation session, read Issue/plan/todos and use branch-strategy to create feature/python-version-upgrade from the verified dev branch. Write compatibility and regression tests, implement each unit, and record actual outcomes. Use commit-rule for requested scoped commits and pr-create for a PR to dev with handoff.md and document links.
 4. In the review session, use pr-review to compare Issue intent and acceptance criteria with plan/todos, actual commits/diff, the pinned spec-it source and test evidence. Record review.md. Missing evidence or unresolved decisions return to implementation or human review.
 5. Present the reviewed HEAD, risks and merge method. After explicit user approval, pr-merge rechecks the real Issue and current HEAD, merges the same reviewed HEAD and confirms MERGED/mergeCommit. dev integration does not prove production deployment.

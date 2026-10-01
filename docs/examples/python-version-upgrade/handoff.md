@@ -3,7 +3,7 @@
 설명용 미실행 양식이다. 현재 구현/커밋·원격 PR·테스트 결과 없음.
 
 - Issue: [로컬 초안](issue.md); 원격 연결 전 실제 Issue 조회 필요
-- 계획과 단위 작업: [plan](plan.md), [01](01-todos.md), [02](02-todos.md), [03](03-todos.md)
+- 계획과 단위 작업: [plan](plan.md), [01](01-todos-runtime-compatibility.md), [02](02-todos-runtime-upgrade.md), [03](03-todos-release-handoff.md)
 - 브랜치·HEAD·커밋 목록: 실제 구현 후 채움
 - 미커밋 변경: 실제 파일과 안전하게 확인한 patch/digest를 기록
 - 변경·계획 이탈·정책 소스: 실제 diff와 고정 기준을 확인한 뒤 기록

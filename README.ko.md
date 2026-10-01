@@ -20,7 +20,7 @@ Issue → plan/todo → 구현·테스트·커밋 → PR → spec-it 검토 → 
 
 ## 작업 문서와 외부 기록
 
-plan.md, todo, handoff.md, review.md의 위치는 [plan 경로 정본](skills/plan-create/references/plan.md#경로와-준비-조건)을 따른다. 계획에는 Issue 맥락·사용자 의도·단계 흐름·검증·배포/롤백을 기록한다. 구현 담당이 테스트 결과를 남기고 리뷰 담당이 의도·코드·근거를 대조한다.
+plan.md, todo, handoff.md, review.md의 위치는 [plan 경로 정본](skills/plan-create/references/plan.md#디렉토리-규칙)을 따른다. 계획에는 Issue 맥락·사용자 의도·단계 흐름·검증·배포/롤백을 기록한다. 구현 담당이 테스트 결과를 남기고 리뷰 담당이 의도·코드·근거를 대조한다.
 
 PR 생성·머지 전에 본문의 Issue 항목을 실제 원격 Issue와 대조한다. PR 오연결·접근 불가·내용 불일치이면 보류하며 local-draft는 대신할 수 없다.
 
@@ -60,7 +60,7 @@ flowchart TD
 > dmp.crawler 프로젝트 파이썬 버전 업그레이드가 필요해. 깃 이슈 생성(issue-create)하고 plan 생성(plan-create)하여 진행해줘.
 
 1. 실제 리포의 현재 Python 실행 버전, 의존성 선언, 컨테이너·CI 설정, 테스트와 배포 진입점을 조사한다. 목표 버전과 중요한 호환성 결정을 확인한다. 변경 의도·영향 범위·달성 조건을 정리하고 issue-create로 같은 Issue를 재사용하거나 생성한다. Issue 전에는 사전 조사를 하고, 상세 구현 계획은 Issue 이후에 작성한다.
-2. plan-create로 plan.md와 단위별 todos를 작성한다. 런타임·의존성 변경, 동작 회귀 사례, 단계별 검증, 배포 조건과 롤백을 포함한다. [채운 문서 세트](docs/examples/python-version-upgrade/README.md)는 가상 예시이며 실제 리포의 작업 경로는 [plan 정본](skills/plan-create/references/plan.md#경로와-준비-조건)을 따른다.
+2. plan-create로 plan.md와 단위별 todos를 작성한다. 런타임·의존성 변경, 동작 회귀 사례, 단계별 검증, 배포 조건과 롤백을 포함한다. [채운 문서 세트](docs/examples/python-version-upgrade/README.md)는 가상 예시이며 실제 리포의 작업 경로는 [plan 정본](skills/plan-create/references/plan.md#디렉토리-규칙)을 따른다.
 3. 구현 세션은 Issue·plan·todos를 읽고 branch-strategy로 확인한 dev에서 feature/python-version-upgrade를 만든다. 호환성·회귀 테스트를 작성하고 단위별 구현과 실제 결과를 기록한다. 요청된 커밋은 commit-rule로 처리하며 pr-create로 dev 대상 PR과 handoff.md를 준비한다.
 4. 리뷰 세션은 pr-review로 Issue 의도·달성 조건, plan/todos, 실제 커밋·diff, 고정한 spec-it 규칙과 테스트 근거를 대조한다. review.md에 판단을 기록한다. 근거 부족이나 미결정이 있으면 구현 보완 또는 인간 판단으로 되돌린다.
 5. 검토한 HEAD·위험·머지 방식을 제시한다. 사용자가 명시 승인한 후 pr-merge가 실제 Issue와 현재 HEAD를 재확인하고 같은 HEAD를 머지하여 MERGED와 mergeCommit을 확인한다. dev 통합만으로 운영 배포를 완료했다고 하지 않는다.
