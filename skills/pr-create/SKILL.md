@@ -14,7 +14,7 @@ description: “PR을 만들어줘”, “PR 본문을 작성해줘”처럼 구
    구현이 아직이면 [task-implement](../task-implement/SKILL.md)로 돌아간다.
    테스트 미실행/부족은 review-pending이며 초안에 그대로 기록한다.
    필요한 저장소 검사를 우회해 ready로 만들지 않는다.
-2. [handoff 계약](references/handoff.md)으로 구현 결과를 docs 작업 디렉토리에 기록한다.
+2. [task-implement](../task-implement/SKILL.md)가 작성한 handoff.md를 [handoff 계약](references/handoff.md)과 대조하고 PR 정보를 보완한다. handoff.md가 없으면 task-implement로 돌아간다.
    계획 이탈·AC별 구현과 테스트·commit·위험·배포/롤백 입력을 연결한다.
    todo 완료 주장과 실제 파일/증거를 대조한다.
 3. [PR 상세·양식](references/pr.md)을 따른다.

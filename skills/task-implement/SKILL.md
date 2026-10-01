@@ -37,16 +37,16 @@ description: '“plan의 01 단계를 구현해줘”, “Issue #12 todo를 이�
 3. 스킬 지시 변경의 시나리오 (변경 대상이 `SKILL.md`·`references/`·`assets/`의 지시일 때)
    - 변경 전(RED): 지시를 바꾸기 전 커밋의 스킬로 검증 표의 시나리오를 실행한다.
    - 변경 후(GREEN): 바꾼 커밋의 스킬로 같은 입력의 시나리오를 실행한다.
-   - 실행 주체와 실행자에게 주는 입력은 [검증 실행 주체](../git-workflow/references/execution-boundaries.md#검증-실행-주체)를 따른다.
+   - 실행 주체와 실행자에게 주는 입력은 [검증 실행 주체](../git-workflow/references/execution-boundaries.md#검증-실행-주체)의 구현 세션 행을 따른다.
    - 기록: 처리 내용에 RED·GREEN 각각의 스킬 커밋과 통과 횟수(예: 0/3, 3/3). 실행하지 못하면 `미실행`과 이유.
 4. 기록: 아래 [기록 규칙](#기록-규칙)에 따라 task 파일과 plan을 갱신한다.
 5. 커밋: 커밋이 요청·승인됐으면 commit-rule로 단계마다 주제별로 커밋한다.
-   - 구현 커밋과 task 파일 기록 커밋(`docs(work-record)`)을 나눈다.
+   - 구현 커밋과 task 파일·plan 기록만 바꾸는 커밋을 나눈다. scope는 [scope 선정](../git-workflow/references/change-conventions.md#scope-선정)을 따른다.
    - 커밋하지 않았다면 변경 파일과 patch 또는 digest를 기록한다. 확인할 수 없는 작업본 상태는 한계를 적는다.
 6. 계획 이탈: plan과 다르게 처리한 변경은 plan 결정과 변경 기록에 구분 `계획 이탈` 행을 추가한다.
    - 내용: 바꾼 것·이유·영향 AC·단계. 기존 행은 수정하지 않는다.
    - task 파일 처리 내용에도 이유를 쓴다.
-7. handoff.md: 단계를 마칠 때마다 [handoff 계약](../pr-create/references/handoff.md)으로 plan의 작업 디렉토리에 작성하거나 갱신한다.
+7. handoff.md: 단계를 마칠 때마다 [handoff 계약](../pr-create/references/handoff.md)으로 plan의 작업 디렉토리에 작성하거나 갱신한다. handoff.md 작성의 정본이다.
    - 사례별 기대·실제 결과, 명령·실행 위치·환경·시각, 대상 소스와 커밋.
    - 커밋 이후 문서만 바뀌었다면 코드 검증 결과와 구분한다.
 8. 완료와 인계
