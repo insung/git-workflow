@@ -2,8 +2,8 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const requiredSkills = ['git-workflow', 'issue-create', 'plan-create', 'pr-create', 'pr-review', 'pr-merge', 'commit-rule', 'git-release'];
-const requiredReferences = ['git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-create/references/feature-issue.md', 'issue-create/references/bug-issue.md', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-review/references/review.md', 'pr-merge/references/wiki.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'commit-rule/references/branch.md', 'git-release/references/release-notes.md'];
+const requiredSkills = ['git-workflow', 'issue-create', 'plan-create', 'pr-create', 'pr-review', 'pr-merge', 'commit-rule', 'branch-strategy', 'git-release'];
+const requiredReferences = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-create/references/feature-issue.md', 'issue-create/references/bug-issue.md', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-review/references/review.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'branch-strategy/references/branch.md', 'git-release/references/release-notes.md'];
 const manifests = ['plugin.json', '.codex-plugin/plugin.json', '.claude-plugin/plugin.json'];
 
 // Structural checks only: this does not execute skills or judge spec-it compliance.

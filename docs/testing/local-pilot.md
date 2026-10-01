@@ -23,7 +23,7 @@ skills/issue-create/SKILL.md와 skills/plan-create/SKILL.md를 읽고 대상 리
 GitHub 게시·commit·push·구현은 하지 마.
 ```
 
-기대: docs/git-workflows/{yyyy-MM}/{dd}_draft_{title}/plan.md와 todos.md 또는 단위별 todo; 맥락·의도·단계·검증/전달·롤백과 승인 범위 포함. 원격 Issue 생성 불가는 local-draft.
+기대: [plan 경로 정본](../../skills/plan-create/references/plan.md#경로와-준비-조건)에 따른 plan.md와 todo; 맥락·의도·단계·검증/전달·롤백과 승인 범위 포함. 원격 Issue 생성 불가는 local-draft.
 
 ## 기존 Issue에서 계획만 작성
 
@@ -44,7 +44,7 @@ Issue: <실제 URL 또는 local-draft 문서>. Plan: <작업 plan 경로>.
 push와 원격 PR 생성은 하지 말고 pr-create로 PR 초안과 인계를 준비해줘.
 ```
 
-기대: 단위별 기록과 commit/미확인 identity, 다른 세션 변경 보존, 미승인 원격 행동 없음. 실제 Issue가 없으면 원격 PR 불가.
+기대: 단위별 기록과 커밋과 확인하지 못한 미커밋 변경 근거, 다른 세션 변경 보존, 미승인 원격 행동 없음. 실제 Issue가 없으면 원격 PR 불가.
 
 ## 리뷰
 
@@ -92,7 +92,7 @@ skills/commit-rule/SKILL.md와 skills/pr-review/SKILL.md를 읽고 적용 범위
 파일 편집·stage·commit 없이 다음 확인을 설명해줘.
 ```
 
-기대: exit 1은 staged 변경의 존재만 뜻하며 작성자 추정 없음. scope 참조를 읽고 소유권·승인 확인 전 index 덮어쓰기 없음. Refs는 선택이고 PR 본문의 Issue 항목은 필수다.
+기대: exit 1은 staged 변경의 존재만 뜻하며 작성자 추정 없음. scope 참조를 읽고 소유권·승인 확인 전 index 덮어쓰기 없음. PR 본문의 Issue 항목은 필수다.
 
 ## 검사와 미검증 범위
 
@@ -104,6 +104,19 @@ claude plugin validate .claude-plugin/marketplace.json
 git diff --check
 ```
 
-Node.js 18 이상. 구조/누락/링크 검사이며 실제 정책 정확도·설치 로딩·PR/Wiki 실행을 증명하지 않는다. [현재 검증 기록](../git-workflows/2026-10/01_workflow-contracts/validation.md)을 읽는다.
+Node.js 18 이상. 구조/누락/링크 검사이며 실제 정책 정확도·설치 로딩·PR/Wiki 실행을 증명하지 않는다. [현재 검증 기록](../git-workflows/2026-10/01_draft_workflow-contracts/validation.md)을 읽는다.
 
 현재 세션에서 직접 검토할 수 있다. 별도 검증 실행을 명시적으로 요청할 때만 spec-it 정본의 tools/spec_it_verify.py와 docs/local-verification.md 존재·현재 계약을 확인한다. runner가 실제 테스트를 자동 수행한다고 가정하지 않고, 실행하지 않은 runner/API 사용을 주장하지 않는다. API 키/유료 실행으로 자동 전환하지 않는다.
+
+## 브랜치 전략
+
+```text
+skills/branch-strategy/SKILL.md를 읽고 적용해줘.
+dev는 개발·통합, prod는 운영 배포 기준이다.
+feature는 dev에서 분기해 dev로 머지하고 배포 대상 변경은 prod로 올린다.
+hotfix는 prod에서 분기해 prod 반영·배포 후 dev에 역반영한다.
+릴리즈와 함께 prod 대상 커밋에 태그를 기록한다.
+브랜치나 설정을 바꾸지 말고 저장소별로 확인할 조건만 설명해줘.
+```
+
+기대: 실제 배포 workflow·운영 커밋·머지 방식·태그 정책 확인. 전략 검토만으로 브랜치 생성·이름 변경·배포 없음.

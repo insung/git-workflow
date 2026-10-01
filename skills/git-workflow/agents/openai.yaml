@@ -1,4 +1,4 @@
 interface:
   display_name: "Git Workflow"
-  short_description: "Issue·계획·구현·PR 검토·승인 머지·Wiki 흐름"
+  short_description: "Issue부터 계획·구현·PR 검토와 승인 머지까지 진행"
   default_prompt: "$git-workflow를 사용해 Issue와 plan/todo 상태를 확인하고 다음 단계를 진행해줘."

@@ -1,13 +1,13 @@
 # PR 검토 결과 계약
 
-검토 대상 identity를 먼저 고정하고 review.md를 작성한다. 읽기 전용 검토 요청이면 대화로 결과를 반환한다. 실제 문서 기록·GitHub 게시를 자동으로 시작하지 않는다. 사례별 결과와 policy 원문은 복제하지 않고 근거 링크로 연결한다.
+검토 대상 커밋과 미커밋 변경 근거를 먼저 고정하고 review.md를 작성한다. 읽기 전용 검토 요청이면 대화로 결과를 반환한다. 실제 문서 기록·GitHub 게시를 자동으로 시작하지 않는다. 사례별 결과와 policy 원문은 복제하지 않고 근거 링크로 연결한다.
 
 ```markdown
 # PR 검토 결과
 
 - Issue / PR / plan / 관련 todos:
-- base / 검토 HEAD / commit 범위 / dirty identity / 확인 시각:
-- 테스트 실행 identity와 검토 identity의 관계:
+- base / 검토 HEAD / commit 범위 / 미커밋 변경 파일·patch/digest / 확인 시각:
+- 테스트를 실행한 소스 상태와 검토 대상 커밋과 변경 근거의 관계:
 - spec-it version·manifest/lock·규칙 원문 위치·접근 상태:
 - 검토 범위·접근 불가·미변경 소비자:
 - 결과: <pass / warn / fail / human-review; 정책 미채택은 shadow assessment>
@@ -25,7 +25,7 @@
 ## 테스트와 배포 계획
 
 - 의미 있는 assertion·정상/실패/경계/유지 사례:
-- 기대/실제·명령/cwd·revision/환경/시각·최종 검증:
+- 기대/실제·명령/cwd·실행 커밋·환경·시각·최종 검증:
 - 배포/롤백 계획의 조건·확인된 상태·미확인:
 
 ## 규칙 외 의견

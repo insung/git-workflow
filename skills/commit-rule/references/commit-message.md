@@ -36,15 +36,12 @@ fix(app-usage): 일별 집계 재실행 시 중복 적재 차단
 
 ## 푸터
 
-`Refs:`는 선택이며 모든 커밋에 Issue 번호를 강제하지 않는다. 실제 Issue 참조가 필요한 경우 본문과 빈 줄로 구분해 끝에 적는다. AI가 작성한 커밋에는 실제 도구를 `Agent:` 트레일러로 기록한다.
+AI가 작성한 커밋에는 실제 도구를 `Agent:` 트레일러로 기록한다. 본문과 빈 줄로 구분해 끝에 적는다.
 
 ```text
 Agent: Codex
 ```
 
-Issue 참조가 필요하면 선택적으로 `Refs: #12`처럼 실제 번호를 추가한다. PR 본문의 필수 Issue 연결과 커밋의 선택 Refs는 별개다.
-
 Claude가 작성했다면 `Agent: Claude`를 쓴다. 두 도구가 실제 기여한 경우 각 `Agent:` 줄로 기록한다. 사용하지 않은 도구를 넣거나 사람의 Git author 설정을 바꾸지 않는다. 사람만 작성한 커밋에는 에이전트 푸터를 넣지 않는다.
 
-
-표준 Co-authored-by 트레일러는 허용한다. BREAKING CHANGE 표기는 실제 호환성 영향과 저장소 규칙을 확인한 경우만 사용한다. Refs는 실제 Issue를 가리키며 local-draft에는 가짜 번호를 넣지 않는다.
+표준 Co-authored-by 트레일러는 허용한다. BREAKING CHANGE 표기는 실제 호환성 영향과 저장소 규칙을 확인한 경우만 사용한다.

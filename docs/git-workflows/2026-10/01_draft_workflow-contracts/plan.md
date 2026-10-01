@@ -1,3 +1,11 @@
+---
+issue: null
+status: completed
+baseline:
+  branch: "feat/issue-review-workflow"
+  commit: "e16b11391384105ef8ccfbebaeace2834ffe59ed"
+---
+
 # Git Workflow 문서 계약 Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
@@ -53,7 +61,7 @@ flowchart TD
 
 **Files:** scripts/check-package.mjs, tests/package.test.mjs, .gitignore, skills/git-workflow/agents/openai.yaml, docs/testing/, 현재 디렉토리 validation.md.
 
-**Interfaces:** `validatePackage(root: string): string[]` 유지. 정식 스킬 8개(후속 요청으로 plan-create 추가)와 필요한 reference 계약을 검사한다. 테스트 fixture는 실제 누락을 만들어 거부를 assert한다.
+**Interfaces:** `validatePackage(root: string): string[]` 유지. 정식 스킬 9개와 필요한 reference 계약을 검사한다. 테스트 fixture는 실제 누락을 만들어 거부를 assert한다.
 
 구체 작업은 [02-todos.md](02-todos.md)에 기록한다. RED로 새 구조 fixture를 기존 검사기에 실행한 후 검사기를 갱신한다.
 
@@ -87,3 +95,22 @@ flowchart TD
 - 기능·버그 Issue 템플릿을 별도 정본 파일로 추출하고 plan의 Issue 값을 하나의 문자열로 단순화한다. 상태 enum은 plan reference에서만 정의한다.
 - 안내 문서는 플러그인의 기능과 실행 계약에 집중한다. 설치 좌표는 유지한다.
 - 검증·전달: skill-creator와 패키지 검사, 로컬 파일럿 시나리오 안내 갱신; 실제 원격 실행과 발행은 수행하지 않는다.
+
+## 후속 보완: 브랜치 전략·중복·가독성
+
+### 맥락과 의도
+
+사용자는 dev 기반 feature 작업, prod 운영 배포와 hotfix 역반영을 독립된 스킬로 정의하려 한다. 개별 스킬의 범위를 좁히고 공유 규칙을 한 곳에서 관리하여 중복·모호한 요청 조건·설치 의존성을 줄인다.
+
+### 작업과 흐름
+
+- branch-strategy로 브랜치 정의·분기 안내를 분리하고 확인된 dev/feature/prod/hotfix 및 릴리즈 태그 흐름을 기록
+- 공통 실행 경계를 작은 reference로 추출하고 작업 경로 규칙은 plan reference로 연결
+- 작업 문서를 draft 경로로 이동하고 참조 링크 갱신
+- spec-it 설치/고정 소스 부재의 직접 조사·human-review 경로 정의
+- PR 검증 요약과 상세 재현 절 구분, 예시와 README 언어·문장 정리
+- Sideband 답변 후 9개 스킬과 패키지·manifest·로컬 링크 검증
+
+### 검증과 전달
+
+skill-creator 검사, 패키지 누락 fixture와 실제 소스 구조 검사를 적용한다. 자동 스킬 선택·실제 GitHub 실행은 별도 환경에서 확인해야 한다. 소스 파일을 지정한 로컬 시험으로 전달하며 커밋·push·설치 캐시 변경과 실제 브랜치 생성·이름 변경은 이번 범위에 포함하지 않는다.

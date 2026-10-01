@@ -106,3 +106,34 @@ Sideband는 파일 경로 변경을 지원하지 않는다. 이동 전 plan/todo
 답변을 추가하지 못한 스레드는 7a673ca2-b898-4cad-9aaf-5fe15831f9b2, 8063d878-0119-4c39-81f9-a2eccae862b0, 21652b35-17de-4d93-9298-5fc840e4e011, 7ab03fb0-79ab-4a75-aedc-1333ab7ad2b1, 50af0aab-ee27-4f53-b51e-7d7a33f0595e다. 이동된 경로에 파일을 복원하거나 댓글 JSONL을 직접 수정하지 않았다.
 
 구조 검사와 지시 대조는 모델의 자동 선택·실제 Issue 의미 판단·머지 실행을 증명하지 않는다. 시험용 가상 입력은 docs/testing/local-pilot.md에 추가했다. GitHub 계정 전환은 인증 문제로 실패하여 성공으로 주장하지 않는다. 실제 원격 조회·Issue/PR 생성·머지·커밋·push·발행·설치 캐시 변경은 수행하지 않았다.
+
+## 후속 검증: 브랜치 전략과 정본 정리
+
+2026-10-01T23:30:46+09:00, 기준 HEAD `e16b11391384105ef8ccfbebaeace2834ffe59ed`의 작업본을 확인했다. 이전 작업은 현재 HEAD에 들어 있으며 이번에는 그 위의 로컬 수정과 신규 스킬·이동 파일을 검증했다. 이전 실행 증거는 당시 결과로 유지한다.
+
+- branch-strategy를 분리하고 dev 개발·통합, prod 운영 배포, feature의 dev 분기/머지, dev에서 prod로 배포 대상 반영을 기록했다. hotfix는 기본적으로 prod에서 분기해 prod 반영·배포 후 dev에 역반영한다. 릴리즈 대상 커밋에 태그와 릴리즈를 남긴다. 실제 브랜치·배포 설정은 바꾸지 않았다.
+- 공통 실행 경계는 execution-boundaries.md에, 문서 경로는 plan reference에만 정의했다. 개별 단계는 라우터 전체를 읽지 않고 해당 reference를 읽는다. 실제 런타임 토큰 사용량은 측정하지 않았다.
+- 작업 문서를 draft 경로로 옮기고 문서 링크를 갱신했다. README의 산출물 목록에 wiki.md를 추가했다.
+- 설치되지 않은 spec-it 스킬은 프로젝트의 고정 정책 소스에서 직접 읽을 수 있다. 설치와 소스가 모두 없으면 일반 영향 조사는 계속하고 미확인 정책 검사를 human-review로 반환한다. 설치 성공·정책 준수는 주장하지 않았다.
+- PR의 검증 상태는 필수 요약이며 확인 절은 선택 상세 재현이다. 예시 브랜치와 제목을 같은 주제로 맞췄다. README의 설명·예시는 영어로 통일했다.
+
+| 검사 | 실제 결과 | 한계 |
+| --- | --- | --- |
+| skill-creator quick_validate.py | 9/9 valid | 프런트매터·이름·형식; 자동 선택 실험 아님 |
+| node --test tests/package.test.mjs | 16/16 pass | 필수 정본·새 스킬 누락과 기존 패키지 구조 검사 |
+| node scripts/check-package.mjs | exit 0 | 실제 파일·manifest·로컬 링크 구조 |
+| claude plugin validate plugin/marketplace | 각각 통과 | manifest 구조 |
+| git diff --check | exit 0 | tracked diff 공백 오류 |
+| Sideband 공식 reanchor·reply·재조회 | 새 5개 답변; 바뀐 기존 앵커도 재연결 | 사용자만 스레드를 종료함 |
+
+기존의 이동 전 plan 경로 5개 댓글은 내용이 정본에 반영되어 있으나 missing-file 때문에 추가 답변을 하지 않았다. 댓글 이벤트를 직접 수정하거나 옛 파일을 복원하지 않았다. 사용자에게 커밋을 요청받지 않았으므로 .comments를 stage하거나 미해결 스레드 포함 여부를 질문하지 않았다. 실제 원격 조회·커밋·push·브랜치 조작·설치 캐시 변경은 없다.
+
+## 후속 검증: Wiki 기능 보류
+
+Sideband 요청에 따라 pr-merge의 Wiki 트리거·작성·게시 절차와 전용 reference를 제거했다. README·워크플로우 흐름도·라우터·계획 양식·패키지 필수 파일 목록을 승인된 PR 머지 범위에 맞췄다. 위의 Wiki 관련 기록은 이전 구현 상태이며, 현재 Wiki 작성은 추후 별도 스킬 작업으로 보류한다.
+
+- node --test tests/package.test.mjs: 16/16 pass.
+- node scripts/check-package.mjs: 구조·manifest·로컬 링크 검사 통과.
+- skill-creator quick_validate.py: 변경한 pr-merge와 git-workflow 모두 valid. 자동 선택·실제 머지 실행 검증은 아니다.
+- git diff --check: 통과.
+- 실제 Issue 연결, 검토·승인 HEAD 일치, 사용자 머지 승인과 실제 MERGED 상태 확인 조건은 유지했다.

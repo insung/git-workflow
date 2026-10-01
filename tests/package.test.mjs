@@ -5,8 +5,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { validatePackage } from '../scripts/check-package.mjs';
 
-const names = ['git-workflow', 'issue-create', 'plan-create', 'pr-create', 'pr-review', 'pr-merge', 'commit-rule', 'git-release'];
-const references = ['git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-create/references/feature-issue.md', 'issue-create/references/bug-issue.md', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-review/references/review.md', 'pr-merge/references/wiki.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'commit-rule/references/branch.md', 'git-release/references/release-notes.md'];
+const names = ['git-workflow', 'issue-create', 'plan-create', 'pr-create', 'pr-review', 'pr-merge', 'commit-rule', 'branch-strategy', 'git-release'];
+const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-create/references/feature-issue.md', 'issue-create/references/bug-issue.md', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-review/references/review.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'branch-strategy/references/branch.md', 'git-release/references/release-notes.md'];
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'git-workflow-package-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
@@ -72,10 +72,16 @@ test('rejects missing shared label guidance', t => {
   assert.ok(validatePackage(root).some(e => e.includes('git-workflow/references/labels.md')));
 });
 
-for (const path of ['git-workflow/references/issue-link.md', 'issue-create/references/feature-issue.md', 'issue-create/references/bug-issue.md']) {
+for (const path of ['git-workflow/references/execution-boundaries.md', 'branch-strategy/references/branch.md', 'git-workflow/references/issue-link.md', 'issue-create/references/feature-issue.md', 'issue-create/references/bug-issue.md']) {
   test(`rejects missing required form or contract: ${path}`, t => {
     const { root } = fixture(t);
     rmSync(join(root, 'skills', path));
     assert.ok(validatePackage(root).some(e => e.includes(`missing reference: skills/${path}`)));
   });
 }
+
+test('rejects a missing branch-strategy entrypoint even when its reference remains', t => {
+  const { root } = fixture(t);
+  rmSync(join(root, 'skills/branch-strategy/SKILL.md'));
+  assert.ok(validatePackage(root).some(e => e.includes('missing skill: branch-strategy')));
+});
