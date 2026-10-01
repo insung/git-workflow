@@ -13,8 +13,8 @@ description: '“plan의 01 단계를 구현해줘”, “Issue #12 todo를 이�
 
 | 구분 | 대상 |
 | --- | --- |
-| 읽음 | Issue의 의도·달성 조건, plan.md(단계 표·결정과 변경 기록·전달과 롤백), 현재 단계의 `task-{nn}-{step-title}.md`, 기존 handoff.md |
-| 읽지 않음 | `review/issue-{n}` 브랜치와 그 worktree, `review-criteria.md`, `review-input-<topic>.md` ([보관 위치](../plan-create/references/review-criteria.md#보관-위치)) |
+| 읽음 | Issue의 의도·달성 조건, plan.md(단계 표·결정과 변경 기록·전달과 롤백), 현재 단계의 `task-{nn}-{step-title}.md`, 기존 handoff.md, 작업 브랜치에 커밋된 fail·human-review review.md |
+| 읽지 않음 | `review/issue-{n}` 브랜치와 그 worktree, 로컬 파일럿의 `review/draft-{title}` 브랜치, `review-criteria.md`, `review-input-<topic>.md` ([보관 위치](../plan-create/references/review-criteria.md#보관-위치)) |
 
 읽지 않음 대상은 checkout·`git show`·`git diff`·grep·목록 조회로도 열지 않는다.
 대화로 그 내용을 받으면 구현과 자기 검증의 근거로 쓰지 않고 handoff.md에 그 사실을 기록한다.
@@ -24,6 +24,7 @@ description: '“plan의 01 단계를 구현해줘”, “Issue #12 todo를 이�
 | Issue에 의도·영향 범위·달성 조건 부족 | [issue-create](../issue-create/SKILL.md) |
 | plan·task 파일 없음, 작업·검증 표 부족 | [plan-create](../plan-create/SKILL.md) |
 | 구현 방식에 영향을 주는 결정이 `보류` | 그 단계만 보류하고 사용자에게 결정 요청 |
+| 이 세션이 그 Issue의 검토 기준·검증 입력을 작성했거나 읽음 | 멈추고 보고. 구현은 다른 세션에 인계 ([보관 위치](../plan-create/references/review-criteria.md#보관-위치)) |
 
 ## 절차
 

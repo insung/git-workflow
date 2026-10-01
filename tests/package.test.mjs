@@ -86,6 +86,12 @@ test('rejects a missing branch-strategy entrypoint even when its reference remai
   assert.ok(validatePackage(root).some(e => e.includes('missing skill: branch-strategy')));
 });
 
+test('rejects a missing task-implement entrypoint', t => {
+  const { root } = fixture(t);
+  rmSync(join(root, 'skills/task-implement/SKILL.md'));
+  assert.ok(validatePackage(root).some(e => e.includes('missing skill: task-implement')));
+});
+
 test('rejects an issue template without GitHub front matter fields', t => {
   const { root, put } = fixture(t);
   put('skills/template-init/assets/.github/ISSUE_TEMPLATE/bug_report.md', '---\nname: n\nabout: a\n---\n');
