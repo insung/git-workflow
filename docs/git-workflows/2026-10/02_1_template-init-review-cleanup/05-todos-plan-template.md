@@ -26,7 +26,7 @@
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 결과 |
 | --- | --- | --- | --- | --- |
-| <a id="tc-11"></a>TC-11 | AC-14 | plan·todo 양식과 예제·이 계획의 절 구성 대조, `ls docs/examples/python-version-upgrade`, `grep -rn "경로와-준비-조건\|메타데이터와-상태" skills docs/examples README.md README.ko.md`, 리포 루트 | 절 일치, 새 todo 파일 이름만 존재, 옛 앵커 0 | 미실행 |
+| <a id="tc-11"></a>TC-11 | AC-14 | plan·todo 양식과 예제·이 계획의 절 구성 대조, `ls docs/examples/python-version-upgrade`, `grep -rn "경로와-준비-조건\|메타데이터와-상태" skills docs/examples README.md README.ko.md`, 리포 루트 | 절 일치, 새 todo 파일 이름만 존재, 옛 앵커 0 | 통과 (3c80538) |
 
 ## 제외 범위
 
