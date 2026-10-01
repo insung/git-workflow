@@ -47,7 +47,7 @@ created: "2026-10-02"
 | [01](task-01-file-naming.md) | 파일 이름 규칙 | todo·검토 기준·검증 입력 이름 규칙을 디렉토리 규칙에 반영, 예제 todo 파일 이름 변경 | [TC-01](task-01-file-naming.md#tc-01) | [ ] |
 | [02](task-02-independent-review.md) | 독립 검토 플로우 | plan-create의 검토 기준·검증 입력 양식, 보관 위치, pr-review 재실행 절차, 검증 실행 주체, 커밋 시점 | [TC-02](task-02-independent-review.md#tc-02)<br>[TC-03](task-02-independent-review.md#tc-03) | [ ] |
 | [03](task-03-task-implement.md) | task-implement 스킬 | 구현 진행 절차와 todo 진행 규칙을 새 스킬로 이동, 링크·패키지 검사 갱신 | [TC-04](task-03-task-implement.md#tc-04)<br>[TC-05](task-03-task-implement.md#tc-05)<br>[TC-06](task-03-task-implement.md#tc-06) | [ ] |
-| [04](task-04-template-init.md) | template-init 지시 보완 | 필수 절 목록, 폴더 생성, remote 없는 저장소, 뜻이 같은 절 판단 기준 | [TC-07](task-04-template-init.md#tc-07)<br>[TC-08](task-04-template-init.md#tc-08) | [ ] |
+| [04](task-04-template-init.md) | template-init 지시 보완 | 필수 절 목록, 폴더 생성, remote 없는 저장소, 뜻이 같은 절 판단 기준 | [TC-07](task-04-template-init.md#tc-07)<br>[TC-08](task-04-template-init.md#tc-08) | [x] |
 | [05](task-05-examples-readme.md) | 예제와 README | python-version-upgrade에 검토 기준·검증 입력 예제 추가, README 스킬 표와 작업 문서 설명 갱신 | [TC-09](task-05-examples-readme.md#tc-09) | [ ] |
 
 실행 순서: 01 → 02 → 03 → 04 → 05 → 최종 검증. 02가 정한 보관 위치(D2)를 03의 읽기 금지 규칙이 참조한다. 05는 01~04의 최종 규칙을 예제로 보여 주므로 마지막에 둔다. 검증이 실패하면 해당 단계로 돌아가 같은 사례를 다시 실행한다.
