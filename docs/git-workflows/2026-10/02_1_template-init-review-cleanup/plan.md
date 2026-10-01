@@ -39,7 +39,7 @@ created: "2026-10-02"
 
 | 단계 | 제목 | 설명 | 검증 사례 | 완료 |
 | --- | --- | --- | --- | --- |
-| [01](01-todos-pr-review-rework.md) | pr-review 재구성과 spec-it 분리 | 의도 파악 → 구현 대조 → 테스트 누락 확인 순서로 재작성. spec-it 정책 검사는 채택 프로젝트 전용 reference로 분리 | [TC-01](01-todos-pr-review-rework.md#tc-01)<br>[TC-02](01-todos-pr-review-rework.md#tc-02)<br>[TC-03](01-todos-pr-review-rework.md#tc-03) | [ ] |
+| [01](01-todos-pr-review-rework.md) | pr-review 재구성과 spec-it 분리 | 의도 파악 → 구현 대조 → 테스트 누락 확인 순서로 재작성. spec-it 정책 검사는 채택 프로젝트 전용 reference로 분리 | [TC-01](01-todos-pr-review-rework.md#tc-01)<br>[TC-02](01-todos-pr-review-rework.md#tc-02)<br>[TC-03](01-todos-pr-review-rework.md#tc-03) | [x] |
 | [02](02-todos-template-init.md) | GitHub 템플릿 정본화와 template-init | 기능·버그·PR 템플릿을 스킬 필수 항목과 일치. 대상 프로젝트에 복사하는 template-init 추가 | [TC-04](02-todos-template-init.md#tc-04)<br>[TC-05](02-todos-template-init.md#tc-05) | [ ] |
 | [03](03-todos-skill-cleanup.md) | description·중복 규칙·조건 정리 | 트리거 T1~T7 한정, 중복 규칙 링크화, 조건 없는 지시 정리, 매니페스트 Wiki 제거 | [TC-06](03-todos-skill-cleanup.md#tc-06)<br>[TC-07](03-todos-skill-cleanup.md#tc-07)<br>[TC-08](03-todos-skill-cleanup.md#tc-08) | [ ] |
 | [04](04-todos-readme-rebuild.md) | README 재구성과 예제 정리 | sideband-comments README 구성 기준 재작성, spec-it 절 추가, 예제 반복 문구 정리 | [TC-09](04-todos-readme-rebuild.md#tc-09) | [ ] |
@@ -83,3 +83,4 @@ created: "2026-10-02"
 | 2026-10-02 | 결정 | D2 `assets/.github`가 플러그인 설치에서 누락되면 `assets/github/`로 변경하고 복사 시 이름 변환 | AC-09, 02 | 보류, TC-05·설치 확인 결과로 결정 |
 | 2026-10-02 | 결정 | D1 플러그인 버전 0.3.0. 스킬 추가와 지시 변경이 있고 설치 캐시 갱신이 필요함. 매니페스트 버전은 03 단계 작업 6에서 함께 변경 | 전달, 03 | 승인 |
 | 2026-10-02 | 계획 이탈 | commit-rule description 변경이 계획 문서 커밋(3c80538)에 이미 포함됨. 분리하지 않고 03 단계 작업 2에서 T1 기준으로 다시 확인 | AC-10, 03 | 승인 |
+| 2026-10-02 | 계획 이탈 | TC-01 변경 전 실행에서 테스트 누락 지적은 이미 3/3이었음. 변경 전후 차이를 spec-it 미채택 저장소의 정책 human-review 생성 여부로 함께 측정. 패키지 검사에 spec-it-policy.md 필수 파일 추가 | AC-05, 01 | 보류, 사용자 확인 대기 |
