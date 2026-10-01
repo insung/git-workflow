@@ -93,3 +93,13 @@ test('rejects an issue template without GitHub front matter fields', t => {
   assert.ok(errors.some(e => e.includes('missing issue template title')));
   assert.ok(errors.some(e => e.includes('missing issue template labels')));
 });
+test('rejects an unquoted description that YAML truncates at " #"', t => {
+  const { root, put } = fixture(t);
+  put('skills/plan-create/SKILL.md', '---\nname: plan-create\ndescription: “Issue #12의 계획을 작성해줘”처럼 요청할 때 사용한다.\n---\n');
+  assert.ok(validatePackage(root).some(e => e.includes('truncated')));
+});
+test('accepts a quoted description containing " #"', t => {
+  const { root, put } = fixture(t);
+  put('skills/plan-create/SKILL.md', "---\nname: plan-create\ndescription: '“Issue #12의 계획을 작성해줘”처럼 요청할 때 사용한다.'\n---\n");
+  assert.deepEqual(validatePackage(root), []);
+});

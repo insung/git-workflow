@@ -52,7 +52,7 @@ export function validatePackage(root) {
   function scan(dir) {
     if (!existsSync(dir)) return;
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
-      if (['.git', '.superpowers', 'node_modules', '.venv'].includes(entry.name)) continue;
+      if (['.git', '.superpowers', '.worktrees', 'node_modules', '.venv'].includes(entry.name)) continue;
       const path = join(dir, entry.name);
       if (entry.isDirectory()) scan(path);
       else if (entry.isFile() && entry.name.endsWith('.md')) checkMarkdown(path);
@@ -67,6 +67,8 @@ export function validatePackage(root) {
       const expected = dirname(path).split(/[\\/]/).at(-1);
       if (name !== expected) errors.push(`skill name mismatch: ${label}`);
       if (!frontmatter?.match(/^description:\s*\S.+$/m)) errors.push(`missing skill description: ${label}`);
+      const description = frontmatter?.match(/^description:[ \t]*([^\r\n]*)$/m)?.[1] ?? '';
+      if (!/^['"]/.test(description) && /\s#/.test(description)) errors.push(`unquoted description truncated at " #": ${label}`);
     }
     const prose = source.replace(/^(```|~~~)[^\n]*\n[\s\S]*?^\1[^\n]*(?:\n|$)/gm, '');
     for (const match of prose.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)) {

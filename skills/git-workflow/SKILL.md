@@ -1,6 +1,6 @@
 ---
 name: git-workflow
-description: “Issue #12 작업을 이어서 진행해줘”, “git workflow로 진행해줘”처럼 Issue 기반 변경의 시작·재개, 다음 단계 선택, 준비된 plan·todo의 구현을 요청할 때 사용한다.
+description: '“Issue #12 작업을 이어서 진행해줘”, “git workflow로 진행해줘”처럼 Issue 기반 변경의 시작·재개, 다음 단계 선택, 준비된 plan·todo의 구현을 요청할 때 사용한다.'
 ---
 
 # Git 워크플로우
