@@ -163,7 +163,7 @@ Inspect staged and unstaged changes before applying commit-rule. Existing stagin
 
 Rules remain in the linked skills/references: [execution boundaries](skills/git-workflow/references/execution-boundaries.md), [Issue linkage](skills/git-workflow/references/issue-link.md), [document summaries and links](skills/git-workflow/references/document-links.md), [labels](skills/git-workflow/references/labels.md). Issue/PR updates summarize outcomes and link to accessible docs; they do not copy the full documents.
 
-## Examples, local pilot and development history
+## Examples and local pilot
 
 | Example | Document set / flow |
 | --- | --- |
@@ -176,6 +176,6 @@ Rules remain in the linked skills/references: [execution boundaries](skills/git-
 
 [docs/examples/](docs/examples/README.md) contains fictional Issue-oriented examples. Its paths are package documentation, not a replacement for the target repository's plan path contract. [Local pilot](docs/examples/python-version-upgrade/local-pilot.md) provides source-file prompts; a fresh session must use the local source explicitly until publication/update is verified. Structural tests do not prove automatic skill selection, correct policy judgment or real remote operations.
 
-The former docs/git-workflows, docs/issues, docs/superpowers and verification files under docs/testing documented this plugin's actual development. They are preserved in [development history](docs/history/git-workflow-development/README.md), rather than relabeled as successful crawler examples. No dmp.crawler code, remote Issue/PR, deployment or release was executed to author these examples.
+No dmp.crawler code, remote Issue/PR, deployment or release was executed to author these examples.
 
 Wiki writing is deferred to a future separate skill and is outside the current plugin scope.

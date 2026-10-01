@@ -127,7 +127,7 @@ staged·미커밋 변경을 확인하고 commit-rule을 적용한다. staged 여
 
 실행 규칙은 [공통 경계](skills/git-workflow/references/execution-boundaries.md), [Issue 연결](skills/git-workflow/references/issue-link.md), [문서 요약·링크](skills/git-workflow/references/document-links.md), [라벨](skills/git-workflow/references/labels.md)에 둔다. Issue/PR에는 핵심 결과와 접근 가능한 docs 링크를 남기며 전문을 복사하지 않는다.
 
-## 예제·로컬 시험과 개발 이력
+## 예제·로컬 시험
 
 | 예제 | 문서 세트와 흐름 |
 | --- | --- |
@@ -140,4 +140,4 @@ staged·미커밋 변경을 확인하고 commit-rule을 적용한다. staged 여
 
 [docs/examples/](docs/examples/README.md)는 Issue 주제별 가상 예제다. 패키지의 설명용 위치이며 대상 리포의 실제 작업 경로 규칙을 바꾸지 않는다. [로컬 시험](docs/examples/python-version-upgrade/local-pilot.md)은 소스 파일을 지정하는 요청을 제공한다. 미발행 후보는 새 세션에 실제 로컬 소스를 명시해야 한다. 구조 검사는 자동 스킬 선택·정책 판정 정확도·실제 원격 실행을 증명하지 않는다.
 
-기존 docs/git-workflows·docs/issues·docs/superpowers와 docs/testing의 검증 문서는 이 플러그인의 실제 개발 기록이었다. 크롤러 성공 예제로 바꾸지 않고 [개발 이력](docs/history/git-workflow-development/README.md)에 보존했다. 이번 예시 작성으로 실제 dmp.crawler 코드 변경·원격 Issue/PR·배포·릴리즈는 수행하지 않았다.
+이번 예시 작성으로 실제 dmp.crawler 코드 변경·원격 Issue/PR·배포·릴리즈는 수행하지 않았다.

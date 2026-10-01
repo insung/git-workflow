@@ -10,4 +10,4 @@
 | [크롤러 시작 장애](crawler-startup-hotfix/README.md) | prod hotfix와 dev 역반영 |
 | [운영 릴리즈](production-release/README.md) | dev → prod, 배포와 태그·Release 구분 |
 
-대상 리포의 실제 작업 문서는 [plan 경로 정본](../../skills/plan-create/references/plan.md#경로와-준비-조건)을 따른다. 이 디렉토리는 설명용 예시만 담는다. 실제 플러그인 개발 기록은 [history](../history/git-workflow-development/README.md)에 보존한다.
+대상 리포의 실제 작업 문서는 [plan 경로 정본](../../skills/plan-create/references/plan.md#경로와-준비-조건)을 따른다. 이 디렉토리는 설명용 예시만 담는다.
