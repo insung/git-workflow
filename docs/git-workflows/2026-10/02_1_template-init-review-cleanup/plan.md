@@ -41,7 +41,7 @@ created: "2026-10-02"
 | --- | --- | --- | --- | --- |
 | [01](01-todos-pr-review-rework.md) | pr-review 재구성과 spec-it 분리 | 의도 파악 → 구현 대조 → 테스트 누락 확인 순서로 재작성. spec-it 정책 검사는 채택 프로젝트 전용 reference로 분리 | [TC-01](01-todos-pr-review-rework.md#tc-01)<br>[TC-02](01-todos-pr-review-rework.md#tc-02)<br>[TC-03](01-todos-pr-review-rework.md#tc-03) | [x] |
 | [02](02-todos-template-init.md) | GitHub 템플릿 정본화와 template-init | 기능·버그·PR 템플릿을 스킬 필수 항목과 일치. 대상 프로젝트에 복사하는 template-init 추가 | [TC-04](02-todos-template-init.md#tc-04)<br>[TC-05](02-todos-template-init.md#tc-05) | [x] |
-| [03](03-todos-skill-cleanup.md) | description·중복 규칙·조건 정리 | 트리거 T1~T7 한정, 중복 규칙 링크화, 조건 없는 지시 정리, 매니페스트 Wiki 제거 | [TC-06](03-todos-skill-cleanup.md#tc-06)<br>[TC-07](03-todos-skill-cleanup.md#tc-07)<br>[TC-08](03-todos-skill-cleanup.md#tc-08) | [ ] |
+| [03](03-todos-skill-cleanup.md) | description·중복 규칙·조건 정리 | 트리거 T1~T7 한정, 중복 규칙 링크화, 조건 없는 지시 정리, 매니페스트 Wiki 제거 | [TC-06](03-todos-skill-cleanup.md#tc-06)<br>[TC-07](03-todos-skill-cleanup.md#tc-07)<br>[TC-08](03-todos-skill-cleanup.md#tc-08) | [x] |
 | [04](04-todos-readme-rebuild.md) | README 재구성과 예제 정리 | sideband-comments README 구성 기준 재작성, spec-it 절 추가, 예제 반복 문구 정리 | [TC-09](04-todos-readme-rebuild.md#tc-09) | [ ] |
 | [05](05-todos-plan-template.md) | plan·todo 양식 개선 | 디렉토리·프론트메터 규칙 번호화, 템플릿 우선 배치, 표 중심 양식, todo 파일 이름 규칙 | [TC-11](05-todos-plan-template.md#tc-11) | [x] |
 
@@ -84,3 +84,5 @@ created: "2026-10-02"
 | 2026-10-02 | 결정 | D1 플러그인 버전 0.3.0. 스킬 추가와 지시 변경이 있고 설치 캐시 갱신이 필요함. 매니페스트 버전은 03 단계 작업 6에서 함께 변경 | 전달, 03 | 승인 |
 | 2026-10-02 | 계획 이탈 | commit-rule description 변경이 계획 문서 커밋(3c80538)에 이미 포함됨. 분리하지 않고 03 단계 작업 2에서 T1 기준으로 다시 확인 | AC-10, 03 | 승인 |
 | 2026-10-02 | 계획 이탈 | TC-01 변경 전 실행에서 테스트 누락 지적은 이미 3/3이었음. 변경 전후 차이를 spec-it 미채택 저장소의 정책 human-review 생성 여부로 함께 측정. 패키지 검사에 spec-it-policy.md 필수 파일 추가 | AC-05, 01 | 보류, 사용자 확인 대기 |
+| 2026-10-02 | 계획 이탈 | pr-review description을 03 단계에서 다시 한정(T2). 일반 코드 리뷰 요청과의 겹침을 03 판정에서 함께 확인하기 위함 | AC-10, 01·03 | 보류, 사용자 확인 대기 |
+| 2026-10-02 | 계획 이탈 | TC-06에 더해 경쟁 스킬을 포함한 요청 14개 단일 선택 판정과 브랜치 생성 동작(전략 질문 여부)을 변경 전·후 3회씩 확인. 입력은 계획 디렉토리의 미추적 고정 입력 파일을 참고하고 그 파일은 수정·커밋하지 않음 | AC-10, 03 | 보류, 사용자 확인 대기 |
