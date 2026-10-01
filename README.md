@@ -21,7 +21,7 @@ The plugin is a set of instructions, not a CI service. One session can run every
 flowchart TD
     A[Request] --> B[issue-create: Issue with acceptance criteria]
     B --> C[plan-create: plan and step todos]
-    C --> D[git-workflow: implement, test and commit each step]
+    C --> D[task-implement: implement, test, record and commit each step]
     D --> E[pr-create: handoff and PR]
     E --> F[pr-review: intent, implementation and test cross-check]
     F -->|fail or missing evidence| D
@@ -32,9 +32,10 @@ flowchart TD
 
 | Skill | Use it to |
 | --- | --- |
-| [git-workflow](skills/git-workflow/SKILL.md) | Start or resume an Issue-based change, choose the next stage, implement a prepared plan |
+| [git-workflow](skills/git-workflow/SKILL.md) | Start or resume an Issue-based change and choose the next stage |
 | [issue-create](skills/issue-create/SKILL.md) | Write or complete an Issue, check for duplicates first |
 | [plan-create](skills/plan-create/SKILL.md) | Write the plan and step todos for an Issue |
+| [task-implement](skills/task-implement/SKILL.md) | Implement a prepared todo in table order, record results, commit each step and write the handoff |
 | [pr-create](skills/pr-create/SKILL.md) | Write the implementation handoff and open the PR |
 | [pr-review](skills/pr-review/SKILL.md) | Check that the change meets the Issue intent and that no test is missing |
 | [pr-merge](skills/pr-merge/SKILL.md) | Merge the reviewed HEAD after user approval and confirm the result |
@@ -83,6 +84,7 @@ skills/
 ├── git-workflow/      router, execution boundaries, conventions, labels, links
 ├── issue-create/      Issue content rules
 ├── plan-create/       plan and todo forms
+├── task-implement/    step implementation and todo recording rules
 ├── pr-create/         PR rules and handoff form
 ├── pr-review/         review form and spec-it policy check
 ├── pr-merge/          approved merge

@@ -21,7 +21,7 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 flowchart TD
     A[요청] --> B[issue-create: 달성 조건을 갖춘 Issue]
     B --> C[plan-create: plan과 단계별 todo]
-    C --> D[git-workflow: 단계별 구현·테스트·커밋]
+    C --> D[task-implement: 단계별 구현·테스트·기록·커밋]
     D --> E[pr-create: 구현 인계와 PR]
     E --> F[pr-review: 의도·구현·테스트 교차 확인]
     F -->|fail 또는 근거 부족| D
@@ -32,9 +32,10 @@ flowchart TD
 
 | 스킬 | 쓰는 때 |
 | --- | --- |
-| [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개, 다음 단계 선택, 준비된 plan의 구현 |
+| [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개와 다음 단계 선택 |
 | [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완과 그 전의 중복 확인 |
 | [plan-create](skills/plan-create/SKILL.md) | Issue의 plan과 단계별 todo 작성 |
+| [task-implement](skills/task-implement/SKILL.md) | 준비된 todo의 작업 표 순서 구현, 기록, 단계별 커밋, 구현 인계 |
 | [pr-create](skills/pr-create/SKILL.md) | 구현 인계 작성과 PR 생성 |
 | [pr-review](skills/pr-review/SKILL.md) | 변경이 Issue 의도를 채우는지와 빠진 테스트 확인 |
 | [pr-merge](skills/pr-merge/SKILL.md) | 사용자 승인 후 검토한 HEAD의 머지와 결과 확인 |
@@ -83,6 +84,7 @@ skills/
 ├── git-workflow/      라우터, 실행 경계, 표기·문체, 라벨, 문서 링크
 ├── issue-create/      Issue 본문 규칙
 ├── plan-create/       plan·todo 양식
+├── task-implement/    단계 구현과 todo 기록 규칙
 ├── pr-create/         PR 규칙과 구현 인계 양식
 ├── pr-review/         검토 양식과 spec-it 정책 검사
 ├── pr-merge/          승인된 머지
