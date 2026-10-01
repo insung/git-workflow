@@ -1,6 +1,6 @@
 ---
 issue: "#4"
-status: in-progress
+status: review-pending
 branch: "feat/task-implement"
 base: "보류 (D1)"
 created: "2026-10-02"
@@ -44,9 +44,9 @@ created: "2026-10-02"
 
 | 단계 | 제목 | 설명 | 검증 사례 | 완료 |
 | --- | --- | --- | --- | --- |
-| [01](task-01-file-naming.md) | 파일 이름 규칙 | todo·검토 기준·검증 입력 이름 규칙을 디렉토리 규칙에 반영, 예제 todo 파일 이름 변경 | [TC-01](task-01-file-naming.md#tc-01) | [ ] |
-| [02](task-02-independent-review.md) | 독립 검토 플로우 | plan-create의 검토 기준·검증 입력 양식, 보관 위치, pr-review 재실행 절차, 검증 실행 주체, 커밋 시점 | [TC-02](task-02-independent-review.md#tc-02)<br>[TC-03](task-02-independent-review.md#tc-03) | [ ] |
-| [03](task-03-task-implement.md) | task-implement 스킬 | 구현 진행 절차와 todo 진행 규칙을 새 스킬로 이동, 링크·패키지 검사 갱신 | [TC-04](task-03-task-implement.md#tc-04)<br>[TC-05](task-03-task-implement.md#tc-05)<br>[TC-06](task-03-task-implement.md#tc-06) | [ ] |
+| [01](task-01-file-naming.md) | 파일 이름 규칙 | todo·검토 기준·검증 입력 이름 규칙을 디렉토리 규칙에 반영, 예제 todo 파일 이름 변경 | [TC-01](task-01-file-naming.md#tc-01) | [x] |
+| [02](task-02-independent-review.md) | 독립 검토 플로우 | plan-create의 검토 기준·검증 입력 양식, 보관 위치, pr-review 재실행 절차, 검증 실행 주체, 커밋 시점 | [TC-02](task-02-independent-review.md#tc-02)<br>[TC-03](task-02-independent-review.md#tc-03) | [x] |
+| [03](task-03-task-implement.md) | task-implement 스킬 | 구현 진행 절차와 todo 진행 규칙을 새 스킬로 이동, 링크·패키지 검사 갱신 | [TC-04](task-03-task-implement.md#tc-04)<br>[TC-05](task-03-task-implement.md#tc-05)<br>[TC-06](task-03-task-implement.md#tc-06) | [x] |
 | [04](task-04-template-init.md) | template-init 지시 보완 | 필수 절 목록, 폴더 생성, remote 없는 저장소, 뜻이 같은 절 판단 기준 | [TC-07](task-04-template-init.md#tc-07)<br>[TC-08](task-04-template-init.md#tc-08) | [x] |
 | [05](task-05-examples-readme.md) | 예제와 README | python-version-upgrade에 검토 기준·검증 입력 예제 추가, README 스킬 표와 작업 문서 설명 갱신 | [TC-09](task-05-examples-readme.md#tc-09) | [x] |
 
@@ -58,8 +58,8 @@ created: "2026-10-02"
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 필요 승인 | 결과 |
 | --- | --- | --- | --- | --- | --- |
-| <a id="tc-f01"></a>TC-F01 | AC-15 | `node --test tests/package.test.mjs`, `node scripts/check-package.mjs`, `claude plugin validate .claude-plugin/plugin.json`, `claude plugin validate .claude-plugin/marketplace.json`, `git diff --check`, 리포 루트 | 모두 통과 | 없음 | 미실행 |
-| <a id="tc-f02"></a>TC-F02 | AC-05, AC-06 | Issue #4의 `review-criteria.md`·`review-input-<topic>.md`로 pr-review 실행 | 고정 입력으로 다시 실행한 결과가 review.md에 기록 | 검토 기준 작성 세션 지정(D5) | 미실행 |
+| <a id="tc-f01"></a>TC-F01 | AC-15 | `node --test tests/package.test.mjs`, `node scripts/check-package.mjs`, `claude plugin validate .claude-plugin/plugin.json`, `claude plugin validate .claude-plugin/marketplace.json`, `git diff --check`, 리포 루트 | 모두 통과 | 없음 | 통과 (af57a04, 2026-10-02). `node --test` 22/22, `check-package` 통과, `claude plugin validate` 두 매니페스트 통과, `git diff --check` 종료 코드 0. 미커밋 변경 없음 |
+| <a id="tc-f02"></a>TC-F02 | AC-05, AC-06 | Issue #4의 `review-criteria.md`·`review-input-<topic>.md`로 pr-review 실행 | 고정 입력으로 다시 실행한 결과가 review.md에 기록 | 검토 기준 작성 세션 지정(D5) | 미실행. 구현 세션은 `review/issue-4`의 검토 기준·검증 입력을 읽지 않으므로(task-implement 입력 규칙) 실행할 수 없음. 다른 세션의 pr-review가 실행 |
 
 문서·지시 변경이라 유닛 테스트 대상 코드는 패키지 검사 스크립트뿐이다. 구조는 패키지 테스트로, 지시의 효과는 하위 에이전트 시나리오의 변경 전·후 비교로 확인한다.
 
