@@ -9,9 +9,10 @@
 3. 두 종류 파일을 plan의 작업 디렉토리 경로(`docs/git-workflows/...`)로 그 브랜치에만 커밋한다. 작성은 별도 worktree(`git worktree add <경로> -b review/issue-{n} <plan 커밋>`)에서 한다.
 4. 작업 브랜치에는 커밋하지 않고, 작업 브랜치의 작업본에 미추적 파일로도 두지 않는다.
 5. 구현 세션은 `review/issue-{n}` 브랜치와 그 worktree를 읽지 않는다.
-6. pr-review는 `git show review/issue-{n}:<경로>`나 그 브랜치의 worktree에서 읽는다.
-7. 기준을 바꿀 때는 구현 세션이 아닌 세션이 같은 브랜치에 커밋하고 이유를 커밋 본문에 쓴다.
-8. 작업 브랜치로의 반입 시점과 범위는 [pr-review의 기록 커밋](../../pr-review/SKILL.md#7-기록-커밋)을 따른다.
+6. 그 Issue의 검토 기준·검증 입력을 작성하거나 읽은 세션은 그 Issue를 구현하지 않는다. 구현은 다른 세션에 맡긴다.
+7. pr-review는 `git show review/issue-{n}:<경로>`나 그 브랜치의 worktree에서 읽는다.
+8. 기준을 바꿀 때는 구현 세션이 아닌 세션이 같은 브랜치에 커밋하고 이유를 커밋 본문에 쓴다.
+9. 작업 브랜치로의 반입 시점과 범위는 [pr-review의 기록 커밋](../../pr-review/SKILL.md#7-기록-커밋)을 따른다.
 
 ## review-criteria.md 템플릿
 
@@ -74,7 +75,7 @@
 | 기준 | 조건 |
 | --- | --- |
 | 필수 | <실행 횟수> 모두 <ID> 지적 |
-| 필수 | 변경 전 결과(RED)가 함께 기록됨 |
+| 필수 | 스킬 지시(`SKILL.md`·`references/`·`assets/`) 변경이면 변경 전 결과(RED)가 함께 기록됨. 아니면 이 행을 쓰지 않음 |
 | 참고 | <판정에 쓰지 않는 관찰> |
 ```
 
