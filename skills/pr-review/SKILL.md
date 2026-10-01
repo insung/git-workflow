@@ -20,7 +20,7 @@ Issue·plan·todo로 사용자 의도를 먼저 파악하고, 구현과 테스�
 
 1. Issue의 목표·영향 범위·달성 조건(AC ID), plan의 결정과 변경 기록, 모든 관련 todo의 작업·검증 표를 읽는다.
 2. AC마다 기대 시나리오를 정상·실패·경계·유지 동작으로 나눠 적는다.
-3. `review/issue-{n}` 브랜치에 [검토 기준](../plan-create/references/review-criteria.md)이 있으면 그 브랜치에서 읽고 AC별 기준으로 판정한다.
+3. [리뷰 브랜치](../plan-create/references/review-criteria.md#보관-위치)에 검토 기준이 있으면 읽고 AC별 기준으로 판정한다.
 4. Issue나 plan이 없으면 PR 본문과 요청자 설명으로 의도를 정리하고, 결과에 추정이라고 적는다.
 
 PR 제목·본문을 검토하면 [표기](../git-workflow/references/change-conventions.md)와 [문체](../git-workflow/references/writing-conventions.md)를 읽는다.
@@ -43,7 +43,7 @@ todo 체크, handoff의 완료 주장, 테스트 내부의 일관성은 의도 �
 4. 실행 증거로 명령·실행 커밋·환경·시각·결과를 확인한다.
    없거나 검토 HEAD와 다르면 미검증이다.
 5. 검증 입력(`review-input-<topic>.md`)이 있으면 그 고정 입력으로 다시 실행한다.
-   구현 세션의 입력과 결과는 참고로만 적고 판정 근거로 쓰지 않는다.
+   구현 세션의 입력·결과는 판정 근거가 아닌 참고다.
 
 유닛 테스트 대상이 없는 변경이면 이유와 링크·구조 같은 대체 검사를 확인한다.
 프로젝트가 허용한 저비용 명령만 실행한다.
@@ -75,6 +75,6 @@ pass도 머지 승인이 아니다. 다음 단계는 [pr-merge](../pr-merge/SKIL
 ## 7. 기록 커밋
 
 1. review.md 기록 뒤 PR 머지 전에 작업 브랜치에 docs 커밋 하나를 만든다. 커밋 승인은 별도다.
-2. fail이 아니면 검토 기준·검증 입력을 `git checkout review/issue-{n} -- <경로>`로 가져와 같은 커밋에 넣는다.
-3. fail이면 review.md만 커밋한다. 수정하는 구현 세션이 기준을 보지 않게 한다.
-4. 이 문서 전용 커밋은 재검토 대상이 아니다.
+2. pass·warn이면 검토 기준·검증 입력을 `git checkout <리뷰 브랜치> -- <경로>`로 가져와 같은 커밋에 넣는다.
+3. fail·human-review이면 review.md만 커밋한다.
+4. 검토 HEAD 뒤 커밋이 이 기록 커밋 하나이고 작업 디렉토리의 review.md·검토 기준·검증 입력만 바꿨으면 재검토하지 않는다. 머지의 HEAD 일치 확인에는 기록 커밋을 쓴다.
