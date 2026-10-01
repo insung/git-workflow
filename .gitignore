@@ -3,5 +3,6 @@
 .env.*
 !.env.example
 .agent-workflow/
+.superpowers/
 node_modules/
 .venv/

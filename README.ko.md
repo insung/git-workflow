@@ -1,126 +1,126 @@
 # git-workflow
 
-[English](README.md) · [MIT 라이선스](LICENSE)
+**하나의 변경을 Issue의 의도부터 승인된 머지까지 같은 근거로 잇는다.**
 
-Git 작업 트리의 변경을 검토 가능한 커밋, 브랜치, PR 또는 릴리즈 노트로 전달할 때 쓰는 스킬입니다. 실제 저장소 상태를 확인한 뒤 다음 행동을 판단합니다. Codex와 Claude Code 플러그인이 동일한 `skills/git-workflow/` 원본을 읽습니다.
+[English](README.md) · **한국어**
 
-## 왜 필요한가
+git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이다. 요청자가 원하는 결과를 Issue의 달성 조건으로 기록하고, 작업을 plan과 단계별 todo로 나누고, 그 ID를 구현·테스트·PR·검토까지 잇는다. 각 단계는 기억에 의존한 요약 대신 이전 단계의 의도와 실제 결과를 읽는다.
 
-Git 작업은 `git commit` 한 번으로 끝나지 않습니다. 작업 트리에는 다른 작업의 변경이 섞일 수 있고, 브랜치 이름만으로 실제 배포 경로를 알 수 없으며, 커밋 제목만 나열한 노트는 배포된 결과와 다를 수 있습니다. 이 스킬은 범위와 근거를 먼저 확인하는 반복 가능한 절차를 제공합니다. 이 문제의식은 현재 스킬의 규칙에서 읽은 것이며, 제작 당시의 개인적 동기라고 단정하지 않습니다.
+이 플러그인은 지시 모음이며 CI 서비스가 아니다. 한 세션에서 모든 단계를 실행할 수 있고, 세션을 나누는 것은 선택이다.
 
-다음 상황에 사용할 수 있습니다.
+## 왜 쓰는가
 
-- 이번 요청의 변경과 다른 미완료 작업을 구분해 커밋할 때
-- 저장소의 검토·배포 방식에 맞는 브랜치와 머지 전략을 정할 때
-- 실제 변경과 검증 결과로 이슈나 PR 초안을 작성할 때
-- 기존 규칙에 맞는 태그·릴리즈 후보를 검토할 때
-- 고정된 `base..target` 범위의 이력과 diff로 릴리즈 노트를 쓸 때
+- **의도와 근거가 이어진다** — Issue의 달성 조건 ID를 todo, 테스트 사례, 구현 인계, 검토가 참조한다.
+- **검토가 빠진 테스트를 교차 확인한다** — pr-review는 달성 조건의 시나리오마다 구현과 assertion을 대응시키고, 테스트가 없는 시나리오를 보고한다.
+- **위험한 단계마다 승인이 따로 있다** — 커밋·push·PR·머지·배포·릴리즈는 각각 다른 행동이며, 한 승인이 다른 행동이나 새 HEAD로 넘어가지 않는다.
+- **대상 저장소가 같은 양식을 쓴다** — template-init이 스킬이 요구하는 항목을 갖춘 Issue·PR 템플릿을 설치한다.
 
-## 플러그인 설치
+## 작동 방식
 
-플러그인과 마켓플레이스 이름은 모두 `git-workflow`입니다. 이 저장소에 필요한 파일이 들어 있으며 `ai-workflow`는 필요하지 않습니다.
-
-### Codex
-
-```bash
-codex plugin marketplace add insung/git-workflow
-codex plugin add git-workflow@git-workflow
+```mermaid
+flowchart TD
+    A[요청] --> B[issue-create: 달성 조건을 갖춘 Issue]
+    B --> C[plan-create: plan과 단계별 todo]
+    C --> D[git-workflow: 단계별 구현·테스트·커밋]
+    D --> E[pr-create: 구현 인계와 PR]
+    E --> F[pr-review: 의도·구현·테스트 교차 확인]
+    F -->|fail 또는 근거 부족| D
+    F -->|pass| G[사용자가 PR·HEAD·머지 방식 승인]
+    G --> H[pr-merge: 머지와 MERGED 확인]
+    H -. 별도 승인 .-> I[git-release: 노트·태그·Release]
 ```
 
-목록에 바로 나타나지 않으면 새 Codex 작업을 시작합니다. `$git-workflow`로 명시 호출하거나 해당 Git 작업을 설명합니다.
+| 스킬 | 쓰는 때 |
+| --- | --- |
+| [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개, 다음 단계 선택, 준비된 plan의 구현 |
+| [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완과 그 전의 중복 확인 |
+| [plan-create](skills/plan-create/SKILL.md) | Issue의 plan과 단계별 todo 작성 |
+| [pr-create](skills/pr-create/SKILL.md) | 구현 인계 작성과 PR 생성 |
+| [pr-review](skills/pr-review/SKILL.md) | 변경이 Issue 의도를 채우는지와 빠진 테스트 확인 |
+| [pr-merge](skills/pr-merge/SKILL.md) | 사용자 승인 후 검토한 HEAD의 머지와 결과 확인 |
+| [commit-rule](skills/commit-rule/SKILL.md) | 주제별 커밋과 커밋 메시지 작성 |
+| [branch-strategy](skills/branch-strategy/SKILL.md) | 브랜치 역할 정의나 브랜치 생성 |
+| [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
+| [template-init](skills/template-init/SKILL.md) | 대상 저장소에 Issue·PR 템플릿 설치 |
+
+작업 문서(plan.md, `{nn}-todos-{step-title}.md`, handoff.md, review.md)는 대상 저장소의 [디렉토리 규칙](skills/plan-create/references/plan.md#디렉토리-규칙)에 따라 둔다.
+
+## spec-it
+
+[spec-it](https://github.com/insung/spec-it)은 프로젝트의 아키텍처·제품 정책을 고정하는 별도 플러그인이다. 프로젝트는 `.architecture/manifest.yaml`과 `.architecture/lock.yaml`을 커밋해 spec-it을 채택한다. git-workflow는 spec-it 없이도 동작한다.
+
+| 프로젝트 상태 | pr-review 동작 |
+| --- | --- |
+| 채택(manifest·lock 있음) | 의도·구현·테스트 교차 확인 뒤 고정된 규칙으로 [spec-it 정책 검사](skills/pr-review/references/spec-it-policy.md)를 적용하고 규칙 ID별 판정을 기록 |
+| 미채택 | 의도·구현·테스트 교차 확인만 하고 「spec-it 미채택」을 기록. 정책 판정 없음 |
+
+## 설치
 
 ### Claude Code
 
-```bash
+```sh
 claude plugin marketplace add insung/git-workflow
 claude plugin install git-workflow@git-workflow
 ```
 
-필요하면 새 Claude Code 세션을 시작합니다. 플러그인 스킬의 호출 이름은 `/git-workflow:git-workflow`입니다.
+### Codex
 
-루트의 범용 `plugin.json`, Codex 호환 매니페스트·마켓플레이스, Claude Code 매니페스트·마켓플레이스가 모두 같은 [`skills/git-workflow/`](skills/git-workflow/)를 가리킵니다.
-
-## 어떻게 활용하나
-
-**범위를 나눈 커밋**
-
-```text
-$git-workflow
-현재 작업 트리를 살펴보고 이번 요청의 변경과 다른 작업을 구분해줘.
-이번 요청의 변경만 적절한 단위로 커밋해줘.
-```
-
-스킬은 저장소 상태와 최근 커밋 규칙을 확인한 뒤 허가된 파일이나 hunk만 stage합니다. 커밋 후 같은 범위를 다시 확인합니다. 커밋 요청만으로 push까지 허가된 것은 아닙니다.
-
-**브랜치 전략**
-
-```text
-$git-workflow
-현재 브랜치, CI, 릴리즈 주기와 리뷰 경로를 조사해 브랜치 전략을 제안해줘.
-긴급 수정이 기본 브랜치로 돌아오는 경로도 설명해줘.
-```
-
-제안에는 각 브랜치의 역할, 분기·병합 지점, 릴리즈 기준, 보호 규칙과 도입 비용이 포함됩니다. 브랜치 이름만으로 배포 역할을 추측하지 않으며, 전략 요청만으로 브랜치를 만들거나 설정을 바꾸지 않습니다.
-
-**커밋 이력으로 릴리즈 노트 작성**
-
-```text
-$git-workflow
-v1.4.0부터 현재 main 커밋까지의 릴리즈 노트를 초안으로 만들어줘.
-사용자나 운영자에게 영향을 주는 변경만 실제 diff를 근거로 포함해줘.
-```
-
-스킬은 이전 지점이 대상 커밋의 조상인지 확인하고, first-parent 이력·전체 커밋 본문·변경 파일을 대조합니다. 관련 커밋은 하나의 결과로 묶고 초안과 실제 발행을 구분합니다. 이전 배포 지점이 불명확하면 버전과 날짜를 지어내지 않고 `Unreleased` 초안으로 남깁니다.
-
-## 작업 흐름 한눈에 보기
-
-```mermaid
-flowchart TD
-    A["Git 작업 요청"] --> B["저장소 규칙과 실제 상태 확인"]
-    B --> C{"요청한 결과"}
-    C -->|커밋 또는 PR| D["이번 요청의 변경만 선택"]
-    C -->|브랜치 전략| E["CI·리뷰·배포 흐름 확인"]
-    C -->|릴리즈 노트| F["base..target 이력과 diff 대조"]
-    D --> G["허가된 작업 수행 후 상태 재확인"]
-    E --> H["분기·병합·긴급 수정 경로 제안"]
-    F --> I["근거가 있는 사용자 영향으로 초안 작성"]
-```
-
-예를 들어 사용자가 `src/retry.ts`와 `tests/retry.test.ts`를 이번 요청의 변경으로, `docs/team-plan.md`를 다른 작업의 변경으로 명시했다고 가정합니다.
-
-```text
- M src/retry.ts
- M tests/retry.test.ts
- M docs/team-plan.md
-```
-
-Diff를 검토하고 해당 커밋 승인을 받은 뒤, 에이전트는 재시도 관련 두 파일만 stage합니다. Stage된 diff를 확인하고 저장소에 맞는 검증을 실행한 뒤 범위를 표시한 커밋을 만듭니다. 마지막 `git status --short`에는 `docs/team-plan.md`가 남아야 합니다. 변경 출처가 불명확하거나 한 파일에 다른 작업이 섞여 있으면 먼저 정확한 hunk를 구분합니다. 이 사례는 가상이며 이 저장소의 현재 작업 트리를 설명하지 않습니다.
-
-설치된 스킬에서도 커밋 사례, 브랜치 전략 판단, 릴리즈 노트 초안을 담은 [상세 예시](skills/git-workflow/references/examples.md)를 읽을 수 있습니다.
-
-## 책임 경계
-
-저장소의 명시 규칙이 이 스킬의 기본 커밋 형식이나 브랜치 제안보다 우선합니다. 다른 작업의 변경 소유자를 추측하거나 이슈 번호, 테스트·배포 결과를 만들어내지 않습니다. 노트 작성은 태그나 GitHub Release 발행 권한이 아닙니다. Push, PR, 이슈, 머지, 태그, 릴리즈는 각각 해당 행동에 필요한 권한 안에서 실행합니다.
-
-이 스킬은 작업 지침이며 Git 훅이나 정책 엔진이 아닙니다. spec-it을 쓰는 프로젝트의 고정된 정책은 별도로 적용합니다. 이 스킬은 그 정책을 복사하거나 대체하지 않습니다.
-
-## 파일과 업데이트
-
-정본은 [`skills/git-workflow/SKILL.md`](skills/git-workflow/SKILL.md)입니다. 브랜치와 릴리즈 노트의 상세 기준은 연결된 `references/`에 있습니다. 현재 플러그인 버전은 `0.1.0`이며, 새 버전을 배포할 때 매니페스트 버전을 함께 갱신해야 합니다.
-
-Codex에서 마켓플레이스를 갱신하고 다시 설치하려면 다음 명령을 사용합니다.
-
-```bash
-codex plugin marketplace upgrade git-workflow
-codex plugin remove git-workflow@git-workflow
+```sh
+codex plugin marketplace add insung/git-workflow
 codex plugin add git-workflow@git-workflow
 ```
 
-Claude Code에서는 다음 명령을 사용합니다.
+설치하거나 갱신한 뒤에는 새 세션을 시작한다. Claude Code에서는 스킬이 `/git-workflow:<스킬>`로 보인다.
 
-```bash
-claude plugin marketplace update git-workflow
-claude plugin update git-workflow@git-workflow
+### 대상 저장소 첫 실행
+
+에이전트에게 GitHub 템플릿 설치를 요청한다. 예: 「이 저장소에 git-workflow의 Issue·PR 템플릿을 설치해줘」. template-init은 없는 파일만 복사하고 기존 템플릿과의 차이를 보고한다.
+
+## 구조
+
+```text
+skills/
+├── git-workflow/      라우터, 실행 경계, 표기·문체, 라벨, 문서 링크
+├── issue-create/      Issue 본문 규칙
+├── plan-create/       plan·todo 양식
+├── pr-create/         PR 규칙과 구현 인계 양식
+├── pr-review/         검토 양식과 spec-it 정책 검사
+├── pr-merge/          승인된 머지
+├── commit-rule/       커밋 메시지·범위 규칙
+├── branch-strategy/   브랜치 역할과 생성
+├── git-release/       릴리즈 노트
+└── template-init/     assets/.github/ Issue·PR 템플릿
 ```
 
-제거하려면 해당 도구에서 `codex plugin remove git-workflow@git-workflow` 또는 `claude plugin uninstall git-workflow@git-workflow`을 실행합니다.
+규칙마다 정본 파일은 하나다. SKILL.md는 reference를 다시 쓰지 않고 링크한다.
+
+## 개발
+
+요구 사항: Node.js 18 이상. 의존성 없음.
+
+```sh
+node --test tests/package.test.mjs
+node scripts/check-package.mjs
+claude plugin validate .claude-plugin/plugin.json
+claude plugin validate .claude-plugin/marketplace.json
+git diff --check
+```
+
+이 검사는 패키지 구조, 매니페스트, 필수 파일, 상대 링크를 확인한다. 스킬 선택이나 검토 품질은 측정하지 않는다. 스킬 변경은 작업 문서에 기록한 하위 에이전트 시나리오의 변경 전·후 비교로 확인한다.
+
+## 예제
+
+[예제](docs/examples/README.md)는 채운 문서 세트와 흐름을 보여준다.
+
+| 예제 | 흐름 |
+| --- | --- |
+| [파이썬 버전 업그레이드](docs/examples/python-version-upgrade/README.md) | Issue, plan, 단계별 todo, 구현 인계, PR, 검토 |
+| [기존 Issue 재개](docs/examples/resume-existing-issue/README.md) | 다른 세션의 작업을 문서에서 이어받음 |
+| [리뷰 보완](docs/examples/review-rework/README.md) | 검토 지적 수정과 새 HEAD 검토 |
+| [크롤러 시작 장애 hotfix](docs/examples/crawler-startup-hotfix/README.md) | prod에서 수정하고 dev에 역반영 |
+| [운영 릴리즈](docs/examples/production-release/README.md) | dev → prod, 배포와 릴리즈 노트 |
+| [로컬 파일럿](docs/examples/python-version-upgrade/local-pilot.md) | GitHub 접근 없이 문서 준비 |
+
+## 라이선스
+
+[MIT](LICENSE)
