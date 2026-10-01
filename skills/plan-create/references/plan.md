@@ -12,8 +12,8 @@
 | --- | --- | --- |
 | `plan.md` | plan-create | 요청·범위·단계·검증·전달 |
 | `task-{nn}-{step-title}.md` | plan-create | 단계별 변경 대상·작업·검증 |
-| `review-criteria.md` | plan-create | 검토 기준 |
-| `review-input-<topic>.md` | plan-create | 검증 입력 |
+| `review-criteria.md` | plan-create, 구현 전 | AC별 판정 기준·우회 확인·공통 확인. 리뷰 전까지 `review/issue-{n}` 브랜치에만 둠 ([보관 위치](review-criteria.md#보관-위치)) |
+| `review-input-<topic>.md` | plan-create, 구현 전 | 다시 실행할 고정 입력·기대 지적·통과 기준. 보관 위치는 `review-criteria.md`와 같음 |
 | `handoff.md` | 구현 후 | 실제 구현·테스트 결과 |
 | `review.md` | pr-review | 검토 결과 |
 
