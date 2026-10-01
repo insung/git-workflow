@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { validatePackage } from '../scripts/check-package.mjs';
@@ -102,4 +102,17 @@ test('accepts a quoted description containing " #"', t => {
   const { root, put } = fixture(t);
   put('skills/plan-create/SKILL.md', "---\nname: plan-create\ndescription: '“Issue #12의 계획을 작성해줘”처럼 요청할 때 사용한다.'\n---\n");
   assert.deepEqual(validatePackage(root), []);
+});
+
+test('template-init required-section table matches the template headings', () => {
+  const root = join(import.meta.dirname, '..', 'skills', 'template-init');
+  const rows = readFileSync(join(root, 'SKILL.md'), 'utf8').split('\n').filter(l => /^\| (기능 Issue|버그 Issue|PR) \|/.test(l));
+  assert.equal(rows.length, 3);
+  const files = ['ISSUE_TEMPLATE/feature_request.md', 'ISSUE_TEMPLATE/bug_report.md', 'PULL_REQUEST_TEMPLATE.md'];
+  rows.forEach((row, i) => {
+    const [, , required, optional] = row.split('|').map(c => c.trim());
+    const listed = [...required.split(','), ...optional.split(',')].map(s => s.trim());
+    const headings = readFileSync(join(root, 'assets', '.github', files[i]), 'utf8').split('\n').filter(l => /^## /.test(l)).map(l => l.slice(3).trim());
+    assert.deepEqual([...listed].sort(), [...headings].sort(), files[i]);
+  });
 });
