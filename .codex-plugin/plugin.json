@@ -1,7 +1,7 @@
 {
   "name": "git-workflow",
-  "version": "0.2.0",
-  "description": "Issue-first implementation, spec-it review, approved merge and Wiki, plus scoped commits and releases.",
+  "version": "0.3.0",
+  "description": "Issue-first implementation, intent and test review, approved merge, GitHub templates, scoped commits and releases.",
   "author": {
     "name": "insung"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Git Workflow",
     "shortDescription": "Issue-first Git delivery with spec-it review.",
-    "longDescription": "Issue-first implementation, spec-it review, approved merge and Wiki, plus scoped commits and releases.",
+    "longDescription": "Issue-first implementation, intent and test review, approved merge, GitHub templates, scoped commits and releases.",
     "developerName": "insung",
     "category": "Productivity",
     "capabilities": [],

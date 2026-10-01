@@ -8,7 +8,7 @@
     {
       "name": "git-workflow",
       "source": ".",
-      "description": "Issue-first implementation, spec-it review, approved merge and Wiki, plus scoped commits and releases."
+      "description": "Issue-first implementation, intent and test review, approved merge, GitHub templates, scoped commits and releases."
     }
   ],
   "description": "Install the git-workflow skills as a Claude Code plugin."
