@@ -44,7 +44,7 @@ flowchart TD
 | [git-release](skills/git-release/SKILL.md) | Prepare release notes, tags and GitHub Releases |
 | [template-init](skills/template-init/SKILL.md) | Install the Issue and PR templates into a target repository |
 
-Work documents (plan.md, `task-{nn}-{step-title}.md`, handoff.md, review.md) live in the target repository under the [directory rules](skills/plan-create/references/plan.md#디렉토리-규칙).
+Work documents (plan.md, `task-{nn}-{step-title}.md`, handoff.md, review.md) live in the target repository under the [directory rules](skills/plan-create/references/plan.md#디렉토리-규칙). The review criteria (`review-criteria.md`) and fixed inputs (`review-input-<topic>.md`) are written before implementation and kept on the `review/issue-{n}` branch; they appear in the work directory only after the pr-review record commit. See the [storage rule](skills/plan-create/references/review-criteria.md#보관-위치).
 
 ## spec-it
 
@@ -108,7 +108,7 @@ claude plugin validate .claude-plugin/marketplace.json
 git diff --check
 ```
 
-These checks cover package structure, manifests, required files and relative links. They do not measure skill selection or review quality; skill changes are checked with before-and-after subagent scenarios recorded in the work documents.
+These checks cover package structure, manifests, required files and relative links. They do not measure skill selection or review quality; skill changes are checked with before-and-after scenarios, run as defined in [verification runners](skills/git-workflow/references/execution-boundaries.md#검증-실행-주체).
 
 ## Examples
 

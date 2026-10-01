@@ -44,7 +44,7 @@ flowchart TD
 | [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
 | [template-init](skills/template-init/SKILL.md) | 대상 저장소에 Issue·PR 템플릿 설치 |
 
-작업 문서(plan.md, `task-{nn}-{step-title}.md`, handoff.md, review.md)는 대상 저장소의 [디렉토리 규칙](skills/plan-create/references/plan.md#디렉토리-규칙)에 따라 둔다.
+작업 문서(plan.md, `task-{nn}-{step-title}.md`, handoff.md, review.md)는 대상 저장소의 [디렉토리 규칙](skills/plan-create/references/plan.md#디렉토리-규칙)에 따라 둔다. 검토 기준(`review-criteria.md`)과 검증 입력(`review-input-<topic>.md`)은 구현 전에 `review/issue-{n}` 브랜치에 따로 보관하며, 작업 디렉토리에는 pr-review의 기록 커밋 뒤에 나타난다. [보관 위치](skills/plan-create/references/review-criteria.md#보관-위치)를 따른다.
 
 ## spec-it
 
@@ -108,7 +108,7 @@ claude plugin validate .claude-plugin/marketplace.json
 git diff --check
 ```
 
-이 검사는 패키지 구조, 매니페스트, 필수 파일, 상대 링크를 확인한다. 스킬 선택이나 검토 품질은 측정하지 않는다. 스킬 변경은 작업 문서에 기록한 하위 에이전트 시나리오의 변경 전·후 비교로 확인한다.
+이 검사는 패키지 구조, 매니페스트, 필수 파일, 상대 링크를 확인한다. 스킬 선택이나 검토 품질은 측정하지 않는다. 스킬 변경은 시나리오의 변경 전·후 비교로 확인하며, 실행 주체는 [검증 실행 주체](skills/git-workflow/references/execution-boundaries.md#검증-실행-주체)를 따른다.
 
 ## 예제
 
