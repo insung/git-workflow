@@ -58,4 +58,4 @@ Issue/PR 분류와 진행 기록에는 [라벨](references/labels.md)과 [문서
    Issue에는 요약과 확인된 문서 링크만 게시한다.
    구현 완료와 검토 완료는 구분한다.
 
-[전체 흐름과 한계](../../README.ko.md#사용-시나리오), [로컬 파일럿](../../docs/examples/python-version-upgrade/local-pilot.md)을 참고한다.
+[전체 흐름](../../README.ko.md#작동-방식), [로컬 파일럿](../../docs/examples/python-version-upgrade/local-pilot.md)을 참고한다.
