@@ -46,3 +46,16 @@
 - 필요한 사람 결정: push(force push 포함)와 PR 생성, TC-F02 실행 시점
 - 결과가 적용되는 HEAD와 재검토 조건: `31be0db`. 이후 코드·스킬 변경이 생기면 해당 AC를 다시 검토한다. 이 review.md와 검토 기준 파일의 문서 전용 커밋은 재검토 대상이 아니다.
 - 머지 승인 상태: 리뷰 결과는 머지 승인이 아님
+
+## 재검토: 18f271c
+
+| 항목 | 내용 |
+| --- | --- |
+| 계기 | 0.3.0 설치 후 세션의 스킬 목록에서 git-workflow·plan-create description이 “Issue로 잘려 보임 |
+| 원인 | 인용하지 않은 description의 ` #`부터 YAML이 주석으로 읽음. `skills/git-workflow/SKILL.md:3`, `skills/plan-create/SKILL.md:3` |
+| 이전 판정의 빈틈 | TC-06은 원문 description을 판정에 주어 YAML 파싱 결과를 확인하지 못함. 구조 검사도 description 존재만 확인함 |
+| 수정 | 두 description 인용, 인용하지 않은 description에 공백 뒤 `#`가 있으면 구조 검사 실패, 테스트 2개 추가 (18f271c) |
+| 재실행 | YAML로 파싱한 description으로 TC-06 3회. 14개 요청 중 13개 3/3, R4는 2/3(1회 `없음`, pr-review 선택 0회). 수정 전 파싱 값은 R8·R10을 스킬 이름으로만 고름 |
+| 구조 검사 | 테스트 21개 통과, 수정 전 SKILL.md에 새 검사 적용 시 두 파일 실패 확인 |
+| 결과 | pass. AC-10 판정 유지 |
+
