@@ -40,7 +40,7 @@ created: "2026-10-02"
 | 단계 | 제목 | 설명 | 검증 사례 | 완료 |
 | --- | --- | --- | --- | --- |
 | [01](01-todos-pr-review-rework.md) | pr-review 재구성과 spec-it 분리 | 의도 파악 → 구현 대조 → 테스트 누락 확인 순서로 재작성. spec-it 정책 검사는 채택 프로젝트 전용 reference로 분리 | [TC-01](01-todos-pr-review-rework.md#tc-01)<br>[TC-02](01-todos-pr-review-rework.md#tc-02)<br>[TC-03](01-todos-pr-review-rework.md#tc-03) | [x] |
-| [02](02-todos-template-init.md) | GitHub 템플릿 정본화와 template-init | 기능·버그·PR 템플릿을 스킬 필수 항목과 일치. 대상 프로젝트에 복사하는 template-init 추가 | [TC-04](02-todos-template-init.md#tc-04)<br>[TC-05](02-todos-template-init.md#tc-05) | [ ] |
+| [02](02-todos-template-init.md) | GitHub 템플릿 정본화와 template-init | 기능·버그·PR 템플릿을 스킬 필수 항목과 일치. 대상 프로젝트에 복사하는 template-init 추가 | [TC-04](02-todos-template-init.md#tc-04)<br>[TC-05](02-todos-template-init.md#tc-05) | [x] |
 | [03](03-todos-skill-cleanup.md) | description·중복 규칙·조건 정리 | 트리거 T1~T7 한정, 중복 규칙 링크화, 조건 없는 지시 정리, 매니페스트 Wiki 제거 | [TC-06](03-todos-skill-cleanup.md#tc-06)<br>[TC-07](03-todos-skill-cleanup.md#tc-07)<br>[TC-08](03-todos-skill-cleanup.md#tc-08) | [ ] |
 | [04](04-todos-readme-rebuild.md) | README 재구성과 예제 정리 | sideband-comments README 구성 기준 재작성, spec-it 절 추가, 예제 반복 문구 정리 | [TC-09](04-todos-readme-rebuild.md#tc-09) | [ ] |
 | [05](05-todos-plan-template.md) | plan·todo 양식 개선 | 디렉토리·프론트메터 규칙 번호화, 템플릿 우선 배치, 표 중심 양식, todo 파일 이름 규칙 | [TC-11](05-todos-plan-template.md#tc-11) | [x] |
