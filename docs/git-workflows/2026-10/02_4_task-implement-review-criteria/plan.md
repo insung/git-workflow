@@ -95,3 +95,4 @@ created: "2026-10-02"
 | 2026-10-02 | 계획 이탈 | 최종 리뷰 M-1: fail·human-review review.md의 고정 입력 비공개를 「고정 입력 재실행」 행에서 문서 전체로 확장. `pr-review/references/review.md` 작성 규칙에 한 행, `pr-review/SKILL.md` 기록 커밋 3에서 링크 | AC-06, AC-08, 02 | 보류 |
 | 2026-10-02 | 계획 이탈 | 최종 리뷰 M-2: 검증 입력 템플릿의 RED 필수 행을 스킬 지시 변경일 때만 쓰게 함. 코드 변경인 python-version-upgrade 예제에서 RED 행 제거 | AC-04, AC-10, 02·05 | 보류 |
 | 2026-10-02 | 계획 이탈 | 최종 리뷰 M-3·M-4: task-implement 진입점 누락 거부 테스트 추가. task-implement 입력 표에 작업 브랜치의 fail·human-review review.md(읽음), `review/draft-{title}`(읽지 않음) 추가 | AC-05, AC-15, 03 | 보류 |
+| 2026-10-02 | 계획 이탈 | 02·03·04의 RED는 구현 후 옛 스냅샷 재생으로 실행되어 지시 변경 전 선행 실행 순서를 지키지 못함. 기존 RED/GREEN 비교 결과는 보존하며 현재 재생으로 과거 순서 충족을 소급하지 않음. 실행 시각·한계는 task-02·03·04와 handoff의 116d81e 기록 참조 | AC-01, AC-02, AC-04~06, AC-12~14, 02·03·04 | 보류 (사용자 결정 대기) |
