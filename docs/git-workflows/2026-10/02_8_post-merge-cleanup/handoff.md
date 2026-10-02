@@ -153,3 +153,11 @@ print(json.dumps({'time':datetime.datetime.now(datetime.timezone.utc).isoformat(
 ## PR 준비 후속 인계
 
 사용자의 PR 준비 요청으로 origin/main a0be2fa를 통합했다. 통합 소스는 02390ae이며 기존 #5 기능과 #8 정책을 모두 보존했다. root의 최신 검토는 [review.md의 통합 검토](review.md#pr-준비를-위한-최신-main-통합-검토)에 있다. 과거 #5 미머지·원격 미실행 서술은 원래 검증 시점의 상태다. 작업 브랜치 push와 초안 PR은 이번 후속 전달 범위이며 Issue 종료·PR 머지·실제 브랜치/worktree 삭제는 포함하지 않는다.
+
+## 원격 PR 인계 결과
+
+- 초안 PR: https://github.com/insung/git-workflow/pull/10
+- Issue: #8, base main / head feat/post-merge-cleanup
+- 생성 시 원격 HEAD: 1745273e369040b2df0b183a0f87b8a9d193ac06. source 검토 HEAD는 02390ae로 유지한다.
+- 생성 후 조회: OPEN·Draft, MERGEABLE, enhancement 라벨·insung 담당자, #8 참조·warn 내용 확인.
+- 이번 후속 기록은 plan/handoff만 변경한다. PR 머지·Issue 종료·원격 댓글·실제 브랜치/worktree 삭제 없음.
