@@ -149,3 +149,7 @@ print(json.dumps({'time':datetime.datetime.now(datetime.timezone.utc).isoformat(
 | GREEN 1 | `post-merge-public-green-result-1.md` | `595d74c8e9d8169898b7c2c4557fa7d48556732436c93c5c8cf03da853b7a3a6` | 2026-10-02T13:17:49.494371+00:00 |
 | GREEN 2 | `post-merge-public-green-result-2.md` | `02adf8f0d4aa52de4a09de51f38e71f44248dbf6c538555181beb6aa28ada02a` | 2026-10-02T13:18:00.187548+00:00 |
 | GREEN 3 | `post-merge-public-green-result-3.md` | `db24ca46db9c367e7ac28df60f6b9ee3ec064bddb156d0cc08c7e304ab54dd2b` | 2026-10-02T13:19:25.263810+00:00 |
+
+## PR 준비 후속 인계
+
+사용자의 PR 준비 요청으로 origin/main a0be2fa를 통합했다. 통합 소스는 02390ae이며 기존 #5 기능과 #8 정책을 모두 보존했다. root의 최신 검토는 [review.md의 통합 검토](review.md#pr-준비를-위한-최신-main-통합-검토)에 있다. 과거 #5 미머지·원격 미실행 서술은 원래 검증 시점의 상태다. 작업 브랜치 push와 초안 PR은 이번 후속 전달 범위이며 Issue 종료·PR 머지·실제 브랜치/worktree 삭제는 포함하지 않는다.

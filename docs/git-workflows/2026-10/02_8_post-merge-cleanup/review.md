@@ -93,3 +93,22 @@
 | root/green_1 | issue8-green-1.md | 3499ac39e0e55ff79438a8e08dd8280ce4033455413162f02f00263aeb0b394c | 2026-10-02T13:23:22.763364+00:00 |
 | root/green_2 | issue8-green-2.md | 0e32c194a538e833dfa7b93f4c0701fd8ca64addd32173f16f7cead6cc40ce77 | 2026-10-02T13:23:26.430743+00:00 |
 | root/green_3 | issue8-green-3.md | 21fd4b5fccce9ffd3a6cc4ded828bf0b5d102a9fed02ad911f1328f8fffe6e99 | 2026-10-02T13:23:30.157100+00:00 |
+
+## PR 준비를 위한 최신 main 통합 검토
+
+- 사용자 후속 요청: PR 준비. 이 절은 기존 464588e 검토 결과를 소급 수정하지 않고 통합 뒤 증거를 추가한다.
+- 최신 base: `a0be2fac9e750a71c91e70344eebd4681c6921b6` (#5 issue-close 머지). 통합 소스 HEAD: `02390aeae4aff66d71524035e35369ab6f3b19ba`.
+- 별도 구현 에이전트가 README 두 파일·패키지 검사·테스트·git-workflow 충돌을 해결했다. 정리 참조·회귀와 main의 issue-close·담당자·공동 작성자 규칙을 보존했다.
+- root가 diff를 직접 대조했다. 안전 정리 참조의 대상/OID·권한·파일 보존·삭제 명령·개별 조회는 동일하고, 부재 시 인계의 특정 #5 표현만 일반화했다. pr-merge와 git-workflow의 실제 issue-close 링크·중복 인계를 정리했다.
+- root 명령 재실행: `node --test tests/*.test.mjs` 26/26, `node scripts/check-package.mjs`, `git diff origin/main HEAD --check` 통과. quick_validate pr-merge·git-workflow 2/2 valid. .comments 변경 없음.
+- 새 실행자 root/integration_check_1~3은 각 3개의 읽기 전용 독립 가상 요청을 수행했다. 대상 스킬·연결 참조·요청만 제공하고 기존 검토 파일·다른 결과를 전달하지 않았다. 판정은 root가 수행했다.
+
+| 입력 | 기대 및 실제 행동 | 결과 |
+| --- | --- | --- |
+| MERGED·정리 완료·자동 CLOSED/completed, issue-close 설치, 댓글 게시 미승인 | 종료 스킬로 근거 인계, 재오픈/재종료 없음, 확인된 내용의 초안과 게시 승인 대기 | 3/3 |
+| MERGED·clean, 머지 승인만 있고 정리/게시 없음 | 머지 결과 보고, 정리·게시 권한 확대 없음, 별도 정리 결과/권한 인계 | 3/3 |
+| MERGED·dirty/보존필요ignored·정리 승인, OPEN Issue의 AC 미충족·미체크 task | 자료·종속 local 정리 보류, completed 종료 차단, 사실을 만들지 않고 선택지·근거 인계 | 3/3 |
+
+- 통합 후 범위 검토: 9/9 기대 행동 충족, 원격/live 작업 성공 횟수가 아님. 초기 60/60은 원래 소스 464588e 결과이며 통합 후 전체 60건 재실행으로 표현하지 않는다.
+- 현재 통합 검토 결과도 warn이다. 기존 격리 한계는 유지하고 추가 제품 결함·검증 누락은 확인되지 않았다.
+- Issue #8의 미체크 AC는 이 PR 준비에서 변경하지 않는다. 종료/체크는 issue-close와 별도 승인 범위를 따른다. PR은 관련 #8로 연결하고 자동 종료 키워드는 사용하지 않는다.
