@@ -27,6 +27,7 @@ flowchart TD
     F -->|fail 또는 근거 부족| D
     F -->|pass| G[사용자가 PR·HEAD·머지 방식 승인]
     G --> H[pr-merge: 머지와 MERGED 확인]
+    H --> J[issue-close: 종료 사유와 결과 코멘트]
     H -. 별도 승인 .-> I[git-release: 노트·태그·Release]
 ```
 
@@ -40,6 +41,7 @@ flowchart TD
 | [pr-create](skills/pr-create/SKILL.md) | 구현 인계 작성과 PR 생성 |
 | [pr-review](skills/pr-review/SKILL.md) | 변경이 Issue 의도를 채우는지와 빠진 테스트 확인 |
 | [pr-merge](skills/pr-merge/SKILL.md) | 사용자 승인 후 검토한 HEAD의 머지와 결과 확인 |
+| [issue-close](skills/issue-close/SKILL.md) | 종료 사유 선택과 결과 코멘트를 남기는 Issue 종료 |
 | [commit-rule](skills/commit-rule/SKILL.md) | 주제별 커밋과 커밋 메시지 작성 |
 | [branch-strategy](skills/branch-strategy/SKILL.md) | 브랜치 역할 정의나 브랜치 생성 |
 | [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
@@ -92,6 +94,7 @@ skills/
 ├── pr-create/         PR 규칙과 구현 인계 양식
 ├── pr-review/         검토 양식과 spec-it 정책 검사
 ├── pr-merge/          승인된 머지
+├── issue-close/       종료 사유와 종료 코멘트 양식
 ├── commit-rule/       커밋 메시지·범위 규칙
 ├── branch-strategy/   브랜치 역할과 생성
 ├── git-release/       릴리즈 노트

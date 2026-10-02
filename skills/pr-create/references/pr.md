@@ -114,6 +114,7 @@ https://github.com/<owner>/<repo>/compare/<base>...<head>?expand=1&template=rele
 gh pr create --base dev --head feature/app-ranking-weekly-period \
   --title 'feat(app-ranking): 기간을 주 단위로 선택' \
   --label 'enhancement' \
+  --assignee @me \
   --body-file /tmp/pr-body.md
 ```
 
@@ -133,3 +134,9 @@ gh label list                          # 그 저장소에 있는 label 이름
 커밋 type과 label을 잇는 표는 저장소마다 다르므로 만들어 두지 않는다. 설정 파일을 읽고 그때 고른다.
 
 본문/링크/라벨은 원격 생성 이후 실제 PR과 대조한다. 생성 응답 불명은 PR 재조회로 중복을 피한다. 예시 base dev와 label enhancement는 대상 저장소에서 확인한 경우에만 사용한다.
+
+## 실행 계정 assignee 확인
+
+생성 시 `--assignee @me`로 실제 인증 계정을 지정한다. 기존 assignee는 제거하지 않는다.
+생성 뒤 `gh pr view <PR> --json assignees`로 실제 login을 확인한다.
+지정에 실패해도 이미 생성된 PR은 유지한다. 오류나 응답 불명 때는 먼저 생성 여부와 assignees를 조회하며, 삭제하거나 중복 생성하지 않는다. 생성이 확인되었고 지정이 승인 범위에 있으면 `gh pr edit <PR> --add-assignee @me`로 추가만 재시도한다. 재조회 뒤 실제 assignee login과 미적용 사유(권한·인증 오류 또는 미확인)를 보고한다.
