@@ -36,12 +36,17 @@ fix(app-usage): 일별 집계 재실행 시 중복 적재 차단
 
 ## 푸터
 
-AI가 작성한 커밋에는 실제 도구를 `Agent:` 트레일러로 기록한다. 본문과 빈 줄로 구분해 끝에 적는다.
+AI가 작성한 커밋에는 실제 도구를 GitHub 표준 `Co-authored-by:` 트레일러로 기록한다. GitHub은 이 트레일러로 커밋의 공동 작성자를 표시한다. 본문과 빈 줄로 구분해 끝에 적는다.
+
+| 도구 | 트레일러 |
+| --- | --- |
+| Claude | `Co-authored-by: Claude <noreply@anthropic.com>` |
+| Codex | `Co-authored-by: Codex <noreply@openai.com>` |
 
 ```text
-Agent: Codex
+Co-authored-by: Claude <noreply@anthropic.com>
 ```
 
-Claude가 작성했다면 `Agent: Claude`를 쓴다. 두 도구가 실제 기여한 경우 각 `Agent:` 줄로 기록한다. 사용하지 않은 도구를 넣거나 사람의 Git author 설정을 바꾸지 않는다. 사람만 작성한 커밋에는 에이전트 푸터를 넣지 않는다.
+두 도구가 실제 기여한 경우 각 줄로 기록한다. 사용하지 않은 도구를 넣거나 사람의 Git author 설정을 바꾸지 않는다. 사람만 작성한 커밋에는 넣지 않는다. 표의 주소만 쓰고 다른 주소를 만들지 않는다. GitHub이 공동 작성자로 인정하려면 주소가 GitHub 계정에 연결되어 있어야 한다.
 
-표준 Co-authored-by 트레일러는 허용한다. BREAKING CHANGE 표기는 실제 호환성 영향과 저장소 규칙을 확인한 경우만 사용한다.
+BREAKING CHANGE 표기는 실제 호환성 영향과 저장소 규칙을 확인한 경우만 사용한다.
