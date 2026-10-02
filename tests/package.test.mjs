@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { validatePackage } from '../scripts/check-package.mjs';
 
-const names = ['git-workflow', 'issue-create', 'plan-create', 'pr-create', 'pr-review', 'pr-merge', 'commit-rule', 'branch-strategy', 'git-release', 'template-init'];
-const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'template-init/assets/.github/ISSUE_TEMPLATE/feature_request.md', 'template-init/assets/.github/ISSUE_TEMPLATE/bug_report.md', 'template-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-review/references/review.md', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'branch-strategy/references/branch.md', 'git-release/references/release-notes.md'];
+const names = ['git-workflow', 'agents-init', 'issue-create', 'plan-create', 'task-implement', 'pr-create', 'pr-review', 'pr-merge', 'commit-rule', 'branch-strategy', 'git-release', 'template-init'];
+const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'template-init/assets/.github/ISSUE_TEMPLATE/feature_request.md', 'template-init/assets/.github/ISSUE_TEMPLATE/bug_report.md', 'template-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'plan-create/references/review-criteria.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-review/references/review.md', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'branch-strategy/references/branch.md', 'git-release/references/release-notes.md'];
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'git-workflow-package-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
@@ -86,6 +86,12 @@ test('rejects a missing branch-strategy entrypoint even when its reference remai
   assert.ok(validatePackage(root).some(e => e.includes('missing skill: branch-strategy')));
 });
 
+test('rejects a missing task-implement entrypoint', t => {
+  const { root } = fixture(t);
+  rmSync(join(root, 'skills/task-implement/SKILL.md'));
+  assert.ok(validatePackage(root).some(e => e.includes('missing skill: task-implement')));
+});
+
 test('rejects an issue template without GitHub front matter fields', t => {
   const { root, put } = fixture(t);
   put('skills/template-init/assets/.github/ISSUE_TEMPLATE/bug_report.md', '---\nname: n\nabout: a\n---\n');
@@ -102,4 +108,23 @@ test('accepts a quoted description containing " #"', t => {
   const { root, put } = fixture(t);
   put('skills/plan-create/SKILL.md', "---\nname: plan-create\ndescription: '“Issue #12의 계획을 작성해줘”처럼 요청할 때 사용한다.'\n---\n");
   assert.deepEqual(validatePackage(root), []);
+});
+
+test('template-init required-section table matches the template headings', () => {
+  const root = join(import.meta.dirname, '..', 'skills', 'template-init');
+  const rows = readFileSync(join(root, 'SKILL.md'), 'utf8').split('\n').filter(l => /^\| (기능 Issue|버그 Issue|PR) \|/.test(l));
+  assert.equal(rows.length, 3);
+  const files = ['ISSUE_TEMPLATE/feature_request.md', 'ISSUE_TEMPLATE/bug_report.md', 'PULL_REQUEST_TEMPLATE.md'];
+  rows.forEach((row, i) => {
+    const [, , required, optional] = row.split('|').map(c => c.trim());
+    const listed = [...required.split(','), ...optional.split(',')].map(s => s.trim());
+    const headings = readFileSync(join(root, 'assets', '.github', files[i]), 'utf8').split('\n').filter(l => /^## /.test(l)).map(l => l.slice(3).trim());
+    assert.deepEqual([...listed].sort(), [...headings].sort(), files[i]);
+  });
+});
+
+test('rejects a missing agents-init entrypoint without relying on README links', t => {
+  const { root } = fixture(t);
+  rmSync(join(root, 'skills/agents-init/SKILL.md'));
+  assert.ok(validatePackage(root).includes('missing skill: agents-init'));
 });

@@ -17,14 +17,16 @@ description: '“Issue #12의 구현 계획을 작성해줘”, “이 Issue 계
    원격 Issue를 쓸 수 없으면 [로컬 파일럿 디렉토리 규칙](references/plan.md#로컬-파일럿-디렉토리-규칙)을 따른다.
 3. [plan.md 템플릿](references/plan.md#planmd-템플릿)을 채운다.
    단계는 독립적으로 검증할 수 있는 단위로 나누고 검증과 전달·롤백을 포함한다.
-4. 단계마다 [todo 양식](references/todos.md)으로 `{nn}-todos-{step-title}.md`를 만든다.
-5. 구현 방식에 영향을 주는 미결정은 결정과 변경 기록에 `보류`로 남기고 그 단계만 보류한다.
-6. Issue에는 핵심 계획·남은 결정·확인된 문서 링크만 남긴다.
+4. 단계마다 [todo 양식](references/todos.md)으로 `task-{nn}-{step-title}.md`를 만든다.
+5. 구현 전에 [검토 기준·검증 입력 양식](references/review-criteria.md)으로 `review-criteria.md`와 `review-input-<topic>.md`를 만든다.
+   [보관 위치](references/review-criteria.md#보관-위치)에 따라 `review/issue-{n}` 브랜치에만 커밋한다.
+6. 구현 방식에 영향을 주는 미결정은 결정과 변경 기록에 `보류`로 남기고 그 단계만 보류한다.
+7. Issue에는 핵심 계획·남은 결정·확인된 문서 링크만 남긴다.
    댓글 게시는 요청 범위에서만 수행한다.
 
 ## 출력과 인계
 
 plan의 상태는 [status 값](references/plan.md#프론트메터-규칙)을 따른다.
-Issue 식별자와 문서 경로, plan/todo 링크, 준비된 작업과 보류 이유, 승인 범위를 반환한다.
+Issue 식별자와 문서 경로, plan/todo 링크, 검토 기준 브랜치 이름, 준비된 작업과 보류 이유, 승인 범위를 반환한다.
 계획 작성 완료와 구현 완료를 구분한다.
-준비된 단위의 구현은 [git-workflow](../git-workflow/SKILL.md#구현-진행)에 전달한다.
+준비된 단위의 구현은 [task-implement](../task-implement/SKILL.md)에 전달한다.

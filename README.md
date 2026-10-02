@@ -21,7 +21,7 @@ The plugin is a set of instructions, not a CI service. One session can run every
 flowchart TD
     A[Request] --> B[issue-create: Issue with acceptance criteria]
     B --> C[plan-create: plan and step todos]
-    C --> D[git-workflow: implement, test and commit each step]
+    C --> D[task-implement: implement, test, record and commit each step]
     D --> E[pr-create: handoff and PR]
     E --> F[pr-review: intent, implementation and test cross-check]
     F -->|fail or missing evidence| D
@@ -32,9 +32,11 @@ flowchart TD
 
 | Skill | Use it to |
 | --- | --- |
-| [git-workflow](skills/git-workflow/SKILL.md) | Start or resume an Issue-based change, choose the next stage, implement a prepared plan |
+| [git-workflow](skills/git-workflow/SKILL.md) | Start or resume an Issue-based change and choose the next stage |
+| [agents-init](skills/agents-init/SKILL.md) | Propose a short git-workflow declaration for AGENTS.md and add it after explicit approval |
 | [issue-create](skills/issue-create/SKILL.md) | Write or complete an Issue, check for duplicates first |
 | [plan-create](skills/plan-create/SKILL.md) | Write the plan and step todos for an Issue |
+| [task-implement](skills/task-implement/SKILL.md) | Implement a prepared todo in table order, record results, commit each step and write the handoff |
 | [pr-create](skills/pr-create/SKILL.md) | Write the implementation handoff and open the PR |
 | [pr-review](skills/pr-review/SKILL.md) | Check that the change meets the Issue intent and that no test is missing |
 | [pr-merge](skills/pr-merge/SKILL.md) | Merge the reviewed HEAD after user approval and confirm the result |
@@ -43,7 +45,7 @@ flowchart TD
 | [git-release](skills/git-release/SKILL.md) | Prepare release notes, tags and GitHub Releases |
 | [template-init](skills/template-init/SKILL.md) | Install the Issue and PR templates into a target repository |
 
-Work documents (plan.md, `{nn}-todos-{step-title}.md`, handoff.md, review.md) live in the target repository under the [directory rules](skills/plan-create/references/plan.md#디렉토리-규칙).
+Work documents (plan.md, `task-{nn}-{step-title}.md`, handoff.md, review.md) live in the target repository under the [directory rules](skills/plan-create/references/plan.md#디렉토리-규칙). The review criteria (`review-criteria.md`) and fixed inputs (`review-input-<topic>.md`) are written before implementation and kept on the `review/issue-{n}` branch; they appear in the work directory only after the pr-review record commit. See the [storage rule](skills/plan-create/references/review-criteria.md#보관-위치).
 
 ## spec-it
 
@@ -76,13 +78,17 @@ Start a new session after installing or updating. In Claude Code the skills appe
 
 Ask the agent to install the GitHub templates, for example "Install the git-workflow Issue and PR templates in this repository". template-init copies only the files that do not exist yet and reports how existing templates differ.
 
+Ask "Initialize this project’s AGENTS.md for git-workflow" to use agents-init. It shows the target path, complete addition and position before requesting explicit approval. It preserves existing instructions; rejection or no response leaves the file unchanged.
+
 ## Architecture
 
 ```text
 skills/
 ├── git-workflow/      router, execution boundaries, conventions, labels, links
+├── agents-init/       approved short AGENTS.md declaration
 ├── issue-create/      Issue content rules
 ├── plan-create/       plan and todo forms
+├── task-implement/    step implementation and todo recording rules
 ├── pr-create/         PR rules and handoff form
 ├── pr-review/         review form and spec-it policy check
 ├── pr-merge/          approved merge
@@ -106,7 +112,7 @@ claude plugin validate .claude-plugin/marketplace.json
 git diff --check
 ```
 
-These checks cover package structure, manifests, required files and relative links. They do not measure skill selection or review quality; skill changes are checked with before-and-after subagent scenarios recorded in the work documents.
+These checks cover package structure, manifests, required files and relative links. They do not measure skill selection or review quality; skill changes are checked with before-and-after scenarios, run as defined in [verification runners](skills/git-workflow/references/execution-boundaries.md#검증-실행-주체).
 
 ## Examples
 

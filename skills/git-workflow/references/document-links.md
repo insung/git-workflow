@@ -1,6 +1,6 @@
 # 문서 정본과 원격 요약
 
-Issue/PR 생성·구현 진행 기록·검토 결과를 GitHub에 남길 때 읽는다. 상세 정본은 대상 리포 docs/git-workflows/의 plan, todo, handoff, review다. 원격에는 이번 결과·판단·남은 일의 핵심 요약과 근거 문서 링크를 남긴다. 문서 전문을 복사하지 않는다.
+Issue/PR 생성·구현 기록·검토 결과를 GitHub에 남길 때 읽는다. 상세 정본은 대상 리포 docs/git-workflows/의 plan, todo, handoff, review다. 원격에는 이번 결과·판단·남은 일의 핵심 요약과 근거 문서 링크를 남긴다. 문서 전문을 복사하지 않는다.
 
 ## 원격 기록 형태
 

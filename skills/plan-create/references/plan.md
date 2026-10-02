@@ -11,17 +11,19 @@
 | 파일 | 작성 단계 | 내용 |
 | --- | --- | --- |
 | `plan.md` | plan-create | 요청·범위·단계·검증·전달 |
-| `{nn}-todos-{step-title}.md` | plan-create | 단계별 변경 대상·작업·검증 |
+| `task-{nn}-{step-title}.md` | plan-create | 단계별 변경 대상·작업·검증 |
+| `review-criteria.md` | plan-create, 구현 전 | AC별 판정 기준·우회 확인·공통 확인. 리뷰 전까지 `review/issue-{n}` 브랜치에만 둠 ([보관 위치](review-criteria.md#보관-위치)) |
+| `review-input-<topic>.md` | plan-create, 구현 전 | 다시 실행할 고정 입력·기대 지적·통과 기준. 보관 위치는 `review-criteria.md`와 같음 |
 | `handoff.md` | 구현 후 | 실제 구현·테스트 결과 |
 | `review.md` | pr-review | 검토 결과 |
 
-`{nn}`은 plan 단계 번호(01, 02, …), `{step-title}`은 그 단계 핵심 제목의 영어 kebab-case다. 단계가 하나여도 `01-todos-{step-title}.md`를 쓴다.
+`{nn}`은 plan 단계 번호(01, 02, …), `{step-title}`은 그 단계 핵심 제목의 영어 kebab-case다. 단계가 하나여도 `task-01-{step-title}.md`를 쓴다.
 
 ```text
 docs/git-workflows/2026-10/02_123_retry-guidance/
 ├── plan.md
-├── 01-todos-retry-classification.md
-├── 02-todos-retry-message.md
+├── task-01-retry-classification.md
+├── task-02-retry-message.md
 ├── handoff.md
 └── review.md
 ```
@@ -74,7 +76,7 @@ created: "<YYYY-MM-DD>"
 
 | 단계 | 제목 | 설명 | 검증 사례 | 완료 |
 | --- | --- | --- | --- | --- |
-| [01](01-todos-<step-title>.md) | <작업 핵심 제목> | <작업 핵심 요약> | [TC-01](01-todos-<step-title>.md#tc-01)<br>[TC-02](01-todos-<step-title>.md#tc-02) | [ ] |
+| [01](task-01-<step-title>.md) | <작업 핵심 제목> | <작업 핵심 요약> | [TC-01](task-01-<step-title>.md#tc-01)<br>[TC-02](task-01-<step-title>.md#tc-02) | [ ] |
 
 실행 순서: 01 → 02. 검증이 실패하면 해당 단계로 돌아가 같은 사례를 다시 실행한다.
 
