@@ -21,7 +21,7 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 flowchart TD
     A[요청] --> B[issue-create: 달성 조건을 갖춘 Issue]
     B --> C[plan-create: plan과 단계별 todo]
-    C --> D[git-workflow: 단계별 구현·테스트·커밋]
+    C --> D[task-implement: 단계별 구현·테스트·기록·커밋]
     D --> E[pr-create: 구현 인계와 PR]
     E --> F[pr-review: 의도·구현·테스트 교차 확인]
     F -->|fail 또는 근거 부족| D
@@ -33,9 +33,11 @@ flowchart TD
 
 | 스킬 | 쓰는 때 |
 | --- | --- |
-| [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개, 다음 단계 선택, 준비된 plan의 구현 |
+| [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개와 다음 단계 선택 |
+| [agents-init](skills/agents-init/SKILL.md) | AGENTS.md의 짧은 git-workflow 선언 제안과 명시적 승인 후 추가 |
 | [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완과 그 전의 중복 확인 |
 | [plan-create](skills/plan-create/SKILL.md) | Issue의 plan과 단계별 todo 작성 |
+| [task-implement](skills/task-implement/SKILL.md) | 준비된 todo의 작업 표 순서 구현, 기록, 단계별 커밋, 구현 인계 |
 | [pr-create](skills/pr-create/SKILL.md) | 구현 인계 작성과 PR 생성 |
 | [pr-review](skills/pr-review/SKILL.md) | 변경이 Issue 의도를 채우는지와 빠진 테스트 확인 |
 | [pr-merge](skills/pr-merge/SKILL.md) | 사용자 승인 후 검토한 HEAD의 머지와 결과 확인 |
@@ -45,7 +47,7 @@ flowchart TD
 | [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
 | [template-init](skills/template-init/SKILL.md) | 대상 저장소에 Issue·PR 템플릿 설치 |
 
-작업 문서(plan.md, `{nn}-todos-{step-title}.md`, handoff.md, review.md)는 대상 저장소의 [디렉토리 규칙](skills/plan-create/references/plan.md#디렉토리-규칙)에 따라 둔다.
+작업 문서(plan.md, `task-{nn}-{step-title}.md`, handoff.md, review.md)는 대상 저장소의 [디렉토리 규칙](skills/plan-create/references/plan.md#디렉토리-규칙)에 따라 둔다. 검토 기준(`review-criteria.md`)과 검증 입력(`review-input-<topic>.md`)은 구현 전에 `review/issue-{n}` 브랜치에 따로 보관하며, 작업 디렉토리에는 pr-review의 기록 커밋 뒤에 나타난다. [보관 위치](skills/plan-create/references/review-criteria.md#보관-위치)를 따른다.
 
 ## spec-it
 
@@ -78,13 +80,17 @@ codex plugin add git-workflow@git-workflow
 
 에이전트에게 GitHub 템플릿 설치를 요청한다. 예: 「이 저장소에 git-workflow의 Issue·PR 템플릿을 설치해줘」. template-init은 없는 파일만 복사하고 기존 템플릿과의 차이를 보고한다.
 
+「이 프로젝트의 AGENTS.md를 git-workflow용으로 초기화해줘」라고 요청하면 agents-init이 대상 경로·추가 전문·위치를 보여주고 명시적 승인을 기다린다. 기존 지침은 보존하며 거절하거나 응답이 없으면 파일을 변경하지 않는다.
+
 ## 구조
 
 ```text
 skills/
 ├── git-workflow/      라우터, 실행 경계, 표기·문체, 라벨, 문서 링크
+├── agents-init/       승인 후 짧은 AGENTS.md 선언 추가
 ├── issue-create/      Issue 본문 규칙
 ├── plan-create/       plan·todo 양식
+├── task-implement/    단계 구현과 todo 기록 규칙
 ├── pr-create/         PR 규칙과 구현 인계 양식
 ├── pr-review/         검토 양식과 spec-it 정책 검사
 ├── pr-merge/          승인된 머지
@@ -109,7 +115,7 @@ claude plugin validate .claude-plugin/marketplace.json
 git diff --check
 ```
 
-이 검사는 패키지 구조, 매니페스트, 필수 파일, 상대 링크를 확인한다. 스킬 선택이나 검토 품질은 측정하지 않는다. 스킬 변경은 작업 문서에 기록한 하위 에이전트 시나리오의 변경 전·후 비교로 확인한다.
+이 검사는 패키지 구조, 매니페스트, 필수 파일, 상대 링크를 확인한다. 스킬 선택이나 검토 품질은 측정하지 않는다. 스킬 변경은 시나리오의 변경 전·후 비교로 확인하며, 실행 주체는 [검증 실행 주체](skills/git-workflow/references/execution-boundaries.md#검증-실행-주체)를 따른다.
 
 ## 예제
 
@@ -117,6 +123,7 @@ git diff --check
 
 | 예제 | 흐름 |
 | --- | --- |
+| [git-workflow v0.3.0 개선 (실제 사례)](docs/examples/git-workflow-v0.3.0/README.md) | 리뷰, Issue, 계획과 코멘트, 검토 기준 고정, 구현 세션 분리, 독립 검토, 머지와 릴리즈 |
 | [파이썬 버전 업그레이드](docs/examples/python-version-upgrade/README.md) | Issue, plan, 단계별 todo, 구현 인계, PR, 검토 |
 | [기존 Issue 재개](docs/examples/resume-existing-issue/README.md) | 다른 세션의 작업을 문서에서 이어받음 |
 | [리뷰 보완](docs/examples/review-rework/README.md) | 검토 지적 수정과 새 HEAD 검토 |
