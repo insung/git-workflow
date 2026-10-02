@@ -40,6 +40,11 @@ spec-it을 채택한 프로젝트에서 정책 예외가 필요하면 spec-it의
 실제 머지가 확인되면 PR URL, mergedAt, mergeCommit과 검토·승인한 HEAD를 보고한다.
 머지가 확인되지 않으면 merge-unconfirmed와 확인이 필요한 항목을 반환한다.
 
+실제 MERGED 확인 뒤 [머지 후 작업 정리](references/post-merge-cleanup.md)를 읽어
+정리 대상·권한·보존 조건을 확인하고 원격/local/worktree 결과를 각각 보고한다.
+issue-close가 설치돼 있으면 머지·정리 근거를 인계하고, 없으면 로컬 handoff에 남긴다.
+자동 종료된 Issue의 결과 코멘트 보완도 issue-close의 책임이다.
+
 머지와 배포는 별도다.
 plan의 배포·롤백 조건/권한과 실제 배포 workflow를 확인한다.
 배포 승인이 없거나 환경이 미확인이면 필요한 다음 행동을 기록한다.
