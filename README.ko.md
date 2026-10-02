@@ -27,9 +27,12 @@ flowchart TD
     F -->|fail 또는 근거 부족| D
     F -->|pass| G[사용자가 PR·HEAD·머지 방식 승인]
     G --> H[pr-merge: 머지와 MERGED 확인]
-    H --> J[issue-close: 종료 사유와 결과 코멘트]
+    H --> J[승인 범위와 보존 조건을 확인한 작업 정리]
+    J --> K[issue-close: 종료 사유와 결과 코멘트]
     H -. 별도 승인 .-> I[git-release: 노트·태그·Release]
 ```
+
+정리는 원격 브랜치·로컬 브랜치·worktree 결과를 각각 보고한다. dirty·공유·잠금·보호·검토 후 작업은 보존하고 Codex 관리 worktree는 관리 기능으로 아카이브한다. [정리 정책](skills/pr-merge/references/post-merge-cleanup.md)을 적용한다. 종료 코멘트는 설치된 issue-close가 담당하며 없으면 로컬 handoff로 남긴다. 작은 후속 변경도 의도·범위·AC가 같은 열린 Issue만 재사용하고, 닫힌 범위와 다른 변경은 연결된 새 Issue로 추적한다.
 
 | 스킬 | 쓰는 때 |
 | --- | --- |
@@ -40,7 +43,7 @@ flowchart TD
 | [task-implement](skills/task-implement/SKILL.md) | 준비된 todo의 작업 표 순서 구현, 기록, 단계별 커밋, 구현 인계 |
 | [pr-create](skills/pr-create/SKILL.md) | 구현 인계 작성과 PR 생성 |
 | [pr-review](skills/pr-review/SKILL.md) | 변경이 Issue 의도를 채우는지와 빠진 테스트 확인 |
-| [pr-merge](skills/pr-merge/SKILL.md) | 사용자 승인 후 검토한 HEAD의 머지와 결과 확인 |
+| [pr-merge](skills/pr-merge/SKILL.md) | 승인된 머지 확인·안전한 작업 정리·종료 근거 인계 |
 | [issue-close](skills/issue-close/SKILL.md) | 종료 사유 선택과 결과 코멘트를 남기는 Issue 종료 |
 | [commit-rule](skills/commit-rule/SKILL.md) | 주제별 커밋과 커밋 메시지 작성 |
 | [branch-strategy](skills/branch-strategy/SKILL.md) | 브랜치 역할 정의나 브랜치 생성 |

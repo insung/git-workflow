@@ -27,9 +27,12 @@ flowchart TD
     F -->|fail or missing evidence| D
     F -->|pass| G[User approves PR, HEAD and merge method]
     G --> H[pr-merge: merge and confirm MERGED]
-    H --> J[issue-close: close reason and result comment]
+    H --> J[Authorized cleanup with preservation checks]
+    J --> K[issue-close: close reason and result comment]
     H -. separate approval .-> I[git-release: notes, tag and Release]
 ```
+
+Cleanup reports remote branches, local branches and worktrees separately. Dirty, shared, locked, protected and post-review work is preserved. Codex managed worktrees use archive management. Read the [cleanup policy](skills/pr-merge/references/post-merge-cleanup.md). Closure comments belong to issue-close when installed; otherwise evidence remains in a local handoff. Small follow-up changes reuse an open Issue only when intent, scope and AC match; a different scope after closure needs a new linked Issue.
 
 | Skill | Use it to |
 | --- | --- |
@@ -40,7 +43,7 @@ flowchart TD
 | [task-implement](skills/task-implement/SKILL.md) | Implement a prepared todo in table order, record results, commit each step and write the handoff |
 | [pr-create](skills/pr-create/SKILL.md) | Write the implementation handoff and open the PR |
 | [pr-review](skills/pr-review/SKILL.md) | Check that the change meets the Issue intent and that no test is missing |
-| [pr-merge](skills/pr-merge/SKILL.md) | Merge the reviewed HEAD after user approval and confirm the result |
+| [pr-merge](skills/pr-merge/SKILL.md) | Confirm the approved merge, safely clean up the work and hand off closure evidence |
 | [issue-close](skills/issue-close/SKILL.md) | Close an Issue with a close reason and a result comment |
 | [commit-rule](skills/commit-rule/SKILL.md) | Make scoped commits and write commit messages |
 | [branch-strategy](skills/branch-strategy/SKILL.md) | Define branch roles or create a branch |

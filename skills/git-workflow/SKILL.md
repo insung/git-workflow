@@ -5,7 +5,7 @@ description: '“Issue #12 작업을 이어서 진행해줘”, “git workflow�
 
 # Git 워크플로우
 
-Issue → plan/todo → 구현·테스트·커밋 → PR → 검토 → 사용자 승인 → 머지 → Issue 종료로 연결한다.
+Issue → plan/todo → 구현·테스트·커밋 → PR → 검토 → 사용자 승인 → 머지 확인 → 안전 정리 → Issue 종료·결과 기록으로 연결한다.
 역할은 현재 대화 세션에서도 실행할 수 있다.
 단, 검토 기준·검증 입력을 작성하거나 읽은 세션은 그 Issue를 구현하지 않는다 ([보관 위치](../plan-create/references/review-criteria.md#보관-위치)).
 스킬은 실행 지침이며 scheduler/정책 validator가 아니다.
@@ -20,8 +20,8 @@ Issue → plan/todo → 구현·테스트·커밋 → PR → 검토 → 사용�
 | 준비된 plan·todo의 단계 구현 | [task-implement](../task-implement/SKILL.md) | 코드·테스트·task 기록·commit·handoff |
 | 구현 후 PR 준비 | [pr-create](../pr-create/SKILL.md) | PR, docs 링크, HEAD |
 | PR·의도·정책·테스트 검증 | [pr-review](../pr-review/SKILL.md) | review, 검토 HEAD, 증거·판단 |
-| 승인·머지 | [pr-merge](../pr-merge/SKILL.md) | 실제 머지 상태와 merge commit |
-| 머지 후 Issue 종료·결과 기록, 진행 안 함·중복 종료 | [issue-close](../issue-close/SKILL.md) | 실제 state·stateReason, 종료 코멘트 |
+| 승인·머지·작업 정리 | [pr-merge](../pr-merge/SKILL.md) | 실제 머지 상태·merge commit과 원격/local/worktree별 정리 결과 |
+| 머지 후 Issue 종료·결과 기록, 진행 안 함·중복 종료 | [issue-close](../issue-close/SKILL.md); 미설치면 로컬 handoff | 머지·정리 근거와 게시 권한, 실제 state·stateReason과 종료 코멘트; 자동 CLOSED Issue도 결과 코멘트 보완 인계 |
 | 커밋 실행·메시지·범위 검토 요청 | [commit-rule](../commit-rule/SKILL.md) | 승인된 범위의 commit |
 | 브랜치 전략·분기·hotfix 요청 | [branch-strategy](../branch-strategy/SKILL.md) | 확정 전략·분기 결과·미정 항목 |
 | 릴리즈 요청 | [git-release](../git-release/SKILL.md) | 고정 범위의 노트·발행 상태 |
@@ -32,6 +32,8 @@ Issue → plan/todo → 구현·테스트·커밋 → PR → 검토 → 사용�
 
 개념·상태·이력 질문은 읽기 전용이다.
 기존 작업의 late-entry는 현재 상태부터 Issue·plan·증거를 연결한다.
+후속 변경은 [issue-create](../issue-create/SKILL.md)의 의도·범위·AC 대조로 열린 동일 범위 Issue를 재사용하고, 닫힌 범위와 다른 요구는 배경 링크를 가진 새 Issue로 분리한다.
+종료 코멘트의 양식·게시 검증은 issue-close가 담당하며 이 워크플로우에서 중복 구현하지 않는다.
 모든 파일을 한 번에 읽지 않고 현재 단계와 관련 기준만 읽는다.
 
 ## 실행 기준
