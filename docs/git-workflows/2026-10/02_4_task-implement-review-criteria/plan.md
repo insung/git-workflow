@@ -1,6 +1,6 @@
 ---
 issue: "#4"
-status: review-pending
+status: in-progress
 branch: "feat/task-implement"
 base: "보류 (D1)"
 created: "2026-10-02"
@@ -35,10 +35,10 @@ created: "2026-10-02"
 
 | 구분 | 내용 |
 | --- | --- |
-| 포함 | task-implement 신규, git-workflow·plan-create·pr-create·pr-review 지시, todo·검증 입력 이름 규칙, template-init 지시, python-version-upgrade 예제, README 영어·한국어, 패키지 검사·테스트, 플러그인 매니페스트 버전 |
-| 제외 | Issue #1 작업 문서의 파일 이름 변경, 권한·hook으로 파일 접근 차단, 기존 스킬 이름 변경, spec-it 저장소 변경, 템플릿 복사 후 커밋·push 자동 실행 |
+| 포함 | agents-init 신규(사용자 승인 후 짧은 git-workflow 선언 추가), task-implement 신규, git-workflow·plan-create·pr-create·pr-review 지시, todo·검증 입력 이름 규칙, template-init 지시, python-version-upgrade 예제, README 영어·한국어, 패키지 검사·테스트, 플러그인 매니페스트 버전 |
+| 제외 | 실제 프로젝트 AGENTS.md에 이번 세션에서 규칙 적용, 원격 Issue 수정, Issue #1 작업 문서의 파일 이름 변경, 권한·hook으로 파일 접근 차단, 기존 스킬 이름 변경, spec-it 저장소 변경, 템플릿 복사 후 커밋·push 자동 실행 |
 | 미변경 소비자 | 설치된 플러그인 캐시, 대상 저장소의 기존 `docs/git-workflows/` 문서(옛 todo 이름) |
-| 호환성·데이터·운영 | 스킬 1개 추가. todo 파일 이름 규칙 변경으로 진행 중인 대상 저장소 문서와 이름이 다름(D3) |
+| 호환성·데이터·운영 | 스킬 2개 추가(기존 task-implement와 확장 agents-init). todo 파일 이름 규칙 변경으로 진행 중인 대상 저장소 문서와 이름이 다름(D3) |
 
 ## 단계
 
@@ -49,6 +49,8 @@ created: "2026-10-02"
 | [03](task-03-task-implement.md) | task-implement 스킬 | 구현 진행 절차와 todo 진행 규칙을 새 스킬로 이동, 링크·패키지 검사 갱신 | [TC-04](task-03-task-implement.md#tc-04)<br>[TC-05](task-03-task-implement.md#tc-05)<br>[TC-06](task-03-task-implement.md#tc-06) | [x] |
 | [04](task-04-template-init.md) | template-init 지시 보완 | 필수 절 목록, 폴더 생성, remote 없는 저장소, 뜻이 같은 절 판단 기준 | [TC-07](task-04-template-init.md#tc-07)<br>[TC-08](task-04-template-init.md#tc-08) | [x] |
 | [05](task-05-examples-readme.md) | 예제와 README | python-version-upgrade에 검토 기준·검증 입력 예제 추가, README 스킬 표와 작업 문서 설명 갱신 | [TC-09](task-05-examples-readme.md#tc-09) | [x] |
+
+| [06](task-06-agents-init.md) | AGENTS.md 초기화 스킬 | 기존 지침 보존, 짧은 워크플로우 선언 제안과 사용자 승인 후 추가, 중복 방지, 패키지·README 연결 | [TC-10](task-06-agents-init.md#tc-10)<br>[TC-11](task-06-agents-init.md#tc-11)<br>[TC-12](task-06-agents-init.md#tc-12)<br>[TC-13](task-06-agents-init.md#tc-13) | [ ] |
 
 실행 순서: 01 → 02 → 03 → 04 → 05 → 최종 검증. 02가 정한 보관 위치(D2)를 03의 읽기 금지 규칙이 참조한다. 05는 01~04의 최종 규칙을 예제로 보여 주므로 마지막에 둔다. 검증이 실패하면 해당 단계로 돌아가 같은 사례를 다시 실행한다.
 
@@ -96,3 +98,21 @@ created: "2026-10-02"
 | 2026-10-02 | 계획 이탈 | 최종 리뷰 M-2: 검증 입력 템플릿의 RED 필수 행을 스킬 지시 변경일 때만 쓰게 함. 코드 변경인 python-version-upgrade 예제에서 RED 행 제거 | AC-04, AC-10, 02·05 | 보류 |
 | 2026-10-02 | 계획 이탈 | 최종 리뷰 M-3·M-4: task-implement 진입점 누락 거부 테스트 추가. task-implement 입력 표에 작업 브랜치의 fail·human-review review.md(읽음), `review/draft-{title}`(읽지 않음) 추가 | AC-05, AC-15, 03 | 보류 |
 | 2026-10-02 | 계획 이탈 | 02·03·04의 RED는 구현 후 옛 스냅샷 재생으로 실행되어 지시 변경 전 선행 실행 순서를 지키지 못함. 기존 RED/GREEN 비교 결과는 보존하며 현재 재생으로 과거 순서 충족을 소급하지 않음. 실행 시각·한계는 task-02·03·04와 handoff의 116d81e 기록 참조 | AC-01, AC-02, AC-04~06, AC-12~14, 02·03·04 | 보류 (사용자 결정 대기) |
+
+## 2026-10-02 사용자 요청에 따른 확장
+
+기존 01~05와 독립 검토 결과는 보존한다. 06은 이번 대화로 승인된 로컬 추가 범위이며 원격 Issue의 AC가 추가된 것으로 주장하지 않는다.
+
+| 로컬 추가 AC | 달성 조건 |
+| --- | --- |
+| EXT-01 | agents-init 스킬을 패키지에 추가하고 README와 워크플로우 진입점에서 찾을 수 있다. |
+| EXT-02 | 실행 시 대상 AGENTS.md 경로, 추가할 전문과 위치를 먼저 보여주고 명시적 승인을 기다린다. 최초 초기화 요청만으로 쓰지 않는다. |
+| EXT-03 | 승인 후 기존 내용을 보존한 채 추가하고, 파일이 없으면 승인 후 생성한다. 거절·응답 없음이면 파일을 변경하지 않는다. |
+| EXT-04 | 추가 문구는 프로젝트의 git-workflow 채택과 Issue → plan → 구현·검증 → PR 검토 → 사용자 승인 머지를 짧게 설명한다. 앞선 상세 후보·특정 계정·로컬 경로·자동 커밋 권한을 삽입하지 않는다. 중복이나 충돌이 있으면 기존 문구를 덮어쓰지 않는다. |
+| EXT-05 | skill-creator quick_validate, plugin-eval evaluate-skill과 패키지 검증을 실행한다. 승인 전·후 및 중복 시나리오는 격리된 임시 작업본에서 검증한다. |
+
+확장 실행 순서: plan·task 고정 → 별도 리뷰 브랜치에 추가 기준 고정 → 새 구현 에이전트 06 실행 → 현재 리뷰 세션 독립 검증. 신규 스킬이 없는 변경 전 상태와 변경 후 시나리오를 구분하며, 없는 스킬을 실행했다고 주장하지 않는다. 원격 Issue 조회는 인증·연결 실패로 기존 로컬 자료와 사용자 요청을 사용했다.
+
+| 날짜 | 구분 | 내용 | 영향 AC·단계 | 상태 |
+| --- | --- | --- | --- | --- |
+| 2026-10-02 | 요청 변경 | 짧은 워크플로우 선언을 제안하고 승인 후 기존 AGENTS.md에 추가하는 agents-init 스킬, skill-creator 작성·evaluate-skill 검토·progress-report 보고를 추가한다. 기존 AGENTS.md 실제 적용은 이 요청에 포함하지 않는다. | EXT-01~05, 06 | 승인 |
