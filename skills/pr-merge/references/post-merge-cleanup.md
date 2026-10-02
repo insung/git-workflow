@@ -48,4 +48,4 @@ auto-merge 등록·merge queue 진입·exit 0·응답 미확인은 정리 시작
 | 실패 | 삭제 명령의 오류와 후속 조회 결과 |
 | 미확인 | 응답/조회 실패 또는 관리 metadata와 경로 상태 불일치; 재실행 전 조회 |
 
-머지 PR URL·mergedAt·mergeCommit·검토/승인 HEAD, 각 원격/local/worktree의 식별값·전후 조회·결과·보류 이유를 인계한다. 실제 Issue 종료/결과 코멘트는 issue-close가 설치돼 있으면 그 스킬에 전달한다. 자동 닫기로 이미 CLOSED인 Issue도 결과 코멘트 보완 경로로 인계한다. 설치돼 있지 않으면 동일 근거와 게시 권한을 로컬 handoff에 남기고 #5 제공 후 인계한다. 종료 스킬이나 새 코멘트 양식은 여기서 구현하지 않는다.
+머지 PR URL·mergedAt·mergeCommit·검토/승인 HEAD, 각 원격/local/worktree의 식별값·전후 조회·결과·보류 이유를 인계한다. 실제 Issue 종료/결과 코멘트는 issue-close가 설치돼 있으면 그 스킬에 전달한다. 자동 닫기로 이미 CLOSED인 Issue도 결과 코멘트 보완 경로로 인계한다. 설치돼 있지 않으면 동일 근거와 게시 권한을 로컬 handoff에 남기고 issue-close를 사용할 수 있을 때 인계한다. 종료 스킬이나 새 코멘트 양식은 여기서 구현하지 않는다.

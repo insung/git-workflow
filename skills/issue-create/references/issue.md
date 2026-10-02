@@ -73,6 +73,7 @@ gh label list --limit 1000                        # 정확한 이름·조회 완
 
 gh issue create --title 'feat(app-ranking): 기간을 주 단위로 선택' \
   --label 'enhancement' \
+  --assignee @me \
   --body-file /tmp/issue-body.md
 ```
 
@@ -81,3 +82,10 @@ gh issue create --title 'feat(app-ranking): 기간을 주 단위로 선택' \
 **승인 없이 실행하지 않는다. 이미 승인된 범위는 다시 묻지 않는다.**
 
 라벨 예시는 enhancement의 실제 존재를 확인한 경우다. 없는 라벨은 공통 labels 절차로 생성 필요·승인·권한을 확인한다. 조회 실패 시 없다고 가정하지 않는다. 생성 응답 불명은 Issue 목록을 재조회해 중복 생성하지 않으며 실제 URL/번호·라벨을 확인한다.
+
+## 실행 계정 assignee 확인
+
+생성 시 `--assignee @me`로 실제 인증 계정을 지정한다. 기존 assignee는 제거하지 않는다.
+기존 Issue를 재사용하고 지정이 승인 범위에 있으면 `gh issue edit <Issue> --add-assignee @me`로 추가한다. 재사용만으로 수정 승인을 가정하지 않는다.
+생성 뒤 `gh issue view <Issue> --json assignees`로 실제 login을 확인한다.
+지정에 실패해도 이미 생성된 Issue는 유지한다. 오류나 응답 불명 때는 먼저 생성 여부와 assignees를 조회하며, 삭제하거나 중복 생성하지 않는다. 생성이 확인되었고 지정이 승인 범위에 있으면 `gh issue edit <Issue> --add-assignee @me`로 추가만 재시도한다. 재조회 뒤 실제 assignee login과 미적용 사유(권한·인증 오류 또는 미확인)를 보고한다.

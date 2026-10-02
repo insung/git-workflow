@@ -28,7 +28,7 @@ flowchart TD
     F -->|pass| G[User approves PR, HEAD and merge method]
     G --> H[pr-merge: merge and confirm MERGED]
     H --> J[Authorized cleanup with preservation checks]
-    J --> K[Handoff merge and cleanup evidence to issue-close if installed]
+    J --> K[issue-close: close reason and result comment]
     H -. separate approval .-> I[git-release: notes, tag and Release]
 ```
 
@@ -44,6 +44,7 @@ Cleanup reports remote branches, local branches and worktrees separately. Dirty,
 | [pr-create](skills/pr-create/SKILL.md) | Write the implementation handoff and open the PR |
 | [pr-review](skills/pr-review/SKILL.md) | Check that the change meets the Issue intent and that no test is missing |
 | [pr-merge](skills/pr-merge/SKILL.md) | Confirm the approved merge, safely clean up the work and hand off closure evidence |
+| [issue-close](skills/issue-close/SKILL.md) | Close an Issue with a close reason and a result comment |
 | [commit-rule](skills/commit-rule/SKILL.md) | Make scoped commits and write commit messages |
 | [branch-strategy](skills/branch-strategy/SKILL.md) | Define branch roles or create a branch |
 | [git-release](skills/git-release/SKILL.md) | Prepare release notes, tags and GitHub Releases |
@@ -96,6 +97,7 @@ skills/
 ├── pr-create/         PR rules and handoff form
 ├── pr-review/         review form and spec-it policy check
 ├── pr-merge/          approved merge
+├── issue-close/       close reasons and closing comment form
 ├── commit-rule/       commit message and scope rules
 ├── branch-strategy/   branch roles and creation
 ├── git-release/       release notes
