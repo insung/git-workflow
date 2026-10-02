@@ -33,6 +33,7 @@ flowchart TD
 | Skill | Use it to |
 | --- | --- |
 | [git-workflow](skills/git-workflow/SKILL.md) | Start or resume an Issue-based change and choose the next stage |
+| [agents-init](skills/agents-init/SKILL.md) | Propose a short git-workflow declaration for AGENTS.md and add it after explicit approval |
 | [issue-create](skills/issue-create/SKILL.md) | Write or complete an Issue, check for duplicates first |
 | [plan-create](skills/plan-create/SKILL.md) | Write the plan and step todos for an Issue |
 | [task-implement](skills/task-implement/SKILL.md) | Implement a prepared todo in table order, record results, commit each step and write the handoff |
@@ -77,11 +78,14 @@ Start a new session after installing or updating. In Claude Code the skills appe
 
 Ask the agent to install the GitHub templates, for example "Install the git-workflow Issue and PR templates in this repository". template-init copies only the files that do not exist yet and reports how existing templates differ.
 
+Ask "Initialize this project’s AGENTS.md for git-workflow" to use agents-init. It shows the target path, complete addition and position before requesting explicit approval. It preserves existing instructions; rejection or no response leaves the file unchanged.
+
 ## Architecture
 
 ```text
 skills/
 ├── git-workflow/      router, execution boundaries, conventions, labels, links
+├── agents-init/       approved short AGENTS.md declaration
 ├── issue-create/      Issue content rules
 ├── plan-create/       plan and todo forms
 ├── task-implement/    step implementation and todo recording rules

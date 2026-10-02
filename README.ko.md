@@ -33,6 +33,7 @@ flowchart TD
 | 스킬 | 쓰는 때 |
 | --- | --- |
 | [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개와 다음 단계 선택 |
+| [agents-init](skills/agents-init/SKILL.md) | AGENTS.md의 짧은 git-workflow 선언 제안과 명시적 승인 후 추가 |
 | [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완과 그 전의 중복 확인 |
 | [plan-create](skills/plan-create/SKILL.md) | Issue의 plan과 단계별 todo 작성 |
 | [task-implement](skills/task-implement/SKILL.md) | 준비된 todo의 작업 표 순서 구현, 기록, 단계별 커밋, 구현 인계 |
@@ -77,11 +78,14 @@ codex plugin add git-workflow@git-workflow
 
 에이전트에게 GitHub 템플릿 설치를 요청한다. 예: 「이 저장소에 git-workflow의 Issue·PR 템플릿을 설치해줘」. template-init은 없는 파일만 복사하고 기존 템플릿과의 차이를 보고한다.
 
+「이 프로젝트의 AGENTS.md를 git-workflow용으로 초기화해줘」라고 요청하면 agents-init이 대상 경로·추가 전문·위치를 보여주고 명시적 승인을 기다린다. 기존 지침은 보존하며 거절하거나 응답이 없으면 파일을 변경하지 않는다.
+
 ## 구조
 
 ```text
 skills/
 ├── git-workflow/      라우터, 실행 경계, 표기·문체, 라벨, 문서 링크
+├── agents-init/       승인 후 짧은 AGENTS.md 선언 추가
 ├── issue-create/      Issue 본문 규칙
 ├── plan-create/       plan·todo 양식
 ├── task-implement/    단계 구현과 todo 기록 규칙

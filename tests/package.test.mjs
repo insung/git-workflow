@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { validatePackage } from '../scripts/check-package.mjs';
 
-const names = ['git-workflow', 'issue-create', 'plan-create', 'task-implement', 'pr-create', 'pr-review', 'pr-merge', 'commit-rule', 'branch-strategy', 'git-release', 'template-init'];
+const names = ['git-workflow', 'agents-init', 'issue-create', 'plan-create', 'task-implement', 'pr-create', 'pr-review', 'pr-merge', 'commit-rule', 'branch-strategy', 'git-release', 'template-init'];
 const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'template-init/assets/.github/ISSUE_TEMPLATE/feature_request.md', 'template-init/assets/.github/ISSUE_TEMPLATE/bug_report.md', 'template-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'plan-create/references/review-criteria.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-review/references/review.md', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'branch-strategy/references/branch.md', 'git-release/references/release-notes.md'];
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'git-workflow-package-'));
@@ -121,4 +121,10 @@ test('template-init required-section table matches the template headings', () =>
     const headings = readFileSync(join(root, 'assets', '.github', files[i]), 'utf8').split('\n').filter(l => /^## /.test(l)).map(l => l.slice(3).trim());
     assert.deepEqual([...listed].sort(), [...headings].sort(), files[i]);
   });
+});
+
+test('rejects a missing agents-init entrypoint without relying on README links', t => {
+  const { root } = fixture(t);
+  rmSync(join(root, 'skills/agents-init/SKILL.md'));
+  assert.ok(validatePackage(root).includes('missing skill: agents-init'));
 });
