@@ -22,10 +22,14 @@ description: “PR을 만들어줘”, “PR 본문을 작성해줘”처럼 구
    plan/todo 전문 대신 변경·검증·위험 요약과 확인된 링크를 쓴다.
 4. 기존 PR을 조회해 중복을 피한다.
    base/head·요청 범위·필요 라벨을 확인하고 승인된 push/PR 생성/리뷰 요청만 실행한다.
-   실제 URL/headRefOid와 본문의 Issue 항목·라벨을 재확인한다.
+   실제 URL/headRefOid와 본문의 Issue 항목·라벨·assignee login을 재확인한다.
    생성 응답 불명은 재조회한다.
    접근 불가면 local-pr-draft로 반환한다.
 5. [pr-review](../pr-review/SKILL.md)에 Issue·plan/todo·handoff·검토 base/HEAD·테스트 근거·정책 위치를 인계한다.
    대화 내 검토/별도 세션은 선택 사항이다.
    GitHub reviewer 지정·검토 댓글은 승인 범위를 확인한다.
    PR 생성 승인은 머지 승인이 아니다.
+
+## 출력
+
+PR URL, 실제 headRefOid, 적용 라벨, 실제 assignee login과 미적용 사유, 검증 상태와 남은 리뷰를 반환한다.
