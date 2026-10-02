@@ -1,6 +1,6 @@
 ---
 issue: "#8"
-status: review-pending
+status: completed
 branch: "feat/post-merge-cleanup"
 base: "main"
 created: "2026-10-02"
@@ -45,9 +45,9 @@ created: "2026-10-02"
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 필요 승인 | 결과 |
 | --- | --- | --- | --- | --- | --- |
-| TC-F01 | AC-01~AC-08 | 고정 입력 12종 × 변경 전·후 각각 새 실행자 3명, 판정은 현재 세션 | 정상·실패·경계·유지 행동의 기대 결과 대조 | 현재 검증 요청에 포함 | 구현자 미실행: root의 독립 고정 입력 판정 담당; 공개 비교는 handoff |
-| TC-F02 | AC-09 | `node --test tests/*.test.mjs`, `node scripts/check-package.mjs`, `git diff --check`, 작업 루트 | 테스트·구조·상대 링크·공백 검사 통과 | 없음 | 464588e: 25/25·package·diff check 통과 |
-| TC-F03 | AC-03~AC-05, AC-09 | 임시 Git 저장소에서 일반·dirty·locked·후속 커밋·squash 사례의 안전 명령 실행 | 임시 대상만 정리, 보존 대상의 바이트·ref 유지 | 임시 저장소에 한정 | 임시 Git 5/5; handoff의 명령·실제 결과 |
+| TC-F01 | AC-01~AC-08 | 고정 입력 12종 × 변경 전·후 각각 새 실행자 3명, 판정은 현재 세션 | 정상·실패·경계·유지 행동의 기대 결과 대조 | 현재 검증 요청에 포함 | root 독립: 초기 12종×3 GREEN 36/36; 추가 8종×3 24/24. RED·격리 warn·추가 작성 시점은 review |
+| TC-F02 | AC-09 | `node --test tests/*.test.mjs`, `node scripts/check-package.mjs`, `git diff --check`, 작업 루트 | 테스트·구조·상대 링크·공백 검사 통과 | 없음 | root 재실행 464588e: 25/25·package·diff check·quick_validate 3/3 통과 |
+| TC-F03 | AC-03~AC-05, AC-09 | 임시 Git 저장소에서 일반·dirty·locked·후속 커밋·squash 사례의 안전 명령 실행 | 임시 대상만 정리, 보존 대상의 바이트·ref 유지 | 임시 저장소에 한정 | root 독립 임시 Git 7사례/21 assertion + lease 2사례/4 assertion 통과; review 근거 |
 
 ## 전달과 롤백
 
@@ -66,3 +66,4 @@ created: "2026-10-02"
 | 2026-10-02 | 요청 변경 | 사용자가 계획·서브에이전트 구현·현재 세션 독립 검증·최종 진행 표 요청 | 전체 | 승인 |
 | 2026-10-02 | 결정 | #5 미머지 시 결과 요약을 로컬 인계하고 issue-close 구현·새 코멘트 양식을 만들지 않음 | AC-08, 02 | 승인 |
 | 2026-10-02 | 계획 이탈 | 01·02 소스 커밋 후 공개 GREEN을 최종 source에서 통합 실행하고 기록은 문서 전용 커밋으로 남김. 독립 실행 출력 우발 노출은 handoff에 기록하여 root 판정으로 인계 | 전체, 01·02 | review-pending |
+| 2026-10-02 | 결정 | root 독립 GREEN 60/60·회귀25/25·Git25 assertion 확인. 우발 노출은 warn으로 보존하고 추가 입력으로 보강. 로컬 검증·인계 범위 완료, 실환경·원격 전달은 제외 | 전체 | 승인 |
