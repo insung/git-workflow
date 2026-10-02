@@ -137,6 +137,12 @@
 - quick_validate valid, package tests 24/24, check-package valid, git diff --check 통과. 신규 테스트는 README 링크 없이 필수 agents-init 진입점 누락을 거부한다.
 - plugin-eval start와 analyze 실제 실행: Evaluate Skill 경로, 95/100 A, fail 0 warn 1, static budget 305 tokens. 경고는 한국어 trigger를 `/use when/i`로 검사하는 평가기 오탐이며 유지한다. coverage 정보는 코드 없는 스킬에 비적용, 실제 토큰 사용량 미측정이다.
 - TC-10~12 구현용 독립 실행자 3명: 기존 파일 승인 전 무변경→명시적 승인 후 CRLF·원본 바이트·전문 exact 일치, 없는 파일 제안→거절 뒤 부재, 영어 의미동일 중복 선언 무변경 각 3/3. 최소 raw fixture와 스킬·사용자 요청만 전달했고 기대결과를 전달하지 않았다. 같은 실행자 후속 요청으로 missing·duplicate를 실행한 한계와 미응답 관찰 시점 한계는 [task-06](task-06-agents-init.md#실행-근거와-한계)에 기록했다.
-- 미실행: 신규 파일 승인 후 생성, 충돌 처리, 승인 전후 concurrent 변경 대응의 행동 시나리오. root의 별도 독립 검증 대기. 실제 Issue의 비공개 review 브랜치·검토 기준·고정 입력은 조회하지 않았다.
+- 구현 세션 미실행 중 신규 파일 승인 후 생성은 root가 독립 검증 추가 1/1 통과로 보고했다. 충돌 처리·승인 전후 concurrent 변경 대응 행동은 미실행으로 유지한다. 실제 Issue의 비공개 review 브랜치·검토 기준·고정 입력은 조회하지 않았다.
 - plan 06행 앞 빈 줄 제거 후 bundled marked HTML 렌더링에서 단계 table 1개·data rows 6개 확인. 시각 스크린샷 검사는 하지 않았다.
 - `.comments` 작업본·index 변경 없음, 포함할 신규 resolved 댓글 없음. 초기 작업본 clean이며 이번 수정만 로컬 커밋한다.
+
+### 06 독립 검증 완료 인계
+
+root가 결과만 제공했다: 승인 전후 기존 내용 보존 3/3, 거절 3/3, 중복 3/3, 신규 파일 제안 후 명시적 승인 생성 추가 1/1 모두 통과. root는 실제 바이트와 승인 전문을 대조했고 검토 동안 source digest 동일을 확인했다. quick_validate valid, node tests 24/24, check-package valid, diff check 0, plugin-eval 95/A(한국어 trigger 영어 휴리스틱 경고 1)도 확인했다.
+
+소스 `637afba`·구현 기록 `6d106f7`은 변경하지 않는다. plan 06을 완료 표시하고 전체 status는 `review-pending`으로 되돌렸다. 단계 06 통과는 기존 Issue #4의 human-review 보류 해소나 전체 Issue 통과를 뜻하지 않는다. 충돌·concurrent 변경 행동과 호스트 로딩 미확인 한계는 유지한다. 이 인계는 실제 비공개 검토 자료 조회 없이 전달된 결과만 기록한다.
