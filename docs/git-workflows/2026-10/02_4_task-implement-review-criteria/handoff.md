@@ -127,3 +127,16 @@
 3. 고정 입력으로 TC-F02를 실행해 review.md의 고정 입력 재실행 절을 채운다. 이 handoff의 구현 세션 결과는 참고로만 쓴다.
 4. review.md 기록 뒤 `skills/pr-review/SKILL.md`의 「7. 기록 커밋」을 따른다.
 5. 사용자 결정: `document-links.md` 계획 이탈 승인 여부, D1 PR 대상 브랜치, push·PR 승인.
+
+
+## 06 사용자 요청 확장 인계 (2026-10-02)
+
+- EXT-01~05는 대화로 승인된 로컬 추가 범위이며 원격 Issue의 AC 추가를 주장하지 않는다. 기존 01~05 기록·보류 판단은 보존한다.
+- 소스 커밋: `637afba` (agents-init, 양언어 README, 라우팅, package requiredSkills·누락 거부 테스트). 기록은 별도 docs(work-record) 커밋이다. 플러그인 0.4.0 유지, release·설치·push·PR·Issue 댓글 미실행.
+- 스킬은 경로·추가 전문·위치를 제시하고 최초 요청과 구별되는 명시적 승인 후에만 추가한다. 기존 바이트 보존, absent 파일 승인 후 생성, 중복 무변경, 충돌 보존·질문, 승인 직전 파일 상태 재확인을 명시한다. 실제 프로젝트 AGENTS.md는 변경하지 않았다.
+- quick_validate valid, package tests 24/24, check-package valid, git diff --check 통과. 신규 테스트는 README 링크 없이 필수 agents-init 진입점 누락을 거부한다.
+- plugin-eval start와 analyze 실제 실행: Evaluate Skill 경로, 95/100 A, fail 0 warn 1, static budget 305 tokens. 경고는 한국어 trigger를 `/use when/i`로 검사하는 평가기 오탐이며 유지한다. coverage 정보는 코드 없는 스킬에 비적용, 실제 토큰 사용량 미측정이다.
+- TC-10~12 구현용 독립 실행자 3명: 기존 파일 승인 전 무변경→명시적 승인 후 CRLF·원본 바이트·전문 exact 일치, 없는 파일 제안→거절 뒤 부재, 영어 의미동일 중복 선언 무변경 각 3/3. 최소 raw fixture와 스킬·사용자 요청만 전달했고 기대결과를 전달하지 않았다. 같은 실행자 후속 요청으로 missing·duplicate를 실행한 한계와 미응답 관찰 시점 한계는 [task-06](task-06-agents-init.md#실행-근거와-한계)에 기록했다.
+- 미실행: 신규 파일 승인 후 생성, 충돌 처리, 승인 전후 concurrent 변경 대응의 행동 시나리오. root의 별도 독립 검증 대기. 실제 Issue의 비공개 review 브랜치·검토 기준·고정 입력은 조회하지 않았다.
+- plan 06행 앞 빈 줄 제거 후 bundled marked HTML 렌더링에서 단계 table 1개·data rows 6개 확인. 시각 스크린샷 검사는 하지 않았다.
+- `.comments` 작업본·index 변경 없음, 포함할 신규 resolved 댓글 없음. 초기 작업본 clean이며 이번 수정만 로컬 커밋한다.

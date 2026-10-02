@@ -49,7 +49,6 @@ created: "2026-10-02"
 | [03](task-03-task-implement.md) | task-implement 스킬 | 구현 진행 절차와 todo 진행 규칙을 새 스킬로 이동, 링크·패키지 검사 갱신 | [TC-04](task-03-task-implement.md#tc-04)<br>[TC-05](task-03-task-implement.md#tc-05)<br>[TC-06](task-03-task-implement.md#tc-06) | [x] |
 | [04](task-04-template-init.md) | template-init 지시 보완 | 필수 절 목록, 폴더 생성, remote 없는 저장소, 뜻이 같은 절 판단 기준 | [TC-07](task-04-template-init.md#tc-07)<br>[TC-08](task-04-template-init.md#tc-08) | [x] |
 | [05](task-05-examples-readme.md) | 예제와 README | python-version-upgrade에 검토 기준·검증 입력 예제 추가, README 스킬 표와 작업 문서 설명 갱신 | [TC-09](task-05-examples-readme.md#tc-09) | [x] |
-
 | [06](task-06-agents-init.md) | AGENTS.md 초기화 스킬 | 기존 지침 보존, 짧은 워크플로우 선언 제안과 사용자 승인 후 추가, 중복 방지, 패키지·README 연결 | [TC-10](task-06-agents-init.md#tc-10)<br>[TC-11](task-06-agents-init.md#tc-11)<br>[TC-12](task-06-agents-init.md#tc-12)<br>[TC-13](task-06-agents-init.md#tc-13) | [ ] |
 
 실행 순서: 01 → 02 → 03 → 04 → 05 → 최종 검증. 02가 정한 보관 위치(D2)를 03의 읽기 금지 규칙이 참조한다. 05는 01~04의 최종 규칙을 예제로 보여 주므로 마지막에 둔다. 검증이 실패하면 해당 단계로 돌아가 같은 사례를 다시 실행한다.
@@ -110,6 +109,8 @@ created: "2026-10-02"
 | EXT-03 | 승인 후 기존 내용을 보존한 채 추가하고, 파일이 없으면 승인 후 생성한다. 거절·응답 없음이면 파일을 변경하지 않는다. |
 | EXT-04 | 추가 문구는 프로젝트의 git-workflow 채택과 Issue → plan → 구현·검증 → PR 검토 → 사용자 승인 머지를 짧게 설명한다. 앞선 상세 후보·특정 계정·로컬 경로·자동 커밋 권한을 삽입하지 않는다. 중복이나 충돌이 있으면 기존 문구를 덮어쓰지 않는다. |
 | EXT-05 | skill-creator quick_validate, plugin-eval evaluate-skill과 패키지 검증을 실행한다. 승인 전·후 및 중복 시나리오는 격리된 임시 작업본에서 검증한다. |
+
+06 구현 기록: 소스 `637afba`, TC-10~12 구현용 세 실행자 관찰 각 3/3, TC-13 구조 검증 통과. 신규 파일 승인 후 생성·충돌·상태 재승인은 구현 시나리오 미실행이며 별도 독립 검증 대기. 자세한 근거는 [task-06](task-06-agents-init.md#실행-근거와-한계). 완료 표시는 구현 작업·기록 완료이며 독립 검토 통과를 뜻하지 않는다.
 
 확장 실행 순서: plan·task 고정 → 별도 리뷰 브랜치에 추가 기준 고정 → 새 구현 에이전트 06 실행 → 현재 리뷰 세션 독립 검증. 신규 스킬이 없는 변경 전 상태와 변경 후 시나리오를 구분하며, 없는 스킬을 실행했다고 주장하지 않는다. 원격 Issue 조회는 인증·연결 실패로 기존 로컬 자료와 사용자 요청을 사용했다.
 
