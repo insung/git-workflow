@@ -5,7 +5,7 @@ description: 대상 프로젝트의 AGENTS.md에 짧은 git-workflow 채택 선�
 
 # AGENTS.md 초기화
 
-프로젝트가 git-workflow를 따른다는 짧은 선언만 추가한다.
+프로젝트가 git-workflow를 따르며 메인 조정·별도 구현으로 진행한다는 짧은 선언만 추가한다. 상세 절차는 각 단계 스킬을 정본으로 유지한다.
 
 ## 추가 전문
 
@@ -13,8 +13,15 @@ description: 대상 프로젝트의 AGENTS.md에 짧은 git-workflow 채택 선�
 ## Git workflow
 
 이 프로젝트는 git-workflow를 따른다.
-Issue 생성 → plan 작성 → 구현·검증 → PR 검토 → 사용자 승인 후 머지 순서로 진행한다.
+Issue 생성 → plan 작성 → 별도 에이전트 구현 → 메인 독립 검증 → PR 검토 → 사용자 승인 후 머지 → Issue 종료 순서로 진행한다.
+
+- 메인 에이전트는 Issue·plan, 구현 위임, 검증, PR 생성·검토, 승인 후 머지와 실제 머지 확인 뒤 Issue close·결과 기록을 조정한다. 구현 전에 검토 기준·검증 입력을 고정하고 직접 구현하지 않는다.
+- Issue 기반 구현 요청에서는 이전 대화를 상속하지 않는 별도 구현 에이전트를 생성해 승인된 단계를 반복 지시 없이 위임한다. Issue → plan 공통 맥락·결정·단계 → 담당 task → handoff·공개 리뷰 지적 순서로 인계하며, 공통 목적·유지할 결정·담당 범위를 연결한다. 비공개 검토 기준·검증 입력은 구현자에게 전달하지 않는다.
+- 구현 에이전트는 task-implement에 따라 구현·자체 테스트·결과 인계를 담당한다. 메인은 인계 결과를 고정 기준으로 독립 검증하며, 실패하면 구현자에게 수정을 위임한 뒤 재검증한다.
+- 기본 역할 분리와 단계 진행은 요청 범위와 행동·대상별 승인을 따른다. 읽기 전용 질문·Issue 작성만 요청한 경우에는 구현으로 확대하지 않는다.
 ```
+
+역할별 인계는 [문서 읽기 순서](../git-workflow/references/document-links.md#문서별-역할과-읽기-순서), 기준 고정·비공개 입력 격리는 [검토 입력 보관](../plan-create/references/review-criteria.md#보관-위치), 승인과 검증 실행은 [공통 실행 경계](../git-workflow/references/execution-boundaries.md)를 따른다. 스킬은 지시 모음이며 별도 스케줄러가 아니다.
 
 ## 제안과 적용
 
