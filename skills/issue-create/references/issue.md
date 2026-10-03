@@ -26,11 +26,11 @@
 
 ### 기능 이슈
 
-[기능 Issue 템플릿](../../template-init/assets/.github/ISSUE_TEMPLATE/feature_request.md)을 읽어 본문을 작성한다. 대상 저장소에 같은 종류의 템플릿이 있으면 그 절 이름을 따르고 빠진 필수 항목만 보완한다. 달성 조건은 “사용성 개선” 대신 “앱 상세에서 기간을 주 단위로 선택 가능”처럼 검증 가능한 결과로 쓴다.
+[기능 Issue 템플릿](../../template-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md)을 읽어 본문을 작성한다. 대상 저장소에 같은 종류의 템플릿이 있으면 그 절 이름을 따르고 빠진 필수 항목만 보완한다. 달성 조건은 “사용성 개선” 대신 “앱 상세에서 기간을 주 단위로 선택 가능”처럼 검증 가능한 결과로 쓴다.
 
 ### 버그 이슈
 
-[버그 Issue 템플릿](../../template-init/assets/.github/ISSUE_TEMPLATE/bug_report.md)을 읽어 기대·실제 동작과 재현 절차·확인한 환경을 작성한다. 필요한 재현 정보는 아래 조사 기준을 따른다.
+[버그 Issue 템플릿](../../template-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md)을 읽어 기대·실제 동작과 재현 절차·확인한 환경을 작성한다. 필요한 재현 정보는 아래 조사 기준을 따른다.
 
 ### 조사 결과·참고 링크의 선택 항목
 
@@ -89,3 +89,7 @@ gh issue create --title 'feat(app-ranking): 기간을 주 단위로 선택' \
 기존 Issue를 재사용하고 지정이 승인 범위에 있으면 `gh issue edit <Issue> --add-assignee @me`로 추가한다. 재사용만으로 수정 승인을 가정하지 않는다.
 생성 뒤 `gh issue view <Issue> --json assignees`로 실제 login을 확인한다.
 지정에 실패해도 이미 생성된 Issue는 유지한다. 오류나 응답 불명 때는 먼저 생성 여부와 assignees를 조회하며, 삭제하거나 중복 생성하지 않는다. 생성이 확인되었고 지정이 승인 범위에 있으면 `gh issue edit <Issue> --add-assignee @me`로 추가만 재시도한다. 재조회 뒤 실제 assignee login과 미적용 사유(권한·인증 오류 또는 미확인)를 보고한다.
+
+## 작성 후 점검
+
+[공통 편집 순서](../../git-workflow/references/writing-conventions.md#정보-단위와-작성-후-편집)를 적용한다. 목표는 문제와 원하는 결과부터, AC는 한 항목에 하나의 관찰 가능한 완료 결과부터 쓴다. 중요한 결정의 핵심 이유와 재현 정보는 유지하며 구현 방법·검증 명령·작업 이력은 plan/task로 연결한다. 같은 뜻의 기존 저장소 절 이름은 그대로 쓴다.

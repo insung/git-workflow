@@ -6,7 +6,7 @@
 
 git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이다. 요청자가 원하는 결과를 Issue의 달성 조건으로 기록하고, 작업을 plan과 단계별 todo로 나누고, 그 ID를 구현·테스트·PR·검토까지 잇는다. 각 단계는 기억에 의존한 요약 대신 이전 단계의 의도와 실제 결과를 읽는다.
 
-이 플러그인은 지시 모음이며 CI 서비스가 아니다. 한 세션에서 모든 단계를 실행할 수 있고, 세션을 나누는 것은 선택이다.
+이 플러그인은 지시 모음이며 CI 서비스가 아니다. 한 chat에서 전체 흐름을 조정할 수 있다. 독립 검토 기준이나 입력을 작성·열람한 세션은 해당 변경을 구현하지 않으며 별도 구현 세션에 인계한다.
 
 ## 왜 쓰는가
 
@@ -14,6 +14,26 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 - **검토가 빠진 테스트를 교차 확인한다** — pr-review는 달성 조건의 시나리오마다 구현과 assertion을 대응시키고, 테스트가 없는 시나리오를 보고한다.
 - **위험한 단계마다 승인이 따로 있다** — 커밋·push·PR·머지·배포·릴리즈는 각각 다른 행동이며, 한 승인이 다른 행동이나 새 HEAD로 넘어가지 않는다.
 - **대상 저장소가 같은 양식을 쓴다** — template-init이 스킬이 요구하는 항목을 갖춘 Issue·PR 템플릿을 설치한다.
+
+## 다음 요청 선택
+
+원하는 결과부터 요청한다. git-workflow는 Issue와 작업 기록을 읽고 다음 단계를 선택한다. 스킬을 직접 지정해도 된다.
+
+| 현재 상황 | 요청 예시 | 스킬 |
+| --- | --- | --- |
+| 새 저장소 | “이 저장소에 Issue·PR 템플릿을 설치해줘.” | template-init |
+| 워크플로 채택 | “AGENTS.md에 git-workflow 채택 선언을 제안해줘.” | agents-init; 추가 전 명시적 승인 |
+| 새 변경 | “만료 안내는 유지하고 재시도 안내를 위한 Issue를 만들어줘.” | issue-create |
+| 준비된 Issue | “Issue #12의 구현 계획을 작성해줘.” | plan-create |
+| 준비된 단계 | “Issue #12의 01 단계를 구현하고 검증 결과를 기록해줘.” | task-implement |
+| 구현 완료 | “Issue #12의 인계와 PR을 준비해줘.” | pr-create |
+| 검토 필요 | “이 PR을 Issue·plan·실제 검증 근거와 대조해줘.” | pr-review |
+| 검토된 HEAD | “승인된 PR을 합의한 방식으로 머지해줘.” | pr-merge; 해당 PR·HEAD에 대한 승인 |
+| 작업 종료 | “확인된 결과와 종료 이유로 Issue #12를 닫아줘.” | issue-close; 종료·댓글의 별도 범위 |
+
+범위를 정한 커밋은 commit-rule, 브랜치 역할은 branch-strategy, 릴리즈는 git-release에 요청한다. 각 요청이 다른 행동까지 자동 승인하지 않는다. 아래 스킬 표에서 정본 규칙을 읽는다.
+
+Issue는 원하는 결과, plan은 공통 결정과 단계 순서, task는 실행 결과, handoff는 상세 근거의 진입점이다. review는 독립 판정과 필요한 조치를 전달한다. 역할이 나뉘어도 plan의 목적과 결정은 공유하며, 구현자에게 비공개 검토 입력은 전달하지 않는다. [문서 역할과 인계](skills/git-workflow/references/document-links.md)를 참조한다.
 
 ## 작동 방식
 
@@ -121,6 +141,8 @@ git diff --check
 이 검사는 패키지 구조, 매니페스트, 필수 파일, 상대 링크를 확인한다. 스킬 선택이나 검토 품질은 측정하지 않는다. 스킬 변경은 시나리오의 변경 전·후 비교로 확인하며, 실행 주체는 [검증 실행 주체](skills/git-workflow/references/execution-boundaries.md#검증-실행-주체)를 따른다.
 
 ## 예제
+
+[문서 개선 전후](docs/examples/readable-records/README.md)는 의미를 보존하며 결론과 다음 행동을 쉽게 찾는 편집 예시다.
 
 [예제](docs/examples/README.md)는 채운 문서 세트와 흐름을 보여준다.
 

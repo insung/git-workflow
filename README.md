@@ -6,7 +6,7 @@
 
 git-workflow is a Codex and Claude Code plugin for Issue-based changes. It records what the requester wants as Issue acceptance criteria, splits the work into a plan and step todos, and carries those IDs through implementation, tests, the PR and review. Each stage reads the previous stage's intent and actual results instead of a summary from memory.
 
-The plugin is a set of instructions, not a CI service. One session can run every stage; separate sessions are optional.
+The plugin is a set of instructions, not a CI service. One chat can coordinate the workflow. A session that writes or reads independent review criteria or inputs cannot implement that change; use a separate implementation session.
 
 ## Why
 
@@ -14,6 +14,26 @@ The plugin is a set of instructions, not a CI service. One session can run every
 - **Reviews cross-check for missing tests** — pr-review maps every acceptance scenario to its implementation and its assertion, and reports scenarios with no test.
 - **Each risky step has its own approval** — commit, push, PR, merge, deployment and release are separate actions; approval for one does not extend to another or to a new HEAD.
 - **Target repositories use the same forms** — template-init installs Issue and PR templates that contain the fields the skills require.
+
+## Choose your next request
+
+Start with the result you want. The router reads the Issue and recorded work to choose the next stage; you can also name a skill directly.
+
+| Your situation | Example request | Skill |
+| --- | --- | --- |
+| New repository | “Install Issue and PR templates in this repository.” | template-init |
+| Adopt the workflow | “Propose a git-workflow declaration for AGENTS.md.” | agents-init; explicit approval before the addition |
+| New change | “Create an Issue for retry guidance; keep expired guidance unchanged.” | issue-create |
+| Ready Issue | “Write the implementation plan for Issue #12.” | plan-create |
+| Prepared step | “Implement step 01 of Issue #12 and record its tests.” | task-implement |
+| Implementation ready | “Prepare the handoff and PR for Issue #12.” | pr-create |
+| Review needed | “Review this PR against its Issue, plan and actual test evidence.” | pr-review |
+| Reviewed HEAD | “Merge this approved PR using the agreed method.” | pr-merge; approval applies to that PR and HEAD |
+| Work ended | “Close Issue #12 with its confirmed outcome and close reason.” | issue-close; closure and comments have their own scope |
+
+Use commit-rule for a scoped commit, branch-strategy for branch roles, and git-release for a release. These requests do not authorize the other actions automatically. The skill table below links to each rule.
+
+Read the Issue for the intended result, the plan for shared decisions and stage order, the task for execution results, and the handoff for detailed evidence. A review gives the independent verdict and necessary action. Separate roles share the plan’s purpose and decisions; implementation does not receive the private review inputs. See [document roles and handoff](skills/git-workflow/references/document-links.md).
 
 ## How it works
 
@@ -122,7 +142,7 @@ These checks cover package structure, manifests, required files and relative lin
 
 ## Examples
 
-The [examples](docs/examples/README.md) show filled document sets and flows.
+The [examples](docs/examples/README.md) show filled document sets and flows. The [before-and-after records](docs/examples/readable-records/README.md) show how to preserve meaning while making the conclusion and next action easier to find.
 
 | Example | Flow |
 | --- | --- |

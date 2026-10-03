@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync, renameSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { validatePackage } from '../scripts/check-package.mjs';
 
 const names = ['git-workflow', 'agents-init', 'issue-create', 'plan-create', 'task-implement', 'pr-create', 'pr-review', 'pr-merge', 'issue-close', 'commit-rule', 'branch-strategy', 'git-release', 'template-init'];
-const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-close/references/closing-comment.md', 'template-init/assets/.github/ISSUE_TEMPLATE/feature_request.md', 'template-init/assets/.github/ISSUE_TEMPLATE/bug_report.md', 'template-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'plan-create/references/review-criteria.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-merge/references/post-merge-cleanup.md', 'pr-review/references/review.md', 'pr-review/references/pr-comment.md', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'branch-strategy/references/branch.md', 'git-release/references/release-notes.md'];
+const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-close/references/closing-comment.md', 'template-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'template-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'template-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'plan-create/references/review-criteria.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-merge/references/post-merge-cleanup.md', 'pr-review/references/review.md', 'pr-review/references/pr-comment.md', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'branch-strategy/references/branch.md', 'git-release/references/release-notes.md'];
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'git-workflow-package-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
@@ -77,7 +77,7 @@ test('rejects missing shared label guidance', t => {
   assert.ok(validatePackage(root).some(e => e.includes('git-workflow/references/labels.md')));
 });
 
-for (const path of ['git-workflow/references/execution-boundaries.md', 'branch-strategy/references/branch.md', 'git-workflow/references/issue-link.md', 'template-init/assets/.github/ISSUE_TEMPLATE/feature_request.md', 'template-init/assets/.github/ISSUE_TEMPLATE/bug_report.md', 'template-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'pr-review/references/spec-it-policy.md', 'pr-review/references/pr-comment.md']) {
+for (const path of ['git-workflow/references/execution-boundaries.md', 'branch-strategy/references/branch.md', 'git-workflow/references/issue-link.md', 'template-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'template-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'template-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'pr-review/references/spec-it-policy.md', 'pr-review/references/pr-comment.md']) {
   test(`rejects missing required form or contract: ${path}`, t => {
     const { root } = fixture(t);
     rmSync(join(root, 'skills', path));
@@ -99,7 +99,7 @@ test('rejects a missing task-implement entrypoint', t => {
 
 test('rejects an issue template without GitHub front matter fields', t => {
   const { root, put } = fixture(t);
-  put('skills/template-init/assets/.github/ISSUE_TEMPLATE/bug_report.md', '---\nname: n\nabout: a\n---\n');
+  put('skills/template-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', '---\nname: n\nabout: a\n---\n');
   const errors = validatePackage(root);
   assert.ok(errors.some(e => e.includes('missing issue template title')));
   assert.ok(errors.some(e => e.includes('missing issue template labels')));
@@ -119,7 +119,7 @@ test('template-init required-section table matches the template headings', () =>
   const root = join(import.meta.dirname, '..', 'skills', 'template-init');
   const rows = readFileSync(join(root, 'SKILL.md'), 'utf8').split('\n').filter(l => /^\| (기능 Issue|버그 Issue|PR) \|/.test(l));
   assert.equal(rows.length, 3);
-  const files = ['ISSUE_TEMPLATE/feature_request.md', 'ISSUE_TEMPLATE/bug_report.md', 'PULL_REQUEST_TEMPLATE.md'];
+  const files = ['ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'ISSUE_TEMPLATE/BUG_REPORT.md', 'PULL_REQUEST_TEMPLATE.md'];
   rows.forEach((row, i) => {
     const [, , required, optional] = row.split('|').map(c => c.trim());
     const listed = [...required.split(','), ...optional.split(',')].map(s => s.trim());
@@ -139,4 +139,20 @@ test('rejects missing cleanup policy without depending on entrypoint links', t =
   const { root } = fixture(t);
   rmSync(join(root, 'skills/pr-merge/references/post-merge-cleanup.md'));
   assert.ok(validatePackage(root).includes('missing reference: skills/pr-merge/references/post-merge-cleanup.md'));
+});
+
+
+test('rejects a lowercase-only asset on case-sensitive and insensitive filesystems', t => {
+  const { root } = fixture(t);
+  const dir = join(root, 'skills/template-init/assets/.github/ISSUE_TEMPLATE');
+  renameSync(join(dir, 'FEATURE_REQUEST.md'), join(dir, 'feature_request.md'));
+  assert.ok(validatePackage(root).some(e => e.includes('exact uppercase name: FEATURE_REQUEST.md')));
+  assert.ok(validatePackage(root).some(e => e.includes('noncanonical or duplicate issue asset: feature_request.md')));
+});
+
+test('rejects a mixed-case asset instead of silently accepting an alias', t => {
+  const { root } = fixture(t);
+  const dir = join(root, 'skills/template-init/assets/.github/ISSUE_TEMPLATE');
+  renameSync(join(dir, 'BUG_REPORT.md'), join(dir, 'Bug_Report.md'));
+  assert.ok(validatePackage(root).some(e => e.includes('exact uppercase name: BUG_REPORT.md')));
 });
