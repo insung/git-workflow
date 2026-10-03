@@ -27,8 +27,11 @@ description: “PR을 만들어줘”, “PR 본문을 작성해줘”처럼 구
    접근 불가면 local-pr-draft로 반환한다.
 5. [pr-review](../pr-review/SKILL.md)에 Issue·plan/todo·handoff·검토 base/HEAD·테스트 근거·정책 위치를 인계한다.
    대화 내 검토/별도 세션은 선택 사항이다.
-   GitHub reviewer 지정·검토 댓글은 승인 범위를 확인한다.
-   PR 생성 승인은 머지 승인이 아니다.
+   기본 기록은 PR 본문·handoff로 충분하므로 별도 인계 댓글을 자동 게시하지 않는다.
+   별도 인계 댓글이 요청되면 본문·handoff와 중복되지 않는 필요한 요약인지 확인하고 [document-links](../git-workflow/references/document-links.md)의 공통 기록·링크·승인 규칙을 적용한다.
+   검토 결과 작성·최초/재검토 댓글은 pr-review가 담당하며 pr-create가 검토 판정을 만들어 게시하지 않는다.
+   GitHub reviewer 지정은 해당 승인 범위를 확인한다. 댓글 신규 게시·수정은 그 행동의 요청이 있어야 한다.
+   PR 생성 승인은 댓글 게시·수정 또는 머지 승인이 아니다.
 
 ## 출력
 
