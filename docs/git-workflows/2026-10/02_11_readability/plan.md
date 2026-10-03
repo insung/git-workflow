@@ -1,6 +1,6 @@
 ---
 issue: "https://github.com/insung/git-workflow/issues/11"
-status: review-pending
+status: completed
 branch: "feat/readable-records"
 base: "main"
 created: "2026-10-02"
@@ -68,7 +68,7 @@ task는 실행 결과, review는 요구 충족과 검증 누락에 대한 독립
 | --- | --- | --- | --- |
 | [01](task-01-readme-guidance.md) | README 사용 안내 | [TC-01](task-01-readme-guidance.md#tc-01)·[TC-02](task-01-readme-guidance.md#tc-02) | [x] |
 | [02](task-02-writing-templates.md) | 작성 기준·주석·파일명 | [TC-03](task-02-writing-templates.md#tc-03)~[TC-12](task-02-writing-templates.md#tc-12), [TC-16](task-02-writing-templates.md#tc-16)·[TC-17](task-02-writing-templates.md#tc-17) | [x] |
-| [03](task-03-examples-validation.md) | 예시·검증·인계 | [TC-13](task-03-examples-validation.md#tc-13)~[TC-15](task-03-examples-validation.md#tc-15) | [ ] |
+| [03](task-03-examples-validation.md) | 예시·검증·인계 | [TC-13](task-03-examples-validation.md#tc-13)~[TC-15](task-03-examples-validation.md#tc-15) | [x] |
 
 01 → 02 → 03 순서로 진행한다. 지시 변경 시 변경 전 시나리오를 먼저 실행한다. 변경 후 같은 입력으로 재실행한다. 실패한 검증은 해당 단계로 돌아간다.
 
@@ -77,8 +77,8 @@ task는 실행 결과, review는 요구 충족과 검증 누락에 대한 독립
 | 사례 | AC | 확인 방법 (리포 루트) | 기대 결과 | 결과 |
 | --- | --- | --- | --- | --- |
 | <a id="tc-f01"></a>TC-F01 | AC-01, AC-04, AC-05, AC-10, AC-11 | `node scripts/check-package.mjs`, `node --test tests/package.test.mjs`, `git diff --check` | 패키지·링크·기존 테스트 통과 | 통과: 6006dc9, 패키지·29개 테스트·diff 검사 |
-| <a id="tc-f02"></a>TC-F02 | AC-02, AC-03, AC-07, AC-08, AC-12, AC-13, AC-14 | 독립 review/issue-11의 고정 입력 재실행 | 의미 보존·정보 단위·기존 설치 보존 | 미실행: 별도 리뷰 세션의 고정 입력 판정 대기 |
-| <a id="tc-f03"></a>TC-F03 | AC-06 | 보존 커밋 확인 후 이번 worktree 제거·목록 재조회 | 결과·다른 작업 보존 | 미실행: 조정 역할의 보존·정리 대기 |
+| <a id="tc-f02"></a>TC-F02 | AC-02, AC-03, AC-07, AC-08, AC-12, AC-13, AC-14 | 독립 review/issue-11의 고정 입력 재실행 | 의미 보존·정보 단위·기존 설치 보존 | 통과: 독립 고정 입력 6종 각각 3회, review.md 참조 |
+| <a id="tc-f03"></a>TC-F03 | AC-06 | 보존 커밋 확인 후 이번 worktree 제거·목록 재조회 | 결과·다른 작업 보존 | 통과: 결과 보존 후 구현 worktree 제거, 외부 종료 보고서 참조 |
 
 문서·지시 변경이라 서버 단위 테스트 대신 패키지 검사와 독립 작성 시나리오를 사용한다. 계획 문서 검사는 구현 완료 증거가 아니다.
 
@@ -104,3 +104,7 @@ task는 실행 결과, review는 요구 충족과 검증 누락에 대한 독립
 | 2026-10-03 | 요청 변경 | 01~03 구현·검증·로컬 커밋 승인, 독립 리뷰·worktree 정리는 조정 역할 | 전체 단계 | 승인 |
 | 2026-10-03 | 계획 이탈 | 03 예시 연결 시 README의 한 세션 설명을 독립 역할 경계와 일치하도록 재대조 | AC-01·AC-14, 01·03 | 승인 |
 | 2026-10-03 | 실행 인계 | 03의 source·검증·인계 완료, 독립 리뷰·이번 worktree 정리는 조정 역할에 전달 | AC-05·AC-06, 03 | 검토 대기 |
+
+## 독립 검토와 종료
+
+[독립 review](review.md)에서 최종 구현을 확인했다. 구현 worktree는 clean·보존 확인 후 제거했으며 다른 8개 worktree는 동일했다. 검토 기준·입력은 구현 담당 종료 후 검토 기록과 함께 보존했다. 리뷰용 worktree 정리와 Issue 현재 상태는 외부 종료 보고서에 기록한다.
