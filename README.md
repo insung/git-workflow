@@ -103,7 +103,7 @@ Start a new session after installing or updating. In Claude Code the skills appe
 
 Ask the agent to install the GitHub templates, for example "Install the git-workflow Issue and PR templates in this repository". template-init copies only the files that do not exist yet and reports how existing templates differ.
 
-Ask "Initialize this project’s AGENTS.md for git-workflow" to use agents-init. It shows the target path, complete addition and position before requesting explicit approval. It preserves existing instructions; rejection or no response leaves the file unchanged.
+Ask "Initialize this project’s AGENTS.md for git-workflow" to use [agents-init](skills/agents-init/SKILL.md): it proposes a declaration for an individual project or a root containing multiple projects, then adds it only after explicit approval while preserving existing bytes. The declaration makes the main agent coordinate approved stages and independently validate a separate implementer’s work; see the skill for the declaration and the [role-specific reading order](skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서) for shared context and handoff.
 
 ## Architecture
 
