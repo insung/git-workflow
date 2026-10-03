@@ -67,7 +67,7 @@ task는 실행 결과, review는 요구 충족과 검증 누락에 대한 독립
 | 단계 | 결과 | 검증 | 완료 |
 | --- | --- | --- | --- |
 | [01](task-01-readme-guidance.md) | README 사용 안내 | [TC-01](task-01-readme-guidance.md#tc-01)·[TC-02](task-01-readme-guidance.md#tc-02) | [x] |
-| [02](task-02-writing-templates.md) | 작성 기준·주석·파일명 | [TC-03](task-02-writing-templates.md#tc-03)~[TC-12](task-02-writing-templates.md#tc-12), [TC-16](task-02-writing-templates.md#tc-16)·[TC-17](task-02-writing-templates.md#tc-17) | [ ] |
+| [02](task-02-writing-templates.md) | 작성 기준·주석·파일명 | [TC-03](task-02-writing-templates.md#tc-03)~[TC-12](task-02-writing-templates.md#tc-12), [TC-16](task-02-writing-templates.md#tc-16)·[TC-17](task-02-writing-templates.md#tc-17) | [x] |
 | [03](task-03-examples-validation.md) | 예시·검증·인계 | [TC-13](task-03-examples-validation.md#tc-13)~[TC-15](task-03-examples-validation.md#tc-15) | [ ] |
 
 01 → 02 → 03 순서로 진행한다. 지시 변경 시 변경 전 시나리오를 먼저 실행한다. 변경 후 같은 입력으로 재실행한다. 실패한 검증은 해당 단계로 돌아간다.
@@ -99,8 +99,6 @@ task는 실행 결과, review는 요구 충족과 검증 누락에 대한 독립
 | 2026-10-03 | 요청 변경 | 중요한 맥락은 판단 이유와 근거로 보존 | 공통 작성·편집 | 승인 |
 | 2026-10-03 | 요청 변경 | 달성 조건과 task 검증·review 지적을 단일 판단 단위로 정리 | AC-01~08, AC-10~12 | 승인 |
 | 2026-10-03 | 요청 변경 | AC-09를 AC-10~12로 분리하고 추적 연결 유지 | 02·03 | 승인 |
-
 | 2026-10-03 | 요청 변경 | task는 실행 결과, review는 짧은 독립 판단으로 분리 | AC-13·02~03 | 승인 |
 | 2026-10-03 | 요청 변경 | plan 공통 맥락을 모든 역할이 공유하고 인계 안내로 읽기 순서 지정 | AC-14·02~03 | 승인 |
-
 | 2026-10-03 | 요청 변경 | 01~03 구현·검증·로컬 커밋 승인, 독립 리뷰·worktree 정리는 조정 역할 | 전체 단계 | 승인 |
