@@ -1,6 +1,6 @@
 ---
 issue: "#17"
-status: ready
+status: review-pending
 branch: "fix/issue-close-cleanup"
 base: "main"
 created: "2026-10-03"
@@ -48,8 +48,8 @@ created: "2026-10-03"
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 필요 승인 | 결과 |
 | --- | --- | --- | --- | --- | --- |
-| TC-F01 | AC-07 | node --test tests/*.test.mjs, 리포 루트 | 기존 회귀 통과 | 없음 | 미실행 |
-| TC-F02 | AC-07 | node scripts/check-package.mjs, git diff --check | 구조·상대 링크·공백 검사 통과 | 없음 | 미실행 |
+| TC-F01 | AC-07 | node --test tests/*.test.mjs, 리포 루트 | 기존 회귀 통과 | 없음 | 통과 29/29, `630870d` |
+| TC-F02 | AC-07 | node scripts/check-package.mjs, git diff --check | 구조·상대 링크·공백 검사 통과 | 없음 | 통과, `630870d` |
 
 ## 전달과 롤백
 
@@ -66,3 +66,4 @@ created: "2026-10-03"
 | --- | --- | --- | --- | --- |
 | 2026-10-03 | 결정 | 닫힌 #8 후속 범위는 새 #17로 추적 | 전체·01 | 승인 |
 | 2026-10-03 | 결정 | 정리 보류 자체를 새 completed 차단 사유로 추가하지 않으며 AC에 삭제가 포함되면 기존 AC 차단 적용 | AC-06·01 | 승인 |
+| 2026-10-03 | 검증 한계 | 최종 소스의 자기 GREEN 1/3 통과, 새 실행자 슬롯 한도로 2회 미실행. 단계 완료 미체크, 별도 독립 실행으로 인계 | AC-07·01 | 보류 |
