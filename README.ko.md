@@ -103,7 +103,7 @@ codex plugin add git-workflow@git-workflow
 
 에이전트에게 GitHub 템플릿 설치를 요청한다. 예: 「이 저장소에 git-workflow의 Issue·PR 템플릿을 설치해줘」. template-init은 없는 파일만 복사하고 기존 템플릿과의 차이를 보고한다.
 
-「이 프로젝트의 AGENTS.md를 git-workflow용으로 초기화해줘」라고 요청하면 agents-init이 대상 경로·추가 전문·위치를 보여주고 명시적 승인을 기다린다. 기존 지침은 보존하며 거절하거나 응답이 없으면 파일을 변경하지 않는다.
+「이 프로젝트의 AGENTS.md를 git-workflow용으로 초기화해줘」라고 요청하면 [agents-init](skills/agents-init/SKILL.md)이 개별 프로젝트·다중 프로젝트 루트에 맞는 선언을 제안하고, 명시적 승인 후 기존 바이트를 보존하며 추가한다. 선언을 채택하면 메인이 승인된 단계를 조정하고 별도 구현자의 결과를 독립 검증한다. 전문은 스킬에서, 공통 맥락과 인계는 [역할별 읽기 순서](skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서)에서 확인한다.
 
 ## 구조
 
