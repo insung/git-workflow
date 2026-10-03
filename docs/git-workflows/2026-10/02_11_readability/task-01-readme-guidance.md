@@ -21,8 +21,8 @@
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 결과 |
 | --- | --- | --- | --- | --- |
-| <a id="tc-01"></a>TC-01 | AC-01 | 두 README와 실제 SKILL.md 대조, 리포 루트 | 13개 스킬 누락·역할 혼동 없음, agents-init·task-implement·issue-close 요청 예시 존재 | 통과: 5e32fb2, 링크 검사·양언어 수동 대조 |
-| <a id="tc-02"></a>TC-02 | AC-01, AC-05 | 링크 검사와 양언어 수동 대조, 리포 루트 | 정본 재서술 없이 영어·한국어 의미 일치 | 통과: 5e32fb2, 링크 검사·양언어 수동 대조 |
+| <a id="tc-01"></a>TC-01 | AC-01 | 두 README와 실제 SKILL.md 대조, 리포 루트 | 13개 스킬 누락·역할 혼동 없음, agents-init·task-implement·issue-close 요청 예시 존재 | 통과: 6006dc9, 최종 양언어·13개 description·링크 재대조 |
+| <a id="tc-02"></a>TC-02 | AC-01, AC-05 | 링크 검사와 양언어 수동 대조, 리포 루트 | 정본 재서술 없이 영어·한국어 의미 일치 | 통과: 6006dc9, 최종 양언어·13개 description·링크 재대조 |
 
 시나리오 실행 주체는 [공통 실행 경계](../../../../skills/git-workflow/references/execution-boundaries.md#검증-실행-주체)를 따른다. 새 실행자에게 요청문·대상 스킬만 주며 기대 결과는 전달하지 않는다. 실행 불가 시 미실행으로 기록한다.
 

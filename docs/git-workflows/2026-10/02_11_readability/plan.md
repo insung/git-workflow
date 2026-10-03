@@ -1,6 +1,6 @@
 ---
 issue: "https://github.com/insung/git-workflow/issues/11"
-status: in-progress
+status: review-pending
 branch: "feat/readable-records"
 base: "main"
 created: "2026-10-02"
@@ -76,9 +76,9 @@ task는 실행 결과, review는 요구 충족과 검증 누락에 대한 독립
 
 | 사례 | AC | 확인 방법 (리포 루트) | 기대 결과 | 결과 |
 | --- | --- | --- | --- | --- |
-| <a id="tc-f01"></a>TC-F01 | AC-01, AC-04, AC-05, AC-10, AC-11 | `node scripts/check-package.mjs`, `node --test tests/package.test.mjs`, `git diff --check` | 패키지·링크·기존 테스트 통과 | 구현 후 미실행 |
-| <a id="tc-f02"></a>TC-F02 | AC-02, AC-03, AC-07, AC-08, AC-12, AC-13, AC-14 | 독립 review/issue-11의 고정 입력 재실행 | 의미 보존·정보 단위·기존 설치 보존 | 구현 후 미실행 |
-| <a id="tc-f03"></a>TC-F03 | AC-06 | 보존 커밋 확인 후 이번 worktree 제거·목록 재조회 | 결과·다른 작업 보존 | 구현 worktree 미실행 |
+| <a id="tc-f01"></a>TC-F01 | AC-01, AC-04, AC-05, AC-10, AC-11 | `node scripts/check-package.mjs`, `node --test tests/package.test.mjs`, `git diff --check` | 패키지·링크·기존 테스트 통과 | 통과: 6006dc9, 패키지·29개 테스트·diff 검사 |
+| <a id="tc-f02"></a>TC-F02 | AC-02, AC-03, AC-07, AC-08, AC-12, AC-13, AC-14 | 독립 review/issue-11의 고정 입력 재실행 | 의미 보존·정보 단위·기존 설치 보존 | 미실행: 별도 리뷰 세션의 고정 입력 판정 대기 |
+| <a id="tc-f03"></a>TC-F03 | AC-06 | 보존 커밋 확인 후 이번 worktree 제거·목록 재조회 | 결과·다른 작업 보존 | 미실행: 조정 역할의 보존·정리 대기 |
 
 문서·지시 변경이라 서버 단위 테스트 대신 패키지 검사와 독립 작성 시나리오를 사용한다. 계획 문서 검사는 구현 완료 증거가 아니다.
 
@@ -86,7 +86,7 @@ task는 실행 결과, review는 요구 충족과 검증 누락에 대한 독립
 
 - 계획·task는 작업 브랜치에 보존
 - 고정 검토 기준은 review/issue-11에만 보존. 작성·열람 세션은 구현하지 않음
-- 구현·push·PR·머지·Release·설치는 별도 요청 범위
+- 구현·검증·로컬 커밋은 승인 범위. push·PR·머지·Release·설치 갱신은 별도 요청 범위
 - 이번 완료 worktree 삭제는 요청 범위. 보존 필요 파일 확인 후 force 없이 제거
 - 롤백은 해당 구현 커밋 revert. 다른 작업 reset·clean 없음
 
@@ -102,3 +102,5 @@ task는 실행 결과, review는 요구 충족과 검증 누락에 대한 독립
 | 2026-10-03 | 요청 변경 | task는 실행 결과, review는 짧은 독립 판단으로 분리 | AC-13·02~03 | 승인 |
 | 2026-10-03 | 요청 변경 | plan 공통 맥락을 모든 역할이 공유하고 인계 안내로 읽기 순서 지정 | AC-14·02~03 | 승인 |
 | 2026-10-03 | 요청 변경 | 01~03 구현·검증·로컬 커밋 승인, 독립 리뷰·worktree 정리는 조정 역할 | 전체 단계 | 승인 |
+| 2026-10-03 | 계획 이탈 | 03 예시 연결 시 README의 한 세션 설명을 독립 역할 경계와 일치하도록 재대조 | AC-01·AC-14, 01·03 | 승인 |
+| 2026-10-03 | 실행 인계 | 03의 source·검증·인계 완료, 독립 리뷰·이번 worktree 정리는 조정 역할에 전달 | AC-05·AC-06, 03 | 검토 대기 |
