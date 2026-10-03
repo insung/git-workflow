@@ -9,6 +9,7 @@
 | [기존 Issue 재개](resume-existing-issue/README.md) | 다른 세션으로 작업과 증거 인계 |
 | [리뷰 보완](review-rework/README.md) | 테스트 보완·새 HEAD 재검토 |
 | [크롤러 시작 장애](crawler-startup-hotfix/README.md) | prod hotfix와 dev 역반영 |
+| [문서 가독성 개선 전후](readable-records/README.md) | Issue·PR·plan·task·review의 의미 보존과 역할별 인계 |
 | [운영 릴리즈](production-release/README.md) | dev → prod, 배포와 태그·Release 구분 |
 
 대상 리포의 실제 작업 문서는 [plan 경로 정본](../../skills/plan-create/references/plan.md#디렉토리-규칙)을 따른다. 이 디렉토리의 가상 예제는 설명용이다.

@@ -6,7 +6,7 @@
 
 git-workflow is a Codex and Claude Code plugin for Issue-based changes. It records what the requester wants as Issue acceptance criteria, splits the work into a plan and step todos, and carries those IDs through implementation, tests, the PR and review. Each stage reads the previous stage's intent and actual results instead of a summary from memory.
 
-The plugin is a set of instructions, not a CI service. One session can run every stage; separate sessions are optional.
+The plugin is a set of instructions, not a CI service. One chat can coordinate the workflow. A session that writes or reads independent review criteria or inputs cannot implement that change; use a separate implementation session.
 
 ## Why
 
@@ -142,7 +142,7 @@ These checks cover package structure, manifests, required files and relative lin
 
 ## Examples
 
-The [examples](docs/examples/README.md) show filled document sets and flows.
+The [examples](docs/examples/README.md) show filled document sets and flows. The [before-and-after records](docs/examples/readable-records/README.md) show how to preserve meaning while making the conclusion and next action easier to find.
 
 | Example | Flow |
 | --- | --- |
