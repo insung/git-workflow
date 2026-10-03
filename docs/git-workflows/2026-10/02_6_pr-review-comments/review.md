@@ -4,11 +4,11 @@
 
 - Issue: https://github.com/insung/git-workflow/issues/6 / 이전 PR: https://github.com/insung/git-workflow/pull/12
 - base: main `9bc8d1724a8bc2dee6a4643ec146906cbe9b37bd`
-- 검토 HEAD: `58b57ff2796342f248a94e64ee4bbcfe2df9af7a`; 범위: base 이후 구현·계획·인계 커밋 2개
+- 검토 HEAD: `33a49f7be1ea8c09d5b4da0826669aedc92838c7`; 구현 HEAD: `58b57ff2796342f248a94e64ee4bbcfe2df9af7a`. 범위: base 이후 구현·계획·인계 2개와 소스 불변의 검토 기록 커밋 1개
 - 확인 시각: 2026-10-03T14:51:18.537733+09:00; 환경: macOS, Node v23.11.0, 새 실행자는 부모와 같은 세션 모델/설정 상속
-- 미커밋 변경: 이 검토 기록과 원본 검토 기준·고정 입력의 반입만 있음. 최종 skills snapshot과 소스의 byte 일치 확인
+- 미커밋 변경: 이 검토 기록 갱신과 반입 입력의 끝 빈 줄 보정만 있음. 최종 skills snapshot과 소스의 byte 일치 확인
 - 의도: 기존 Issue #6·승인된 plan의 AC-08 후속 검증. [계획](plan.md#ac-08-후속-보완--2026-10-03)·[인계](handoff.md#추가-보완과-최종-대상)
-- 검토 기준: 구현 전 고정한 [기준](review-criteria.md)·[입력](review-input-pr-comments.md), freeze manifest 모든 SHA-256 불변 확인. 반입 파일도 원본 byte 그대로임
+- 검토 기준: 구현 전 고정한 [기준](review-criteria.md)·[입력](review-input-pr-comments.md), freeze manifest 모든 SHA-256 불변 확인. 반입 기준은 원본 byte 그대로이며, 입력은 본문을 유지하고 끝의 여분 빈 줄 1개만 제거했다. 원본 freeze 및 실행자 입력은 변경하지 않았다
 - spec-it 미채택. 검토 완료는 이번 후속 PR의 머지 승인이 아님
 
 ## 독립 대조 요약
@@ -47,6 +47,7 @@
 
 ## 기계 검사와 한계
 
+- 입력 반입 시 끝 빈 줄의 whitespace 오류를 발견해 기록 커밋에서 보정했다. 최종 PR 범위 공백 검사를 다시 확인한다.
 - 대상 소스 snapshot에서 `node scripts/check-package.mjs` exit 0, `node --test tests/package.test.mjs` **29 pass / 0 fail**, `git diff --check` exit 0. 이후 커밋한 소스와 검사·시나리오 snapshot의 byte 일치를 재확인했다.
 - A/B/D를 전체 hash의 기호로 전달한 모의 응답이다. 실제 hash 문자열 출력 형식·실제 GitHub 댓글 API 쓰기·호스트 로딩은 검증하지 않았으며 AC-08의 별도 요청 없는 실제 게시 금지 범위를 유지했다.
 - 3회 통과는 이 고정 입력·소스에서 관찰한 결과다. 모든 향후 모델 실행의 무오류를 보장하지 않는다.

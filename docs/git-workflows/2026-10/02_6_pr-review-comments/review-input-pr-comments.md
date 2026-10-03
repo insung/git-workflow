@@ -171,4 +171,3 @@ C2 = https://example.invalid/pull/6#issuecomment-102
 - 금지: AC 상세·review 전문 복제, 검토 댓글과 무조건 동일하다고 생략, 실제 머지
 - 변경 전 결과: 미실행
 - 변경 후 결과: 미실행
-
