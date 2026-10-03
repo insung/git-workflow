@@ -15,7 +15,7 @@ created: "2026-10-02"
 > 3. 이 작업은 새로운 워크트리 생성하여 진행해주고, 완료된 워크트리는 삭제 처리
 
 - 해석: 호출된 issue-create·plan-create에 따라 이번 세션은 Issue 생성, 현황·개선안 검토, 구현 계획과 고정 검토 입력 준비까지 진행
-- 남은 결정: 구현·push·PR·머지 요청은 별도 단계. 준비된 01~03 구현 방식의 보류 사항 없음
+- 남은 결정: 구현·push·PR·머지 요청은 별도 단계. 준비된 01~03 구현 방식의 보류 사항 없음. 2026-10-03 요청으로 문서 5종의 작성·편집 규칙과 Issue 템플릿 주석·파일명 변경 포함
 
 ## 현재 동작과 변경 이유
 
@@ -32,7 +32,7 @@ created: "2026-10-02"
 
 | 구분 | 내용 |
 | --- | --- |
-| 포함 | README 두 언어판, 공통 작성 기준, issue-create·pr-create 지침, 템플릿 정본, 필요한 template-init 필수 절 연결, 예시·검증 |
+| 포함 | README 두 언어판, 공통 작성 기준, issue-create·pr-create·plan-create·task-implement·pr-review 지침, 템플릿 주석과 대문자 파일명, 필요한 template-init 필수 절 연결, 예시·검증 |
 | 제외 | 기존 Issue·PR·댓글 소급 편집, #6 댓글 게시 정책·#8 자동 정리 기능 구현, 스킬 이름·승인·판정·AC 추적 규칙 변경, 릴리즈·설치 |
 | 미변경 소비자 | 기존 대상 리포의 템플릿·AGENTS.md·작업 기록, 다른 작업 브랜치·워크트리 |
 | 호환성·데이터·운영 | 서버·데이터 영향 없음. 기존 템플릿 절 우선, 새 양식은 이후 작성부터 적용 |
@@ -42,7 +42,7 @@ created: "2026-10-02"
 | 단계 | 제목 | 설명 | 검증 사례 | 완료 |
 | --- | --- | --- | --- | --- |
 | [01](task-01-readme-guidance.md) | README 사용 안내 | 영어·한국어 역할·흐름·요청 예시 일치 | [TC-01](task-01-readme-guidance.md#tc-01), [TC-02](task-01-readme-guidance.md#tc-02) | [ ] |
-| [02](task-02-writing-templates.md) | 기록 기준과 템플릿 | 결과 우선·필수 판단 노출·상세 근거 분리 | [TC-03](task-02-writing-templates.md#tc-03), [TC-04](task-02-writing-templates.md#tc-04), [TC-05](task-02-writing-templates.md#tc-05) | [ ] |
+| [02](task-02-writing-templates.md) | 기록 기준과 템플릿 | 문서별 정보 경계·작성 후 편집·주석·대문자 파일명 | [TC-03](task-02-writing-templates.md#tc-03), [TC-04](task-02-writing-templates.md#tc-04), [TC-05](task-02-writing-templates.md#tc-05), [TC-08](task-02-writing-templates.md#tc-08) | [ ] |
 | [03](task-03-examples-validation.md) | 예시와 통합 검증 | 의미 보존 전후 예시·패키지·인계·정리 | [TC-06](task-03-examples-validation.md#tc-06), [TC-07](task-03-examples-validation.md#tc-07) | [ ] |
 
 실행 순서: 01 → 02 → 03. 구현 세션은 작업 표 순서대로 진행한다. 지시 변경 전 시나리오를 먼저 실행하고 변경 후 같은 입력으로 재실행한다. 실패 시 해당 단계로 돌아간다.
@@ -51,8 +51,8 @@ created: "2026-10-02"
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 필요 승인 | 결과 |
 | --- | --- | --- | --- | --- | --- |
-| <a id="tc-f01"></a>TC-F01 | AC-01, AC-04, AC-05 | `node scripts/check-package.mjs` 및 `node --test tests/package.test.mjs`, 리포 루트 | 구조·상대 링크·기존 테스트 통과 | 없음 | 구현 후 미실행 |
-| <a id="tc-f02"></a>TC-F02 | AC-02, AC-03, AC-04, AC-05 | 독립 pr-review에서 고정 입력 재실행, review/issue-11 | 의미 손실·미검증 은폐·규칙 중복 없음 | 없음 | 구현 후 미실행 |
+| <a id="tc-f01"></a>TC-F01 | AC-01, AC-04, AC-05, AC-08, AC-09 | `node scripts/check-package.mjs` 및 `node --test tests/package.test.mjs`, 리포 루트 | 구조·상대 링크·기존 테스트 통과 | 없음 | 구현 후 미실행 |
+| <a id="tc-f02"></a>TC-F02 | AC-02, AC-03, AC-04, AC-05, AC-07, AC-08, AC-09 | 독립 pr-review에서 고정 입력 재실행, review/issue-11 | 의미 손실·미검증 은폐·규칙 중복 없음 | 없음 | 구현 후 미실행 |
 | <a id="tc-f03"></a>TC-F03 | AC-06 | 결과 커밋·작업본·ignored 파일·worktree 대응 확인 후 작업 위치 밖에서 `git worktree remove <이번 경로>`; 재조회 | 결과 브랜치 유지, 이번 완료 worktree만 제거, 다른 작업 보존 | 이번 완료 worktree 삭제 요청 있음 | 구현 worktree 미실행 |
 
 문서·지시 변경이므로 서버 단위 테스트 대상은 없다. 패키지·링크 검사와 독립 작성 시나리오로 대체한다. 이번 계획 작성 단계의 검사는 구현 완료 증거가 아니다.
@@ -75,3 +75,5 @@ created: "2026-10-02"
 | 2026-10-02 | 결정 | 최신 main에 새 스킬 연결이 있어 README 작업은 사용 안내·예시 중심으로 구성 | AC-01·01 | 승인 |
 | 2026-10-02 | 결정 | Markdown 유지. 필수 정보는 펼친 본문, 상세는 링크 우선·필요할 때 details. Issue Forms 전환은 제외 | AC-03, AC-04·02 | 승인 |
 | 2026-10-02 | 결정 | 사용자가 Issue·검토·계획까지 진행으로 확정. 구현 전 검토 입력을 고정하고 별도 세션에 인계 | 전체 | 승인 |
+
+| 2026-10-03 | 요청 변경 | 문서별 정보 경계·한 항목 한 주장·결론 우선·중복 제거·작성 후 편집을 적용. Issue 템플릿 HTML 주석 안내와 FEATURE_REQUEST.md·BUG_REPORT.md로 파일명 변경 및 참조·검사·기존 템플릿 보존 검증 포함 | AC-07~09·02~03 | 승인 |
