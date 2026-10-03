@@ -10,8 +10,8 @@ description: “Issue·PR 템플릿을 설치해줘”, “이 저장소에 GitH
 
 | 정본 | 대상 경로 |
 | --- | --- |
-| `assets/.github/ISSUE_TEMPLATE/feature_request.md` | `.github/ISSUE_TEMPLATE/feature_request.md` |
-| `assets/.github/ISSUE_TEMPLATE/bug_report.md` | `.github/ISSUE_TEMPLATE/bug_report.md` |
+| `assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md` | `.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md` |
+| `assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md` | `.github/ISSUE_TEMPLATE/BUG_REPORT.md` |
 | `assets/.github/PULL_REQUEST_TEMPLATE.md` | `.github/PULL_REQUEST_TEMPLATE.md` |
 
 ## 필수 절
@@ -38,7 +38,9 @@ description: “Issue·PR 템플릿을 설치해줘”, “이 저장소에 GitH
    find . .github docs -maxdepth 1 -iname 'pull_request_template*' 2>/dev/null
    ```
 
-3. 대상 경로에 파일이 없는 정본만 복사한다.
+3. 같은 종류의 기존 파일을 먼저 확인하고 없는 정본만 복사한다.
+   `.github/ISSUE_TEMPLATE/`의 파일명은 대소문자를 구분하지 않고 비교한다. 기존 `feature_request.md`·`bug_report.md`나 혼합 대소문자 이름은 각각 대문자 정본과 같은 설치 파일로 취급한다. 기존 이름·내용을 유지하고 대문자 파일을 추가하지 않는다. 두 이름이 모두 있으면 기존 중복을 보고하며 임의 삭제·이름 변경을 하지 않는다.
+   대소문자를 구분하는 파일시스템에서도 동일하게 처리한다. 정본 대문자 파일은 해당 종류가 없을 때만 복사한다.
    `.github/ISSUE_TEMPLATE/`나 `.github/`가 없으면 `mkdir -p .github/ISSUE_TEMPLATE`로 만든 뒤 복사한다.
    `.github/ISSUE_TEMPLATE/`에 다른 이름의 템플릿이 있으면 같은 종류가 중복되는지 보고하고, 사용자가 확인한 경우에만 복사한다.
    다른 위치나 `PULL_REQUEST_TEMPLATE/` 폴더에 PR 템플릿이 있으면 PR 정본을 복사하지 않는다.
