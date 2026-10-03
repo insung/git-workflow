@@ -82,3 +82,15 @@
 - 최신 main의 task-implement·assignee·issue-close·post-merge-cleanup·기록 커밋 정책 유지. 기록 커밋 예외를 PR 댓글의 HEAD 판단에서도 적용
 - 부모 독립 재실행: package exit 0, 27 tests / 27 pass / 0 fail, git diff --check exit 0
 - 최신 정책의 3회 독립 실행자 검증 결과와 최종 검토 상태는 review.md에 기록. 과거 수동 walkthrough를 모델 행동 실행으로 재분류하지 않음
+
+## AC-08 후속 인계 — 2026-10-03
+
+- 의도·승인 범위: [plan의 후속 보완](plan.md#ac-08-후속-보완--2026-10-03), Issue #6의 남은 검증과 후속 PR.
+- 기준 main: `9bc8d1724a8bc2dee6a4643ec146906cbe9b37bd`. 별도 worktree의 `fix/pr-comment-ac08` 브랜치.
+- 구현: 별도 구현자는 PR 댓글 reference의 요청/승인과 검토 완료 경계 한 문단만 보완했다. 독립 기준·입력·실행 결과는 구현자에게 전달하지 않았다. parent가 변경과 고정 기준을 대조한다.
+- 기계 검사: Node 환경에서 `node scripts/check-package.mjs` exit 0, `node --test tests/package.test.mjs` 29/29 pass, `git diff --check` exit 0. 이들은 링크·구조 회귀이며 스킬 행동을 대신 증명하지 않는다.
+- 입력: 이전 검토에서 분리한 실행자용 입력을 그대로 사용. SHA-256 `984aec0be740e4dac47da7399024811ab76a3c0bf718e1ec48f6b50a156bf605`. 구현자에게는 공개하지 않았으며 리뷰 기록 단계까지 별도 보관한다.
+- 변경 전: `2331c54` skills snapshot이 git object와 일치함을 확인했다. 기존 실행 1회에 이번 새 실행자 2회를 추가했다. 결과는 기준 상태의 비교 이력으로만 사용한다.
+- 변경 후 대상: 전체 skills snapshot SHA-256 `59f960dfb30f877c9cedac0a6087a5f05009d106390b2c86c895012d2cfd17e5`. 정렬한 파일 경로+NUL+byte 길이+NUL+원문 byte로 계산했다. 계획·인계·검토 문서는 대상 digest에서 제외했다.
+- 실험 범위: 새 실행자마다 담당 스킬 원문·연결 reference와 입력만 제공. 기대값·타 실행 결과·구현 문서는 제공하지 않는다. 실행자는 모의 응답만 반환하고 부모가 판정한다. A/B/D는 전체 hash를 가리키는 기호를 그대로 전달했으므로 hash 출력 형식·GitHub API 쓰기·호스트 로딩은 미검증이다.
+- 실제 댓글 게시·수정·머지·Release·worktree 정리는 미실행이다. PR 생성 요청을 이 권한으로 확대하지 않는다.
