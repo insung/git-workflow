@@ -1,7 +1,7 @@
 ---
 issue: "https://github.com/insung/git-workflow/issues/11"
-status: ready
-branch: "docs/readability-plan"
+status: in-progress
+branch: "feat/readable-records"
 base: "main"
 created: "2026-10-02"
 ---
@@ -14,7 +14,7 @@ created: "2026-10-02"
 > 2. 깃헙 이슈, PR 의 내용이 사람이 읽기가 힘든데 개선 방법 있는지 검토
 > 3. 이 작업은 새로운 워크트리 생성하여 진행해주고, 완료된 워크트리는 삭제 처리
 
-현재 진행 범위는 Issue·검토·계획까지다. 구현 단계의 입력은 준비됐으며 미결정 사항은 없다. 실제 구현은 별도 세션에 인계한다.
+현재 진행 범위는 승인된 01 → 02 → 03 구현·검증과 로컬 커밋이다. 독립 리뷰와 완료 worktree 정리는 조정 역할에 인계한다.
 
 ## 공통 맥락
 
@@ -24,7 +24,7 @@ created: "2026-10-02"
 - 개선 기준: 글자 수 감소나 표 변환 자체로 완료 판정하지 않음
 - 보존: 완료 조건·재현·미검증·위험과 중요한 결정 이유 유지
 - 배치: 중요한 맥락을 삭제하지 않고 판단에 필요한 문서로 이동
-- 현재 범위: Issue·검토·계획까지. 실제 구현·행동 검증은 미실행
+- 현재 범위: README·작성 지침·템플릿 구현과 검증. 독립 리뷰는 별도 역할
 
 역할별 진입점과 인계 항목은 [인계 안내](handoff-guide.md)를 따른다. 공통 맥락 전문을 task·review에 다시 복사하지 않는다.
 
@@ -66,7 +66,7 @@ task는 실행 결과, review는 요구 충족과 검증 누락에 대한 독립
 
 | 단계 | 결과 | 검증 | 완료 |
 | --- | --- | --- | --- |
-| [01](task-01-readme-guidance.md) | README 사용 안내 | [TC-01](task-01-readme-guidance.md#tc-01)·[TC-02](task-01-readme-guidance.md#tc-02) | [ ] |
+| [01](task-01-readme-guidance.md) | README 사용 안내 | [TC-01](task-01-readme-guidance.md#tc-01)·[TC-02](task-01-readme-guidance.md#tc-02) | [x] |
 | [02](task-02-writing-templates.md) | 작성 기준·주석·파일명 | [TC-03](task-02-writing-templates.md#tc-03)~[TC-12](task-02-writing-templates.md#tc-12), [TC-16](task-02-writing-templates.md#tc-16)·[TC-17](task-02-writing-templates.md#tc-17) | [ ] |
 | [03](task-03-examples-validation.md) | 예시·검증·인계 | [TC-13](task-03-examples-validation.md#tc-13)~[TC-15](task-03-examples-validation.md#tc-15) | [ ] |
 
@@ -102,3 +102,5 @@ task는 실행 결과, review는 요구 충족과 검증 누락에 대한 독립
 
 | 2026-10-03 | 요청 변경 | task는 실행 결과, review는 짧은 독립 판단으로 분리 | AC-13·02~03 | 승인 |
 | 2026-10-03 | 요청 변경 | plan 공통 맥락을 모든 역할이 공유하고 인계 안내로 읽기 순서 지정 | AC-14·02~03 | 승인 |
+
+| 2026-10-03 | 요청 변경 | 01~03 구현·검증·로컬 커밋 승인, 독립 리뷰·worktree 정리는 조정 역할 | 전체 단계 | 승인 |
