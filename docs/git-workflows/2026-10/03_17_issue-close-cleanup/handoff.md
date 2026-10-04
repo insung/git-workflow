@@ -116,3 +116,42 @@ RED는 5사례 각 3회 모두 새 요건 전체를 충족하지 못해 각 TC 0
 
 - 인계 base 표기를 실제 작업 base 8917569로 정정했다. 제품 소스는 변경하지 않았다.
 - 최종 소스의 독립 검증은 [review.md](review.md)에 기록한다. 구현자 자기 GREEN의 1/3 및 미실행 2회 이력은 유지하며 독립 실행으로 소급하지 않는다.
+
+
+## 2026-10-04 단계02 추가 인계: 머지 시 기본 작업 worktree 정리
+
+이 항목은 이전 단계의 실행·검토 이력을 보존하는 추가 기록이다. 최신 요청 변경의 승인 의미와 소스는 아래 항목을 적용한다.
+
+- Issue: https://github.com/insung/git-workflow/issues/17; PR 생성·push 없음.
+- Plan / Todo: [plan.md](plan.md), [task-02-merge-cleanup-default.md](task-02-merge-cleanup-default.md); 단계02 검증 미완료.
+- base: main; 변경 전 소스 `9421fb31c6bfb7560815e5f76ad89c6b6444e3cb`; 최종 소스 `2a78df7cdf2ce8bc0ed7bfbf8fc027cb73417817`.
+- 담당: 별도 구현 세션. 비공개 검토 기준·검증 입력 및 review 브랜치를 읽지 않았고 독립 판정을 대신하지 않음.
+- 확인 시각: 2026-10-04T00:28:29Z. 실행 위치: 해당 작업 worktree의 리포 루트, macOS/zsh, 기존 node 런타임.
+
+| AC / TC | 기대 | 구현·실제 상태 |
+| --- | --- | --- |
+| AC-02·08·10 / TC-06 | PR 머지 승인·실제 MERGED·정확한 clean 안전 대상이면 반복 승인 없이 worktree 제거·사후 조회, branch/댓글 별도 | pr-merge 정본과 entrypoint에 구현 `2a78df7`; 행동 실행 미확인 |
+| AC-09 / TC-07 | 결과 조회만 또는 명시적 보존 요청이면 삭제 없음 | 동일 소스에 예외 구현; 행동 실행 미확인 |
+| AC-03·08 / TC-08 | dirty·후속 커밋·다른 세션 사용·queue는 보존 | 기존 손실 방지 조건을 유지; 행동 실행 미확인 |
+| AC-02·07 / TC-09 | 종료만 승인해도 미삭제, 기존 머지 정리 권한 재사용 | issue-close 연결 구현; 행동 실행 미확인, 구조·회귀 통과 |
+
+### 구현자 시나리오 요청과 실행 한계
+
+각 실행은 새 하위 실행자에게 아래 세 파일과 같은 요청문만 전달하도록 구성했다. 기대 결과나 다른 실행 결과를 전달하지 않았다.
+대상: `skills/pr-merge/SKILL.md`, `skills/pr-merge/references/post-merge-cleanup.md`, `skills/issue-close/SKILL.md`. 링크 파일·plan·review를 추가로 읽지 않고 가상 행동만 반환, 총 400단어 이하, pass/fail 판단 금지.
+
+공개 요청문: 모든 사례의 공통 사실은 검토한 PR17 HEAD h17, 정확한 일반 linked worktree `/fiction/project/.worktree/pr17` at h17, 올바른 PR/remote 대응, ignored 파일 없음, 다른 보존 조건 충족, 보존된 checkout에서 실행이다. A: 머지 명시 승인, MERGED+mergedAt+mergeCommit, clean 대상, 별도 정리 표현 없음. B: 결과 조회만 요청, 같은 MERGED+clean. C: 머지 승인과 worktree 명시 보존, 같은 MERGED+clean. D: 머지 승인+MERGED, staged/untracked 변경. E: 머지 승인+MERGED, 후속 h18. F: 머지 승인+MERGED, 다른 세션 사용. G: 머지 승인, queue 등록만 확인. H: completed Issue 종료/댓글만 승인, 이전 MERGED, 머지/정리 승인 없음. I: issue-close에 정확한 PR/HEAD 머지 및 worktree 정리 권한 인계, MERGED+clean+안전, 종료/댓글 별도 승인. 각 사례의 worktree·local/remote branch·댓글 행동을 반환한다.
+
+- RED `9421fb3`: 기본 3회 모두 미실행. 첫 실행자 신규 spawn을 세 번 시도했으나 모두 `agent thread limit reached`. 조정자가 완료 실행자 interrupt 후 재시도해도 동일. 실행자가 생성되지 않았으므로 통과/실패 횟수를 만들지 않음.
+- GREEN `2a78df7`: 기본 3회 모두 미실행. 첫 신규 spawn도 같은 한도로 실패. 이전 실행자를 재사용하지 않음.
+- 계획 이탈: 행동 검증이 환경 한도로 미실행이므로 작업3·단계02 완료 체크를 하지 않고 root의 별도 독립 입력 실행에 인계. 구현자의 자기 반복 완료로 소급하지 않음.
+
+### 명령 검증과 소스 동결
+
+| 명령 | 실제 결과 | 대상 |
+| --- | --- | --- |
+| `node --test tests/*.test.mjs` | 29/29 pass, fail 0 | 최종 3파일 작업본, 바로 뒤 소스 `2a78df7`로 동결 |
+| `node scripts/check-package.mjs` | Package structure valid; semantic review/host loading은 검사하지 않음 | 동일 소스 |
+| `git diff --check` | exit 0, 공백 오류 없음 | 동일 소스 |
+
+소스 커밋은 세 대상 파일만 포함한다. 기존 tracked `.comments`에 변경이 없어 추가 대상이 없었다. 이후 변경은 plan/task/handoff 기록뿐이며 소스를 다시 바꾸지 않았다. 실제 자원 삭제·머지·push·PR·네트워크 댓글·설치 없음. 원격 docs 링크는 게시되지 않은 로컬 문서 상태다. 후속 독립 검증과 사용자 승인 후 머지는 조정자에 인계한다. 롤백은 해당 3파일 변경만 역패치한다.
