@@ -1,6 +1,6 @@
 # Issue #17 독립 검토
 
-최신 요청 변경의 검토는 [머지 시 기본 정리](#2026-10-04-머지-시-기본-정리-검토) 절이다. 아래 초기 결과는 630870d 소스의 이력이다.
+최신 요청 변경의 검토는 [종료 시 삭제 확인 질문](#2026-10-04-종료-시-삭제-확인-질문-검토) 절이다. 아래 초기 결과는 630870d 소스의 이력이다.
 
 - Issue: https://github.com/insung/git-workflow/issues/17; PR 미생성
 - 계획: [plan](plan.md), 작업: [task](task-01-cleanup-handoff.md), 구현 인계: [handoff](handoff.md)
@@ -93,3 +93,35 @@
 - merge-check1: `94c6c19887b122cc93e3f3789122f09dc0181b6ac17155e1aeeae1f5c448cd7b`
 - merge-check2: `4088093703b5ff0b45684948e3f4aa81ec4f46a97b2c4096e7ba8efc232d47a6`
 - merge-check3: `482fe59d63a3263e243988b57d2619af9a370f381509b01af1f36c011fbb577c`
+
+## 2026-10-04 종료 시 삭제 확인 질문 검토
+
+- PR: https://github.com/insung/git-workflow/pull/18. 사용자 요청대로 a359fc1의 현재 변경을 먼저 Draft PR로 만들고 후속 질문 보완 실행
+- 최신 Issue AC-11·12, [task-03](task-03-close-cleanup-prompt.md) 적용
+- 제품 소스: `8d4e544defdec58d89cbad8b74de9c25d552af98`; 검토 시 HEAD 0c9df57은 인계 문서만 변경
+- 구현 전 기준: review/issue-17 `a0a09a9`, [고정 입력](review-input-close-cleanup-prompt.md)
+- root diff 대조: issue-close 지침과 코멘트 기록의 2파일만 변경. pr-merge의 기본 정리 권한과 기존 보존·관리·실행 규칙 불변
+- root 직접 검사: node --test tests/*.test.mjs 29/29, node scripts/check-package.mjs 구조·상대 링크 통과, git diff 46124e4 8d4e544 --check 통과. .comments 변경 없음
+- 새 실행자 close_prompt_check1~3에 입력 절과 고정 source skills archive만 전달. 기대 절·검토 기준·다른 결과·구현 인계 미전달. 판정은 root
+
+| 사례 | 실제 행동 | 기대 충족 |
+| --- | --- | --- |
+| Q01 | 안전한 미승인 정확한 대상에 구체적 삭제 질문·답변 전 미삭제 | 3/3 |
+| Q02 | 동의 후 재조회·제거·사후확인, 거절/무응답 보존과 사유 구분 | 3/3 |
+| Q03 | 동일 PR/HEAD의 기존 승인 재사용·반복 질문 없음 | 3/3 |
+| Q04 | 실행 전 부재 대상 이미 없음·질문 없음 | 3/3 |
+| Q05 | dirty·ignored·다른 사용 보존·승인 질문으로 제약 우회 없음 | 3/3 |
+| Q06 | 대응 불명확 후보는 식별 확인부터·임의 삭제 질문 없음 | 3/3 |
+
+
+- 최신 AC-11·12 충족. 기존 승인 재사용·보존·권한 분리의 AC-02·03 유지 확인. 새 행동의 독립 GREEN 18/18
+- 판정 **warn** 유지: 구현자 자기 RED/GREEN 각 0/3은 새 실행자 생성 한도로 미실행. 독립 실행을 구현자 실행이나 RED로 소급하지 않음
+- 이전 630870d의24건과 2a78df7의21건은 각각 그 소스의 이력. 이번 최종 소스에서 이전 전체를 재실행한 것으로 표현하지 않음
+- 시뮬레이션은 가상 행동이며 실제 삭제·게시·close 성공 근거가 아님. 이번 실제 원격 행동은 승인된 push·Draft PR 생성/본문 갱신뿐이며 실제 삭제·merge·설치 미실행
+- 다음 검토: Draft PR에서 전체 변경과 누적 warn 검토, 머지는 사용자 승인 후 진행
+
+원시 응답 SHA-256:
+
+- close-prompt-check1: `20540e4b2899f61e2156543860f50b7436e8ee2fa642c1e474537c0202b71909`
+- close-prompt-check2: `1b2abc43c5c515a8efb62a9de1ea20e2014e3396c45268221379d6b2e4a6df06`
+- close-prompt-check3: `0514671ed61cdae021146fec330fb72a4be50c57e5b3116e9960b3a638453c0e`
