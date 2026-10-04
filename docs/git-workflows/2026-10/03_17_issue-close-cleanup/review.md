@@ -1,5 +1,7 @@
 # Issue #17 독립 검토
 
+최신 요청 변경의 검토는 [머지 시 기본 정리](#2026-10-04-머지-시-기본-정리-검토) 절이다. 아래 초기 결과는 630870d 소스의 이력이다.
+
 - Issue: https://github.com/insung/git-workflow/issues/17; PR 미생성
 - 계획: [plan](plan.md), 작업: [task](task-01-cleanup-handoff.md), 구현 인계: [handoff](handoff.md)
 - base: `89175699cf1299046262786d99767b211762e516`
@@ -59,3 +61,35 @@
 ## 다음 단계
 
 로컬 지침 변경과 검토 결과 인계. 승인된 후속 PR 전달에서 warn과 각 검증 주체·횟수를 보존한다. 이 결과는 머지·자원 삭제 승인이 아니다.
+
+## 2026-10-04 머지 시 기본 정리 검토
+
+- 사용자 요청: pr-merge할 때 해당 작업 워크트리도 삭제, 기존 승인 분리 문구 위치 제공
+- 최신 Issue AC-02 및 AC-08~10, [task-02](task-02-merge-cleanup-default.md) 적용
+- 검토 base: `9421fb3`; 제품 소스: `2a78df7cdf2ce8bc0ed7bfbf8fc027cb73417817`. HEAD 0f0ed25는 인계 기록만 변경
+- 이번 요청 변경 전 고정 기준: review/issue-17의 `a43ba4f`, [고정 입력](review-input-merge-cleanup-default.md)
+- root 직접 diff 대조: pr-merge 승인 규칙·후속 실행과 issue-close 인계의 3파일만 제품 변경. 이전 머지/정리 분리 규칙은 최신 요청으로 대체. 기존 보호·보존·일반/관리 도구·사후 조회 규칙은 그대로 유지
+- root 실행: node --test tests/*.test.mjs 29/29, node scripts/check-package.mjs 구조·상대 링크 통과, git diff 9421fb3 2a78df7 --check 통과
+- 독립 새 실행자 merge_default_check1~3에 source archive와 입력 절만 전달. 기대/기준·다른 응답·구현 인계는 전달하지 않음. root가 판정
+
+| 사례 | 실제 행동 | 기대 충족 |
+| --- | --- | --- |
+| M01 | 머지 승인에 worktree 제거 포함·추가 승인 질문 없음 | 3/3 |
+| M02 | 머지 결과 조회만이면 제거 없음 | 3/3 |
+| M03 | 명시 보존 요청 우선 | 3/3 |
+| M04 | dirty·후속·다른 세션·관리 도구 제약 보존 | 3/3 |
+| M05 | OPEN/queue에서는 정리 시작 없음 | 3/3 |
+| M06 | Issue 종료만 승인해도 삭제 권한으로 확대 없음 | 3/3 |
+| M07 | 사후 조회 실패를 미확인으로 보고·branch/댓글 미실행 | 3/3 |
+
+
+- 최종 독립 GREEN 21/21 기대 행동 충족. 최신 AC-02·08~10 충족, 안전·상태 분리 유지 사례로 AC-03·07도 재확인
+- 판정 **warn**: 구현자의 변경 전 RED·변경 후 GREEN은 새 실행자 슬롯 한도로 각 0/3 미실행. root의 독립 최종 실행은 별도이며 자기 검증이나 RED 실행으로 소급하지 않음. 제품 결함은 확인되지 않았으나 실행 절차의 한계 유지
+- 630870d의 이전 독립 24건은 이전 소스 결과로 유지하며 이번 소스에서 24건 전체 재실행을 주장하지 않음
+- 가상 행동 검증이며 실제 merge/삭제/게시 성공 횟수가 아님. .comments 변경 없음. 기존 워크트리 실제 삭제·push·PR·설치 미실행
+
+원시 응답 SHA-256:
+
+- merge-check1: `94c6c19887b122cc93e3f3789122f09dc0181b6ac17155e1aeeae1f5c448cd7b`
+- merge-check2: `4088093703b5ff0b45684948e3f4aa81ec4f46a97b2c4096e7ba8efc232d47a6`
+- merge-check3: `482fe59d63a3263e243988b57d2619af9a370f381509b01af1f36c011fbb577c`
