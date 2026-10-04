@@ -2,7 +2,7 @@
 
 - Issue: https://github.com/insung/git-workflow/issues/17 / PR: 미생성
 - Plan / Todo: [plan](plan.md), [task-01](task-01-cleanup-handoff.md)
-- base: `main`의 `9bc8d1724a8bc2dee6a4643ec146906cbe9b37bd`
+- base: `main`의 `89175699cf1299046262786d99767b211762e516`
 - 변경 전 실행 소스: `48229b89424e664214d903e9259d91c07e05d83f`
 - 구현 소스 commit / 검토 대상: `630870d2a9984ecd03a115959b5782b7e29bb2f8`
 - 실행 위치: 프로젝트 `.worktree/issue-close-cleanup`의 리포 루트
@@ -111,3 +111,8 @@ RED는 5사례 각 3회 모두 새 요건 전체를 충족하지 못해 각 TC 0
 - 고정 소스 `630870d`에 대한 조정자의 별도 고정 입력과 독립 판정
 - 위 로컬 회귀 명령 재현; 최종 문서-only 커밋과 소스 검증을 구분
 - 미실행 자기 GREEN 2회와 독립 판정 보완 필요. 슬롯 한도를 우회한 기존 실행자 재사용 없이 새 실행자로 진행
+
+## 조정자 보완
+
+- 인계 base 표기를 실제 작업 base 8917569로 정정했다. 제품 소스는 변경하지 않았다.
+- 최종 소스의 독립 검증은 [review.md](review.md)에 기록한다. 구현자 자기 GREEN의 1/3 및 미실행 2회 이력은 유지하며 독립 실행으로 소급하지 않는다.
