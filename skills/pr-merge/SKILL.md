@@ -44,7 +44,7 @@ spec-it을 채택한 프로젝트에서 정책 예외가 필요하면 spec-it의
 실제 머지가 확인되면 PR URL, mergedAt, mergeCommit과 검토·승인한 HEAD를 보고한다.
 머지가 확인되지 않으면 merge-unconfirmed와 확인이 필요한 항목을 반환한다.
 실제 MERGED 확인 뒤 [머지 후 작업 정리](references/post-merge-cleanup.md)를 읽어
-정리 대상·권한·보존 조건을 확인하고 원격/local/worktree 결과를 각각 보고한다.
+정확한 대상·권한·보존 조건을 확인한다. PR 머지 승인은 해당 작업 worktree 정리도 포함하므로 안전 조건을 충족하면 별도 질문 없이 제거하고 사후 조회한다. 머지 결과 조회만 요청했거나 명시적 보존 요청이 있으면 제거하지 않는다. 로컬·원격 브랜치 삭제와 댓글 게시는 별도 승인 범위로 유지하고 원격/local/worktree 결과를 각각 보고한다.
 설치된 [issue-close](../issue-close/SKILL.md)에 연결 Issue의 종료·결과 코멘트와 머지·정리 근거를 인계하고, 미설치면 로컬 handoff에 남긴다.
 `Closes`로 자동 종료된 Issue도 결과 코멘트 보완 경로로 인계한다.
 
