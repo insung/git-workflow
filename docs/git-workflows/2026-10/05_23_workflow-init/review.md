@@ -16,7 +16,7 @@
 | AC-02 | pass | 라벨만·템플릿만·설정만 범위 유지; 최종 라벨 3/3 권한 재질문 없음 |
 | AC-03 | pass | C·D 3/3, 소문자·동의 절·AGENTS 정확한 제안 승인 계약 유지; 템플릿3·선언 원문 바이트 동일 |
 | AC-04 | pass | 자체10/10 + 독립11/11; 기본 무변경, 누락만 생성, 기존 보존, pagination·조회 오류·응답 불명·timeout 재조회·입력 검증 |
-| AC-05 | pass | E3/3, release.yaml·release-drafter 보존, documentation 포함7범주 YAML, 원격 라벨 생성과 분류 설치 구분 |
+| AC-05 | pass | E3/3, release.yaml·release-drafter 보존, documentation 포함6범주 YAML, 원격 라벨 생성과 분류 설치 구분 |
 | AC-06 | pass | 현재 consumer 링크와 구조 검사, 34/34 회귀, 두 호환 진입점 유지 |
 | AC-07 | pass with quality warnings | 구현 전 기준 고정, 독립 고정5조건×3회 최종15/15, 공개4조건×3회12/12, evaluator 실행 결과와 한계 기록 |
 

@@ -1,6 +1,6 @@
 # 구현과 독립 검토 인계
 
-- Issue: https://github.com/insung/git-workflow/issues/23 (PR 생성 준비)
+- Issue: https://github.com/insung/git-workflow/issues/23 / PR: https://github.com/insung/git-workflow/pull/24 (Draft)
 - Plan: [plan](plan.md), [01](task-01-init-selection.md), [02](task-02-label-sync.md)
 - 작업 위치: `.worktree/workflow-init`
 - base·HEAD: `4d356cf46b06dff6b09b9819bc644b3c2ca2a722`; 구현 커밋 `315576b`
@@ -64,3 +64,5 @@
 검토 기록은 [review](review.md), 고정 기준은 [review-criteria](review-criteria.md)에 연결한다. 자료 반입은 구현 종료와 독립 warn 판정 뒤 수행했다. evaluate-skill 결과는72/100, 정적 비용 fail1·warn3을 PR에 보존한다.
 
 PR 준비 시 구현 commit315576b에서 패키지34/34·도구10/10·독립11/11·구조·diff 검사를 다시 실행했다. 제품 파일은 앞선 manifest와 동일하며 검토 기록 반입만 추가했다.
+
+PR#24를 main ← codex/workflow-init으로 생성했다. 실제 OPEN/Draft·enhancement·assignee insung 및 본문 Issue항목 Closes#23을 재조회했다. 최초 PR HEAD31859b9 확인. 이후 이 기록 보완 커밋은 문서만 변경하며 source manifest와 구현commit315576b는 동일하다.
