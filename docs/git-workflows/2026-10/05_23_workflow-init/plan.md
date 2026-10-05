@@ -1,6 +1,6 @@
 ---
 issue: "#23"
-status: ready
+status: completed
 branch: "codex/workflow-init"
 base: "main"
 created: "2026-10-05"
@@ -42,8 +42,8 @@ created: "2026-10-05"
 
 | 단계 | 제목 | 설명 | 검증 사례 | 완료 |
 | --- | --- | --- | --- | --- |
-| [01](task-01-init-selection.md) | 통합 진입점과 선택 설치 | 정본 이동·참조·자산·소비자 연결 | [TC-01](task-01-init-selection.md#tc-01) | [ ] |
-| [02](task-02-label-sync.md) | 라벨 도구와 검증 | 차이·누락 생성과 회귀·패키지 확인 | [TC-02](task-02-label-sync.md#tc-02) | [ ] |
+| [01](task-01-init-selection.md) | 통합 진입점과 선택 설치 | 정본 이동·참조·자산·소비자 연결 | [TC-01](task-01-init-selection.md#tc-01) | [x] |
+| [02](task-02-label-sync.md) | 라벨 도구와 검증 | 차이·누락 생성과 회귀·패키지 확인 | [TC-02](task-02-label-sync.md#tc-02) | [x] |
 
 실행 순서: 01 → 02. 실패 시 해당 단계로 돌아가 재검증.
 
@@ -51,9 +51,9 @@ created: "2026-10-05"
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 필요 승인 | 결과 |
 | --- | --- | --- | --- | --- | --- |
-| TC-F01 | AC-06·07 | node --test tests/package.test.mjs; node scripts/check-package.mjs, 리포 루트 | 회귀와 링크·정본 검사 통과 | 없음 | 미실행 |
-| TC-F02 | AC-07 | plugin-eval analyze skills/workflow-init --format markdown | 구조·예산·코드 결과와 한계 기록 | 없음 | 미실행 |
-| TC-F03 | AC-01~07 | 독립 고정 입력 시나리오 및 라벨 도구 재실행 | 범위 선택·보존·승인 조건 일치 | 없음 | 미실행 |
+| TC-F01 | AC-06·07 | node --test tests/package.test.mjs; node scripts/check-package.mjs, 리포 루트 | 회귀와 링크·정본 검사 통과 | 없음 | 통과 34/34·패키지 유효; HEAD 4d356cf + 미커밋 소스 |
+| TC-F02 | AC-07 | plugin-eval analyze skills/workflow-init --format markdown | 구조·예산·코드 결과와 한계 기록 | 없음 | 완료; handoff의 대상 source digest와 증거 참조 |
+| TC-F03 | AC-01~07 | 독립 고정 입력 시나리오 및 라벨 도구 재실행 | 범위 선택·보존·승인 조건 일치 | 없음 | 완료; handoff의 대상 source digest와 증거 참조 |
 
 ## 전달과 롤백
 
@@ -70,3 +70,5 @@ created: "2026-10-05"
 | --- | --- | --- | --- | --- |
 | 2026-10-05 | 결정 | 선택 설치와 기존 진입점 호환 유지 | AC-01·02·06, 01 | 승인 |
 | 2026-10-05 | 결정 | 라벨 정의는 자체 YAML, 원격 생성은 CLI 도구, release.yml은 GitHub 네이티브 설정 | AC-04·05, 02 | 승인 |
+| 2026-10-05 | 계획 이탈 | 자체 라벨 스키마는 GitHub 네이티브 파일과 구분해 assets/labels.yml에 보관. 조건별 릴리즈 설치 절차는 references/release.md로 명명 | AC-04·05·06, 01·02 | 승인 |
+| 2026-10-05 | 요청 변경 | pr-create 호출로 이 변경의 커밋·push·PR 생성 허용. 머지·댓글·호스트 설치는 제외 유지 | AC-01~07, 전달 | 승인 |
