@@ -20,6 +20,7 @@ description: “PR을 만들어줘”, “PR 본문을 작성해줘”처럼 구
 3. [PR 상세·양식](references/pr.md)을 따른다.
    대상의 기존 PR template 절 이름을 유지하고 필수 인계만 보완한다.
    plan/todo 전문 대신 변경·검증·위험 요약과 확인된 링크를 쓴다.
+   [본문 작성·편집 순서](references/pr.md#본문-작성편집-순서)로 초안을 편집하고 원문 정보와 대조한 뒤 제시한다.
 4. 기존 PR을 조회해 중복을 피한다.
    base/head·요청 범위·필요 라벨을 확인하고 승인된 push/PR 생성/리뷰 요청만 실행한다.
    실제 URL/headRefOid와 본문의 Issue 항목·라벨·assignee login을 재확인한다.
