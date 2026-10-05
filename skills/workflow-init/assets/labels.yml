@@ -1,0 +1,28 @@
+labels:
+  - name: bug
+    description: 오류 수정
+    color: "D73A4A"
+  - name: enhancement
+    description: 기능 추가 및 개선
+    color: "A2EEEF"
+  - name: documentation
+    description: 문서 및 사용 안내
+    color: "0075CA"
+  - name: refactor
+    description: 동작을 유지하는 구조 개선
+    color: "5319E7"
+  - name: test
+    description: 테스트 추가 및 개선
+    color: "FBCA04"
+  - name: performance
+    description: 성능 개선
+    color: "D4C5F9"
+  - name: ci
+    description: 빌드 및 자동화 개선
+    color: "0E8A16"
+  - name: release
+    description: 릴리즈 준비 및 버전 관리
+    color: "BFD4F2"
+  - name: deployment
+    description: 설치 배포 및 운영
+    color: "006B75"
