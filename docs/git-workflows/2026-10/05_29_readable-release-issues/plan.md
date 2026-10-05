@@ -45,7 +45,7 @@ created: "2026-10-05"
 | [01](task-01-writing-rules.md) | 작성 기준과 예시 | 규칙·템플릿·예시 편집 | TC-01·TC-02 | [x] |
 | [02](task-02-release-drafts.md) | 릴리즈 개정 초안 | 세 버전 원문 대조 | TC-03 | [x] |
 
-| [03](task-03-pr-writing.md) | PR 본문 편집 | 결과·검증·위험·행동과 문체 | TC-04·TC-05 | [ ] |
+| [03](task-03-pr-writing.md) | PR 본문 편집 | 결과·검증·위험·행동과 문체 | TC-04·TC-05 | [x] |
 
 실행 순서: 01 → 02 → 03
 
@@ -55,6 +55,8 @@ created: "2026-10-05"
 | --- | --- | --- | --- | --- | --- |
 | TC-F01 | AC-01~07 | node scripts/check-package.mjs; node --test tests/package.test.mjs; git diff --check | 구조·회귀·공백 이상 없음 | 없음 | 구조·회귀 35/35·diff 검사 통과; HEAD+미커밋 digest·handoff |
 | TC-F02 | AC-01~07 | 고정 입력 시나리오와 원문 의미 대조 | 작성 출력과 원문 의미 일치 | 없음 | 자기 시나리오 최종 GREEN 3/3·원문 대조 완료; 독립 검토 별도 |
+
+| TC-F03 | AC-08~10 | node scripts/check-package.mjs; node --test tests/package.test.mjs; git diff --check | 구조·회귀·공백 이상 없음 | 없음 | 구현 536549c 구조·35/35·diff 통과; phase03 evidence |
 
 ## 전달과 롤백
 
@@ -77,3 +79,7 @@ created: "2026-10-05"
 | 2026-10-05 | 결정 | 결과와 PR 생성·Issue 종료 승인; 머지 승인 별도 | AC-01~07 | 승인 |
 
 | 2026-10-05 | 요청 변경 | pr-create와 PR 본문 작성·편집을 기존 이슈·PR에 확장 | AC-08~10·03 | 승인 |
+
+| 2026-10-05 | 계획 이탈 | 동시 실행자 한도로 변경 전 자기 RED는 1회만 완료. 나머지 2회는 구현 후 동일 HEAD 394e4e2의 skills-only 원본 복사본으로 실행, 변경 전 순서 준수로 소급하지 않음 | 03·TC-04 | 자기 시나리오 완료·변경 전 순서 부분 준수 이력 보존 |
+
+| 2026-10-05 | 검증 갱신 | 공개 지적에 따라 PR 예시의 공통 원문 사실 명시; interim GREEN 제외 후 구현 커밋 536549c에서 fresh GREEN3/3 수행 | 03·AC-08~10 | 자기 검증 완료·독립 검토 대기 |

@@ -1,0 +1,6 @@
+Commit 536549cbc3ddabf19199076692b45052933495aa
+916ce7cbc309d9ab68780baea7c2023924cd8d63f5fa1f395552ee1ac8701bda  skills/pr-create/SKILL.md
+e55ca5c4e6cf1e7233641a15df41af91c6320c4e1988a11c27ec76ea980f55de  skills/pr-create/references/pr.md
+4467c0b72430ccbd2e8e62db785bda3f1625ccfa06dfaef7c57e970a6b01a56d  skills/git-workflow/references/writing-conventions.md
+6a0183782b462308e3b0306386f33f0f1d42cec02c686948fec0b69f74b0317c  skills/workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md
+617e586c15ff91be13ebc4772e1a0431808f220c2330f0ff60db73f20b2345e5  docs/examples/readable-records/README.md
