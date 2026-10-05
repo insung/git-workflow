@@ -1,0 +1,12 @@
+8c32f49c06a00e6779a73977bb0bab15105f83867cda38dc09e33dc9a989c093  docs/examples/production-release/README.md
+3f65b901fbed11ec41b575f1eee7b71bdd7484150843f787e2d67221e0730f1d  docs/examples/readable-records/README.md
+7904d163a95a7c2bd398963c5ee674d5736d0c5e485c108d270f04805cb28917  docs/git-workflows/2026-10/05_29_readable-release-issues/release-notes-v0.3.0.md
+5ea7906821fb8f411b36a5b54772ee0be004aa3c4a8be3e3aa693bc4b17d5569  docs/git-workflows/2026-10/05_29_readable-release-issues/release-notes-v0.5.0.md
+9295cab7fd22c13debd4179aae0d1e8a143cd976491cd47953eccde0fb9b9923  docs/git-workflows/2026-10/05_29_readable-release-issues/release-notes-v0.6.0.md
+9ddf8bb10db1795eba28bb691e36a2a1f93b7fbd77a1d5d2f49a61d586062ca8  skills/git-release/SKILL.md
+adfe8c8701068ce0205d1ca8e9f985145ceab3ca80b8fe380db2f54c5b0d60fb  skills/git-release/references/release-notes.md
+cc139779abf63f9674f7b04c5cad86f2d855d6a7684b1eed3e9141cce4dfaead  skills/git-workflow/references/writing-conventions.md
+94839958d2227ffd8e03692df1ed34050738f5dfa6fa780288f9ba5883875bd5  skills/issue-create/SKILL.md
+fd529c11716be207c8fa9e760f607c191f3f261187297d8bab64cee178892a51  skills/issue-create/references/issue.md
+69ddba1579d084911ace27964b9a0cb6af22b7a11d917fe8da2c22d92492055f  skills/workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md
+b3670867625a8f95416746e45acec23d3908f2808edc545c950bebc074dbe405  skills/workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md

@@ -1,0 +1,48 @@
+UTC: 2026-10-05T10:26:48.618111+00:00
+Command: node --test tests/package.test.mjs
+CWD: git-workflow implementation linked worktree
+HEAD: e79013a65dae27898a88f7c29032fb81d48b3edd + uncommitted patch/digests
+Exit: 0
+✔ accepts a complete dual-host package (19.075916ms)
+✔ rejects a missing workflow stage (17.656917ms)
+✔ rejects a missing issue-close stage (16.355333ms)
+✔ rejects a skill name that does not match its discovery directory (15.817625ms)
+✔ rejects versions that differ between plugin hosts (16.753083ms)
+✔ rejects broken relative handoff links (17.525875ms)
+✔ allows external URLs and local fragments without fetching them (15.90625ms)
+✔ rejects a Codex manifest that loads the wrong skill directory (17.5395ms)
+✔ returns a readable error for malformed JSON (15.854709ms)
+✔ rejects an absent plan form even when no link points to it (16.358209ms)
+✔ rejects missing shared label guidance (15.978416ms)
+✔ rejects missing required form or contract: git-workflow/references/execution-boundaries.md (16.0175ms)
+✔ rejects missing required form or contract: branch-strategy/references/branch.md (16.033291ms)
+✔ rejects missing required form or contract: git-workflow/references/issue-link.md (18.21925ms)
+✔ rejects missing required form or contract: workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md (19.931291ms)
+✔ rejects missing required form or contract: workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md (18.245334ms)
+✔ rejects missing required form or contract: workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md (15.589291ms)
+✔ rejects missing required form or contract: pr-review/references/spec-it-policy.md (15.98375ms)
+✔ rejects missing required form or contract: pr-review/references/pr-comment.md (16.507667ms)
+✔ rejects a missing branch-strategy entrypoint even when its reference remains (20.481083ms)
+✔ rejects a missing task-implement entrypoint (16.0235ms)
+✔ rejects an issue template without GitHub front matter fields (15.1695ms)
+✔ rejects an unquoted description that YAML truncates at " #" (16.150125ms)
+✔ accepts a quoted description containing " #" (15.566917ms)
+✔ workflow-init required-section table matches the template headings (0.679542ms)
+✔ rejects a missing workflow-init entrypoint without relying on README links (15.528167ms)
+✔ rejects missing cleanup policy without depending on entrypoint links (15.906041ms)
+✔ rejects a lowercase-only asset on case-sensitive and insensitive filesystems (18.907708ms)
+✔ rejects a mixed-case asset instead of silently accepting an alias (21.073292ms)
+✔ rejects missing init capability: workflow-init/assets/labels.yml (15.729167ms)
+✔ rejects missing init capability: workflow-init/assets/.github/release.yml (15.579833ms)
+✔ rejects missing init capability: workflow-init/assets/agents-declaration.md (15.834541ms)
+✔ rejects missing init capability: workflow-init/scripts/sync-labels.py (16.029833ms)
+✔ canonical adoption declaration carries role separation and approval boundary (0.167375ms)
+✔ ships workflow-init as the sole initialization entrypoint (0.072333ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 598.534208
