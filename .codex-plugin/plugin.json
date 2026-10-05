@@ -1,6 +1,6 @@
 {
   "name": "git-workflow",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Issue-first implementation, intent and test review, approved merge, GitHub templates, scoped commits and releases.",
   "author": {
     "name": "insung"
