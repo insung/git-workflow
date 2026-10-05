@@ -1,0 +1,71 @@
+time: 2026-10-05T12:23:50.048465+00:00
+HEAD: eb68afd7441364dbacccd1130be8c9bed0538731
+environment: macOS zsh; v23.11.0
+location: git-workflow linked implementation worktree (.worktree/release-0.7.0)
+versions: {"plugin.json": "0.7.0", ".claude-plugin/plugin.json": "0.7.0", ".codex-plugin/plugin.json": "0.7.0"}
+skills HEAD byte preservation: 45/45; untracked skills: 0
+initial check-package exit1: missing handoff.md; created before rerun
+
+command: node scripts/check-package.mjs
+exit: 0
+Package structure valid (skills, manifests, local links). Semantic review and host loading not checked.
+
+
+command: node --test tests/package.test.mjs
+exit: 0
+✔ accepts a complete dual-host package (20.409667ms)
+✔ rejects a missing workflow stage (17.025875ms)
+✔ rejects a missing issue-close stage (16.592ms)
+✔ rejects a skill name that does not match its discovery directory (15.619084ms)
+✔ rejects versions that differ between plugin hosts (15.42825ms)
+✔ rejects broken relative handoff links (16.4675ms)
+✔ allows external URLs and local fragments without fetching them (15.450834ms)
+✔ rejects a Codex manifest that loads the wrong skill directory (15.382708ms)
+✔ returns a readable error for malformed JSON (16.674834ms)
+✔ rejects an absent plan form even when no link points to it (15.913041ms)
+✔ rejects missing shared label guidance (15.7385ms)
+✔ rejects missing required form or contract: git-workflow/references/execution-boundaries.md (15.587458ms)
+✔ rejects missing required form or contract: branch-strategy/references/branch.md (14.950792ms)
+✔ rejects missing required form or contract: git-workflow/references/issue-link.md (15.157625ms)
+✔ rejects missing required form or contract: workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md (15.778291ms)
+✔ rejects missing required form or contract: workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md (15.339958ms)
+✔ rejects missing required form or contract: workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md (15.659833ms)
+✔ rejects missing required form or contract: pr-review/references/spec-it-policy.md (14.607709ms)
+✔ rejects missing required form or contract: pr-review/references/pr-comment.md (15.852625ms)
+✔ rejects a missing branch-strategy entrypoint even when its reference remains (15.148083ms)
+✔ rejects a missing task-implement entrypoint (15.035292ms)
+✔ rejects an issue template without GitHub front matter fields (15.004333ms)
+✔ rejects an unquoted description that YAML truncates at " #" (15.222042ms)
+✔ accepts a quoted description containing " #" (15.614666ms)
+✔ workflow-init required-section table matches the template headings (0.985583ms)
+✔ rejects a missing workflow-init entrypoint without relying on README links (14.801167ms)
+✔ rejects missing cleanup policy without depending on entrypoint links (15.68825ms)
+✔ rejects a lowercase-only asset on case-sensitive and insensitive filesystems (17.925417ms)
+✔ rejects a mixed-case asset instead of silently accepting an alias (15.948583ms)
+✔ rejects missing init capability: workflow-init/assets/labels.yml (15.179625ms)
+✔ rejects missing init capability: workflow-init/assets/.github/release.yml (15.033208ms)
+✔ rejects missing init capability: workflow-init/assets/agents-declaration.md (14.90075ms)
+✔ rejects missing init capability: workflow-init/scripts/sync-labels.py (15.401334ms)
+✔ canonical adoption declaration carries role separation and approval boundary (0.143834ms)
+✔ ships workflow-init as the sole initialization entrypoint (0.072417ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 559.943917
+
+
+command: git diff --check
+exit: 0
+
+
+final record/package check time: 2026-10-05T12:25:13.483797+00:00
+node scripts/check-package.mjs: exit0
+node --test tests/package.test.mjs: 35/35, exit0
+git diff --check: exit0
+new files whitespace: pass
+package digests rechecked: 5/5
+final note wording: historical handoff state clarified; links unchanged; package digest refreshed; whitespace pass
