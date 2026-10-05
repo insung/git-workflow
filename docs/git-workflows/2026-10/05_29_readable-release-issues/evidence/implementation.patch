@@ -2,10 +2,7 @@ diff --git a/docs/examples/production-release/README.md b/docs/examples/producti
 index 9fec5c5..ce102a2 100644
 --- a/docs/examples/production-release/README.md
 +++ b/docs/examples/production-release/README.md
-@@ -12,3 +12,35 @@
- - 필수 Issue 연결에는 실제 승인된 릴리즈 범위와 달성 조건이 대응해야 한다.
- - GitHub Release·태그만으로 서버 배포를 완료했다고 하지 않는다.
- - 배포 실패·복구·태그/Release 발행 상태는 각각 사실에 맞게 기록한다.
+@@ -14,0 +15,32 @@
 +
 +## 노트 초안 예시
 +
@@ -42,10 +39,7 @@ diff --git a/docs/examples/readable-records/README.md b/docs/examples/readable-r
 index 526df3e..febe347 100644
 --- a/docs/examples/readable-records/README.md
 +++ b/docs/examples/readable-records/README.md
-@@ -18,20 +18,47 @@ network 오류에 재시도 안내가 없어 사용자가 앱을 재실행한다
- ## 목표
- network 오류에서 재시도 안내를 제공한다. 현재 안내가 없어 사용자가 앱을 재실행한다.
- 
+@@ -20,0 +21,18 @@ network 오류에서 재시도 안내를 제공한다. 현재 안내가 없어 
 +## 기대 동작
 +network 오류에서 재시도 방법을 안내한다. expired 오류에서는 기존 안내를 유지한다.
 +
@@ -64,7 +58,7 @@ index 526df3e..febe347 100644
 +- 화면: 결제 화면
 +- 앱 버전: v2.1
 +
- ## 영향 범위
+@@ -22,3 +40,12 @@ network 오류에서 재시도 안내를 제공한다. 현재 안내가 없어 
 -- 포함: 오류 분류·안내 문구
 -- 제외: 자동 결제 재전송·서버 변경
 -- 유지할 결정: 중복 결제 위험 때문에 버튼은 안내만 제공
@@ -80,56 +74,33 @@ index 526df3e..febe347 100644
 +
 +- expired 안내를 유지한다.
 +- 중복 결제 위험 때문에 버튼은 안내만 제공한다는 결정이 승인됐다.
- 
- ## 달성 조건
+@@ -26,0 +54 @@ network 오류에서 재시도 안내를 제공한다. 현재 안내가 없어 
 +
- - [ ] AC-01: network 오류에서 재시도 안내 제공
- - [ ] AC-02: expired 오류의 기존 안내 유지
- 
+@@ -30,3 +57,0 @@ network 오류에서 재시도 안내를 제공한다. 현재 안내가 없어 
 -## 재현
 -2026-10-02 앱 v2.1 결제 화면에서 비행기 모드를 켜고 결제 선택 시 「처리 실패」 표시.
 -
- ## 지금 알고 있는 것
+@@ -34 +59,3 @@ network 오류에서 재시도 안내를 제공한다. 현재 안내가 없어 
 -원인과 수정 후 실기기 결과는 미확인. 계획 문서는 로컬 미push이며 원격 링크 준비 중.
 +
 +- 원인과 수정 후 실기기 결과는 미확인이다.
 +- 계획 문서는 로컬 미push이며 계획 링크 준비 중이다.
- ```
- 
- AC에는 완료 결과를 남기고 구현 방법과 실행 절차를 plan/task에 둔다. 버그 Issue에서는 재현·환경을 필수 절로 유지한다.
-@@ -127,6 +154,7 @@ network 재시도 안내를 위한 오류 분류·문구 변경. expired 안내
- - 한계: 런타임 증거 없음; abc1234 통과는 현재 문구 증거 아님
- 
- ## 지적
+@@ -129,0 +157 @@ network 재시도 안내를 위한 오류 분류·문구 변경. expired 안내
 +
- - AC-02: expired 유지 assertion 없음. 유지 동작을 고정할 테스트 추가 필요.
- 
- ## 독립 대조
 diff --git a/skills/git-release/SKILL.md b/skills/git-release/SKILL.md
 index b302e90..b6cdc86 100644
 --- a/skills/git-release/SKILL.md
 +++ b/skills/git-release/SKILL.md
-@@ -28,6 +28,7 @@ git log --first-parent --pretty=format:'%s' <이전-태그>..<현재-태그>
- 
- 커밋 이력에서 릴리즈 노트나 배포 PR의 변경 요약을 만들 때 [release-notes.md](references/release-notes.md)를 읽는다.
- 이전 배포 지점과 이번 대상 지점을 확인하고, 해당 범위의 커밋·PR·실제 변경을 대조해 사용자에게 의미 있는 결과로 묶는다.
+@@ -30,0 +31 @@ git log --first-parent --pretty=format:'%s' <이전-태그>..<현재-태그>
 +초안을 제시하기 전에 [결과 중심 초안과 편집](references/release-notes.md#결과-중심-초안과-편집)의 제목·변경 선정·전환 안내와 원문 대조 절차를 적용한다.
- 릴리즈 노트 작성은 태그 생성, GitHub Release 발행 또는 배포 권한을 포함하지 않는다.
- 
- ### 발행
 diff --git a/skills/git-release/references/release-notes.md b/skills/git-release/references/release-notes.md
 index 099e962..771255f 100644
 --- a/skills/git-release/references/release-notes.md
 +++ b/skills/git-release/references/release-notes.md
-@@ -21,10 +21,20 @@ git diff --name-status <base> <target>
- 
- - `feat`, `fix`, `perf`를 후보로 찾되, 제목만 옮기지 않는다. 해당 diff, PR 설명 또는 변경 문서에서 사용자에게 나타나는 결과를 확인한다.
- - 여러 커밋이 하나의 기능을 완성했으면 한 항목으로 묶는다. 머지 커밋과 내부 커밋을 중복 기재하지 않는다.
+@@ -24 +24 @@ git diff --name-status <base> <target>
 -- `docs`, `build`, `ci`, `chore` 등도 설치 절차, 지원 환경, 운영 방식이나 호환성을 바꿨다면 포함한다. 내부 정리만 한 커밋은 보통 제외한다.
 +- `docs`, `refactor`, `build`, `ci`, `chore` 등도 설치 절차, 지원 환경, 운영 방식이나 호환성을 바꿨다면 포함한다. 내부 정리만 한 커밋은 보통 제외한다.
- - 호환성 변경은 이전 사용 방법과 필요한 전환 조치를 확인해 별도로 드러낸다. 커밋 표기만으로 실제 호환성 단절을 단정하지 않는다.
- - 아직 합쳐지지 않았거나 선택한 `target` 뒤에 들어간 변경은 제외한다. 모노레포에서는 경로만 보고 공용 코드의 영향을 놓치지 않도록 소비자도 확인한다.
- 
+@@ -27,0 +28,10 @@ git diff --name-status <base> <target>
 +## 결과 중심 초안과 편집
 +
 +[GitHub CLI 릴리즈](https://github.com/cli/cli/releases)를 참고해 첫 문단에 핵심 변화, 본문에 변경 종류별 사용자 결과, 필요한 전환 조치와 검증·추적 근거를 둔다. 분류 이름·순서는 제품의 실제 변화와 저장소 규칙에 맞춘다. 자동 생성한 PR 목록은 후보 목록이며 완성 노트를 대신하지 않는다.
@@ -140,13 +111,7 @@ index 099e962..771255f 100644
 +4. 제목과 첫 문단만 읽어도 핵심 결과를 이해하도록 편집한다. git-workflow 제목은 `v버전 — 핵심 변화`다. 다른 저장소의 제목·언어·템플릿은 먼저 따른다.
 +5. [공통 편집 순서](../../git-workflow/references/writing-conventions.md#정보-단위와-작성-후-편집)로 원문과 대조한 뒤 초안을 제시한다. 설명 목록은 완결된 문장을 허용하고 제목·표의 짧은 값은 명사형을 유지한다.
 +
- ## 작성과 재확인
- 
- 저장소의 기존 언어, 제목, 순서와 링크 형식을 따른다. 형식이 없으면 기능·수정·성능·호환성·설치 또는 운영 변경 중 실제 내용이 있는 분류만 사용한다. 항목은 커밋 명령형 대신 사용자가 얻는 결과로 쓰고, 추적이 필요하면 확인된 커밋 또는 PR을 연결한다.
-@@ -32,3 +42,54 @@ git diff --name-status <base> <target>
- 버전과 날짜는 저장소의 확정된 릴리즈 정보가 있을 때만 적는다. 테스트 결과나 배포 완료 여부도 별도의 실행 증거가 있을 때만 적는다. 초안을 `base..target`의 전체 변경과 다시 대조해 누락·중복·범위 밖 항목을 확인한다.
- 
- 사용자가 노트를 저장할 파일을 지정했거나 저장소의 기존 발행 파일에 쓰라고 요청했다면 그 파일을 갱신한다. 그 외에는 검토할 초안을 제시한다. 노트 작성 자체는 커밋, 태그, 푸시, GitHub Release 발행 또는 배포를 실행하지 않는다.
+@@ -34,0 +45,51 @@ git diff --name-status <base> <target>
 +
 +## 완성 예시
 +
@@ -202,27 +167,14 @@ diff --git a/skills/git-workflow/references/writing-conventions.md b/skills/git-
 index 21467f6..720d682 100644
 --- a/skills/git-workflow/references/writing-conventions.md
 +++ b/skills/git-workflow/references/writing-conventions.md
-@@ -2,13 +2,14 @@
- 
- Issue·PR·commit 본문, plan/todo, 리뷰 보고서와 릴리즈 기록을 작성할 때 읽는다. 사용자에게 답하는 대화 문체에는 적용하지 않는다. 대상 저장소의 지정 언어·기록 형식이 우선이다.
- 
+@@ -5 +5 @@ Issue·PR·commit 본문, plan/todo, 리뷰 보고서와 릴리즈 기록을 작
 -본문은 존댓말이나 대화체 반말 대신 기록 문체를 쓴다. 산문은 평어(~다), 제목·목록·표 칸·체크박스는 명사형으로 끝낸다. 템플릿 HTML 주석도 같은 규칙을 따른다.
 +본문은 존댓말이나 대화체 반말 대신 기록 문체를 쓴다. 산문은 평어(~다), 제목·표의 짧은 값·달성 조건(AC)과 체크박스는 명사형으로 끝낸다. Issue·릴리즈의 설명 목록은 결과와 조건을 이해할 수 있도록 완결된 문장으로 써도 된다. 문장형을 모든 목록에 강제하지 않으며, PR·plan·task·review·commit 목록은 기존 명사형 기준을 유지한다. 템플릿 HTML 주석도 해당 요소의 기준을 따른다.
- 
- | 문서 요소 | 예 |
- | --- | --- |
- | 제목 | fix(app-usage): 재실행 시 중복 적재 차단 |
- | 산문 | 같은 날짜 재실행 시 사용량이 중복 집계된다. |
+@@ -11 +11,2 @@ Issue·PR·commit 본문, plan/todo, 리뷰 보고서와 릴리즈 기록을 작
 -| 목록·표 | 마이그레이션: 없음 |
 +| Issue·릴리즈 설명 목록 | 일시 오류에서 재시도 방법을 안내한다. |
 +| 표의 짧은 값·다른 문서의 목록 | 마이그레이션: 없음 |
- | 달성 조건 | 일별 배치를 재실행해도 집계값 유지 |
- 
- 문서 요소는 제목·산문·목록·표·체크박스를 뜻한다. `feat`, `fix` 같은 변경 type은 [change-conventions](change-conventions.md)의 별도 규칙이다.
-@@ -24,9 +25,12 @@ Issue·PR·commit 본문, plan/todo, 리뷰 보고서와 릴리즈 기록을 작
- 초안 뒤 다음 순서로 편집한다.
- 
- 1. 독자가 이 문서에서 결정하거나 실행할 일을 먼저 배치
+@@ -27,4 +28,7 @@ Issue·PR·commit 본문, plan/todo, 리뷰 보고서와 릴리즈 기록을 작
 -2. 여러 주장이 섞인 항목 분리, 같은 주장·경과의 반복 제거
 -3. 상세 조사·명령·로그는 정본으로 연결하고 본문에는 판단에 필요한 근거 유지
 -4. 빈 선택 절 삭제, 필수 절의 해당 없음은 이유 명시
@@ -234,37 +186,20 @@ index 21467f6..720d682 100644
 +6. 원문과 대조해 사실·AC ID·재현·미검증·위험·필수 검증·전달 정보·중요한 결정 이유 보존 확인
 +
 +Issue는 목표·범위·AC·확인된 사실·참고 링크로, 릴리즈는 핵심 요약·결과 분류·전환 안내·근거로 배치한다. 편집한 문장을 원문과 일대일 또는 결과별 묶음으로 대조하고, 의미가 달라지거나 근거를 찾지 못하면 표현을 보완한다.
- 
- 짧게 만드는 것 자체는 목적이 아니다. 중요한 맥락을 삭제하지 않고 [문서 역할](document-links.md#문서별-역할과-읽기-순서)에 맞게 옮긴다. 과거 통과를 현재 HEAD의 통과로 바꾸거나 로컬 문서에 원격 링크를 만들어 넣지 않는다.
 diff --git a/skills/issue-create/SKILL.md b/skills/issue-create/SKILL.md
 index 24738f7..1082846 100644
 --- a/skills/issue-create/SKILL.md
 +++ b/skills/issue-create/SKILL.md
-@@ -20,6 +20,7 @@ description: “이슈를 만들어줘”, “이슈 본문을 보완해줘”,
-    결과 코멘트만으로 새 요구사항의 AC·검증을 대체하지 않는다.
-    없다면 [Issue 상세·양식](references/issue.md)으로 의도·영향/제외 범위·검증 가능한 달성 조건을 작성한다.
-    코드·문서에서 알 수 있는 것은 조사하고 인간 결정만 질문한다.
+@@ -22,0 +23 @@ description: “이슈를 만들어줘”, “이슈 본문을 보완해줘”,
 +   제시 전 [본문 작성·편집 순서](references/issue.md#본문-작성편집-순서)로 목표·범위·AC·확인된 사실·링크를 구별하고 원문 의미를 대조한다.
- 2. 생성이 요청 범위에 있고 접근 가능하면 본문 파일로 Issue를 만들고 URL/번호를 확인한다.
-    인증 불가인 로컬 파일럿만 local-draft를 허용한다.
-    원격 PR 전에는 실제 Issue가 필요하다.
 diff --git a/skills/issue-create/references/issue.md b/skills/issue-create/references/issue.md
 index ec6af65..2792419 100644
 --- a/skills/issue-create/references/issue.md
 +++ b/skills/issue-create/references/issue.md
-@@ -63,7 +63,7 @@ AI는 버그를 목격한 사람이 아니므로 재현 절차를 만들어 낼
- ## 이슈를 만드는 절차
- 
- 1. 같은 내용의 이슈가 이미 있는지 찾는다. 있으면 새로 만들지 않고 그 이슈를 가리킨다
+@@ -66 +66 @@ AI는 버그를 목격한 사람이 아니므로 재현 절차를 만들어 낼
 -2. 본문 초안을 대화에 그대로 보여준다
 +2. 아래 작성·편집 순서로 본문 초안을 편집하고 원문과 대조한 뒤 대화에 그대로 보여준다
- 3. 기존 생성 승인을 확인하고, 없으면 승인받는다
- 4. 파일로 저장해 `--body-file`로 넘긴다
- 
-@@ -93,3 +93,47 @@ gh issue create --title 'feat(app-ranking): 기간을 주 단위로 선택' \
- ## 작성 후 점검
- 
- [공통 편집 순서](../../git-workflow/references/writing-conventions.md#정보-단위와-작성-후-편집)를 적용한다. 목표는 문제와 원하는 결과부터, AC는 한 항목에 하나의 관찰 가능한 완료 결과부터 쓴다. 중요한 결정의 핵심 이유와 재현 정보는 유지하며 구현 방법·검증 명령·작업 이력은 plan/task로 연결한다. 같은 뜻의 기존 저장소 절 이름은 그대로 쓴다.
+@@ -95,0 +96,44 @@ gh issue create --title 'feat(app-ranking): 기간을 주 단위로 선택' \
 +
 +## 본문 작성·편집 순서
 +
@@ -313,39 +248,19 @@ diff --git a/skills/workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md b/
 index d0b2700..28a3632 100644
 --- a/skills/workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md
 +++ b/skills/workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md
-@@ -5,7 +5,7 @@ title: "fix(<scope>): "
- labels: bug
- ---
- 
+@@ -8 +8 @@ labels: bug
 -<!-- 작성 후 편집: 결론 우선, 한 항목 한 결과, 반복 제거. 사실·AC·재현·미검증·위험·중요한 결정 이유 보존 -->
 +<!-- 초안 제시 전 편집: 목표·범위·AC·확인된 사실·링크 구별, 결과·조건·승인·보존 판단 분리, 반복 제거. 설명 목록의 문장형 허용, 제목·표의 짧은 값·AC의 명사형 유지. 원문 사실·AC ID·재현·미검증·위험·중요한 결정 이유 보존 -->
- 
- ## 목표
- 
-@@ -13,11 +13,11 @@ labels: bug
- 
- ## 기대 동작
- 
+@@ -16 +16 @@ labels: bug
 -<!-- 정상이라면 나와야 하는 결과 -->
 +<!-- 정상이라면 나와야 하는 관찰 가능한 결과. 재현·실제 증상·수정 방법과 구별 -->
- 
- ## 실제 동작
- 
+@@ -20 +20 @@ labels: bug
 -<!-- 실제로 나온 결과. 오류 메시지는 원문 그대로 인용 -->
 +<!-- 목격한 실제 결과와 기대 결과의 차이. 오류 메시지 원문 인용, 확인하지 않은 원인·수정 결과의 미확인 표시 -->
- 
- ## 재현 절차
- 
 diff --git a/skills/workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md b/skills/workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md
 index 71d15dd..63952d5 100644
 --- a/skills/workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md
 +++ b/skills/workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md
-@@ -5,7 +5,7 @@ title: "feat(<scope>): "
- labels: enhancement
- ---
- 
+@@ -8 +8 @@ labels: enhancement
 -<!-- 작성 후 편집: 결론 우선, 한 항목 한 결과, 반복 제거. 사실·AC·재현·미검증·위험·중요한 결정 이유 보존 -->
 +<!-- 초안 제시 전 편집: 목표·범위·AC·확인된 사실·링크 구별, 결과·조건·승인·보존 판단 분리, 반복 제거. 설명 목록의 문장형 허용, 제목·표의 짧은 값·AC의 명사형 유지. 원문 사실·AC ID·재현·미검증·위험·중요한 결정 이유 보존 -->
- 
- ## 목표
- 
