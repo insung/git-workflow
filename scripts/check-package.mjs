@@ -2,9 +2,9 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const requiredSkills = ['git-workflow', 'agents-init', 'issue-create', 'plan-create', 'task-implement', 'pr-create', 'pr-review', 'pr-merge', 'issue-close', 'commit-rule', 'branch-strategy', 'git-release', 'template-init'];
-const requiredReferences = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-close/references/closing-comment.md', 'template-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'template-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'template-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'plan-create/references/review-criteria.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-merge/references/post-merge-cleanup.md', 'pr-review/references/review.md', 'pr-review/references/pr-comment.md', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'branch-strategy/references/branch.md', 'git-release/references/release-notes.md'];
-const issueTemplates = ['template-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'template-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md'];
+const requiredSkills = ['git-workflow', 'workflow-init', 'agents-init', 'issue-create', 'plan-create', 'task-implement', 'pr-create', 'pr-review', 'pr-merge', 'issue-close', 'commit-rule', 'branch-strategy', 'git-release', 'template-init'];
+const requiredReferences = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-close/references/closing-comment.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/labels.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/references/templates.md', 'workflow-init/references/agents.md', 'workflow-init/references/labels.md', 'workflow-init/references/release.md', 'workflow-init/scripts/sync-labels.py', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'plan-create/references/review-criteria.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-merge/references/post-merge-cleanup.md', 'pr-review/references/review.md', 'pr-review/references/pr-comment.md', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'branch-strategy/references/branch.md', 'git-release/references/release-notes.md'];
+const issueTemplates = ['workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md'];
 const manifests = ['plugin.json', '.codex-plugin/plugin.json', '.claude-plugin/plugin.json'];
 
 // Structural checks only: this does not execute skills or judge spec-it compliance.
@@ -41,7 +41,7 @@ export function validatePackage(root) {
   for (const path of requiredReferences) {
     if (!existsSync(join(root, 'skills', path))) errors.push(`missing reference: skills/${path}`);
   }
-  const issueDir = join(root, 'skills/template-init/assets/.github/ISSUE_TEMPLATE');
+  const issueDir = join(root, 'skills/workflow-init/assets/.github/ISSUE_TEMPLATE');
   const assetNames = existsSync(issueDir) ? readdirSync(issueDir) : [];
   for (const name of ['FEATURE_REQUEST.md', 'BUG_REPORT.md']) {
     if (!assetNames.includes(name)) errors.push(`issue asset must use exact uppercase name: ${name}`);

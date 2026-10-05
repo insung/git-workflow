@@ -14,6 +14,7 @@ Issue → plan/todo → 구현·테스트·커밋 → PR → 검토 → 사용�
 
 | 요청/상태 | 적용 스킬 | 다음 입력 |
 | --- | --- | --- |
+| git-workflow 설치·초기화 또는 선택 항목 설치 | [workflow-init](../workflow-init/SKILL.md) | 항목 선택, 선택한 범위만 적용 |
 | 대상 프로젝트 AGENTS.md의 워크플로우 선언 초기화·추가 요청 | [agents-init](../agents-init/SKILL.md) | 대상 경로·추가 전문·위치 제안, 명시적 승인 후 추가 |
 | Issue 없음/부족 | [issue-create](../issue-create/SKILL.md) | Issue, 의도·영향·달성 조건 |
 | Issue의 계획·작업 분해 | [plan-create](../plan-create/SKILL.md) | plan/todo, 검증·배포 계획, 결정·승인 범위 |

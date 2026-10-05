@@ -13,7 +13,7 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 - **의도와 근거가 이어진다** — Issue의 달성 조건 ID를 todo, 테스트 사례, 구현 인계, 검토가 참조한다.
 - **검토가 빠진 테스트를 교차 확인한다** — pr-review는 달성 조건의 시나리오마다 구현과 assertion을 대응시키고, 테스트가 없는 시나리오를 보고한다.
 - **위험한 단계마다 승인이 따로 있다** — 커밋·push·PR·머지·배포·릴리즈는 각각 다른 행동이며, 한 승인이 다른 행동이나 새 HEAD로 넘어가지 않는다.
-- **대상 저장소가 같은 양식을 쓴다** — template-init이 스킬이 요구하는 항목을 갖춘 Issue·PR 템플릿을 설치한다.
+- **대상 저장소가 같은 양식을 쓴다** — workflow-init이 스킬이 요구하는 항목을 갖춘 Issue·PR 템플릿을 설치한다.
 
 ## 다음 요청 선택
 
@@ -57,6 +57,7 @@ flowchart TD
 | 스킬 | 쓰는 때 |
 | --- | --- |
 | [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개와 다음 단계 선택 |
+| [workflow-init](skills/workflow-init/SKILL.md) | 선택한 템플릿·AGENTS.md·라벨·릴리즈 분류 초기화 |
 | [agents-init](skills/agents-init/SKILL.md) | AGENTS.md의 짧은 git-workflow 선언 제안과 명시적 승인 후 추가 |
 | [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완과 그 전의 중복 확인 |
 | [plan-create](skills/plan-create/SKILL.md) | Issue의 plan과 단계별 todo 작성 |
@@ -101,6 +102,8 @@ codex plugin add git-workflow@git-workflow
 
 ### 대상 저장소 첫 실행
 
+「git workflow 설치해줘」는 [workflow-init](skills/workflow-init/SKILL.md)으로 네 항목을 제시하고 선택을 기다린다. 「라벨만 설치해줘」 등 부분 요청은 해당 항목만 적용한다. 라벨은 기본 차이 미리보기와 승인된 누락 생성, release.yml은 기존 파일 보존을 따른다.
+
 에이전트에게 GitHub 템플릿 설치를 요청한다. 예: 「이 저장소에 git-workflow의 Issue·PR 템플릿을 설치해줘」. template-init은 없는 파일만 복사하고 기존 템플릿과의 차이를 보고한다.
 
 「이 프로젝트의 AGENTS.md를 git-workflow용으로 초기화해줘」라고 요청하면 [agents-init](skills/agents-init/SKILL.md)이 개별 프로젝트·다중 프로젝트 루트에 맞는 선언을 제안하고, 명시적 승인 후 기존 바이트를 보존하며 추가한다. 선언을 채택하면 메인이 승인된 단계를 조정하고 별도 구현자의 결과를 독립 검증한다. 전문은 스킬에서, 공통 맥락과 인계는 [역할별 읽기 순서](skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서)에서 확인한다.
@@ -121,7 +124,8 @@ skills/
 ├── commit-rule/       커밋 메시지·범위 규칙
 ├── branch-strategy/   브랜치 역할과 생성
 ├── git-release/       릴리즈 노트
-└── template-init/     assets/.github/ Issue·PR 템플릿
+├── workflow-init/     선택 설치·정본 자산·라벨 도구
+└── template-init/     템플릿 호환 진입점
 ```
 
 규칙마다 정본 파일은 하나다. SKILL.md는 reference를 다시 쓰지 않고 링크한다.

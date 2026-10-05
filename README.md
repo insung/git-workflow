@@ -13,7 +13,7 @@ The plugin is a set of instructions, not a CI service. One chat can coordinate t
 - **Intent and evidence stay connected** — acceptance criteria IDs from the Issue are referenced by todos, test cases, the handoff and the review.
 - **Reviews cross-check for missing tests** — pr-review maps every acceptance scenario to its implementation and its assertion, and reports scenarios with no test.
 - **Each risky step has its own approval** — commit, push, PR, merge, deployment and release are separate actions; approval for one does not extend to another or to a new HEAD.
-- **Target repositories use the same forms** — template-init installs Issue and PR templates that contain the fields the skills require.
+- **Target repositories use the same forms** — workflow-init installs Issue and PR templates that contain the fields the skills require.
 
 ## Choose your next request
 
@@ -57,6 +57,7 @@ Cleanup reports remote branches, local branches and worktrees separately. Dirty,
 | Skill | Use it to |
 | --- | --- |
 | [git-workflow](skills/git-workflow/SKILL.md) | Start or resume an Issue-based change and choose the next stage |
+| [workflow-init](skills/workflow-init/SKILL.md) | Initialize selected templates, AGENTS.md, labels and release categories |
 | [agents-init](skills/agents-init/SKILL.md) | Propose a short git-workflow declaration for AGENTS.md and add it after explicit approval |
 | [issue-create](skills/issue-create/SKILL.md) | Write or complete an Issue, check for duplicates first |
 | [plan-create](skills/plan-create/SKILL.md) | Write the plan and step todos for an Issue |
@@ -101,6 +102,8 @@ Start a new session after installing or updating. In Claude Code the skills appe
 
 ### First run in a target repository
 
+Use [workflow-init](skills/workflow-init/SKILL.md) to select templates, an AGENTS.md declaration, GitHub labels, or release categories. Broad installation requests wait for selection; explicit partial requests apply only those items. Labels preview differences before approved missing-only creation; existing release settings are preserved.
+
 Ask the agent to install the GitHub templates, for example "Install the git-workflow Issue and PR templates in this repository". template-init copies only the files that do not exist yet and reports how existing templates differ.
 
 Ask "Initialize this project’s AGENTS.md for git-workflow" to use [agents-init](skills/agents-init/SKILL.md): it proposes a declaration for an individual project or a root containing multiple projects, then adds it only after explicit approval while preserving existing bytes. The declaration makes the main agent coordinate approved stages and independently validate a separate implementer’s work; see the skill for the declaration and the [role-specific reading order](skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서) for shared context and handoff.
@@ -121,7 +124,8 @@ skills/
 ├── commit-rule/       commit message and scope rules
 ├── branch-strategy/   branch roles and creation
 ├── git-release/       release notes
-└── template-init/     assets/.github/ Issue and PR templates
+├── workflow-init/     selected setup, canonical assets and label tool
+└── template-init/     template compatibility entrypoint
 ```
 
 Each rule has one canonical file. SKILL.md files link to their references instead of repeating them.

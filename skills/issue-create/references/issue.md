@@ -26,11 +26,11 @@
 
 ### 기능 이슈
 
-[기능 Issue 템플릿](../../template-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md)을 읽어 본문을 작성한다. 대상 저장소에 같은 종류의 템플릿이 있으면 그 절 이름을 따르고 빠진 필수 항목만 보완한다. 달성 조건은 “사용성 개선” 대신 “앱 상세에서 기간을 주 단위로 선택 가능”처럼 검증 가능한 결과로 쓴다.
+[기능 Issue 템플릿](../../workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md)을 읽어 본문을 작성한다. 대상 저장소에 같은 종류의 템플릿이 있으면 그 절 이름을 따르고 빠진 필수 항목만 보완한다. 달성 조건은 “사용성 개선” 대신 “앱 상세에서 기간을 주 단위로 선택 가능”처럼 검증 가능한 결과로 쓴다.
 
 ### 버그 이슈
 
-[버그 Issue 템플릿](../../template-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md)을 읽어 기대·실제 동작과 재현 절차·확인한 환경을 작성한다. 필요한 재현 정보는 아래 조사 기준을 따른다.
+[버그 Issue 템플릿](../../workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md)을 읽어 기대·실제 동작과 재현 절차·확인한 환경을 작성한다. 필요한 재현 정보는 아래 조사 기준을 따른다.
 
 ### 조사 결과·참고 링크의 선택 항목
 
