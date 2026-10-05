@@ -21,8 +21,8 @@ Start with the result you want. The router reads the Issue and recorded work to 
 
 | Your situation | Example request | Skill |
 | --- | --- | --- |
-| New repository | “Install Issue and PR templates in this repository.” | template-init |
-| Adopt the workflow | “Propose a git-workflow declaration for AGENTS.md.” | agents-init; explicit approval before the addition |
+| New repository | “Install Issue and PR templates in this repository.” | workflow-init: templates |
+| Adopt the workflow | “Propose a git-workflow declaration for AGENTS.md.” | workflow-init: AGENTS.md; explicit approval before the addition |
 | New change | “Create an Issue for retry guidance; keep expired guidance unchanged.” | issue-create |
 | Ready Issue | “Write the implementation plan for Issue #12.” | plan-create |
 | Prepared step | “Implement step 01 of Issue #12 and record its tests.” | task-implement |
@@ -58,7 +58,6 @@ Cleanup reports remote branches, local branches and worktrees separately. Dirty,
 | --- | --- |
 | [git-workflow](skills/git-workflow/SKILL.md) | Start or resume an Issue-based change and choose the next stage |
 | [workflow-init](skills/workflow-init/SKILL.md) | Initialize selected templates, AGENTS.md, labels and release categories |
-| [agents-init](skills/agents-init/SKILL.md) | Propose a short git-workflow declaration for AGENTS.md and add it after explicit approval |
 | [issue-create](skills/issue-create/SKILL.md) | Write or complete an Issue, check for duplicates first |
 | [plan-create](skills/plan-create/SKILL.md) | Write the plan and step todos for an Issue |
 | [task-implement](skills/task-implement/SKILL.md) | Implement a prepared todo in table order, record results, commit each step and write the handoff |
@@ -69,7 +68,6 @@ Cleanup reports remote branches, local branches and worktrees separately. Dirty,
 | [commit-rule](skills/commit-rule/SKILL.md) | Make scoped commits and write commit messages |
 | [branch-strategy](skills/branch-strategy/SKILL.md) | Define branch roles or create a branch |
 | [git-release](skills/git-release/SKILL.md) | Prepare release notes, tags and GitHub Releases |
-| [template-init](skills/template-init/SKILL.md) | Install the Issue and PR templates into a target repository |
 
 Work documents (plan.md, `task-{nn}-{step-title}.md`, handoff.md, review.md) live in the target repository under the [directory rules](skills/plan-create/references/plan.md#디렉토리-규칙). The review criteria (`review-criteria.md`) and fixed inputs (`review-input-<topic>.md`) are written before implementation and kept on the `review/issue-{n}` branch; they appear in the work directory only after the pr-review record commit. See the [storage rule](skills/plan-create/references/review-criteria.md#보관-위치).
 
@@ -104,16 +102,15 @@ Start a new session after installing or updating. In Claude Code the skills appe
 
 Use [workflow-init](skills/workflow-init/SKILL.md) to select templates, an AGENTS.md declaration, GitHub labels, or release categories. Broad installation requests wait for selection; explicit partial requests apply only those items. Labels preview differences before approved missing-only creation; existing release settings are preserved.
 
-Ask the agent to install the GitHub templates, for example "Install the git-workflow Issue and PR templates in this repository". template-init copies only the files that do not exist yet and reports how existing templates differ.
+Ask the agent to install the GitHub templates, for example "Install the git-workflow Issue and PR templates in this repository". workflow-init copies only the files that do not exist yet and reports how existing templates differ.
 
-Ask "Initialize this project’s AGENTS.md for git-workflow" to use [agents-init](skills/agents-init/SKILL.md): it proposes a declaration for an individual project or a root containing multiple projects, then adds it only after explicit approval while preserving existing bytes. The declaration makes the main agent coordinate approved stages and independently validate a separate implementer’s work; see the skill for the declaration and the [role-specific reading order](skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서) for shared context and handoff.
+Ask "Initialize this project’s AGENTS.md for git-workflow" to use [workflow-init](skills/workflow-init/SKILL.md): it proposes a declaration for an individual project or a root containing multiple projects, then adds it only after explicit approval while preserving existing bytes. The declaration makes the main agent coordinate approved stages and independently validate a separate implementer’s work; see the skill for the declaration and the [role-specific reading order](skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서) for shared context and handoff.
 
 ## Architecture
 
 ```text
 skills/
 ├── git-workflow/      router, execution boundaries, conventions, labels, links
-├── agents-init/       approved short AGENTS.md declaration
 ├── issue-create/      Issue content rules
 ├── plan-create/       plan and todo forms
 ├── task-implement/    step implementation and todo recording rules
@@ -124,8 +121,7 @@ skills/
 ├── commit-rule/       commit message and scope rules
 ├── branch-strategy/   branch roles and creation
 ├── git-release/       release notes
-├── workflow-init/     selected setup, canonical assets and label tool
-└── template-init/     template compatibility entrypoint
+└── workflow-init/     selected setup, canonical assets and label tool
 ```
 
 Each rule has one canonical file. SKILL.md files link to their references instead of repeating them.

@@ -21,8 +21,8 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 
 | 현재 상황 | 요청 예시 | 스킬 |
 | --- | --- | --- |
-| 새 저장소 | “이 저장소에 Issue·PR 템플릿을 설치해줘.” | template-init |
-| 워크플로 채택 | “AGENTS.md에 git-workflow 채택 선언을 제안해줘.” | agents-init; 추가 전 명시적 승인 |
+| 새 저장소 | “이 저장소에 Issue·PR 템플릿을 설치해줘.” | workflow-init: 템플릿 |
+| 워크플로 채택 | “AGENTS.md에 git-workflow 채택 선언을 제안해줘.” | workflow-init: AGENTS.md; 추가 전 명시적 승인 |
 | 새 변경 | “만료 안내는 유지하고 재시도 안내를 위한 Issue를 만들어줘.” | issue-create |
 | 준비된 Issue | “Issue #12의 구현 계획을 작성해줘.” | plan-create |
 | 준비된 단계 | “Issue #12의 01 단계를 구현하고 검증 결과를 기록해줘.” | task-implement |
@@ -58,7 +58,6 @@ flowchart TD
 | --- | --- |
 | [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개와 다음 단계 선택 |
 | [workflow-init](skills/workflow-init/SKILL.md) | 선택한 템플릿·AGENTS.md·라벨·릴리즈 분류 초기화 |
-| [agents-init](skills/agents-init/SKILL.md) | AGENTS.md의 짧은 git-workflow 선언 제안과 명시적 승인 후 추가 |
 | [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완과 그 전의 중복 확인 |
 | [plan-create](skills/plan-create/SKILL.md) | Issue의 plan과 단계별 todo 작성 |
 | [task-implement](skills/task-implement/SKILL.md) | 준비된 todo의 작업 표 순서 구현, 기록, 단계별 커밋, 구현 인계 |
@@ -69,7 +68,6 @@ flowchart TD
 | [commit-rule](skills/commit-rule/SKILL.md) | 주제별 커밋과 커밋 메시지 작성 |
 | [branch-strategy](skills/branch-strategy/SKILL.md) | 브랜치 역할 정의나 브랜치 생성 |
 | [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
-| [template-init](skills/template-init/SKILL.md) | 대상 저장소에 Issue·PR 템플릿 설치 |
 
 작업 문서(plan.md, `task-{nn}-{step-title}.md`, handoff.md, review.md)는 대상 저장소의 [디렉토리 규칙](skills/plan-create/references/plan.md#디렉토리-규칙)에 따라 둔다. 검토 기준(`review-criteria.md`)과 검증 입력(`review-input-<topic>.md`)은 구현 전에 `review/issue-{n}` 브랜치에 따로 보관하며, 작업 디렉토리에는 pr-review의 기록 커밋 뒤에 나타난다. [보관 위치](skills/plan-create/references/review-criteria.md#보관-위치)를 따른다.
 
@@ -104,16 +102,15 @@ codex plugin add git-workflow@git-workflow
 
 「git workflow 설치해줘」는 [workflow-init](skills/workflow-init/SKILL.md)으로 네 항목을 제시하고 선택을 기다린다. 「라벨만 설치해줘」 등 부분 요청은 해당 항목만 적용한다. 라벨은 기본 차이 미리보기와 승인된 누락 생성, release.yml은 기존 파일 보존을 따른다.
 
-에이전트에게 GitHub 템플릿 설치를 요청한다. 예: 「이 저장소에 git-workflow의 Issue·PR 템플릿을 설치해줘」. template-init은 없는 파일만 복사하고 기존 템플릿과의 차이를 보고한다.
+에이전트에게 GitHub 템플릿 설치를 요청한다. 예: 「이 저장소에 git-workflow의 Issue·PR 템플릿을 설치해줘」. workflow-init은 없는 파일만 복사하고 기존 템플릿과의 차이를 보고한다.
 
-「이 프로젝트의 AGENTS.md를 git-workflow용으로 초기화해줘」라고 요청하면 [agents-init](skills/agents-init/SKILL.md)이 개별 프로젝트·다중 프로젝트 루트에 맞는 선언을 제안하고, 명시적 승인 후 기존 바이트를 보존하며 추가한다. 선언을 채택하면 메인이 승인된 단계를 조정하고 별도 구현자의 결과를 독립 검증한다. 전문은 스킬에서, 공통 맥락과 인계는 [역할별 읽기 순서](skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서)에서 확인한다.
+「이 프로젝트의 AGENTS.md를 git-workflow용으로 초기화해줘」라고 요청하면 [workflow-init](skills/workflow-init/SKILL.md)이 개별 프로젝트·다중 프로젝트 루트에 맞는 선언을 제안하고, 명시적 승인 후 기존 바이트를 보존하며 추가한다. 선언을 채택하면 메인이 승인된 단계를 조정하고 별도 구현자의 결과를 독립 검증한다. 전문은 스킬에서, 공통 맥락과 인계는 [역할별 읽기 순서](skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서)에서 확인한다.
 
 ## 구조
 
 ```text
 skills/
 ├── git-workflow/      라우터, 실행 경계, 표기·문체, 라벨, 문서 링크
-├── agents-init/       승인 후 짧은 AGENTS.md 선언 추가
 ├── issue-create/      Issue 본문 규칙
 ├── plan-create/       plan·todo 양식
 ├── task-implement/    단계 구현과 todo 기록 규칙
@@ -124,8 +121,7 @@ skills/
 ├── commit-rule/       커밋 메시지·범위 규칙
 ├── branch-strategy/   브랜치 역할과 생성
 ├── git-release/       릴리즈 노트
-├── workflow-init/     선택 설치·정본 자산·라벨 도구
-└── template-init/     템플릿 호환 진입점
+└── workflow-init/     선택 설치·정본 자산·라벨 도구
 ```
 
 규칙마다 정본 파일은 하나다. SKILL.md는 reference를 다시 쓰지 않고 링크한다.

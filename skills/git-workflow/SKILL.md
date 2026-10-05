@@ -15,7 +15,7 @@ Issue → plan/todo → 구현·테스트·커밋 → PR → 검토 → 사용�
 | 요청/상태 | 적용 스킬 | 다음 입력 |
 | --- | --- | --- |
 | git-workflow 설치·초기화 또는 선택 항목 설치 | [workflow-init](../workflow-init/SKILL.md) | 항목 선택, 선택한 범위만 적용 |
-| 대상 프로젝트 AGENTS.md의 워크플로우 선언 초기화·추가 요청 | [agents-init](../agents-init/SKILL.md) | 대상 경로·추가 전문·위치 제안, 명시적 승인 후 추가 |
+| 대상 프로젝트 AGENTS.md의 워크플로우 선언 초기화·추가 요청 | [workflow-init](../workflow-init/SKILL.md) | 대상 경로·추가 전문·위치 제안, 명시적 승인 후 추가 |
 | Issue 없음/부족 | [issue-create](../issue-create/SKILL.md) | Issue, 의도·영향·달성 조건 |
 | Issue의 계획·작업 분해 | [plan-create](../plan-create/SKILL.md) | plan/todo, 검증·배포 계획, 결정·승인 범위 |
 | 준비된 plan·todo의 단계 구현 | [task-implement](../task-implement/SKILL.md) | 코드·테스트·task 기록·commit·handoff |
@@ -26,7 +26,7 @@ Issue → plan/todo → 구현·테스트·커밋 → PR → 검토 → 사용�
 | 커밋 실행·메시지·범위 검토 요청 | [commit-rule](../commit-rule/SKILL.md) | 승인된 범위의 commit |
 | 브랜치 전략·분기·hotfix 요청 | [branch-strategy](../branch-strategy/SKILL.md) | 확정 전략·분기 결과·미정 항목 |
 | 릴리즈 요청 | [git-release](../git-release/SKILL.md) | 고정 범위의 노트·발행 상태 |
-| 대상 저장소의 Issue·PR 템플릿 설치 요청 | [template-init](../template-init/SKILL.md) | 복사한 파일·기존 파일 차이·라벨 상태 |
+| 대상 저장소의 Issue·PR 템플릿 설치 요청 | [workflow-init](../workflow-init/SKILL.md) | 복사한 파일·기존 파일 차이·라벨 상태 |
 
 “커밋 검토”는 메시지·범위·분리라면 commit-rule, 코드 동작·의도·정책·테스트라면 pr-review로 선택한다.
 두 종류를 모두 요청하면 각 범위를 적용한다.

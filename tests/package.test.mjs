@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync, renameSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync, renameSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { validatePackage } from '../scripts/check-package.mjs';
 
-const names = ['git-workflow', 'workflow-init', 'agents-init', 'issue-create', 'plan-create', 'task-implement', 'pr-create', 'pr-review', 'pr-merge', 'issue-close', 'commit-rule', 'branch-strategy', 'git-release', 'template-init'];
+const names = ['git-workflow', 'workflow-init', 'issue-create', 'plan-create', 'task-implement', 'pr-create', 'pr-review', 'pr-merge', 'issue-close', 'commit-rule', 'branch-strategy', 'git-release'];
 const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-close/references/closing-comment.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/labels.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/references/templates.md', 'workflow-init/references/agents.md', 'workflow-init/references/labels.md', 'workflow-init/references/release.md', 'workflow-init/scripts/sync-labels.py', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'plan-create/references/review-criteria.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-merge/references/post-merge-cleanup.md', 'pr-review/references/review.md', 'pr-review/references/pr-comment.md', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'branch-strategy/references/branch.md', 'git-release/references/release-notes.md'];
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'git-workflow-package-'));
@@ -115,7 +115,7 @@ test('accepts a quoted description containing " #"', t => {
   assert.deepEqual(validatePackage(root), []);
 });
 
-test('template-init required-section table matches the template headings', () => {
+test('workflow-init required-section table matches the template headings', () => {
   const root = join(import.meta.dirname, '..', 'skills', 'workflow-init');
   const rows = readFileSync(join(root, 'references/templates.md'), 'utf8').split('\n').filter(l => /^\| (기능 Issue|버그 Issue|PR) \|/.test(l));
   assert.equal(rows.length, 3);
@@ -128,10 +128,10 @@ test('template-init required-section table matches the template headings', () =>
   });
 });
 
-test('rejects a missing agents-init entrypoint without relying on README links', t => {
+test('rejects a missing workflow-init entrypoint without relying on README links', t => {
   const { root } = fixture(t);
-  rmSync(join(root, 'skills/agents-init/SKILL.md'));
-  assert.ok(validatePackage(root).includes('missing skill: agents-init'));
+  rmSync(join(root, 'skills/workflow-init/SKILL.md'));
+  assert.ok(validatePackage(root).includes('missing skill: workflow-init'));
 });
 
 // Detect omitted policy even if the router link is absent: packaging must carry it.
@@ -172,4 +172,11 @@ test('canonical adoption declaration carries role separation and approval bounda
   for (const clause of ['사용자 승인 후 머지', '직접 구현하지 않으며', '이전 대화를 상속하지 않는 별도 구현 에이전트', '비공개 검토 기준·검증 입력은 구현자에게 전달하지 않는다', '읽기 전용 질문·Issue 작성만 요청한 경우에는 구현으로 확대하지 않는다']) {
     assert.ok(declaration.includes(clause), clause);
   }
+});
+
+test('ships workflow-init as the sole initialization entrypoint', () => {
+  const skills = join(import.meta.dirname, '..', 'skills');
+  const discovered = ['workflow-init', 'template-init', 'agents-init'].filter(name =>
+    existsSync(join(skills, name, 'SKILL.md')));
+  assert.deepEqual(discovered, ['workflow-init']);
 });

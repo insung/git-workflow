@@ -5,7 +5,7 @@
 - `workflow-init`에서 템플릿·AGENTS.md 선언·GitHub 라벨·자동 릴리즈 노트 분류를 선택 설치한다. 일반 설치 요청은 선택을 기다리고, “라벨만 설치”처럼 범위를 명시하면 해당 항목만 처리한다.
 - 라벨 이름·한국어 설명·색상을 YAML로 정의하고, 기본 미리보기와 누락 라벨만 생성하는 도구를 제공한다. 기존 메타데이터를 보존하고 동시 생성·조회 오류·응답 불명·타임아웃을 재확인한다.
 - 자동 릴리즈 노트 분류 자산에 기능·개선, 수정, 설치·운영, 릴리즈 준비, 문서·사용 안내, 기타 변경을 제공한다. documentation을 제외하지 않고 기존 릴리즈 설정을 보존한다.
-- 기존 `template-init`·`agents-init` 호출은 각각의 항목만 처리하는 호환 진입점으로 유지한다. 직접 자산 경로를 참조하는 사용자는 `skills/workflow-init/assets/`로 갱신한다.
+- `template-init`·`agents-init`을 제거하고 초기화 진입점을 `workflow-init`으로 통합한다. 기존 호출은 `workflow-init`에 템플릿만 또는 AGENTS.md 선언만 요청하는 방식으로 전환한다. 직접 자산 경로를 참조하는 사용자는 `skills/workflow-init/assets/`로 갱신한다.
 - 라벨 도구에는 Python 3·PyYAML·인증된 GitHub CLI가 필요하다. 실제 프로젝트 설치와 원격 라벨 변경은 선택한 작업으로 별도 실행한다.
 - 구현 근거: [PR #24](https://github.com/insung/git-workflow/pull/24). 세션 간 요청 누락 방지 규칙은 포함하지 않는다.
 
