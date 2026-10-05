@@ -1,6 +1,6 @@
 ---
 issue: "#31"
-status: ready
+status: in-progress
 branch: "codex/release-0.7.0"
 base: "main"
 created: "2026-10-05"
@@ -15,7 +15,7 @@ created: "2026-10-05"
 
 | 단계 | 목표 | 검증 | 완료 |
 | --- | --- | --- | --- |
-| [01](task-01-release-package.md) | 세 manifest·CHANGELOG·발행 노트 | TC-01·02 | [ ] |
+| [01](task-01-release-package.md) | 세 manifest·CHANGELOG·발행 노트 | TC-01·02 | [x] |
 | 02 | 검토·버전 PR 머지·태그·Release·두 호스트 설치 | TC-03·04 | [ ] |
 
 ## 최종 검증
@@ -32,6 +32,10 @@ created: "2026-10-05"
 - 사용자 지정 버전 0.7.0과 발행·설치 승인 적용
 - 발행 대상은 버전 PR을 main에 merge한 commit, 태그 v0.7.0, 제목 v0.7.0 — 릴리즈·Issue·PR 작성 기준 통일
 - 세션 내 선언·AGENTS.md·템플릿 실제 설치·과거 Release 개정 제외
+
+## 현재 결과
+
+단계01 로컬 구현·자기 검증 완료. TC-01 구조·35/35·diff 검사와 스킬45파일 바이트 보존 통과. TC-02 공개 v0.6.0 이후 PR30 결과·전환·한계 대조 완료. 미커밋 패키지는 [digest](evidence/package-source-sha256.txt), 실행 상세는 [handoff](handoff.md) 참조. TC-03·04 발행·설치 전 대기이며 독립 검토는 미판정.
 
 ## 전달과 롤백
 
