@@ -1,0 +1,6 @@
+UTC: 2026-10-05T10:26:47.986103+00:00
+Command: node scripts/check-package.mjs
+CWD: git-workflow implementation linked worktree
+HEAD: e79013a65dae27898a88f7c29032fb81d48b3edd + uncommitted patch/digests
+Exit: 0
+Package structure valid (skills, manifests, local links). Semantic review and host loading not checked.
