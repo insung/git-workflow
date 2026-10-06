@@ -105,7 +105,7 @@ branch-strategy 스킬은 제거되었다. 이전 스킬 호출은 전략 기록
 
 브랜치 전략도 독립 선택 항목이다. 기존 관행을 먼저 확인하고 GitHub Flow·Trunk·Release Flow·Gitflow·기존 dev/prod 후보에서 필요한 전략을 제안한다. 승인한 단일 프로젝트 문서에 기록하고 AGENTS.md에는 최소 읽기 연결을 제안한다. README 기존 내용 수정은 별도 승인하며, 적용 직전 파일이 바뀌면 재승인한다. 문서 생성만으로 AI 준수를 보장하지 않으며 일반 브랜치·PR·hotfix 요청으로 검증한다. [전략 초기화](skills/workflow-init/references/branch-policy.md)와 [후보·공식 출처](skills/workflow-init/references/branch-options.md)를 참고한다.
 
-에이전트에게 GitHub 템플릿 설치를 요청한다. 예: 「이 저장소에 git-workflow의 Issue·PR 템플릿을 설치해줘」. workflow-init은 없는 파일만 복사하고 기존 템플릿과의 차이를 보고한다.
+에이전트에게 GitHub 템플릿 설치를 요청한다. 예: 「이 저장소에 git-workflow의 Issue·PR 템플릿을 설치해줘」. workflow-init의 템플릿 설치·갱신 항목을 선택하거나 템플릿 설치·갱신을 명시적으로 요청하면 없는 파일은 설치하고 기존 내용은 정본 전체로 교체한다. 기존 내용 보존이나 차이 확인만 요청한 경우에는 교체하지 않는다. 기존 파일명·경로를 유지하며 같은 내용이면 다시 쓰지 않는다. 로컬 작업공간을 지정하면 설치본 대신 그 소스의 정본을 사용한다.
 
 「이 프로젝트의 AGENTS.md를 git-workflow용으로 초기화해줘」라고 요청하면 [workflow-init](skills/workflow-init/SKILL.md)이 개별 프로젝트·다중 프로젝트 루트에 맞는 선언을 제안하고, 명시적 승인 후 기존 바이트를 보존하며 추가한다. 선언을 채택하면 메인이 승인된 단계를 조정하고 별도 구현자의 결과를 독립 검증한다. 전문은 스킬에서, 공통 맥락과 인계는 [역할별 읽기 순서](skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서)에서 확인한다.
 
