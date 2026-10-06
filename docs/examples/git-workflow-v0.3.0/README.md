@@ -17,8 +17,8 @@
 | 2 | 요구 정리 | 계획 | sideband-comments | 문서 코멘트 확인과 답글 | 불필요한 내용 제거, README 중심 |
 | 3 | Issue 작성 | 계획 | issue-create | Issue #1 | 템플릿 init 추가, 트리거 수정 포함 |
 | 4 | 계획 | 계획 | plan-create, sideband-comments | plan.md, 단계 todo 5개 | 표 중심 양식, AC ID는 Issue에만 |
-| 5 | 검토 기준 고정 | 계획 | - | [검토 기준](../../git-workflows/2026-10/02_1_template-init-review-cleanup/review-criteria.md), 검증 입력 2개 | 구현 세션에 알리지 않음 |
-| 6 | 구현 | 구현 | git-workflow, commit-rule, writing-skills | 단계별 커밋, todo 처리 내용, [handoff](../../git-workflows/2026-10/02_1_template-init-review-cleanup/handoff.md) | 버전 0.3.0 |
+| 5 | 검토 기준 고정 | 계획 | - | [검토 요약](../../git-workflows/2026-10/02_1_template-init-review-cleanup/review.md#검토-기록-요약), 검증 입력 2개 | 구현 세션에 알리지 않음 |
+| 6 | 구현 | 구현 | git-workflow, commit-rule, writing-skills | 단계별 커밋, todo 처리 내용, [실행 요약](../../git-workflows/2026-10/02_1_template-init-review-cleanup/05-todos-plan-template.md#실행-결과-요약) | 버전 0.3.0 |
 | 7 | 독립 검토 | 계획 | pr-review | 고정 입력으로 하위 에이전트 재실행, [review](../../git-workflows/2026-10/02_1_template-init-review-cleanup/review.md) | warn은 후속 Issue로 |
 | 8 | PR | 계획 | issue-create, pr-create | 소급 Issue #2, PR #3 | 이전 커밋은 소급 Issue로 연결 |
 | 9 | 설치 확인 | 계획 | - | description 잘림 발견, 수정과 재검토 | PR에서 수정 후 머지 |

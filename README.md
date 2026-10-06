@@ -2,7 +2,7 @@
 
 **Carry one change from Issue intent to an approved merge on the same evidence.**
 
-**English** · [한국어](README.ko.md)
+**English** · [한국어](README.ko.md) · [0.8.0 release preparation](docs/releases/v0.8.0.md)
 
 git-workflow is a Codex and Claude Code plugin for Issue-based changes. It records what the requester wants as Issue acceptance criteria, keeps the execution plan in the Issue and creates separate work files only when needed, and carries those IDs through implementation, tests, the PR and review. Each stage reads the previous stage's intent and actual results instead of a summary from memory.
 
@@ -109,6 +109,8 @@ Ask the agent to install the GitHub templates, for example "Install the git-work
 
 Ask "Initialize this project’s AGENTS.md for git-workflow" to use [workflow-init](skills/workflow-init/SKILL.md): it proposes a declaration for an individual project or a root containing multiple projects, then adds it only after explicit approval while preserving existing bytes. The declaration makes the main agent coordinate approved stages and independently validate a separate implementer’s work; see the skill for the declaration and the [role-specific reading order](skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서) for shared context and handoff.
 
+See the [short workflow](skills/workflow-init/references/branch-policy.md#간략한-워크플로우) for branch policy setup and policy application in later work.
+
 ## Architecture
 
 ```text
@@ -148,6 +150,7 @@ The [examples](docs/examples/README.md) show filled document sets and flows. The
 
 | Example | Flow |
 | --- | --- |
+| [Issue-centered records](docs/examples/issue-centered-records/README.md) | Connect the request, plan and actual results without separate work files |
 | [git-workflow v0.3.0 (real case)](docs/examples/git-workflow-v0.3.0/README.md) | Review, Issue, plan with comments, fixed review criteria, separate implementation session, independent review, merge and release |
 | [Python version upgrade](docs/examples/python-version-upgrade/README.md) | Issue, plan, step todos, handoff, PR and review |
 | [Resume an existing Issue](docs/examples/resume-existing-issue/README.md) | Continue another session's work from its documents |
