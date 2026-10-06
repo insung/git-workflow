@@ -31,3 +31,9 @@
 ## 제외 범위
 
 - issue·PR·handoff·review 양식 변경 (01·02 단계)
+
+## 실행 결과 요약
+
+4fff0ca 기준 패키지 검사·회귀 통과. 테스트 누락 지적은 변경 전후 모두 3/3이며 spec-it 미채택에서 불필요한 정책 human-review는 3/3→0/3으로 감소. 실제 호스트 갱신·자산 포함 확인은 인증 만료로 미실행.
+
+당시 명령은 저장소 루트의 `node --test tests/package.test.mjs`, `node scripts/check-package.mjs`, `git diff --check`를 중심으로 실행했다. 추가 명령·대상 작업본·실행 시각은 plan의 정리 전 기록에서 확인한다. 현재 HEAD의 재검증 결과로 사용하지 않는다.

@@ -25,9 +25,9 @@
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 결과 |
 | --- | --- | --- | --- | --- |
-| <a id="tc-01"></a>TC-01 | AC-01·AC-05 | 검토 요청만/댓글 포함 요청/재검토 요청을 자체 fixture로 대조 | 담당·시점 일치, 요청 없으면 대화나 요청된 review.md로 반환 | 자체 대조 완료 — [handoff](handoff.md#자체-시나리오) 참조; 독립 검토 아님 |
-| <a id="tc-02"></a>TC-02 | AC-06 | 머지 직전 동일 HEAD와 변경 HEAD fixture 대조 | 동일 HEAD 확인, 변경 시 재검토 인계, 댓글 부재만으로 차단 없음 | 자체 대조 완료 — [handoff](handoff.md#자체-시나리오) 참조; 독립 검토 아님 |
-| <a id="tc-03"></a>TC-03 | AC-07 | pr-create PR 작성·댓글 별도 요청 fixture와 #5 양식 대조 | 본문·handoff 기본 기록, 종료 코멘트·검토 결과 책임 침범 없음 | 자체 대조 완료 — [handoff](handoff.md#자체-시나리오) 참조; 독립 검토 아님 |
+| <a id="tc-01"></a>TC-01 | AC-01·AC-05 | 검토 요청만/댓글 포함 요청/재검토 요청을 자체 fixture로 대조 | 담당·시점 일치, 요청 없으면 대화나 요청된 review.md로 반환 | 자체 대조 완료 — [실행 요약](03-todos-comment-validation.md#실행-결과-요약) 참조; 독립 검토 아님 |
+| <a id="tc-02"></a>TC-02 | AC-06 | 머지 직전 동일 HEAD와 변경 HEAD fixture 대조 | 동일 HEAD 확인, 변경 시 재검토 인계, 댓글 부재만으로 차단 없음 | 자체 대조 완료 — [실행 요약](03-todos-comment-validation.md#실행-결과-요약) 참조; 독립 검토 아님 |
+| <a id="tc-03"></a>TC-03 | AC-07 | pr-create PR 작성·댓글 별도 요청 fixture와 #5 양식 대조 | 본문·handoff 기본 기록, 종료 코멘트·검토 결과 책임 침범 없음 | 자체 대조 완료 — [실행 요약](03-todos-comment-validation.md#실행-결과-요약) 참조; 독립 검토 아님 |
 
 ## 제외 범위
 

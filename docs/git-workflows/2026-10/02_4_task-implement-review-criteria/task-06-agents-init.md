@@ -62,3 +62,9 @@
 | plugin-eval | 95/A. 한국어 trigger 영어 휴리스틱 경고 1 확인 |
 
 단계 06 독립 검증 완료로 표시한다. 충돌·concurrent 변경 대응 행동 검증과 실제 호스트 로딩은 미실행으로 유지한다. 기존 Issue #4 전체의 human-review 보류를 해소하거나 전체 Issue 통과를 주장하지 않는다.
+
+## 실행 결과 요약
+
+최종 승인 소스 5fec7a8. 패키지 회귀24/24·구조·공백 검사와 agents-init 기존 바이트/승인 전문·거절·중복 사례 확인. 기준 노출·선행 고정 절차 이탈 때문에 전체 독립성이나 자동 pass로 소급하지 않음. 충돌·동시 수정 행동과 호스트 로딩은 미확인.
+
+당시 명령은 저장소 루트의 `node --test tests/package.test.mjs`, `node scripts/check-package.mjs`, `git diff --check`를 중심으로 실행했다. 추가 명령·대상 작업본·실행 시각은 plan의 정리 전 기록에서 확인한다. 현재 HEAD의 재검증 결과로 사용하지 않는다.

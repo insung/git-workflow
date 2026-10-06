@@ -15,7 +15,13 @@ PR30 근거는 docs/git-workflows/2026-10/05_29_readable-release-issues의 공�
 
 | TC | AC | 결과 |
 | --- | --- | --- |
-| TC-01 | AC-01 | 0.7.0 동일성·패키지 구조·35/35·diff 통과. HEAD eb68afd와 미커밋 패키지 digest 기준, [실행 근거](evidence/verification.txt) |
-| TC-02 | AC-02 | PR30 공개 기록·실제 작성 지시 대조 완료; 공개 v0.6.0 이후 PR30만 선정, warn·실행순서·초안·설치 한계 보존. [인계](handoff.md) |
+| TC-01 | AC-01 | 0.7.0 동일성·패키지 구조·35/35·diff 통과. HEAD eb68afd와 미커밋 패키지 digest 기준, [실행 요약](task-01-release-package.md#실행-결과-요약) |
+| TC-02 | AC-02 | PR30 공개 기록·실제 작성 지시 대조 완료; 공개 v0.6.0 이후 PR30만 선정, warn·실행순서·초안·설치 한계 보존. [실행 요약](task-01-release-package.md#실행-결과-요약) |
 
 단계02의 TC-03·04는 발행·설치 전 대기·미실행이다. 기존 skills 지시 변경이 없어 새 모델 RED/GREEN은 해당 없음이다. commit·push·발행·설치는 조정자가 담당한다.
+
+## 실행 결과 요약
+
+eb68afd 기반 패키지의 세 버전0.7.0·회귀35/35·구조·공백 검사와 기존skills45파일 바이트 보존 확인(2026-10-05, macOS/Node v23.11.0). 공개v0.6.0=e79013a 이후PR30 결과만 선정. 당시 발행·두 호스트 설치는 대기이며 준비 pass가 배포 완료를 뜻하지 않음.
+
+당시 명령은 저장소 루트의 `node --test tests/package.test.mjs`, `node scripts/check-package.mjs`, `git diff --check`를 중심으로 실행했다. 추가 명령·대상 작업본·실행 시각은 plan의 정리 전 기록에서 확인한다. 현재 HEAD의 재검증 결과로 사용하지 않는다.

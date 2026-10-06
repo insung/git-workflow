@@ -2,7 +2,7 @@
 
 - Issue / PR / plan / todo: [Issue #1](https://github.com/insung/git-workflow/issues/1) / PR 미생성 / [plan](plan.md) / [01](01-todos-pr-review-rework.md)~[05](05-todos-plan-template.md)
 - base / 검토 HEAD / commit 범위 / 미커밋 변경 / 확인 시각: `3c80538` / `31be0db` / `3c80538..31be0db` 14개 / 없음 (검토 기준 파일 3개만 미추적) / 2026-10-02 KST
-- 의도 출처: Issue #1 본문 AC-01~AC-14, plan, [검토 기준](review-criteria.md)
+- 의도 출처: Issue #1 본문 AC-01~AC-14, plan, [검토 요약](review.md#검토-기록-요약)
 - spec-it: 미채택 (`.architecture/` 없음)
 - 결과: pass (warn 2건, 미실행 1건)
 
@@ -13,13 +13,13 @@
 | AC-01 | README 영어·한국어 절 일치 | `README.md`, `README.ko.md` (2ebf196) | `##` 제목 비교 | 통과, 8개 절 같은 순서 (31be0db) | 충족 |
 | AC-02 | README에 규칙 재서술 없음 | 같음 | 규칙 문장 검색 | 통과, 0건 (31be0db) | 충족 |
 | AC-03 | spec-it 역할과 채택·미채택 동작 설명 | `README.md` spec-it 절 | 절 내용 확인 | 통과 (31be0db) | 충족 |
-| AC-04 | pr-review가 의도·구현·테스트 대조 중심, 500단어 이하 | `skills/pr-review/SKILL.md` (a7e084c) | `wc -w`, 절 순서, [review-input-missing-test.md](review-input-missing-test.md) 3회 | 통과, 412단어. F1·F2·F3 3/3, 오지적 0/3 (31be0db) | 충족 |
+| AC-04 | pr-review가 의도·구현·테스트 대조 중심, 500단어 이하 | `skills/pr-review/SKILL.md` (a7e084c) | `wc -w`, 절 순서, [검토 요약](review.md#검토-기록-요약) 3회 | 통과, 412단어. F1·F2·F3 3/3, 오지적 0/3 (31be0db) | 충족 |
 | AC-05 | spec-it 검사가 채택 프로젝트에서만 적용 | `skills/pr-review/SKILL.md:51-52`, `references/spec-it-policy.md` | 같은 입력 3회 | 통과, 정책 판정 생성 0/3. 변경 전 스킬은 1/1 생성 | 충족 |
 | AC-06 | review 양식이 AC ID별 대조 중심 | `skills/pr-review/references/review.md` | 양식 확인 | 통과 (31be0db) | 충족 |
 | AC-07 | 없는 spec-it 파일 참조 없음 | skills, docs/examples, README | 검색 | 통과, 0건 (31be0db) | 충족 |
 | AC-08 | 템플릿 세 정본에 필수 절과 front matter | `skills/template-init/assets/.github/` (8cf42c9, 561e491) | 절·front matter 대조 | 통과 (31be0db) | 충족 |
 | AC-09 | 템플릿 없는 저장소에 복사, 기존 템플릿 유지 | `skills/template-init/SKILL.md` | 임시 저장소 두 개에 하위 에이전트 적용 | 통과. 첫째 세 파일 정본과 같음, 둘째 기존 PR 템플릿 해시 불변·누락 절 6개 보고 (31be0db). 설치 확인 TC-F02 미실행 | 충족, warn W1 |
-| AC-10 | 요청마다 한 스킬로 수렴 | `skills/*/SKILL.md` description (74aa5ae) | [review-input-triggers.md](review-input-triggers.md) 3회 | 통과, 14개 요청 3/3. 변경 전 description은 R5·R12·R13 불일치 | 충족, warn W2 |
+| AC-10 | 요청마다 한 스킬로 수렴 | `skills/*/SKILL.md` description (74aa5ae) | [검토 요약](review.md#검토-기록-요약) 3회 | 통과, 14개 요청 3/3. 변경 전 description은 R5·R12·R13 불일치 | 충족, warn W2 |
 | AC-11 | 같은 규칙이 정본 한 곳에만 | `issue-link.md`, `change-conventions.md`, `execution-boundaries.md` (7049d21) | 검색 | 통과 (31be0db) | 충족 |
 | AC-12 | 매니페스트에 Wiki 없음 | 매니페스트 4개 (63cad15) | 검색 | 통과, 0건 (31be0db) | 충족 |
 | AC-13 | 패키지 검사 통과 | 전체 | `node --test`, `check-package`, `git diff --check` | 통과, 테스트 19개 (31be0db) | 충족 |
@@ -59,3 +59,6 @@
 | 구조 검사 | 테스트 21개 통과, 수정 전 SKILL.md에 새 검사 적용 시 두 파일 실패 확인 |
 | 결과 | pass. AC-10 판정 유지 |
 
+## 검토 기록 요약
+
+기존 판정·실패 이력·검토 대상·미실행·독립성 한계를 유지한다. 고정 입력과 실행 응답 전문은 현재 트리에서 제거했으며 필요한 원문은 [기록 요약·원문 조회](plan.md#기록-정리)으로 연결한다.

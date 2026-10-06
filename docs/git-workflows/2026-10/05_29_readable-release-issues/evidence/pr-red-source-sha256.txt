@@ -1,6 +1,0 @@
-HEAD 394e4e2cc9c565e8e585d16e95cd38d2b1fef1c0
-186ba0760c68244f7869de8dad47ccab087967a1f904340a5aacb440ee48f37e  skills/pr-create/SKILL.md
-f3527a089d61a543aa1aaa0cef6d90418fdeae2f87c9d38872ef5b529b66c1c1  skills/pr-create/references/pr.md
-cc139779abf63f9674f7b04c5cad86f2d855d6a7684b1eed3e9141cce4dfaead  skills/git-workflow/references/writing-conventions.md
-94bdc0e5bded935c91d4b9f287a196afa10b03ef5f79448b3b164a51dd87a1e8  skills/workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md
-3f65b901fbed11ec41b575f1eee7b71bdd7484150843f787e2d67221e0730f1d  docs/examples/readable-records/README.md

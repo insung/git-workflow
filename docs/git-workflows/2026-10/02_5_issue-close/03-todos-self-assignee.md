@@ -37,8 +37,8 @@
 
 - 실행 시각(UTC): 2026-10-02T02:45:13.298187+00:00; 기준 HEAD `41d78c0093e568317c7cae89e4de7d1f79e2fb6e` + 미커밋 작업본. 실제 커밋 없음.
 - 환경: Node v23.11.0, gh 2.101.0. `node scripts/check-package.mjs` exit 0, `node --test tests/package.test.mjs` 22 pass / 0 fail, `git diff --check` exit 0.
-- 문서 사례는 정적 대조다. 실제 종료·코멘트·assignee·GitHub 공동 작성자 표시 실행 증거는 아니다. 최종 내용 식별과 파일 목록은 [handoff](handoff.md)에 기록한다.
+- 문서 사례는 정적 대조다. 실제 종료·코멘트·assignee·GitHub 공동 작성자 표시 실행 증거는 아니다. 최종 내용 식별과 파일 목록은 [실행 요약](05-todos-issue-housekeeping.md#실행-결과-요약)에 기록한다.
 
 ## PR 준비 후속 기록 — 2026-10-02
 
-주제별 로컬 커밋과 최신 main 통합 완료. 코드 커밋·통합 검사는 [인계](handoff.md#pr-생성-인계--2026-10-02), 독립 검토와 미실행 증거는 [review](review.md)에 기록했다. 통합 후 package 검사 25/25, checker·diff 검사 통과. 실제 원격 적용은 생성 후 조회로 별도 확인한다.
+주제별 로컬 커밋과 최신 main 통합 완료. 코드 커밋·통합 검사는 [실행 요약](05-todos-issue-housekeeping.md#실행-결과-요약), 독립 검토와 미실행 증거는 [review](review.md)에 기록했다. 통합 후 package 검사 25/25, checker·diff 검사 통과. 실제 원격 적용은 생성 후 조회로 별도 확인한다.
