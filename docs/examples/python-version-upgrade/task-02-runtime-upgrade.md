@@ -14,7 +14,7 @@
 
 | # | 작업 | 완료 | 처리 내용 |
 | --- | --- | --- | --- |
-| 1 | 대상 dev·HEAD 확인 후 branch-strategy로 feature/python-version-upgrade 생성 | [ ] | |
+| 1 | 프로젝트 정책과 대상 dev·HEAD 확인 후 feature/python-version-upgrade 생성 | [ ] | |
 | 2 | 런타임 선언·CI·이미지와 필요한 호환 코드 변경 | [ ] | |
 | 3 | 설치·import와 정상·실패·경계 입력 유닛 테스트 작성 | [ ] | |
 

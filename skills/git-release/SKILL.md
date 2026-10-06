@@ -22,7 +22,7 @@ git log --first-parent --pretty=format:'%s' <이전-태그>..<현재-태그>
 - 검증된 커밋에만 배포 태그를 붙인다.
 - type별 버전 후보는 [공통 표기의 type 표](../git-workflow/references/change-conventions.md#제목)를 따른다.
   저장소에 버전 정책이나 자동화가 있으면 그 규칙이 우선이다.
-- hotfix 분기·반영은 [브랜치 전략](../branch-strategy/SKILL.md)을 따른다.
+- hotfix 분기·반영은 [공통 브랜치 정책](../git-workflow/references/project-branch-policy.md)을 따른다.
 
 ### 릴리즈 노트 작성
 
