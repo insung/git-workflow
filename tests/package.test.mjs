@@ -5,8 +5,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { validatePackage } from '../scripts/check-package.mjs';
 
-const names = ['git-workflow', 'workflow-init', 'issue-create', 'plan-create', 'task-implement', 'pr-create', 'pr-review', 'pr-merge', 'issue-close', 'commit-rule', 'branch-strategy', 'git-release'];
-const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-close/references/closing-comment.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/labels.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/references/templates.md', 'workflow-init/references/agents.md', 'workflow-init/references/labels.md', 'workflow-init/references/release.md', 'workflow-init/scripts/sync-labels.py', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'plan-create/references/review-criteria.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-merge/references/post-merge-cleanup.md', 'pr-review/references/review.md', 'pr-review/references/pr-comment.md', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'branch-strategy/references/branch.md', 'git-release/references/release-notes.md'];
+const names = ['git-workflow', 'workflow-init', 'issue-create', 'plan-create', 'task-implement', 'pr-create', 'pr-review', 'pr-merge', 'issue-close', 'commit-rule', 'git-release'];
+const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-close/references/closing-comment.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/labels.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/references/templates.md', 'workflow-init/references/agents.md', 'workflow-init/references/labels.md', 'workflow-init/references/release.md', 'workflow-init/references/branch-policy.md', 'workflow-init/references/branch-options.md', 'git-workflow/references/project-branch-policy.md', 'workflow-init/scripts/sync-labels.py', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'plan-create/references/review-criteria.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-merge/references/post-merge-cleanup.md', 'pr-review/references/review.md', 'pr-review/references/pr-comment.md', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'git-release/references/release-notes.md'];
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'git-workflow-package-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
@@ -77,7 +77,7 @@ test('rejects missing shared label guidance', t => {
   assert.ok(validatePackage(root).some(e => e.includes('git-workflow/references/labels.md')));
 });
 
-for (const path of ['git-workflow/references/execution-boundaries.md', 'branch-strategy/references/branch.md', 'git-workflow/references/issue-link.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'pr-review/references/spec-it-policy.md', 'pr-review/references/pr-comment.md']) {
+for (const path of ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/issue-link.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'pr-review/references/spec-it-policy.md', 'pr-review/references/pr-comment.md']) {
   test(`rejects missing required form or contract: ${path}`, t => {
     const { root } = fixture(t);
     rmSync(join(root, 'skills', path));
@@ -85,10 +85,14 @@ for (const path of ['git-workflow/references/execution-boundaries.md', 'branch-s
   });
 }
 
-test('rejects a missing branch-strategy entrypoint even when its reference remains', t => {
-  const { root } = fixture(t);
-  rmSync(join(root, 'skills/branch-strategy/SKILL.md'));
-  assert.ok(validatePackage(root).some(e => e.includes('missing skill: branch-strategy')));
+test('rejects rediscovery of the removed branch-strategy skill', t => {
+  const { root, put } = fixture(t);
+  put('skills/branch-strategy/SKILL.md', '---\nname: branch-strategy\ndescription: Retired skill.\n---\n');
+  assert.ok(validatePackage(root).includes('removed skill must not be discoverable: branch-strategy'));
+});
+
+test('does not ship a branch-strategy discovery entrypoint', () => {
+  assert.equal(existsSync(join(import.meta.dirname, '..', 'skills/branch-strategy/SKILL.md')), false);
 });
 
 test('rejects a missing task-implement entrypoint', t => {
@@ -157,7 +161,7 @@ test('rejects a mixed-case asset instead of silently accepting an alias', t => {
   assert.ok(validatePackage(root).some(e => e.includes('exact uppercase name: BUG_REPORT.md')));
 });
 
-for (const path of ['workflow-init/assets/labels.yml', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/scripts/sync-labels.py']) {
+for (const path of ['workflow-init/assets/labels.yml', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/scripts/sync-labels.py', 'workflow-init/references/branch-policy.md', 'workflow-init/references/branch-options.md', 'git-workflow/references/project-branch-policy.md']) {
   test(`rejects missing init capability: ${path}`, t => {
     const { root } = fixture(t);
     rmSync(join(root, 'skills', path));

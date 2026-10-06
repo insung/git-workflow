@@ -31,7 +31,7 @@ Start with the result you want. The router reads the Issue and recorded work to 
 | Reviewed HEAD | “Merge this approved PR using the agreed method.” | pr-merge; approval applies to that PR and HEAD |
 | Work ended | “Close Issue #12 with its confirmed outcome and close reason.” | issue-close; closure and comments have their own scope |
 
-Use commit-rule for a scoped commit, branch-strategy for branch roles, and git-release for a release. These requests do not authorize the other actions automatically. The skill table below links to each rule.
+Use commit-rule for a scoped commit, workflow-init for branch policy setup, and git-release for a release. Ordinary branch, PR and hotfix requests read and follow the [project policy](skills/git-workflow/references/project-branch-policy.md). These requests do not authorize the other actions automatically. The skill table below links to each rule.
 
 The Issue owns the original request, behavior change, scope, constraints, AC, plan and required reference links. The PR owns actual implementation, verification and delivery results. Detailed plans and task contracts are conditional. Implementation does not receive private review inputs. See [document roles and handoff](skills/git-workflow/references/document-links.md).
 
@@ -57,7 +57,7 @@ Cleanup reports remote branches, local branches and worktrees separately. Dirty,
 | Skill | Use it to |
 | --- | --- |
 | [git-workflow](skills/git-workflow/SKILL.md) | Start or resume an Issue-based change and choose the next stage |
-| [workflow-init](skills/workflow-init/SKILL.md) | Initialize selected templates, AGENTS.md, labels and release categories |
+| [workflow-init](skills/workflow-init/SKILL.md) | Initialize selected templates, AGENTS.md, labels, release categories and project branch policy |
 | [issue-create](skills/issue-create/SKILL.md) | Write or complete an Issue, check for duplicates first |
 | [plan-create](skills/plan-create/SKILL.md) | Write an inline Issue plan and conditional detailed design |
 | [task-implement](skills/task-implement/SKILL.md) | Implement the prepared plan, verify and record results, and make approved commits |
@@ -66,7 +66,6 @@ Cleanup reports remote branches, local branches and worktrees separately. Dirty,
 | [pr-merge](skills/pr-merge/SKILL.md) | Confirm the approved merge, safely clean up the work and hand off closure evidence |
 | [issue-close](skills/issue-close/SKILL.md) | Close an Issue with a close reason and a result comment |
 | [commit-rule](skills/commit-rule/SKILL.md) | Make scoped commits and write commit messages |
-| [branch-strategy](skills/branch-strategy/SKILL.md) | Define branch roles or create a branch |
 | [git-release](skills/git-release/SKILL.md) | Prepare release notes, tags and GitHub Releases |
 
 Simple work uses the Issue and PR as its records. Create a plan only when [detailed design is needed](skills/plan-create/references/plan.md#상세-plan-생성-조건); add task contracts only for independent handoffs. Handoff, review, evidence and txt files are not automatic outputs. Follow the [evidence lifecycle and document hub handoff](skills/git-workflow/references/document-links.md), preserve existing records and fixed links, and use the [short example](docs/examples/issue-centered-records/README.md). Freeze independent criteria before implementation and keep them in a [review-only location](skills/plan-create/references/review-criteria.md#보관-위치).
@@ -100,7 +99,11 @@ Start a new session after installing or updating. In Claude Code the skills appe
 
 ### First run in a target repository
 
-Use [workflow-init](skills/workflow-init/SKILL.md) to select templates, an AGENTS.md declaration, GitHub labels, or release categories. Broad installation requests wait for selection; explicit partial requests apply only those items. Labels preview differences before approved missing-only creation; existing release settings are preserved.
+Use [workflow-init](skills/workflow-init/SKILL.md) to select templates, an AGENTS.md declaration, GitHub labels, release categories, or a project branch policy. Broad installation requests wait for selection; explicit partial requests apply only those items. Labels preview differences before approved missing-only creation; existing release settings are preserved.
+
+The branch-strategy skill has been removed. Replace old setup calls with workflow-init’s branch policy option, and use ordinary branch requests with the shared policy reader for branch operations. Existing project policy documents are preserved.
+
+Branch policy is an independent option. Start from existing practice, then compare GitHub Flow, Trunk, Release Flow, Gitflow and the existing dev/prod option. Record the approved policy in one project document and propose a minimal AGENTS.md reading link. Changes to existing README content need separate approval; reread files before writing and renew approval if they changed. Document creation alone does not prove AI compliance: check ordinary branch, PR and hotfix requests. See [policy setup](skills/workflow-init/references/branch-policy.md) and [options with official sources](skills/workflow-init/references/branch-options.md).
 
 Ask the agent to install the GitHub templates, for example "Install the git-workflow Issue and PR templates in this repository". Selecting template installation/update, or explicitly requesting template installation or update, installs missing files and replaces existing contents with the complete canonical templates. Requests to preserve existing contents or only inspect differences do not replace them. It keeps existing names and locations and skips byte-identical files. When a local workspace is specified, it uses that source rather than the installed plugin cache.
 
@@ -119,7 +122,6 @@ skills/
 ├── pr-merge/          approved merge
 ├── issue-close/       close reasons and closing comment form
 ├── commit-rule/       commit message and scope rules
-├── branch-strategy/   branch roles and creation
 ├── git-release/       release notes
 └── workflow-init/     selected setup, canonical assets and label tool
 ```

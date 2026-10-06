@@ -24,7 +24,8 @@ Issue의 요청·기준·계획 → 구현·테스트·커밋 → PR → 검토 
 | 승인·머지·작업 정리 | [pr-merge](../pr-merge/SKILL.md) | 실제 머지 상태·merge commit과 원격/local/worktree별 정리 결과 |
 | 머지 후 Issue 종료·결과 기록, 진행 안 함·중복 종료 | [issue-close](../issue-close/SKILL.md); 미설치면 대화/임시 인계 | 머지·정리 근거와 게시 권한, 실제 state·stateReason과 종료 코멘트; 자동 CLOSED Issue도 결과 코멘트 보완 인계 |
 | 커밋 실행·메시지·범위 검토 요청 | [commit-rule](../commit-rule/SKILL.md) | 승인된 범위의 commit |
-| 브랜치 전략·분기·hotfix 요청 | [branch-strategy](../branch-strategy/SKILL.md) | 확정 전략·분기 결과·미정 항목 |
+| 프로젝트 브랜치 전략 초기화·기록 요청 | [workflow-init](../workflow-init/SKILL.md) | 기존 관행 요약·전략안·정본 위치와 최소 읽기 연결의 명시적 승인 |
+| 브랜치 전략 검토·분기·hotfix 요청 | [공통 브랜치 정책](references/project-branch-policy.md) | 프로젝트 정본 읽기·확정 규칙·분기 결과·미정 항목 |
 | 릴리즈 요청 | [git-release](../git-release/SKILL.md) | 고정 범위의 노트·발행 상태 |
 | 대상 저장소의 Issue·PR 템플릿 설치 요청 | [workflow-init](../workflow-init/SKILL.md) | 복사한 파일·기존 파일 차이·라벨 상태 |
 

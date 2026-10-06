@@ -31,7 +31,7 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 | 검토된 HEAD | “승인된 PR을 합의한 방식으로 머지해줘.” | pr-merge; 해당 PR·HEAD에 대한 승인 |
 | 작업 종료 | “확인된 결과와 종료 이유로 Issue #12를 닫아줘.” | issue-close; 종료·댓글의 별도 범위 |
 
-범위를 정한 커밋은 commit-rule, 브랜치 역할은 branch-strategy, 릴리즈는 git-release에 요청한다. 각 요청이 다른 행동까지 자동 승인하지 않는다. 아래 스킬 표에서 정본 규칙을 읽는다.
+범위를 정한 커밋은 commit-rule, 전략 초기화는 workflow-init, 릴리즈는 git-release에 요청한다. 일반 브랜치·PR·hotfix 작업은 [프로젝트 정책](skills/git-workflow/references/project-branch-policy.md)을 읽고 따른다. 각 요청이 다른 행동까지 자동 승인하지 않는다. 아래 스킬 표에서 정본 규칙을 읽는다.
 
 Issue는 원문·동작 차이·영향·제약·AC·계획·필수 참고 링크, PR은 실제 결과·검증·배포 상태의 진입점이다. 단순 작업은 별도 파일 없이 진행한다. 상세 plan과 역할별 task는 필요한 경우에만 연결한다. 독립 검토 입력은 구현자에게 전달하지 않는다. [문서 역할과 인계](skills/git-workflow/references/document-links.md)를 참조한다.
 
@@ -57,7 +57,7 @@ flowchart TD
 | 스킬 | 쓰는 때 |
 | --- | --- |
 | [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개와 다음 단계 선택 |
-| [workflow-init](skills/workflow-init/SKILL.md) | 선택한 템플릿·AGENTS.md·라벨·릴리즈 분류 초기화 |
+| [workflow-init](skills/workflow-init/SKILL.md) | 선택한 템플릿·AGENTS.md·라벨·릴리즈 분류·프로젝트 브랜치 전략 초기화 |
 | [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완과 그 전의 중복 확인 |
 | [plan-create](skills/plan-create/SKILL.md) | Issue 안의 계획과 조건부 상세 설계 작성 |
 | [task-implement](skills/task-implement/SKILL.md) | 준비된 계획 구현, 검증, 결과 기록과 승인된 커밋 |
@@ -66,7 +66,6 @@ flowchart TD
 | [pr-merge](skills/pr-merge/SKILL.md) | 승인된 머지 확인·안전한 작업 정리·종료 근거 인계 |
 | [issue-close](skills/issue-close/SKILL.md) | 종료 사유 선택과 결과 코멘트를 남기는 Issue 종료 |
 | [commit-rule](skills/commit-rule/SKILL.md) | 주제별 커밋과 커밋 메시지 작성 |
-| [branch-strategy](skills/branch-strategy/SKILL.md) | 브랜치 역할 정의나 브랜치 생성 |
 | [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
 
 단순 작업은 Issue·PR 본문을 기본 기록으로 사용한다. [상세 설계 조건](skills/plan-create/references/plan.md#상세-plan-생성-조건)에 해당할 때만 docs/git-workflows에 plan을 만들고 독립 계약이 필요한 task만 추가한다. handoff·review·evidence·txt는 자동 생성하지 않는다. [증거 수명과 문서 허브 인계](skills/git-workflow/references/document-links.md)를 따르며 기존 작업 파일·고정 링크는 보존한다. [짧은 예시](docs/examples/issue-centered-records/README.md)를 참조한다. 독립 기준은 구현 전 고정하고 [리뷰 전용 위치](skills/plan-create/references/review-criteria.md#보관-위치)에 유지한다.
@@ -100,7 +99,11 @@ codex plugin add git-workflow@git-workflow
 
 ### 대상 저장소 첫 실행
 
-「git workflow 설치해줘」는 [workflow-init](skills/workflow-init/SKILL.md)으로 네 항목을 제시하고 선택을 기다린다. 「라벨만 설치해줘」 등 부분 요청은 해당 항목만 적용한다. 라벨은 기본 차이 미리보기와 승인된 누락 생성, release.yml은 기존 파일 보존을 따른다.
+「git workflow 설치해줘」는 [workflow-init](skills/workflow-init/SKILL.md)으로 다섯 항목을 제시하고 선택을 기다린다. 「라벨만 설치해줘」 등 부분 요청은 해당 항목만 적용한다. 라벨은 기본 차이 미리보기와 승인된 누락 생성, release.yml은 기존 파일 보존을 따른다.
+
+branch-strategy 스킬은 제거되었다. 이전 스킬 호출은 전략 기록이라면 workflow-init의 브랜치 전략 항목, 실제 브랜치 작업이라면 일반 요청과 공통 정책 읽기로 전환한다. 기존 프로젝트 정책 문서는 보존한다.
+
+브랜치 전략도 독립 선택 항목이다. 기존 관행을 먼저 확인하고 GitHub Flow·Trunk·Release Flow·Gitflow·기존 dev/prod 후보에서 필요한 전략을 제안한다. 승인한 단일 프로젝트 문서에 기록하고 AGENTS.md에는 최소 읽기 연결을 제안한다. README 기존 내용 수정은 별도 승인하며, 적용 직전 파일이 바뀌면 재승인한다. 문서 생성만으로 AI 준수를 보장하지 않으며 일반 브랜치·PR·hotfix 요청으로 검증한다. [전략 초기화](skills/workflow-init/references/branch-policy.md)와 [후보·공식 출처](skills/workflow-init/references/branch-options.md)를 참고한다.
 
 에이전트에게 GitHub 템플릿 설치를 요청한다. 예: 「이 저장소에 git-workflow의 Issue·PR 템플릿을 설치해줘」. workflow-init의 템플릿 설치·갱신 항목을 선택하거나 템플릿 설치·갱신을 명시적으로 요청하면 없는 파일은 설치하고 기존 내용은 정본 전체로 교체한다. 기존 내용 보존이나 차이 확인만 요청한 경우에는 교체하지 않는다. 기존 파일명·경로를 유지하며 같은 내용이면 다시 쓰지 않는다. 로컬 작업공간을 지정하면 설치본 대신 그 소스의 정본을 사용한다.
 
@@ -119,7 +122,6 @@ skills/
 ├── pr-merge/          승인된 머지
 ├── issue-close/       종료 사유와 종료 코멘트 양식
 ├── commit-rule/       커밋 메시지·범위 규칙
-├── branch-strategy/   브랜치 역할과 생성
 ├── git-release/       릴리즈 노트
 └── workflow-init/     선택 설치·정본 자산·라벨 도구
 ```
