@@ -37,3 +37,9 @@
 ## 역할과 전달
 
 구현자는 Issue→plan→이 task→handoff 순서로 읽는다. review/issue-29 및 review/issue-29-pr-writing과 review-criteria·review-input 파일은 읽지 않는다. 조정자가 기준·검증 입력을 고정하고 별도 구현자에게 맡긴다. 구현자는 commit·push·PR 변경을 실행하지 않고 조정자에게 인계한다.
+
+## 실행 결과 요약
+
+e79013a 기반 작성 지침과 최종 PR 지시536549c에서 구조·회귀35/35·공백 검사 통과. 최종 자기 GREEN3/3이며 interim은 제외. PR 작성 RED2/3은 구현 후 이전 소스를 재구성해 실행하여 변경 전 순서 준수1/3. 독립 warn과 선행 고정 커밋 이탈 유지; 원시 출력 삭제가 이 한계를 해소하지 않음.
+
+당시 명령은 저장소 루트의 `node --test tests/package.test.mjs`, `node scripts/check-package.mjs`, `git diff --check`를 중심으로 실행했다. 추가 명령·대상 작업본·실행 시각은 plan의 정리 전 기록에서 확인한다. 현재 HEAD의 재검증 결과로 사용하지 않는다.

@@ -29,8 +29,8 @@
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 결과 |
 | --- | --- | --- | --- | --- |
-| <a id="tc-01"></a>TC-01 | AC-08 | node scripts/check-package.mjs; node --test tests/package.test.mjs (각각 실행), 리포 루트 | 정상 패키지 통과, 신규 reference 누락 사례 실패 탐지 | 패키지 exit 0; 테스트 22/22, 완전/누락 fixture 대조 성공 — [handoff](handoff.md#검증-요약과-증거) 참조 |
-| <a id="tc-02"></a>TC-02 | AC-01~08 | 자체 시나리오·git diff --check·정본/상대 링크 검사, 리포 루트 | 요구 동작과 기록 일치, 로컬 실행 증거만 주장, 독립 검토는 미실행 유지 | 자체 대조 완료 — [handoff](handoff.md#자체-시나리오) 참조; 독립 검토 아님 |
+| <a id="tc-01"></a>TC-01 | AC-08 | node scripts/check-package.mjs; node --test tests/package.test.mjs (각각 실행), 리포 루트 | 정상 패키지 통과, 신규 reference 누락 사례 실패 탐지 | 패키지 exit 0; 테스트 22/22, 완전/누락 fixture 대조 성공 — [실행 요약](03-todos-comment-validation.md#실행-결과-요약) 참조 |
+| <a id="tc-02"></a>TC-02 | AC-01~08 | 자체 시나리오·git diff --check·정본/상대 링크 검사, 리포 루트 | 요구 동작과 기록 일치, 로컬 실행 증거만 주장, 독립 검토는 미실행 유지 | 자체 대조 완료 — [실행 요약](03-todos-comment-validation.md#실행-결과-요약) 참조; 독립 검토 아님 |
 
 ## 제외 범위
 
@@ -46,3 +46,9 @@
 | 누락된 변경 전 2회 보완 | AC-08 | 고정된 17개 사례, 새 실행자별 응답 대조 | 실행 중 |
 | 보완 후 3회 독립 실행 | AC-01~08 | 동일 입력·대상 스킬만 제공, 부모 판정 | 실행 중 |
 | 패키지·회귀·공백 검사 | AC-08 | node scripts/check-package.mjs, node --test tests/package.test.mjs, git diff --check | 패키지 통과, 29/29 통과; 최종 범위 재확인 예정 |
+
+## 실행 결과 요약
+
+구현자의 e7da604 기반 7파일 작업본은 22/22·구조·공백 검사와 17개 수동 mock 대조. 독립 모델 실행·GitHub 게시 증거가 아님. 후속 최종 pass와 그 이전 근거 없는 pass 생성 실패는 review의 검토 대상별 이력으로 유지.
+
+당시 명령은 저장소 루트의 `node --test tests/package.test.mjs`, `node scripts/check-package.mjs`, `git diff --check`를 중심으로 실행했다. 추가 명령·대상 작업본·실행 시각은 plan의 정리 전 기록에서 확인한다. 현재 HEAD의 재검증 결과로 사용하지 않는다.

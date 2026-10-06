@@ -7,8 +7,8 @@
 - 검토 HEAD: `33a49f7be1ea8c09d5b4da0826669aedc92838c7`; 구현 HEAD: `58b57ff2796342f248a94e64ee4bbcfe2df9af7a`. 범위: base 이후 구현·계획·인계 2개와 소스 불변의 검토 기록 커밋 1개
 - 확인 시각: 2026-10-03T14:51:18.537733+09:00; 환경: macOS, Node v23.11.0, 새 실행자는 부모와 같은 세션 모델/설정 상속
 - 미커밋 변경: 이 검토 기록 갱신과 반입 입력의 끝 빈 줄 보정만 있음. 최종 skills snapshot과 소스의 byte 일치 확인
-- 의도: 기존 Issue #6·승인된 plan의 AC-08 후속 검증. [계획](plan.md#ac-08-후속-보완--2026-10-03)·[인계](handoff.md#추가-보완과-최종-대상)
-- 검토 기준: 구현 전 고정한 [기준](review-criteria.md)·[입력](review-input-pr-comments.md), freeze manifest 모든 SHA-256 불변 확인. 반입 기준은 원본 byte 그대로이며, 입력은 본문을 유지하고 끝의 여분 빈 줄 1개만 제거했다. 원본 freeze 및 실행자 입력은 변경하지 않았다
+- 의도: 기존 Issue #6·승인된 plan의 AC-08 후속 검증. [계획](plan.md#ac-08-후속-보완--2026-10-03)·[실행 요약](03-todos-comment-validation.md#실행-결과-요약)
+- 검토 기준: 구현 전 고정한 [검토 요약](review.md#검토-기록-요약)·[검토 요약](review.md#검토-기록-요약), freeze manifest 모든 SHA-256 불변 확인. 반입 기준은 원본 byte 그대로이며, 입력은 본문을 유지하고 끝의 여분 빈 줄 1개만 제거했다. 원본 freeze 및 실행자 입력은 변경하지 않았다
 - spec-it 미채택. 검토 완료는 이번 후속 PR의 머지 승인이 아님
 
 ## 독립 대조 요약
@@ -105,7 +105,7 @@
 - Plan / Todo: [plan](plan.md), [01](01-todos-comment-contract.md), [02](02-todos-skill-integration.md), [03](03-todos-comment-validation.md)
 - base: main / 검토 HEAD: e7da6045004289c3f3c9f2b1654d841bc2a90f6b / commit 범위: 새 commit 없음
 - 미커밋 변경: 구현·검사 7파일. SHA-256 `4654d9f39d414b3c30694cbac3f1fb1a57eac198fc0a3431aebf960bea195e97`
-- digest: [handoff](handoff.md)의 경로+NUL+길이+NUL+bytes 방식으로 독립 재계산 일치. plan/todo/인계/리뷰 문서는 digest 대상에서 제외
+- digest: [실행 요약](03-todos-comment-validation.md#실행-결과-요약)의 경로+NUL+길이+NUL+bytes 방식으로 독립 재계산 일치. plan/todo/인계/리뷰 문서는 digest 대상에서 제외
 - 확인 시각: 2026-10-02T23:26:01.091255+09:00
 - 의도 출처: 사용자 승인한 Issue #6·plan. 구현 서브에이전트의 자체 결과를 완료 근거로 그대로 채택하지 않고 직접 재검증
 - spec-it: 미채택
@@ -122,7 +122,7 @@
 | AC-05 | 무게시 요청·예전 승인 확대 금지·타인 보존 | document-links 및 세 스킬 연결 | RV-04·06·07·14 | 충족 |
 | AC-06 | 동일 HEAD·불일치 인계, 댓글 부재 비차단 | pr-merge 머지 전 및 pr-comment 실행2 | RV-10·11·17; 충돌 보완 후 재대조 | 충족 |
 | AC-07 | pr-create 본문/handoff 기본, 공통 정본, 종료 경계 | pr-create·document-links·pr-comment | RV-12·13, 고정 Issue #5·closing-comment snapshot과 직접 비교 | 충족 |
-| AC-08 | 필수 reference 회귀·고정 사례·원격 쓰기 제외 | scripts/check-package.mjs·tests/package.test.mjs | 부모 직접 패키지 검사 통과, 22 tests/22 pass/0 fail, diff 공백 검사 통과, [RV-01~17](review-scenarios.md) | 충족(로컬 검증 범위) |
+| AC-08 | 필수 reference 회귀·고정 사례·원격 쓰기 제외 | scripts/check-package.mjs·tests/package.test.mjs | 부모 직접 패키지 검사 통과, 22 tests/22 pass/0 fail, diff 공백 검사 통과, [검토 요약](review.md#검토-기록-요약) | 충족(로컬 검증 범위) |
 
 스킬 지시 자체에는 실행 로직 유닛 테스트 대상이 없다. 의미 충족은 원문·고정 사례 직접 대조로 확인하고 패키지 회귀는 별도로 실행했다. 신규 reference 파일을 삭제한 fixture에서 누락 오류를 확인하는 assertion과 정상 fixture의 빈 오류 배열을 직접 읽고 테스트 실행으로 확인했다. 규칙 문자열 존재만 검사해 의미 검증이라고 하지 않는다.
 
@@ -143,7 +143,7 @@
 | git diff --check | exit 0 | 작업본 diff |
 | staged/unstaged·untracked 범위 | staged 없음, 기존 6파일 수정·PR reference 신규·해당 작업 docs만 미추적 | 다른 worktree 수정 없음 |
 | freeze-manifest | 모든 고정 자료 SHA-256 일치 | 독립 입력 변조 없음 |
-| 고정 사례 RV-01~17 | [직접 적용 기록](review-scenarios.md), 변경 전 5건 유지·12건 계약 누락, 변경 후 직접 대조 충족 | 동일 고정 입력, 원문 전후 비교 |
+| 고정 사례 RV-01~17 | [검토 요약](review.md#검토-기록-요약), 변경 전 5건 유지·12건 계약 누락, 변경 후 직접 대조 충족 | 동일 고정 입력, 원문 전후 비교 |
 
 ## 지적과 처리
 
@@ -160,3 +160,7 @@
 - 커밋·push·PR 생성·댓글 게시·머지·Release는 미실행이다. 결과는 미커밋 로컬 산출물로 전달한다.
 - 소스·검토 대상이 바뀌면 영향 사례와 digest를 다시 고정한다.
 - 리뷰 결과는 머지 승인이 아니다.
+
+## 검토 기록 요약
+
+기존 판정·실패 이력·검토 대상·미실행·독립성 한계를 유지한다. 고정 입력과 실행 응답 전문은 현재 트리에서 제거했으며 필요한 원문은 [기록 요약·원문 조회](plan.md#기록-정리)으로 연결한다.

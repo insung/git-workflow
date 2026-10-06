@@ -72,3 +72,7 @@ created: "2026-10-05"
 | 2026-10-05 | 결정 | 라벨 정의는 자체 YAML, 원격 생성은 CLI 도구, release.yml은 GitHub 네이티브 설정 | AC-04·05, 02 | 승인 |
 | 2026-10-05 | 계획 이탈 | 자체 라벨 스키마는 GitHub 네이티브 파일과 구분해 assets/labels.yml에 보관. 조건별 릴리즈 설치 절차는 references/release.md로 명명 | AC-04·05·06, 01·02 | 승인 |
 | 2026-10-05 | 요청 변경 | pr-create 호출로 이 변경의 커밋·push·PR 생성 허용. 머지·댓글·호스트 설치는 제외 유지 | AC-01~07, 전달 | 승인 |
+
+## 기록 정리
+
+2026-10-06 Issue #39의 승인에 따라 전달문·검토 입력·응답 전문·로그·중복 초안을 현재 트리에서 정리했다. 이 문서의 기존 상태·판정·승인은 당시 기록이며 현재 완료 상태로 갱신한 것이 아니다. 필요한 원문은 [정리 전 기록](https://github.com/insung/git-workflow/tree/3993cb36cdb3fca6ff8b2bfee47016eb8a70e959/docs/git-workflows/2026-10/05_23_workflow-init)에서 조회한다.

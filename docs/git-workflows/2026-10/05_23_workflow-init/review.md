@@ -39,3 +39,7 @@ python3 verify-labels.py <implementation-worktree>/skills/workflow-init/scripts/
 ## PR 준비 시 재확인
 
 구현 커밋315576b의 source manifest가 앞선 독립 검증 작업본과 동일함을 확인했다. 이후 기록 커밋은 제품 소스를 변경하지 않으며 HEAD별 검증 근거를 아래 handoff에 연결한다. 검토 기준·입력은 구현 완료와 warn 판정 후 pr-review 기록 절차에 따라 반입했다.
+
+## 검토 기록 요약
+
+기존 판정·실패 이력·검토 대상·미실행·독립성 한계를 유지한다. 고정 입력과 실행 응답 전문은 현재 트리에서 제거했으며 필요한 원문은 [기록 요약·원문 조회](plan.md#기록-정리)으로 연결한다.

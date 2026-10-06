@@ -2,7 +2,7 @@
 
 - 대상: [PR #7](https://github.com/insung/git-workflow/pull/7), feat/task-implement → main.
 - 검토·사용자 승인 소스 HEAD: `5fec7a83e1ebe2c67978ad311979f5547c3db9d6`. 이 문서만 후속 기록 커밋으로 추가하며 소스·테스트·매니페스트·기존 계획 기록은 변경하지 않는다.
-- 근거: [plan](plan.md), [handoff](handoff.md), [agents-init 검증](task-06-agents-init.md). 원격 Issue #4는 실제 OPEN Issue이며 사용자 후속 요청인 agents-init 확장 범위는 plan과 PR에 구분되어 있다.
+- 근거: [plan](plan.md), [실행 요약](task-06-agents-init.md#실행-결과-요약), [agents-init 검증](task-06-agents-init.md). 원격 Issue #4는 실제 OPEN Issue이며 사용자 후속 요청인 agents-init 확장 범위는 plan과 PR에 구분되어 있다.
 - 기존 독립 검토 상태는 human-review였다. 2026-10-02 사용자가 PR 생성·남은 검토 항목을 안내받은 뒤 「좋아 승인」으로 머지를 승인했다. 공개한 과거 절차 이탈·독립성 한계와 계획 변경을 수용한 사람 결정으로 기록하며 과거 실행을 소급해 통과로 바꾸지 않는다.
 - 결과: 사용자 승인으로 머지 진행. 현재 기능 검증과 수용한 과거 절차 이탈·미검증 범위를 구분한다. 자동 AC 전체 pass나 호스트 설치 검증 완료를 주장하지 않는다.
 
@@ -21,3 +21,7 @@
 - agents-init 충돌·동시 변경 대응의 행동 검증, 실제 프로젝트 AGENTS.md 적용, 설치 갱신과 호스트 로딩은 미실행이다.
 - 비공개 기준·고정 입력·원시 증거는 이 기록에 반입하지 않는다.
 - 머지 방식은 저장소에서 허용한 merge commit이며 관리자 우회·브랜치 삭제·Release·배포·Issue 자동 닫기를 하지 않는다.
+
+## 검토 기록 요약
+
+기존 판정·실패 이력·검토 대상·미실행·독립성 한계를 유지한다. 고정 입력과 실행 응답 전문은 현재 트리에서 제거했으며 필요한 원문은 [기록 요약·원문 조회](plan.md#기록-정리)으로 연결한다.

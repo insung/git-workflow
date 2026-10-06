@@ -34,3 +34,7 @@ node --test tests/package.test.mjs; python3 tests/label-sync.test.py; node scrip
 사용자는 두 스킬 삭제와 0.6.0 포함을 승인했다. 이를 위해 해당 수정 commit/push·PR 머지·v0.6.0 태그 갱신·Release 노트 수정·두 호스트 재설치를 수행한다. 현재 공개 태그 OID 9767073e1879befea60ce0ac3b46875974ea30d3와 대상 1f6d0da를 기록하고 조건부 갱신한다. v0.5.0은 유지한다. 다른 source 변경이 생기면 재검토한다.
 
 롤백은 이번 변경 범위와 보존한 태그 OID를 근거로 별도 승인 하에 수행한다. 공개 태그 이력을 삭제하거나 다른 작업을 reset/clean하지 않는다.
+
+## 기록 정리
+
+2026-10-06 Issue #39의 승인에 따라 전달문·검토 입력·응답 전문·로그·중복 초안을 현재 트리에서 정리했다. 이 문서의 기존 상태·판정·승인은 당시 기록이며 현재 완료 상태로 갱신한 것이 아니다. 필요한 원문은 [정리 전 기록](https://github.com/insung/git-workflow/tree/3993cb36cdb3fca6ff8b2bfee47016eb8a70e959/docs/git-workflows/2026-10/05_27_remove-init-entrypoints)에서 조회한다.

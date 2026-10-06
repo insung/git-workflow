@@ -117,3 +117,7 @@ created: "2026-10-02"
 | 날짜 | 구분 | 내용 | 영향 AC·단계 | 상태 |
 | --- | --- | --- | --- | --- |
 | 2026-10-02 | 요청 변경 | 짧은 워크플로우 선언을 제안하고 승인 후 기존 AGENTS.md에 추가하는 agents-init 스킬, skill-creator 작성·evaluate-skill 검토·progress-report 보고를 추가한다. 기존 AGENTS.md 실제 적용은 이 요청에 포함하지 않는다. | EXT-01~05, 06 | 승인 |
+
+## 기록 정리
+
+2026-10-06 Issue #39의 승인에 따라 전달문·검토 입력·응답 전문·로그·중복 초안을 현재 트리에서 정리했다. 이 문서의 기존 상태·판정·승인은 당시 기록이며 현재 완료 상태로 갱신한 것이 아니다. 필요한 원문은 [정리 전 기록](https://github.com/insung/git-workflow/tree/3993cb36cdb3fca6ff8b2bfee47016eb8a70e959/docs/git-workflows/2026-10/02_4_task-implement-review-criteria)에서 조회한다.

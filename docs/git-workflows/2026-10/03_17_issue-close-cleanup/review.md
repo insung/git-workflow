@@ -3,11 +3,11 @@
 최신 요청 변경의 검토는 [종료 시 삭제 확인 질문](#2026-10-04-종료-시-삭제-확인-질문-검토) 절이다. 아래 초기 결과는 630870d 소스의 이력이다.
 
 - Issue: https://github.com/insung/git-workflow/issues/17; PR 미생성
-- 계획: [plan](plan.md), 작업: [task](task-01-cleanup-handoff.md), 구현 인계: [handoff](handoff.md)
+- 계획: [plan](plan.md), 작업: [task](task-01-cleanup-handoff.md), 구현 인계: [실행 요약](task-03-close-cleanup-prompt.md#실행-결과-요약)
 - base: `89175699cf1299046262786d99767b211762e516`
 - 제품 소스: `630870d2a9984ecd03a115959b5782b7e29bb2f8`; 검토 시 HEAD 01460e1은 문서만 추가
 - 구현 전 고정 기준: `51a90b9`, 리뷰 브랜치 review/issue-17
-- 초기 [고정 입력](review-input-close-cleanup.md) 7개는 구현 전 작성. [부재 추가 입력](review-input-absence.md)은 구현 후 166e026에서 고정했으며 초기 고정으로 소급하지 않음
+- 초기 [검토 요약](review.md#검토-기록-요약) 7개는 구현 전 작성. [검토 요약](review.md#검토-기록-요약)은 구현 후 166e026에서 고정했으며 초기 고정으로 소급하지 않음
 - 판정: root; 구현: 별도 에이전트. 시나리오 실행자는 판정하지 않음
 - 결과: **warn**. 제품 AC의 독립 검증 충족. 구현자의 최종 자기 GREEN은 기본 3회 중 1회만 실행, 2회는 슬롯 한도로 미실행. root가 별도의 새 실행자 3명으로 최종 소스의 고정 행동 입력을 실행했으며 자기 GREEN 3/3으로 표현하지 않음
 - spec-it 미채택
@@ -67,7 +67,7 @@
 - 사용자 요청: pr-merge할 때 해당 작업 워크트리도 삭제, 기존 승인 분리 문구 위치 제공
 - 최신 Issue AC-02 및 AC-08~10, [task-02](task-02-merge-cleanup-default.md) 적용
 - 검토 base: `9421fb3`; 제품 소스: `2a78df7cdf2ce8bc0ed7bfbf8fc027cb73417817`. HEAD 0f0ed25는 인계 기록만 변경
-- 이번 요청 변경 전 고정 기준: review/issue-17의 `a43ba4f`, [고정 입력](review-input-merge-cleanup-default.md)
+- 이번 요청 변경 전 고정 기준: review/issue-17의 `a43ba4f`, [검토 요약](review.md#검토-기록-요약)
 - root 직접 diff 대조: pr-merge 승인 규칙·후속 실행과 issue-close 인계의 3파일만 제품 변경. 이전 머지/정리 분리 규칙은 최신 요청으로 대체. 기존 보호·보존·일반/관리 도구·사후 조회 규칙은 그대로 유지
 - root 실행: node --test tests/*.test.mjs 29/29, node scripts/check-package.mjs 구조·상대 링크 통과, git diff 9421fb3 2a78df7 --check 통과
 - 독립 새 실행자 merge_default_check1~3에 source archive와 입력 절만 전달. 기대/기준·다른 응답·구현 인계는 전달하지 않음. root가 판정
@@ -99,7 +99,7 @@
 - PR: https://github.com/insung/git-workflow/pull/18. 사용자 요청대로 a359fc1의 현재 변경을 먼저 Draft PR로 만들고 후속 질문 보완 실행
 - 최신 Issue AC-11·12, [task-03](task-03-close-cleanup-prompt.md) 적용
 - 제품 소스: `8d4e544defdec58d89cbad8b74de9c25d552af98`; 검토 시 HEAD 0c9df57은 인계 문서만 변경
-- 구현 전 기준: review/issue-17 `a0a09a9`, [고정 입력](review-input-close-cleanup-prompt.md)
+- 구현 전 기준: review/issue-17 `a0a09a9`, [검토 요약](review.md#검토-기록-요약)
 - root diff 대조: issue-close 지침과 코멘트 기록의 2파일만 변경. pr-merge의 기본 정리 권한과 기존 보존·관리·실행 규칙 불변
 - root 직접 검사: node --test tests/*.test.mjs 29/29, node scripts/check-package.mjs 구조·상대 링크 통과, git diff 46124e4 8d4e544 --check 통과. .comments 변경 없음
 - 새 실행자 close_prompt_check1~3에 입력 절과 고정 source skills archive만 전달. 기대 절·검토 기준·다른 결과·구현 인계 미전달. 판정은 root
@@ -125,3 +125,7 @@
 - close-prompt-check1: `20540e4b2899f61e2156543860f50b7436e8ee2fa642c1e474537c0202b71909`
 - close-prompt-check2: `1b2abc43c5c515a8efb62a9de1ea20e2014e3396c45268221379d6b2e4a6df06`
 - close-prompt-check3: `0514671ed61cdae021146fec330fb72a4be50c57e5b3116e9960b3a638453c0e`
+
+## 검토 기록 요약
+
+기존 판정·실패 이력·검토 대상·미실행·독립성 한계를 유지한다. 고정 입력과 실행 응답 전문은 현재 트리에서 제거했으며 필요한 원문은 [기록 요약·원문 조회](plan.md#기록-정리)으로 연결한다.

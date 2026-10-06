@@ -2,7 +2,7 @@
 
 **하나의 변경을 Issue의 의도부터 승인된 머지까지 같은 근거로 잇는다.**
 
-[English](README.md) · **한국어**
+[English](README.md) · **한국어** · [0.8.0 릴리즈 준비](docs/releases/v0.8.0.md)
 
 git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이다. 요청자가 원하는 결과를 Issue의 달성 조건으로 기록하고, Issue에 실행 계획을 작성하고, 그 ID를 구현·테스트·PR·검토까지 잇는다. 별도 작업 파일은 필요한 경우에만 만든다. 각 단계는 기억에 의존한 요약 대신 이전 단계의 의도와 실제 결과를 읽는다.
 
@@ -109,6 +109,8 @@ branch-strategy 스킬은 제거되었다. 이전 스킬 호출은 전략 기록
 
 「이 프로젝트의 AGENTS.md를 git-workflow용으로 초기화해줘」라고 요청하면 [workflow-init](skills/workflow-init/SKILL.md)이 개별 프로젝트·다중 프로젝트 루트에 맞는 선언을 제안하고, 명시적 승인 후 기존 바이트를 보존하며 추가한다. 선언을 채택하면 메인이 승인된 단계를 조정하고 별도 구현자의 결과를 독립 검증한다. 전문은 스킬에서, 공통 맥락과 인계는 [역할별 읽기 순서](skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서)에서 확인한다.
 
+브랜치 전략 초기화와 이후 작업의 정책 적용 순서는 [간략한 워크플로우](skills/workflow-init/references/branch-policy.md#간략한-워크플로우)를 참조한다.
+
 ## 구조
 
 ```text
@@ -150,6 +152,7 @@ git diff --check
 
 | 예제 | 흐름 |
 | --- | --- |
+| [Issue 중심 기록](docs/examples/issue-centered-records/README.md) | 별도 작업 파일 없이 요청·계획·실제 결과 연결 |
 | [git-workflow v0.3.0 개선 (실제 사례)](docs/examples/git-workflow-v0.3.0/README.md) | 리뷰, Issue, 계획과 코멘트, 검토 기준 고정, 구현 세션 분리, 독립 검토, 머지와 릴리즈 |
 | [파이썬 버전 업그레이드](docs/examples/python-version-upgrade/README.md) | Issue, plan, 단계별 todo, 구현 인계, PR, 검토 |
 | [기존 Issue 재개](docs/examples/resume-existing-issue/README.md) | 다른 세션의 작업을 문서에서 이어받음 |

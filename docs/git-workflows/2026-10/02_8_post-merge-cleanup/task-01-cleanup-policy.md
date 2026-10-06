@@ -13,9 +13,9 @@
 
 | # | 작업 | 완료 | 처리 내용 |
 | --- | --- | --- | --- |
-| 1 | MERGED 확인 이후 정리 참조 연결 | [x] | 구현 09d8a74; [실행·이탈 근거](handoff.md) |
-| 2 | 원격·로컬·worktree 대상 및 보존 조건 정의 | [x] | 구현 09d8a74; [실행·이탈 근거](handoff.md) |
-| 3 | 일반 Git·Codex 관리 worktree 도구와 사후 확인 정의 | [x] | 구현 09d8a74; [실행·이탈 근거](handoff.md) |
+| 1 | MERGED 확인 이후 정리 참조 연결 | [x] | 구현 09d8a74; [실행 요약](task-02-workflow-integration.md#실행-결과-요약) |
+| 2 | 원격·로컬·worktree 대상 및 보존 조건 정의 | [x] | 구현 09d8a74; [실행 요약](task-02-workflow-integration.md#실행-결과-요약) |
+| 3 | 일반 Git·Codex 관리 worktree 도구와 사후 확인 정의 | [x] | 구현 09d8a74; [실행 요약](task-02-workflow-integration.md#실행-결과-요약) |
 
 ## 검증
 
