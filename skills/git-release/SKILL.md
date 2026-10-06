@@ -8,7 +8,7 @@ description: “릴리즈 노트를 작성해줘”, “태그와 Release를 만
 [공통 실행 경계](../git-workflow/references/execution-boundaries.md)를 적용한다.
 
 제목·변경 분류는 [공통 표기](../git-workflow/references/change-conventions.md), 기록은 [공통 문체](../git-workflow/references/writing-conventions.md)를 적용한다.
-plan의 배포 조건과 Issue/PR·확인된 docs 증거도 대조한다.
+Issue/PR의 배포 조건과 확인된 검증 근거를 대조하고 필요한 기존 plan을 추가로 읽는다.
 
 ## 태그와 릴리즈
 

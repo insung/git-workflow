@@ -4,13 +4,13 @@
 
 [English](README.md) · **한국어**
 
-git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이다. 요청자가 원하는 결과를 Issue의 달성 조건으로 기록하고, 작업을 plan과 단계별 todo로 나누고, 그 ID를 구현·테스트·PR·검토까지 잇는다. 각 단계는 기억에 의존한 요약 대신 이전 단계의 의도와 실제 결과를 읽는다.
+git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이다. 요청자가 원하는 결과를 Issue의 달성 조건으로 기록하고, Issue에 실행 계획을 작성하고, 그 ID를 구현·테스트·PR·검토까지 잇는다. 별도 작업 파일은 필요한 경우에만 만든다. 각 단계는 기억에 의존한 요약 대신 이전 단계의 의도와 실제 결과를 읽는다.
 
 이 플러그인은 지시 모음이며 CI 서비스가 아니다. 한 chat에서 전체 흐름을 조정할 수 있다. 독립 검토 기준이나 입력을 작성·열람한 세션은 해당 변경을 구현하지 않으며 별도 구현 세션에 인계한다.
 
 ## 왜 쓰는가
 
-- **의도와 근거가 이어진다** — Issue의 달성 조건 ID를 todo, 테스트 사례, 구현 인계, 검토가 참조한다.
+- **의도와 근거가 이어진다** — Issue의 달성 조건 ID를 본문 계획, 테스트 사례, PR 결과와 검토가 참조한다.
 - **검토가 빠진 테스트를 교차 확인한다** — pr-review는 달성 조건의 시나리오마다 구현과 assertion을 대응시키고, 테스트가 없는 시나리오를 보고한다.
 - **위험한 단계마다 승인이 따로 있다** — 커밋·push·PR·머지·배포·릴리즈는 각각 다른 행동이며, 한 승인이 다른 행동이나 새 HEAD로 넘어가지 않는다.
 - **대상 저장소가 같은 양식을 쓴다** — workflow-init이 스킬이 요구하는 항목을 갖춘 Issue·PR 템플릿을 설치한다.
@@ -33,16 +33,16 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 
 범위를 정한 커밋은 commit-rule, 브랜치 역할은 branch-strategy, 릴리즈는 git-release에 요청한다. 각 요청이 다른 행동까지 자동 승인하지 않는다. 아래 스킬 표에서 정본 규칙을 읽는다.
 
-Issue는 원하는 결과, plan은 공통 결정과 단계 순서, task는 실행 결과, handoff는 상세 근거의 진입점이다. review는 독립 판정과 필요한 조치를 전달한다. 역할이 나뉘어도 plan의 목적과 결정은 공유하며, 구현자에게 비공개 검토 입력은 전달하지 않는다. [문서 역할과 인계](skills/git-workflow/references/document-links.md)를 참조한다.
+Issue는 원문·동작 차이·영향·제약·AC·계획·필수 참고 링크, PR은 실제 결과·검증·배포 상태의 진입점이다. 단순 작업은 별도 파일 없이 진행한다. 상세 plan과 역할별 task는 필요한 경우에만 연결한다. 독립 검토 입력은 구현자에게 전달하지 않는다. [문서 역할과 인계](skills/git-workflow/references/document-links.md)를 참조한다.
 
 ## 작동 방식
 
 ```mermaid
 flowchart TD
     A[요청] --> B[issue-create: 달성 조건을 갖춘 Issue]
-    B --> C[plan-create: plan과 단계별 todo]
+    B --> C[plan-create: Issue 안의 계획·필요한 상세 설계]
     C --> D[task-implement: 단계별 구현·테스트·기록·커밋]
-    D --> E[pr-create: 구현 인계와 PR]
+    D --> E[pr-create: 실제 결과와 PR]
     E --> F[pr-review: 의도·구현·테스트 교차 확인]
     F -->|fail 또는 근거 부족| D
     F -->|pass| G[사용자가 PR·HEAD·머지 방식 승인]
@@ -59,9 +59,9 @@ flowchart TD
 | [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개와 다음 단계 선택 |
 | [workflow-init](skills/workflow-init/SKILL.md) | 선택한 템플릿·AGENTS.md·라벨·릴리즈 분류 초기화 |
 | [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완과 그 전의 중복 확인 |
-| [plan-create](skills/plan-create/SKILL.md) | Issue의 plan과 단계별 todo 작성 |
-| [task-implement](skills/task-implement/SKILL.md) | 준비된 todo의 작업 표 순서 구현, 기록, 단계별 커밋, 구현 인계 |
-| [pr-create](skills/pr-create/SKILL.md) | 구현 인계 작성과 PR 생성 |
+| [plan-create](skills/plan-create/SKILL.md) | Issue 안의 계획과 조건부 상세 설계 작성 |
+| [task-implement](skills/task-implement/SKILL.md) | 준비된 계획 구현, 검증, 결과 기록과 승인된 커밋 |
+| [pr-create](skills/pr-create/SKILL.md) | AC별 구현·검증 결과와 PR 작성 |
 | [pr-review](skills/pr-review/SKILL.md) | 변경이 Issue 의도를 채우는지와 빠진 테스트 확인 |
 | [pr-merge](skills/pr-merge/SKILL.md) | 승인된 머지 확인·안전한 작업 정리·종료 근거 인계 |
 | [issue-close](skills/issue-close/SKILL.md) | 종료 사유 선택과 결과 코멘트를 남기는 Issue 종료 |
@@ -69,7 +69,7 @@ flowchart TD
 | [branch-strategy](skills/branch-strategy/SKILL.md) | 브랜치 역할 정의나 브랜치 생성 |
 | [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
 
-작업 문서(plan.md, `task-{nn}-{step-title}.md`, handoff.md, review.md)는 대상 저장소의 [디렉토리 규칙](skills/plan-create/references/plan.md#디렉토리-규칙)에 따라 둔다. 검토 기준(`review-criteria.md`)과 검증 입력(`review-input-<topic>.md`)은 구현 전에 `review/issue-{n}` 브랜치에 따로 보관하며, 작업 디렉토리에는 pr-review의 기록 커밋 뒤에 나타난다. [보관 위치](skills/plan-create/references/review-criteria.md#보관-위치)를 따른다.
+단순 작업은 Issue·PR 본문을 기본 기록으로 사용한다. [상세 설계 조건](skills/plan-create/references/plan.md#상세-plan-생성-조건)에 해당할 때만 docs/git-workflows에 plan을 만들고 독립 계약이 필요한 task만 추가한다. handoff·review·evidence·txt는 자동 생성하지 않는다. [증거 수명과 문서 허브 인계](skills/git-workflow/references/document-links.md)를 따르며 기존 작업 파일·고정 링크는 보존한다. [짧은 예시](docs/examples/issue-centered-records/README.md)를 참조한다. 독립 기준은 구현 전 고정하고 [리뷰 전용 위치](skills/plan-create/references/review-criteria.md#보관-위치)에 유지한다.
 
 ## spec-it
 
@@ -112,8 +112,8 @@ codex plugin add git-workflow@git-workflow
 skills/
 ├── git-workflow/      라우터, 실행 경계, 표기·문체, 라벨, 문서 링크
 ├── issue-create/      Issue 본문 규칙
-├── plan-create/       plan·todo 양식
-├── task-implement/    단계 구현과 todo 기록 규칙
+├── plan-create/       본문 계획·선택적 설계 양식
+├── task-implement/    계획 구현과 결과 기록 규칙
 ├── pr-create/         PR 규칙과 구현 인계 양식
 ├── pr-review/         검토 양식과 spec-it 정책 검사
 ├── pr-merge/          승인된 머지

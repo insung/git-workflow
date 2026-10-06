@@ -6,7 +6,7 @@ description: “PR이 Issue 계획대로 구현됐는지 리뷰해줘”, “이
 # PR 검토
 
 [공통 실행 경계](../git-workflow/references/execution-boundaries.md)를 적용한다.
-Issue·plan·todo로 사용자 의도를 먼저 파악하고, 구현과 테스트가 그 의도를 채우는지 교차 확인한다.
+Issue의 현재 기준·계획과 필요한 연결 문서로 사용자 의도를 먼저 파악하고, 구현과 테스트가 그 의도를 채우는지 교차 확인한다.
 판정과 하위 에이전트 사용은 [검증 실행 주체](../git-workflow/references/execution-boundaries.md#검증-실행-주체)를 따른다.
 
 ## 1. 검토 대상 고정
@@ -18,16 +18,16 @@ Issue·plan·todo로 사용자 의도를 먼저 파악하고, 구현과 테스�
 
 ## 2. 의도 파악
 
-1. Issue의 목표·영향 범위·달성 조건(AC ID), plan의 결정과 변경 기록, 모든 관련 todo의 작업·검증 표를 읽는다.
-2. AC마다 기대 시나리오를 정상·실패·경계·유지 동작으로 나눠 적는다.
-3. [리뷰 브랜치](../plan-create/references/review-criteria.md#보관-위치)에 검토 기준이 있으면 읽고 AC별 기준으로 판정한다.
-4. Issue나 plan이 없으면 PR 본문과 요청자 설명으로 의도를 정리하고, 결과에 추정이라고 적는다.
+1. Issue의 원문·목표·영향·제약·달성 조건(AC ID)·현재 계획을 읽는다. 연결된 상세 plan·task와 기존 작업 기록은 필요한 범위에서 추가로 읽는다. 파일 부재 자체를 누락으로 판정하지 않는다.
+2. AC마다 해당하는 정상·실패·경계·유지 시나리오를 대조한다. 기대를 추측하거나 네 종류를 억지로 모두 만들지 않는다.
+3. [리뷰 전용 위치](../plan-create/references/review-criteria.md#보관-위치)의 고정 상태를 확인하고, 별도 기준이 있으면 읽고 AC별 기준으로 판정한다.
+4. Issue가 없거나 의도가 부족하면 PR·요청자 설명의 확인된 부분과 추정을 구별하고 의도 부족을 기록한다. 선택적 plan 파일이 없다는 이유로 의도를 추정으로 바꾸지 않는다.
 
 PR 제목·본문을 검토하면 [표기](../git-workflow/references/change-conventions.md)와 [문체](../git-workflow/references/writing-conventions.md)를 읽는다.
 
 ## 3. 구현 대조
 
-1. diff의 변경을 AC와 todo 작업에 양방향으로 대응시킨다.
+1. diff의 변경을 AC와 공개 계획의 작업에 양방향으로 대응시킨다.
 2. 계획 밖 파일·기능, 빠진 작업, 미변경 소비자에 미치는 영향을 확인한다.
 3. 이번 변경이 만든 문제와 변경 밖의 기존 문제를 구분한다.
 
@@ -37,7 +37,7 @@ todo 체크, handoff의 완료 주장, 테스트 내부의 일관성은 의도 �
 
 1. AC 기대 시나리오마다 테스트 파일과 assertion을 찾는다.
    대응 assertion이 없는 시나리오는 테스트 누락이다.
-2. Issue의 AC ID 중 todo 검증 표에 없는 ID는 계획의 테스트 누락이다.
+2. Issue의 AC ID 중 본문 계획 또는 연결된 검증 계획 어디에도 대응 사례가 없는 ID는 계획의 검증 누락이다.
 3. assertion이 동작을 고정하는지 확인한다.
    해당 구현을 지워도 통과하는 테스트는 그 시나리오를 검증하지 않는다.
 4. 실행 증거로 명령·실행 커밋·환경·시각·결과를 확인한다.
@@ -66,7 +66,7 @@ live·유료·credential 실행은 해당 승인이 있을 때만 하고, 실행
 | pass | 모든 AC 시나리오가 구현·테스트·실행 증거로 확인됨 |
 
 AC·todo·정책 근거가 없는 의견은 advisory로 분리한다.
-review.md 기록을 요청받았으면 대상 작업 디렉토리의 review.md에 쓰고, 아니면 대화로 반환한다.
+기본은 대화로 반환한다. 요청된 PR 리뷰/댓글 또는 별도 review.md에 같은 검토 결과를 기록한다. 별도 파일은 필수가 아니다.
 최초 검토·재검토는 검토 HEAD와 결과를 고정한 뒤, 댓글 신규 게시·수정이 요청된 경우에만 [PR 댓글](references/pr-comment.md)의 양식·승인·조회·중복 방지·사후 확인 절차를 따른다.
 댓글 요청이 없으면 위 대화/review.md 반환으로 끝낸다. PR 생성·검토·머지 승인은 댓글 승인으로 확대하지 않는다.
 Issue 원격 요약은 요청된 경우 [document-links](../git-workflow/references/document-links.md), 라벨은 [labels](../git-workflow/references/labels.md)를 따른다.
@@ -74,9 +74,10 @@ Issue 원격 요약은 요청된 경우 [document-links](../git-workflow/referen
 fail은 구현 담당에게 수정을 인계하고, 수정 후 새 HEAD를 다시 검토한다.
 pass도 머지 승인이 아니다. 다음 단계는 [pr-merge](../pr-merge/SKILL.md)다.
 
-## 7. 기록 커밋
+## 7. 검토 기록 보존
 
-1. review.md 기록 뒤 PR 머지 전에 작업 브랜치에 docs 커밋 하나를 만든다. 커밋 승인은 별도다.
-2. pass·warn이면 검토 기준·검증 입력을 `git checkout <리뷰 브랜치> -- <경로>`로 가져와 같은 커밋에 넣는다.
-3. fail·human-review이면 [작성 규칙](references/review.md#작성-규칙)을 지킨 review.md만 커밋한다.
-4. 검토 HEAD 뒤 커밋이 이 기록 커밋 하나이고 작업 디렉토리의 review.md·검토 기준·검증 입력만 바꿨으면 재검토하지 않는다. 머지의 HEAD 일치 확인에는 기록 커밋을 쓴다.
+대상 HEAD·판정·AC별 근거·조치·한계를 대화 또는 요청된 PR 리뷰 기록에 남긴다. 별도 review.md·docs 기록 커밋은 필수가 아니다. 임시 결과가 원격 검토 근거를 대신하면 안 된다.
+
+비공개 기준·고정 입력은 [보관 기준](../plan-create/references/review-criteria.md#보관-위치)에 따라 유지하고 pass·warn이어도 자동 반입하지 않는다. fail·human-review의 공개 범위는 [review 작성 규칙](references/review.md#작성-규칙)을 따른다.
+
+요청된 문서-only 기록 커밋이 있으면 검토 코드 HEAD와 보존 commit을 구별한다. 공개 검토 기록만 추가했고 소스·테스트·계획이 바뀌지 않았으면 기존 판정을 유지하되 머지에서는 실제 최신 HEAD를 확인한다. 그 밖의 변경은 영향받는 범위를 다시 검토한다.
