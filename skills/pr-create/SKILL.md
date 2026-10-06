@@ -7,6 +7,8 @@ description: “PR을 만들어줘”, “PR 본문을 작성해줘”처럼 구
 
 [공통 실행 경계](../git-workflow/references/execution-boundaries.md), [표기](../git-workflow/references/change-conventions.md), [문체](../git-workflow/references/writing-conventions.md), [라벨](../git-workflow/references/labels.md), [기록 위치](../git-workflow/references/document-links.md)를 따른다.
 
+PR base/head 결정 전에 [프로젝트 전략 정본](../branch-strategy/references/project-policy.md)을 읽고 요청과 대조한다. 정책의 PR 대상과 요청이 충돌하거나 필요한 대상이 미정이면 해당 결정·생성을 보류하고 확인한다.
+
 1. 실제 Issue·현재 계획·diff/commit·검증 결과를 확인한다. 별도 plan/task/handoff가 없다는 이유로 거절하지 않는다. 기존 연결 문서는 읽되 실제 결과와 대조한다. [Issue 연결 검사](../git-workflow/references/issue-link.md)가 부족하면 local-pr-draft를 반환한다.
 2. AC별 실제 구현·검증·미실행과 중요한 결정·차이·위험·배포/롤백을 [인계 정보](references/handoff.md)와 대조한다. 결과가 부족하면 task-implement로 증거 보완을 인계한다. 테스트 부족은 review-pending이며 ready로 만들지 않는다.
 3. [본문 규칙](references/pr.md#본문-작성편집-순서)과 대상의 같은 뜻 템플릿 절을 따른다. Issue 기준은 연결하고 실제 결과만 기록한다. 새 자산과 절 이름이 다르다는 이유로 기존 템플릿을 교체하지 않는다.

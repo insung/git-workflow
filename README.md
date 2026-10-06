@@ -57,7 +57,7 @@ Cleanup reports remote branches, local branches and worktrees separately. Dirty,
 | Skill | Use it to |
 | --- | --- |
 | [git-workflow](skills/git-workflow/SKILL.md) | Start or resume an Issue-based change and choose the next stage |
-| [workflow-init](skills/workflow-init/SKILL.md) | Initialize selected templates, AGENTS.md, labels and release categories |
+| [workflow-init](skills/workflow-init/SKILL.md) | Initialize selected templates, AGENTS.md, labels, release categories and project branch policy |
 | [issue-create](skills/issue-create/SKILL.md) | Write or complete an Issue, check for duplicates first |
 | [plan-create](skills/plan-create/SKILL.md) | Write an inline Issue plan and conditional detailed design |
 | [task-implement](skills/task-implement/SKILL.md) | Implement the prepared plan, verify and record results, and make approved commits |
@@ -100,7 +100,9 @@ Start a new session after installing or updating. In Claude Code the skills appe
 
 ### First run in a target repository
 
-Use [workflow-init](skills/workflow-init/SKILL.md) to select templates, an AGENTS.md declaration, GitHub labels, or release categories. Broad installation requests wait for selection; explicit partial requests apply only those items. Labels preview differences before approved missing-only creation; existing release settings are preserved.
+Use [workflow-init](skills/workflow-init/SKILL.md) to select templates, an AGENTS.md declaration, GitHub labels, release categories, or a project branch policy. Broad installation requests wait for selection; explicit partial requests apply only those items. Labels preview differences before approved missing-only creation; existing release settings are preserved.
+
+Branch policy is an independent option. Start from existing practice, then compare GitHub Flow, Trunk, Release Flow, Gitflow and the existing dev/prod option. Record the approved policy in one project document and propose a minimal AGENTS.md reading link. Changes to existing README content need separate approval; reread files before writing and renew approval if they changed. Document creation alone does not prove AI compliance: check ordinary branch, PR and hotfix requests. See [policy setup](skills/workflow-init/references/branch-policy.md) and [options with official sources](skills/workflow-init/references/branch-options.md).
 
 Ask the agent to install the GitHub templates, for example "Install the git-workflow Issue and PR templates in this repository". workflow-init copies only the files that do not exist yet and reports how existing templates differ.
 
