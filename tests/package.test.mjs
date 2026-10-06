@@ -180,3 +180,19 @@ test('ships workflow-init as the sole initialization entrypoint', () => {
     existsSync(join(skills, name, 'SKILL.md')));
   assert.deepEqual(discovered, ['workflow-init']);
 });
+
+// Regression: required user-facing information must not silently become optional.
+test('Issue templates require the original request, inline plan and reference links', () => {
+  const root = join(import.meta.dirname, '..', 'skills', 'workflow-init');
+  const rows = readFileSync(join(root, 'references/templates.md'), 'utf8').split('\n').filter(l => /^\| (기능 Issue|버그 Issue) \|/.test(l));
+  for (const row of rows) {
+    const required = row.split('|')[2].split(',').map(s => s.trim());
+    for (const heading of ['사용자 요청 원문', '계획', '참고 링크']) assert.ok(required.includes(heading), `${row.split('|')[1]}: ${heading}`);
+  }
+});
+
+test('PR reports AC results without requiring separate plan, task or handoff files', () => {
+  const asset = readFileSync(join(import.meta.dirname, '..', 'skills/workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md'), 'utf8');
+  assert.match(asset, /^## 완료 조건 확인과 검증 근거$/m);
+  assert.doesNotMatch(asset, /^- (계획|작업·테스트 사례|구현 인계):/m);
+});

@@ -13,7 +13,7 @@ description: '“Issue #12를 닫아줘”, “머지된 PR의 Issue에 결과 �
 
 `gh issue view <Issue> --json state,stateReason,body,comments,closedByPullRequestsReferences`로 현재 상태·달성 조건·연결 PR을 조회한다.
 연결 PR은 `gh pr view <PR> --json state,mergedAt,mergeCommit,baseRefName`으로 실제 머지를 확인한다.
-plan·todo·handoff·review에서 AC별 결과와 근거를 찾는다.
+PR의 AC 결과·검증·검토·배포 근거를 찾고 필요한 기존 plan·todo·handoff·review를 추가로 읽는다. 별도 파일 부재 자체는 종료 차단 사유가 아니다.
 
 Issue 본문에서 체크하지 않은 task 항목을 찾는다. `- [ ]`뿐 아니라 `* [ ]`, `+ [ ]`, 번호 목록과 들여쓴 task도 확인하고 코드 예시는 task로 세지 않는다.
 있으면 종료 전에 항목 원문과 대응하는 근거(충족·미충족·미확인)를 사용자에게 알린다.
@@ -39,7 +39,7 @@ duplicate는 정본 Issue가 열려 있거나 같은 범위로 해결되었는�
 - 미충족 또는 미확인 AC가 있음
 - Issue 본문에 체크하지 않은 task 항목이 남아 있음
 - 해결 PR의 `state=MERGED`·merge commit을 확인하지 못함
-- AC 결과의 근거 링크(todo·handoff·review 또는 PR)가 없음
+- AC 결과의 근거 링크(PR·검토 결과 또는 필요한 기존 문서)가 없음
 
 ## 3. 정리 확인과 코멘트 작성
 

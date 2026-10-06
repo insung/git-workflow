@@ -1,9 +1,10 @@
 # 워크플로우 예제 / Workflow examples
 
-실제 사례 하나와 가상 예제가 있다. 가상 예제의 Issue 번호·커밋·목표 버전·명령·승인·테스트 결과는 실제 리포에서 확인해 채워야 한다. dmp.crawler의 현재 구조나 실행 결과를 조사한 문서가 아니다.
+현재 기본은 Issue·PR 중심 기록이다. 기존 파일 세트는 당시 방식과 작업 재개를 설명하는 예제로 보존한다. 실제 사례와 가상 예제가 있다. 가상 예제의 Issue 번호·커밋·목표 버전·명령·승인·테스트 결과는 실제 리포에서 확인해 채워야 한다. dmp.crawler의 현재 구조나 실행 결과를 조사한 문서가 아니다.
 
 | Issue 주제 / Topic | 내용 / Contents |
 | --- | --- |
+| [Issue 중심 기록](issue-centered-records/README.md) | 현재 기본: 모호한 요청·단순 작업·조건부 설계·증거 수명 |
 | [git-workflow v0.3.0 개선 (실제 사례)](git-workflow-v0.3.0/README.md) | 리뷰 → Issue → 계획·코멘트 → 검토 기준 고정 → 구현 세션 → 독립 검토 → 머지·릴리즈 |
 | [파이썬 버전 업그레이드](python-version-upgrade/README.md) | Issue → plan/todos → 구현·PR → 리뷰 → 승인 머지 문서 세트 |
 | [기존 Issue 재개](resume-existing-issue/README.md) | 다른 세션으로 작업과 증거 인계 |

@@ -16,7 +16,7 @@ PR 본문의 Issue 항목에 [Issue 연결 검사](../git-workflow/references/is
 
 ## 머지 전
 
-Issue, plan/todo, PR URL, 검토한 HEAD와 결과, docs 증거와 전달/배포 계획을 확인한다.
+Issue의 현재 계획, 필요한 연결 문서, PR URL, 검토한 HEAD와 결과, 검증 근거와 전달/배포 계획을 확인한다.
 기록은 [문체](../git-workflow/references/writing-conventions.md), 원격 요약은 [document-links](../git-workflow/references/document-links.md)를 따른다.
 fail/human-review가 남아 있으면 수정·추가 증거 또는 명시적 인간 결정이 먼저다.
 spec-it을 채택한 프로젝트에서 정책 예외가 필요하면 spec-it의 예외 절차로 기록하며, 머지 승인만으로 예외를 만들지 않는다.
@@ -45,10 +45,10 @@ spec-it을 채택한 프로젝트에서 정책 예외가 필요하면 spec-it의
 머지가 확인되지 않으면 merge-unconfirmed와 확인이 필요한 항목을 반환한다.
 실제 MERGED 확인 뒤 [머지 후 작업 정리](references/post-merge-cleanup.md)를 읽어
 정확한 대상·권한·보존 조건을 확인한다. PR 머지 승인은 해당 작업 worktree 정리도 포함하므로 안전 조건을 충족하면 별도 질문 없이 제거하고 사후 조회한다. 머지 결과 조회만 요청했거나 명시적 보존 요청이 있으면 제거하지 않는다. 로컬·원격 브랜치 삭제와 댓글 게시는 별도 승인 범위로 유지하고 원격/local/worktree 결과를 각각 보고한다.
-설치된 [issue-close](../issue-close/SKILL.md)에 연결 Issue의 종료·결과 코멘트와 머지·정리 근거를 인계하고, 미설치면 로컬 handoff에 남긴다.
+설치된 [issue-close](../issue-close/SKILL.md)에 연결 Issue의 종료·결과 코멘트와 머지·정리 근거를 인계하고, 미설치면 대화 또는 작업용 임시 인계에 남긴다.
 `Closes`로 자동 종료된 Issue도 결과 코멘트 보완 경로로 인계한다.
 
 머지와 배포는 별도다.
-plan의 배포·롤백 조건/권한과 실제 배포 workflow를 확인한다.
+Issue/PR의 배포·롤백 조건/권한과 실제 배포 workflow를 확인한다.
 배포 승인이 없거나 환경이 미확인이면 필요한 다음 행동을 기록한다.
 승인된 배포가 필요하면 해당 실행 절차로 인계하고, 배포 결과를 머지 완료와 구분한다.

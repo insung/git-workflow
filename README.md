@@ -4,13 +4,13 @@
 
 **English** · [한국어](README.ko.md)
 
-git-workflow is a Codex and Claude Code plugin for Issue-based changes. It records what the requester wants as Issue acceptance criteria, splits the work into a plan and step todos, and carries those IDs through implementation, tests, the PR and review. Each stage reads the previous stage's intent and actual results instead of a summary from memory.
+git-workflow is a Codex and Claude Code plugin for Issue-based changes. It records what the requester wants as Issue acceptance criteria, keeps the execution plan in the Issue and creates separate work files only when needed, and carries those IDs through implementation, tests, the PR and review. Each stage reads the previous stage's intent and actual results instead of a summary from memory.
 
 The plugin is a set of instructions, not a CI service. One chat can coordinate the workflow. A session that writes or reads independent review criteria or inputs cannot implement that change; use a separate implementation session.
 
 ## Why
 
-- **Intent and evidence stay connected** — acceptance criteria IDs from the Issue are referenced by todos, test cases, the handoff and the review.
+- **Intent and evidence stay connected** — acceptance criteria IDs connect the inline plan, test cases, PR results and review.
 - **Reviews cross-check for missing tests** — pr-review maps every acceptance scenario to its implementation and its assertion, and reports scenarios with no test.
 - **Each risky step has its own approval** — commit, push, PR, merge, deployment and release are separate actions; approval for one does not extend to another or to a new HEAD.
 - **Target repositories use the same forms** — workflow-init installs Issue and PR templates that contain the fields the skills require.
@@ -33,16 +33,16 @@ Start with the result you want. The router reads the Issue and recorded work to 
 
 Use commit-rule for a scoped commit, branch-strategy for branch roles, and git-release for a release. These requests do not authorize the other actions automatically. The skill table below links to each rule.
 
-Read the Issue for the intended result, the plan for shared decisions and stage order, the task for execution results, and the handoff for detailed evidence. A review gives the independent verdict and necessary action. Separate roles share the plan’s purpose and decisions; implementation does not receive the private review inputs. See [document roles and handoff](skills/git-workflow/references/document-links.md).
+The Issue owns the original request, behavior change, scope, constraints, AC, plan and required reference links. The PR owns actual implementation, verification and delivery results. Detailed plans and task contracts are conditional. Implementation does not receive private review inputs. See [document roles and handoff](skills/git-workflow/references/document-links.md).
 
 ## How it works
 
 ```mermaid
 flowchart TD
     A[Request] --> B[issue-create: Issue with acceptance criteria]
-    B --> C[plan-create: plan and step todos]
+    B --> C[plan-create: inline plan and conditional design]
     C --> D[task-implement: implement, test, record and commit each step]
-    D --> E[pr-create: handoff and PR]
+    D --> E[pr-create: results and PR]
     E --> F[pr-review: intent, implementation and test cross-check]
     F -->|fail or missing evidence| D
     F -->|pass| G[User approves PR, HEAD and merge method]
@@ -59,9 +59,9 @@ Cleanup reports remote branches, local branches and worktrees separately. Dirty,
 | [git-workflow](skills/git-workflow/SKILL.md) | Start or resume an Issue-based change and choose the next stage |
 | [workflow-init](skills/workflow-init/SKILL.md) | Initialize selected templates, AGENTS.md, labels and release categories |
 | [issue-create](skills/issue-create/SKILL.md) | Write or complete an Issue, check for duplicates first |
-| [plan-create](skills/plan-create/SKILL.md) | Write the plan and step todos for an Issue |
-| [task-implement](skills/task-implement/SKILL.md) | Implement a prepared todo in table order, record results, commit each step and write the handoff |
-| [pr-create](skills/pr-create/SKILL.md) | Write the implementation handoff and open the PR |
+| [plan-create](skills/plan-create/SKILL.md) | Write an inline Issue plan and conditional detailed design |
+| [task-implement](skills/task-implement/SKILL.md) | Implement the prepared plan, verify and record results, and make approved commits |
+| [pr-create](skills/pr-create/SKILL.md) | Record AC results and verification evidence, and open the PR |
 | [pr-review](skills/pr-review/SKILL.md) | Check that the change meets the Issue intent and that no test is missing |
 | [pr-merge](skills/pr-merge/SKILL.md) | Confirm the approved merge, safely clean up the work and hand off closure evidence |
 | [issue-close](skills/issue-close/SKILL.md) | Close an Issue with a close reason and a result comment |
@@ -69,7 +69,7 @@ Cleanup reports remote branches, local branches and worktrees separately. Dirty,
 | [branch-strategy](skills/branch-strategy/SKILL.md) | Define branch roles or create a branch |
 | [git-release](skills/git-release/SKILL.md) | Prepare release notes, tags and GitHub Releases |
 
-Work documents (plan.md, `task-{nn}-{step-title}.md`, handoff.md, review.md) live in the target repository under the [directory rules](skills/plan-create/references/plan.md#디렉토리-규칙). The review criteria (`review-criteria.md`) and fixed inputs (`review-input-<topic>.md`) are written before implementation and kept on the `review/issue-{n}` branch; they appear in the work directory only after the pr-review record commit. See the [storage rule](skills/plan-create/references/review-criteria.md#보관-위치).
+Simple work uses the Issue and PR as its records. Create a plan only when [detailed design is needed](skills/plan-create/references/plan.md#상세-plan-생성-조건); add task contracts only for independent handoffs. Handoff, review, evidence and txt files are not automatic outputs. Follow the [evidence lifecycle and document hub handoff](skills/git-workflow/references/document-links.md), preserve existing records and fixed links, and use the [short example](docs/examples/issue-centered-records/README.md). Freeze independent criteria before implementation and keep them in a [review-only location](skills/plan-create/references/review-criteria.md#보관-위치).
 
 ## spec-it
 
@@ -112,8 +112,8 @@ Ask "Initialize this project’s AGENTS.md for git-workflow" to use [workflow-in
 skills/
 ├── git-workflow/      router, execution boundaries, conventions, labels, links
 ├── issue-create/      Issue content rules
-├── plan-create/       plan and todo forms
-├── task-implement/    step implementation and todo recording rules
+├── plan-create/       inline plan and optional design forms
+├── task-implement/    plan implementation and result recording rules
 ├── pr-create/         PR rules and handoff form
 ├── pr-review/         review form and spec-it policy check
 ├── pr-merge/          approved merge
