@@ -102,7 +102,7 @@ codex plugin add git-workflow@git-workflow
 
 「git workflow 설치해줘」는 [workflow-init](skills/workflow-init/SKILL.md)으로 네 항목을 제시하고 선택을 기다린다. 「라벨만 설치해줘」 등 부분 요청은 해당 항목만 적용한다. 라벨은 기본 차이 미리보기와 승인된 누락 생성, release.yml은 기존 파일 보존을 따른다.
 
-에이전트에게 GitHub 템플릿 설치를 요청한다. 예: 「이 저장소에 git-workflow의 Issue·PR 템플릿을 설치해줘」. workflow-init은 없는 파일만 복사하고 기존 템플릿과의 차이를 보고한다.
+에이전트에게 GitHub 템플릿 설치를 요청한다. 예: 「이 저장소에 git-workflow의 Issue·PR 템플릿을 설치해줘」. workflow-init의 템플릿 설치·갱신 항목을 선택하거나 템플릿 설치·갱신을 명시적으로 요청하면 없는 파일은 설치하고 기존 내용은 정본 전체로 교체한다. 기존 내용 보존이나 차이 확인만 요청한 경우에는 교체하지 않는다. 기존 파일명·경로를 유지하며 같은 내용이면 다시 쓰지 않는다. 로컬 작업공간을 지정하면 설치본 대신 그 소스의 정본을 사용한다.
 
 「이 프로젝트의 AGENTS.md를 git-workflow용으로 초기화해줘」라고 요청하면 [workflow-init](skills/workflow-init/SKILL.md)이 개별 프로젝트·다중 프로젝트 루트에 맞는 선언을 제안하고, 명시적 승인 후 기존 바이트를 보존하며 추가한다. 선언을 채택하면 메인이 승인된 단계를 조정하고 별도 구현자의 결과를 독립 검증한다. 전문은 스킬에서, 공통 맥락과 인계는 [역할별 읽기 순서](skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서)에서 확인한다.
 
