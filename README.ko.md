@@ -52,7 +52,7 @@ flowchart TD
     H -. 별도 승인 .-> I[git-release: 노트·태그·Release]
 ```
 
-정리는 원격 브랜치·로컬 브랜치·worktree 결과를 각각 보고한다. dirty·공유·잠금·보호·검토 후 작업은 보존하고 Codex 관리 worktree는 관리 기능으로 아카이브한다. [정리 정책](skills/pr-merge/references/post-merge-cleanup.md)을 적용한다. 종료 코멘트는 설치된 issue-close가 담당하며 없으면 로컬 handoff로 남긴다. 작은 후속 변경도 의도·범위·AC가 같은 열린 Issue만 재사용하고, 닫힌 범위와 다른 변경은 연결된 새 Issue로 추적한다.
+pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 head는 issue-close가 Issue를 닫을 때 삭제한다. issue-close는 근거로 충족된 task 항목을 승인 없이 체크한다. dirty·공유·잠금·보호·검토 후 작업은 보존하고 Codex 관리 worktree는 관리 기능으로 아카이브한다. [정리 정책](skills/pr-merge/references/post-merge-cleanup.md)을 적용한다. 종료 코멘트는 설치된 issue-close가 담당하며 없으면 로컬 handoff로 남긴다. 작은 후속 변경도 의도·범위·AC가 같은 열린 Issue만 재사용하고, 닫힌 범위와 다른 변경은 연결된 새 Issue로 추적한다.
 
 | 스킬 | 쓰는 때 |
 | --- | --- |

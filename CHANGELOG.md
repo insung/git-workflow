@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- issue-close는 PR AC 결과·검토 결과로 충족이 확인된 task 항목을 승인 없이 체크한다. 미충족·미확인 항목은 지금처럼 사용자에게 알리고 completed를 막는다.
+- 원격 head 삭제를 pr-merge에서 issue-close로 옮겼다. 열린 Issue를 completed로 닫을 때 종료 승인 후·코멘트 게시 전에 머지된 PR의 원격 head를 승인 없이 삭제한다. 이미 닫힌 Issue는 상황을 설명하고 삭제할지 묻는다. 안전 조건은 그대로이고 로컬 브랜치는 지우지 않는다.
+- issue-close가 `Closes` 키워드 없이 Issue를 참조한 머지된 PR도 PR 본문 검색으로 찾는다.
+- 근거: [Issue #43](https://github.com/insung/git-workflow/issues/43).
+
 ## 0.8.0 — 발행 준비
 
 - Issue를 요청 원문·동작 차이·영향·제약·AC·계획·필수 참고 링크의 진입점으로 사용하고 PR에 실제 구현·검증·배포 결과를 연결한다. 상세 plan과 독립 작업 task만 조건부로 분리하며 원시 로그·인계·검토 파일을 자동 생성하지 않는다.
