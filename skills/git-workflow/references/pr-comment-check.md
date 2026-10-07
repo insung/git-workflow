@@ -1,6 +1,6 @@
 # PR·연결 Issue 코멘트 확인
 
-pr-review, pr-merge, pr-comment-check가 재사용하는 읽기·판단 절차다. 리뷰 상태가 COMMENTED·APPROVED이거나 이전 검토가 pass여도 본문과 파일별 요청을 읽는다. 결과 게시 규칙은 [pr-comment.md](../../pr-review/references/pr-comment.md)에 유지한다.
+pr-review, pr-merge, pr-comment-check가 재사용하는 읽기·판단 절차다. 리뷰 상태가 COMMENTED·APPROVED이거나 이전 검토가 pass여도 본문과 파일별 요청을 읽는다. 수정 후 원래 스레드 회신은 [공통 수정 결과 회신](pr-comment-reply.md)을 따른다. 구현·pr-review·pr-merge가 재사용하며 코멘트 확인 요청만으로 회신을 자동 게시하지 않는다. 결과 게시 규칙은 [pr-comment.md](../../pr-review/references/pr-comment.md)에 유지한다.
 
 ## 1. 대상과 조회 완전성
 

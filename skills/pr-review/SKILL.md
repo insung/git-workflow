@@ -29,6 +29,8 @@ PR 제목·본문을 검토하면 [표기](../git-workflow/references/change-con
 
 GitHub PR이면 [공통 코멘트 확인](../git-workflow/references/pr-comment-check.md)으로 일반 댓글·리뷰 본문·파일별 코멘트와 답글·연결 Issue 댓글을 전체 조회한다. 요청별 현재 HEAD의 반영 근거·후속 합의·완료 조건 영향을 구현 대조와 최종 판정에 포함한다. COMMENTED·resolved·outdated나 이전 pass만으로 요청을 처리했다고 하지 않는다. 조회 미완료는 미확인·필요한 재조회로 보고하며 모든 unresolved 댓글을 자동 fail로 만들지 않는다.
 
+사용자가 수정 결과 회신을 요청했으면 [공통 수정 결과 회신](../git-workflow/references/pr-comment-reply.md)을 재사용한다. 이미 같은 결과로 회신했으면 URL을 반환하고 중복 게시하지 않는다. 구현자 결과와 이 검토의 판정을 구별하며 답글 게시·resolve·머지 권한을 따로 확인한다.
+
 ## 3. 구현 대조
 
 1. diff의 변경을 AC와 공개 계획의 작업에 양방향으로 대응시킨다.

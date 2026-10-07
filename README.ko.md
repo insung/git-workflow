@@ -75,6 +75,8 @@ pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 hea
 
 PR과 연결 Issue의 코멘트만 확인할 때는 [pr-comment-check](skills/pr-comment-check/SKILL.md)를 사용한다. pr-review·pr-merge도 같은 [조회·반영 확인 절차](skills/git-workflow/references/pr-comment-check.md)를 재사용한다. COMMENTED·resolved·outdated는 반영 근거가 아니며, 확인 요청은 게시·스레드 resolve·머지 승인이 아니다.
 
+수정 결과를 회신해 달라는 요청에는 task-implement·pr-review·pr-merge가 [공통 회신 절차](skills/git-workflow/references/pr-comment-reply.md)를 재사용한다. 원래 스레드에 반영 근거·검증·남은 판단과 작성 AI를 표시하고, 기존 답글과 중복을 확인한 뒤 게시된 URL·본문을 다시 읽는다. 회신·resolve·머지 권한은 각각 구별한다.
+
 ## spec-it
 
 [spec-it](https://github.com/insung/spec-it)은 프로젝트의 아키텍처·제품 정책을 고정하는 별도 플러그인이다. 프로젝트는 `.architecture/manifest.yaml`과 `.architecture/lock.yaml`을 커밋해 spec-it을 채택한다. git-workflow는 spec-it 없이도 동작한다.

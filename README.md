@@ -75,6 +75,8 @@ Simple work uses the Issue and PR as its records. Create a plan only when [detai
 
 Check PR and linked Issue feedback with [pr-comment-check](skills/pr-comment-check/SKILL.md). pr-review and pr-merge reuse the same [read and evidence procedure](skills/git-workflow/references/pr-comment-check.md); COMMENTED, resolved and outdated do not prove a request was implemented. Checking comments does not authorize posting, resolving threads or merging.
 
+When the user requests a result reply, task-implement, pr-review and pr-merge reuse the [shared reply procedure](skills/git-workflow/references/pr-comment-reply.md). Reply in the original review thread with implementation evidence, validation, remaining decisions and the actual AI author. Check existing replies and read back the saved URL and body. Posting, resolving threads and merging each require their own scope.
+
 ## spec-it
 
 [spec-it](https://github.com/insung/spec-it) is a separate plugin that pins a project's architecture and product policies. A project adopts it by committing `.architecture/manifest.yaml` and `.architecture/lock.yaml`. git-workflow does not require spec-it.
