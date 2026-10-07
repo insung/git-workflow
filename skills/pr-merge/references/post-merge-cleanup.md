@@ -12,7 +12,7 @@ auto-merge 등록·merge queue 진입·exit 0·응답 미확인은 정리 시작
 
 pr-merge는 원격 head를 삭제하지 않는다. 원격 head는 [issue-close](../../issue-close/SKILL.md#completed의-원격-head-삭제)가 Issue를 닫을 때 이 문서의 대상 대응·안전 조건·실행·사후 조회로 처리한다.
 
-`gh pr merge --delete-branch`는 로컬·원격 브랜치 삭제 옵션이다. worktree 제거 증거가 아니며, 안전 조건을 확인하기 전에 머지 명령에 붙이지 않는다. 원격 자동 삭제 설정을 켜거나 보호 규칙을 우회하지 않는다.
+`gh pr merge --delete-branch`는 로컬·원격 브랜치 삭제 옵션이다. worktree 제거 증거가 아니며, pr-merge는 원격 head를 지우지 않으므로 머지 명령에 붙이지 않는다. 원격 자동 삭제 설정을 켜거나 보호 규칙을 우회하지 않는다.
 
 다음 대응표를 조회 근거와 함께 고정한다. 이름만 같은 branch를 같은 작업으로 추정하지 않는다.
 
