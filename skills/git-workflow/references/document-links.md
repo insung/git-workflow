@@ -17,6 +17,18 @@ Issue는 요청·기준·계획, PR은 실제 구현·검증·검토·전달 결
 
 PR 생성 전 결과는 대화나 작업용 임시 초안으로 유지한다. 원격 PR 생성 시 필요한 결과를 본문에 반영한다. 임시 초안은 공유 정본으로 취급하지 않으며 다른 세션에는 실제 접근 가능한 입력을 전달한다.
 
+## 커밋에서 출발하는 읽기 순서
+
+코드의 해당 변경을 `git blame`이나 `git log`로 찾아 커밋 메시지를 읽는다. Refs의 출처는 [커밋 메시지 정본](../../commit-rule/references/commit-message.md#issue-출처-refs)의 표기·실제 Issue 확인 기준으로 해석한다.
+
+1. 커밋의 Refs에서 Issue로 이동해 `사용자 요청 원문`, 의도·판단·합의, 현재 계획을 읽는다.
+2. Issue가 연결한 PR에서 해당 커밋과 해결 범위를 대조하고 실제 구현·검증·미실행·중요한 선택을 읽는다. 연결된 PR이 여러 개면 해당 변경을 포함하는 PR을 확인한다.
+3. Refs가 없거나 Issue에서 PR을 찾기 어려우면 GitHub의 커밋별 PR 조회로 연결된 PR을 찾고, PR 본문의 관련 Issue에서 원문·판단을 읽는다. 결과가 없거나 접근이 불가하면 추적 한계를 남기며 관계를 만들어 넣지 않는다.
+
+확인된 기존 사례는 [커밋 3344dbd](https://github.com/insung/git-workflow/commit/3344dbd9fcad9171fd93b4d17e555a4e13ee8033) → [PR #38](https://github.com/insung/git-workflow/pull/38) → [Issue #36의 요청 원문](https://github.com/insung/git-workflow/issues/36)이다. 이 커밋에는 Refs가 없으며 [커밋별 PR API](https://api.github.com/repos/insung/git-workflow/commits/3344dbd9fcad9171fd93b4d17e555a4e13ee8033/pulls)로 연결을 확인했다. Refs는 직접 진입할 출처를 명시한다. 효과 비교 측정 결과는 없다.
+
+Issue와 PR은 같은 정보를 복사하는 대신 위 역할에 따라 읽는다. Squash의 최종 메시지 보존은 [머지 지침](../../pr-merge/SKILL.md#squash-최종-메시지)에서 확인한다. 기존 공개 커밋의 이력을 다시 쓰지 않는다.
+
 ## 증거와 실행 로그
 
 별도 설계가 있다는 이유로 evidence/·evidences/·txt·digest 파일을 생성하지 않는다. 확장자보다 쓰임과 보존 필요를 판단한다.

@@ -35,6 +35,8 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 
 Issue는 원문·동작 차이·영향·제약·AC·계획·필수 참고 링크, PR은 실제 결과·검증·배포 상태의 진입점이다. 단순 작업은 별도 파일 없이 진행한다. 상세 plan과 역할별 task는 필요한 경우에만 연결한다. 독립 검토 입력은 구현자에게 전달하지 않는다. [문서 역할과 인계](skills/git-workflow/references/document-links.md)를 참조한다.
 
+Issue 기반 커밋은 [Refs 푸터](skills/commit-rule/references/commit-message.md#issue-출처-refs)로 실제 Issue를 연결한다. 코드에서 시작할 때는 [커밋 → Issue의 원문·판단 → PR의 실제 결과](skills/git-workflow/references/document-links.md#커밋에서-출발하는-읽기-순서)를 읽는다. Squash를 사용하면 [최종 메시지의 Refs](skills/pr-merge/SKILL.md#squash-최종-메시지)를 확인한다.
+
 ## 작동 방식
 
 ```mermaid
