@@ -1,5 +1,10 @@
 # Changelog
 
+## 미발행
+
+- PR·연결 Issue 코멘트의 공통 조회·반영 근거 확인과 pr-comment-check 진입점 제공
+- pr-review·pr-merge의 피드백 재확인, 읽기 전용 수집과 페이지·HEAD 오류 검증
+
 ## Unreleased
 
 - issue-close는 PR AC 결과·검토 결과로 충족이 확인된 task 항목을 승인 없이 체크한다. 미충족·미확인 항목은 지금처럼 사용자에게 알리고 completed를 막는다.

@@ -65,12 +65,15 @@ pr-merge reports local branches and worktrees separately; issue-close deletes th
 | [task-implement](skills/task-implement/SKILL.md) | Implement the prepared plan, verify and record results, and make approved commits |
 | [pr-create](skills/pr-create/SKILL.md) | Record AC results and verification evidence, and open the PR |
 | [pr-review](skills/pr-review/SKILL.md) | Check that the change meets the Issue intent and that no test is missing |
+| [pr-comment-check](skills/pr-comment-check/SKILL.md) | Read PR and linked Issue comments and report request status with evidence |
 | [pr-merge](skills/pr-merge/SKILL.md) | Confirm the approved merge, safely clean up the work and hand off closure evidence |
 | [issue-close](skills/issue-close/SKILL.md) | Close an Issue with a close reason and a result comment |
 | [commit-rule](skills/commit-rule/SKILL.md) | Make scoped commits and write commit messages |
 | [git-release](skills/git-release/SKILL.md) | Prepare release notes, tags and GitHub Releases |
 
 Simple work uses the Issue and PR as its records. Create a plan only when [detailed design is needed](skills/plan-create/references/plan.md#상세-plan-생성-조건); add task contracts only for independent handoffs. Handoff, review, evidence and txt files are not automatic outputs. Follow the [evidence lifecycle and document hub handoff](skills/git-workflow/references/document-links.md), preserve existing records and fixed links, and use the [short example](docs/examples/issue-centered-records/README.md). Freeze independent criteria before implementation and keep them in a [review-only location](skills/plan-create/references/review-criteria.md#보관-위치).
+
+Check PR and linked Issue feedback with [pr-comment-check](skills/pr-comment-check/SKILL.md). pr-review and pr-merge reuse the same [read and evidence procedure](skills/git-workflow/references/pr-comment-check.md); COMMENTED, resolved and outdated do not prove a request was implemented. Checking comments does not authorize posting, resolving threads or merging.
 
 ## spec-it
 
