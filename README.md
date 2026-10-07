@@ -35,6 +35,8 @@ Use commit-rule for a scoped commit, workflow-init for branch policy setup, and 
 
 The Issue owns the original request, behavior change, scope, constraints, AC, plan and required reference links. The PR owns actual implementation, verification and delivery results. Detailed plans and task contracts are conditional. Implementation does not receive private review inputs. See [document roles and handoff](skills/git-workflow/references/document-links.md).
 
+Issue-based commits link the actual Issue through a [Refs footer](skills/commit-rule/references/commit-message.md#issue-출처-refs). From code, follow [commit → Issue request and decisions → PR results](skills/git-workflow/references/document-links.md#커밋에서-출발하는-읽기-순서). When using squash, [verify Refs in the final message](skills/pr-merge/SKILL.md#squash-최종-메시지).
+
 ## How it works
 
 ```mermaid

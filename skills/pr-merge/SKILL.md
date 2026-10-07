@@ -35,15 +35,29 @@ spec-it을 채택한 프로젝트에서 정책 예외가 필요하면 spec-it의
    댓글 요청과 머지 승인은 별개이고, 확인 댓글은 새 검토나 머지 완료를 뜻하지 않는다.
 4. 승인 범위 안에서 저장소의 머지 방식과 보호 규칙을 따른다.
    `gh pr merge <PR> --match-head-commit <확인한HEAD> <승인된머지방식>`처럼 HEAD 일치를 실행 시에도 요구한다.
+   Squash를 사용하는 경우 아래 [최종 메시지 확인](#squash-최종-메시지)을 먼저 적용한다.
    보호 규칙을 우회하거나 관리자 강제 머지를 하지 않는다.
 5. 응답이 불명확하면 재실행보다 먼저 PR 상태를 조회한다.
    실제 `state=MERGED`, mergedAt, mergeCommit을 확인한다.
    auto-merge 등록이나 명령 exit 0만으로 머지 완료라 하지 않는다.
    미확인이면 merge-unconfirmed로 멈춘다.
 
+## Squash 최종 메시지
+
+승인된 머지 방식이 Squash인 경우 적용한다. [커밋 메시지 정본](../commit-rule/references/commit-message.md#issue-출처-refs)의 Refs·Co-authored-by 규칙을 최종 메시지에도 적용한다. 이 절은 머지 방식을 새로 선택하는 근거가 아니다.
+
+1. 최신 PR의 실제 해결 Issue를 확인해 필요한 Refs를 정한다. 단순히 모든 커밋의 참조를 복사하지 않고 이번 해결 범위와 대조한다. 참조 표기는 최종 커밋이 게시될 PR base 저장소 기준으로 확인한다.
+2. 최종 제목·본문·Refs·실제 기여자의 Co-authored-by를 준비한다. GitHub 기본 Squash 메시지는 커밋 수·저장소 설정에 따라 달라지므로 원래 커밋의 푸터가 자동 보존된다고 가정하지 않는다. 출처 참조에 의도하지 않은 자동 종료 키워드가 있는지도 확인한다.
+3. CLI에서는 확인한 제목을 `--subject`, 본문·푸터를 임시 파일의 `--body-file`로 지정하고, 기존 `--match-head-commit`과 승인된 `--squash`를 함께 사용한다. UI에서는 최종 메시지 입력란을 대조한다. 필요한 최종 메시지를 반영할 수 없는 실행 경로는 머지를 보류하고 이유를 보고한다.
+4. 실제 MERGED·mergedAt·mergeCommit을 확보한 뒤 그 OID의 메시지를 다시 읽어 준비한 Refs와 대조한다. 명령 성공이나 원래 HEAD의 푸터만으로 보존 완료라 하지 않는다.
+
+사후 보고는 `머지: 완료/미확인`과 `Refs: 확인/누락/미확인`을 구별한다. 실제 MERGED와 mergeCommit을 확인했지만 메시지 조회만 실패한 경우 머지는 완료, Refs는 미확인이다. 누락 또는 조회 실패는 관련 Issue·mergeCommit·남은 확인을 보고하고 후속 조치로 남긴다. 완료된 머지를 재실행하거나 공개 커밋을 amend·rebase·force push로 고치지 않는다.
+
+GitHub의 기본 메시지 구성은 [공식 Squash 설정 문서](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests)를 참조한다.
+
 ## 머지 결과와 다음 행동
 
-실제 머지가 확인되면 PR URL, mergedAt, mergeCommit과 검토·승인한 HEAD를 보고한다.
+실제 머지가 확인되면 PR URL, mergedAt, mergeCommit과 검토·승인한 HEAD를 보고한다. Squash인 경우 최종 메시지의 Refs 확인 결과도 함께 보고한다.
 머지가 확인되지 않으면 merge-unconfirmed와 확인이 필요한 항목을 반환한다.
 실제 MERGED 확인 뒤 [머지 후 작업 정리](references/post-merge-cleanup.md)를 읽어
 정확한 대상·권한·보존 조건을 확인한다. PR 머지 승인은 해당 작업 worktree 정리도 포함하므로 안전 조건을 충족하면 별도 질문 없이 제거하고 사후 조회한다. 머지 결과 조회만 요청했거나 명시적 보존 요청이 있으면 제거하지 않는다. 로컬·원격 브랜치 삭제와 댓글 게시는 별도 승인 범위로 유지하고 원격/local/worktree 결과를 각각 보고한다.
