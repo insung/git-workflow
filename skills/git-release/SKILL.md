@@ -34,6 +34,7 @@ git log --first-parent --pretty=format:'%s' <이전-태그>..<현재-태그>
 커밋 이력에서 릴리즈 노트나 배포 PR의 변경 요약을 만들 때 [release-notes.md](references/release-notes.md)를 읽는다.
 이전 배포 지점과 이번 대상 지점을 확인하고, 해당 범위의 커밋·PR·실제 변경을 대조해 사용자에게 의미 있는 결과로 묶는다.
 초안을 제시하기 전에 [결과 중심 초안과 편집](references/release-notes.md#결과-중심-초안과-편집)의 제목·변경 선정·전환 안내와 원문 대조 절차를 적용한다.
+공개 제목·본문 첫 H2와 [GitHub CLI 참고 기본 구성](references/release-notes.md#github-cli-참고-기본-구성)을 적용한다. 상세 근거는 연결하고 필요한 전환·승인·검증 한계를 보존한다.
 릴리즈 노트 작성은 태그 생성, GitHub Release 발행 또는 배포 권한을 포함하지 않는다.
 
 ### 발행
