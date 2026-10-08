@@ -11,6 +11,8 @@ description: '“이슈를 만들어줘”, “이슈 본문을 보완해줘”,
 제목은 [change-conventions](../git-workflow/references/change-conventions.md), 기록은 [writing-conventions](../git-workflow/references/writing-conventions.md), 라벨은 [labels](../git-workflow/references/labels.md), 외부 기록은 [document-links](../git-workflow/references/document-links.md)를 읽는다.
 목표 버전과 마일스톤은 [공통 마일스톤 절차](../git-workflow/references/milestones.md)를 적용한다. 저장소 기준과 목표가 정해졌으면 생성 시 연결하고, 미정이면 임의 지정하지 않는다. 기존 마일스톤 재사용·승인된 누락 생성·기존 연결 보존·응답 불명 시 재조회와 연결 실패만 재시도를 따른다.
 
+릴리즈 중 추가 작업은 [릴리즈 기록 기준](../git-release/references/release-context.md#릴리즈-중-추가-작업)의 같은 Issue 기록·분리와 요청별 출처 연결을 적용한다.
+
 ## Issue 확인·작성
 
 1. 변경 크기와 관계없이 기존 Issue의 의도·영향 범위·달성 조건(AC)을 현재 요청과 대조한다.
@@ -24,7 +26,7 @@ description: '“이슈를 만들어줘”, “이슈 본문을 보완해줘”,
    제시 전 [본문 작성·편집 순서](references/issue.md#본문-작성편집-순서)로 목표·범위·AC·확인된 사실·링크를 구별하고 원문 의미를 대조한다.
 2. 생성이 요청 범위에 있고 접근 가능하면 본문 파일로 Issue를 만들고 URL/번호를 확인한다.
    인증 불가인 로컬 파일럿만 local-draft를 허용한다.
-   원격 PR 전에는 실제 Issue가 필요하다.
+   일반 원격 PR 전에는 실제 Issue가 필요하다. [순수 릴리즈 준비 예외](../git-release/references/release-context.md#issue-없는-릴리즈와-준비-pr)는 별도 조건·대체 기록을 적용하며 이슈 생성을 강제하지 않는다.
 3. 실제 URL/번호·본문·라벨과 assignee login, 실제 마일스톤 연결 또는 미지정 사유를 재확인한다.
    생성 응답이 불명확하면 먼저 조회하여 중복 생성을 피한다.
    Issue가 존재하더라도 의도·영향 범위·달성 조건이 부족하면 보완한다.
