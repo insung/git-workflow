@@ -116,8 +116,6 @@ codex plugin add git-workflow@git-workflow
 
 「git workflow 설치해줘」는 [workflow-init](skills/workflow-init/SKILL.md)으로 여섯 항목을 제시하고 선택을 기다린다. 「라벨만 설치해줘」 등 부분 요청은 해당 항목만 적용한다. 라벨은 기본 차이 미리보기와 승인된 누락 생성, release.yml은 기존 파일 보존을 따른다.
 
-PR 작성 스킬 이름은 `pr-create`에서 `pr-request`로 변경되었다. 이후 호출에는 `pr-request`를 사용한다. PR 작성과 리뷰 인계 절차는 유지한다. 설치된 환경에는 플러그인을 갱신한 뒤 새 세션에서 적용한다. workflow-init은 프로젝트 설정을 초기화·갱신하며 플러그인의 스킬을 업데이트하지 않는다.
-
 branch-strategy 스킬은 제거되었다. 이전 스킬 호출은 전략 기록이라면 workflow-init의 브랜치 전략 항목, 실제 브랜치 작업이라면 일반 요청과 공통 정책 읽기로 전환한다. 기존 프로젝트 정책 문서는 보존한다.
 
 브랜치 전략도 독립 선택 항목이다. 기존 관행을 먼저 확인하고 GitHub Flow·Trunk·Release Flow·Gitflow·기존 dev/prod 후보에서 필요한 전략을 제안한다. 승인한 단일 프로젝트 문서에 기록하고 AGENTS.md에는 최소 읽기 연결을 제안한다. README 기존 내용 수정은 별도 승인하며, 적용 직전 파일이 바뀌면 재승인한다. 문서 생성만으로 AI 준수를 보장하지 않으며 일반 브랜치·PR·hotfix 요청으로 검증한다. [전략 초기화](skills/workflow-init/references/branch-policy.md)와 [후보·공식 출처](skills/workflow-init/references/branch-options.md)를 참고한다.

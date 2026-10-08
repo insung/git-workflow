@@ -116,8 +116,6 @@ Start a new session after installing or updating. In Claude Code the skills appe
 
 Use [workflow-init](skills/workflow-init/SKILL.md) to select templates, an AGENTS.md declaration, GitHub labels, release categories, or a project branch policy. Broad installation requests wait for selection; explicit partial requests apply only those items. Labels preview differences before approved missing-only creation; existing release settings are preserved.
 
-The PR authoring skill has been renamed from `pr-create` to `pr-request`. Use `pr-request` for future calls; the PR authoring and review handoff procedures are unchanged. Update the installed plugin and start a new session to use the new name. workflow-init initializes or updates project settings; it does not update the plugin skills.
-
 The branch-strategy skill has been removed. Replace old setup calls with workflow-init’s branch policy option, and use ordinary branch requests with the shared policy reader for branch operations. Existing project policy documents are preserved.
 
 Branch policy is an independent option. Start from existing practice, then compare GitHub Flow, Trunk, Release Flow, Gitflow and the existing dev/prod option. Record the approved policy in one project document and propose a minimal AGENTS.md reading link. Changes to existing README content need separate approval; reread files before writing and renew approval if they changed. Document creation alone does not prove AI compliance: check ordinary branch, PR and hotfix requests. See [policy setup](skills/workflow-init/references/branch-policy.md) and [options with official sources](skills/workflow-init/references/branch-options.md).
