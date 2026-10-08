@@ -8,7 +8,7 @@
 
 여러 프로젝트를 포함하는 루트 대상이면 첫 문장을 `이 루트 디렉토리의 하위 프로젝트들은 git-workflow를 따른다.`로 바꾸고 나머지 선언은 유지한다. 개별 프로젝트에는 위 첫 문장을 쓴다.
 
-역할별 인계는 [문서 읽기 순서](../../git-workflow/references/document-links.md#문서별-역할과-읽기-순서), 기준 고정·비공개 입력 격리는 [검토 입력 보관](../../plan-create/references/review-criteria.md#보관-위치), 승인과 검증 실행은 [공통 실행 경계](../../git-workflow/references/execution-boundaries.md)를 따른다. 스킬은 지시 모음이며 별도 스케줄러가 아니다.
+역할별 인계는 [문서 읽기 순서](../../git-workflow/references/document-links.md#문서별-역할과-읽기-순서), 기준 고정·비공개 입력 격리는 [검토 입력 보관](../../git-workflow/references/review-criteria.md#보관-위치), 승인과 검증 실행은 [공통 실행 경계](../../git-workflow/references/execution-boundaries.md)를 따른다. 스킬은 지시 모음이며 별도 스케줄러가 아니다.
 
 ## 제안과 적용
 
