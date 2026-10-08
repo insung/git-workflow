@@ -173,7 +173,7 @@ test('rejects a mixed-case asset instead of silently accepting an alias', t => {
   assert.ok(validatePackage(root).some(e => e.includes('exact uppercase name: BUG_REPORT.md')));
 });
 
-for (const path of ['workflow-init/assets/labels.yml', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/scripts/sync-labels.py', 'workflow-init/references/branch-policy.md', 'workflow-init/references/branch-options.md', 'workflow-init/references/milestones.md', 'git-workflow/references/milestones.md', 'git-workflow/references/project-branch-policy.md', 'workflow-init/references/milestones.md', 'git-workflow/references/milestones.md']) {
+for (const path of ['workflow-init/assets/labels.yml', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/scripts/sync-labels.py', 'workflow-init/references/branch-policy.md', 'workflow-init/references/branch-options.md', 'git-workflow/references/project-branch-policy.md', 'workflow-init/references/milestones.md', 'git-workflow/references/milestones.md']) {
   test(`rejects missing init capability: ${path}`, t => {
     const { root } = fixture(t);
     rmSync(join(root, 'skills', path));
