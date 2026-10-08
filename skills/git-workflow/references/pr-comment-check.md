@@ -8,7 +8,7 @@ pr-review, pr-merge, pr-comment-check가 재사용하는 읽기·판단 절차�
 2. PR 일반 댓글, 모든 리뷰 본문(상태와 무관), 파일별 코멘트와 답글, reviewThreads의 resolved·outdated 정보를 조회한다. 파일·라인·원래 commit/라인·답글 부모·작성자·URL·본문·생성/수정 시각을 유지한다. 같은 ID의 REST/GraphQL 코멘트는 하나로 연결하되 답글·본문을 버리지 않는다.
 3. PR 본문의 실제 Issue 참조와 closingIssuesReferences를 [Issue 연결 검사](issue-link.md)로 확인한다. 자동 종료 연결만으로 연결 Issue 전체를 안다고 하지 않는다. 명시 관련 Issue를 수집기에 추가하고 각 Issue의 본문과 **모든 댓글**을 읽은 뒤 이번 요청·AC·합의와 관련된 내용을 고른다. 다른 저장소의 Issue도 그 host·저장소 기준으로 확인한다. 무관한 댓글은 제외 이유를 남긴다. 모호한 참조·접근 제한은 미확인이다.
 4. REST는 Link의 다음 페이지를 끝까지, GraphQL은 각 connection의 hasNextPage/endCursor를 끝까지 조회한다. reviewThreads와 각 thread.comments, 연결 Issue 목록도 각각 페이지를 확인한다. gh pr view의 기본 목록이나 첫 100건만으로 전체 조회를 주장하지 않는다.
-5. 조회 실패·권한 오류·GraphQL errors·cursor 누락·페이지 누락·소스 간 파일 코멘트 ID 불일치는 `조회 미완료`로 반환한다. 성공한 일부 빈 목록을 전체 코멘트 없음으로 바꾸지 않는다. 조회하지 못한 소스와 필요한 재조회부터 적는다.
+5. 조회 실패·권한 오류·GraphQL errors·cursor 누락·페이지 누락·게시된 파일 코멘트의 소스 간 ID 불일치는 `조회 미완료`로 반환한다. 성공한 일부 빈 목록을 전체 코멘트 없음으로 바꾸지 않는다. GraphQL에서 각 코멘트의 pullRequestReview.state=PENDING을 실제 확인한 경우에만 REST에 없는 초안으로 구별해 pendingComments에 보존한다. 게시된 코멘트의 누락이나 리뷰 상태 미확인은 여전히 실패다. 초안의 조회 완료는 리뷰 제출·답글 게시 완료를 뜻하지 않으며 다른 계정의 미공개 초안까지 조회했다고 하지 않는다. 조회하지 못한 소스와 필요한 재조회부터 적는다.
 
 읽기 전용 수집 도구(인증 계정·host는 대상 지침 적용):
 
@@ -31,7 +31,7 @@ node skills/pr-comment-check/scripts/collect-comments.mjs --repo OWNER/REPO --pr
 
 모든 unresolved 댓글을 차단하지 않는다. 요청과 Issue 원문·AC·현재 계획·후속 합의의 관계를 밝힌다. 완료 조건을 깨는 미반영 요청은 pr-review의 fail, 합의 충돌·필수 증거 부족·조회 미완료는 human-review로 인계한다. 질문·제안·참고 의견 중 완료 조건에 영향 없는 항목은 advisory/warn으로 남길 수 있다. 합의된 보류도 필수 AC와 충돌하면 해결한 것으로 세지 않고 기준 변경의 권한·합의를 확인한다.
 
-코멘트 확인만으로 모든 AC 검토 pass를 만들지 않는다. pr-comment-check는 코멘트 처리 상태와 영향만 반환한다. pr-review는 전체 검토의 다른 증거와 합친다. pr-merge는 새 검토 판정을 만들지 않고 미처리 중요 요청·미확인과 필요한 재검토를 반환한다.
+코멘트 확인만으로 모든 AC 검토 pass를 만들지 않는다. pr-comment-check의 이 공통 확인 단계는 코멘트 처리 상태와 영향을 반환한다. 처리·회신이 승인된 진입점은 그 결과를 수정 구현·공통 회신에 이어 전달하고 적용 결과까지 보고한다. pr-review는 전체 검토의 다른 증거와 합친다. pr-merge는 새 검토 판정을 만들지 않고 미처리 중요 요청·미확인과 필요한 재검토를 반환한다.
 
 ## 4. 머지 직전 다시 확인
 

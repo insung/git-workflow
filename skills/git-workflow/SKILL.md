@@ -22,7 +22,7 @@ Issue의 요청·기준·계획 → 구현·테스트·커밋 → PR → 검토 
 | 준비된 Issue 계획 또는 기존 plan·todo 구현 | [task-implement](../task-implement/SKILL.md) | 코드·테스트·실제 결과·commit·PR 인계 |
 | 구현 후 PR 준비 | [pr-create](../pr-create/SKILL.md) | PR, AC 결과·검증 근거, HEAD |
 | PR·의도·정책·테스트 검증 | [pr-review](../pr-review/SKILL.md) | review, 검토 HEAD, 증거·판단 |
-| PR·연결 Issue의 코멘트만 확인 | [pr-comment-check](../pr-comment-check/SKILL.md) | 요청별 반영 근거·합의·남은 행동, 조회 완전성·HEAD |
+| PR·연결 Issue의 코멘트 확인·처리·회신 | [pr-comment-check](../pr-comment-check/SKILL.md) | 요청별 판단·반영·회신 결과, 조회 완전성·HEAD·남은 행동 |
 | 승인·머지·작업 정리 | [pr-merge](../pr-merge/SKILL.md) | 실제 머지 상태·merge commit과 local/worktree별 정리 결과 |
 | 머지 후 Issue 종료·결과 기록, 진행 안 함·중복 종료 | [issue-close](../issue-close/SKILL.md); 미설치면 대화/임시 인계 | 머지·정리 근거와 게시 권한, 실제 state·stateReason과 종료 코멘트, 근거로 충족된 task 체크와 원격 head 정리; 자동 CLOSED Issue도 결과 코멘트 보완 인계 |
 | 커밋 실행·메시지·범위 검토 요청 | [commit-rule](../commit-rule/SKILL.md) | 승인된 범위의 commit |

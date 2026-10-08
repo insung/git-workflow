@@ -67,7 +67,7 @@ pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 hea
 | [task-implement](skills/task-implement/SKILL.md) | 준비된 계획 구현, 검증, 결과 기록과 승인된 커밋 |
 | [pr-create](skills/pr-create/SKILL.md) | AC별 구현·검증 결과와 PR 작성 |
 | [pr-review](skills/pr-review/SKILL.md) | 변경이 Issue 의도를 채우는지와 빠진 테스트 확인 |
-| [pr-comment-check](skills/pr-comment-check/SKILL.md) | PR·연결 Issue의 코멘트 조회와 요청별 반영 근거·남은 행동 확인 |
+| [pr-comment-check](skills/pr-comment-check/SKILL.md) | PR·연결 Issue의 코멘트 확인·처리·원래 스레드 회신과 적용 결과 보고 |
 | [pr-merge](skills/pr-merge/SKILL.md) | 승인된 머지 확인·안전한 작업 정리·종료 근거 인계 |
 | [issue-close](skills/issue-close/SKILL.md) | 종료 사유 선택과 결과 코멘트를 남기는 Issue 종료 |
 | [commit-rule](skills/commit-rule/SKILL.md) | 주제별 커밋과 커밋 메시지 작성 |
@@ -76,7 +76,7 @@ pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 hea
 
 단순 작업은 Issue·PR 본문을 기본 기록으로 사용한다. [상세 설계 조건](skills/plan-create/references/plan.md#상세-plan-생성-조건)에 해당할 때만 docs/git-workflows에 plan을 만들고 독립 계약이 필요한 task만 추가한다. handoff·review·evidence·txt는 자동 생성하지 않는다. [증거 수명과 문서 허브 인계](skills/git-workflow/references/document-links.md)를 따르며 기존 작업 파일·고정 링크는 보존한다. [짧은 예시](docs/examples/issue-centered-records/README.md)를 참조한다. 독립 기준은 구현 전 고정하고 [리뷰 전용 위치](skills/plan-create/references/review-criteria.md#보관-위치)에 유지한다.
 
-PR과 연결 Issue의 코멘트만 확인할 때는 [pr-comment-check](skills/pr-comment-check/SKILL.md)를 사용한다. pr-review·pr-merge도 같은 [조회·반영 확인 절차](skills/git-workflow/references/pr-comment-check.md)를 재사용한다. COMMENTED·resolved·outdated는 반영 근거가 아니며, 확인 요청은 게시·스레드 resolve·머지 승인이 아니다.
+PR과 연결 Issue의 코멘트를 확인·처리·회신할 때는 [pr-comment-check](skills/pr-comment-check/SKILL.md)를 사용한다. pr-review·pr-merge도 같은 [조회·반영 확인 절차](skills/git-workflow/references/pr-comment-check.md)를 재사용한다. COMMENTED·resolved·outdated는 반영 근거가 아니며, 처리·회신을 맡긴 작업은 승인된 구현·회신까지 이어가고 적용 결과를 보고한다. 내용만 확인하는 요청은 읽기로 제한하며, 처리·회신도 스레드 resolve·머지 승인이 아니다.
 
 수정 결과를 회신해 달라는 요청에는 task-implement·pr-review·pr-merge가 [공통 회신 절차](skills/git-workflow/references/pr-comment-reply.md)를 재사용한다. 원래 스레드에 반영 근거·검증·남은 판단과 작성 AI를 표시하고, 기존 답글과 중복을 확인한 뒤 게시된 URL·본문을 다시 읽는다. 회신·resolve·머지 권한은 각각 구별한다.
 

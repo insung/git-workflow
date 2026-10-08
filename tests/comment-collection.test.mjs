@@ -24,7 +24,7 @@ function fixture(overrides = {}) {
     if (query?.includes('PullRequestReviewThread')) {
       if (overrides.graphErrors) return { data: {}, errors: [{ message: 'Forbidden' }] };
       if (overrides.missingCursor) return { data: { node: { comments: { nodes: [], pageInfo: { hasNextPage: true, endCursor: null } } } } };
-      const nodes = v.id === 'T2' ? [] : [{ id: v.cursor ? 'C12' : 'C11', body: v.cursor ? 'reply' : 'request' }];
+      const nodes = v.id === 'T2' ? [] : [{ id: v.cursor ? 'C12' : 'C11', body: v.cursor ? 'reply' : 'request', pullRequestReview: { state: 'COMMENTED' } }];
       return { data: { node: { comments: page(nodes, v.id === 'T1' && !v.cursor ? 'reply-next' : null) } } };
     }
     if (query?.includes('closingIssuesReferences')) return { data: { repository: { pullRequest: { closingIssuesReferences:
@@ -94,4 +94,38 @@ test('requires explicit body-only Issue refs in addition to closing links', asyn
   };
   const result = await collect({ repo: 'o/r', number: 1, issues: ['other/repo#7'] }, request);
   assert.deepEqual(result.linkedIssues.map(i => i.ref), ['o/r#3', 'other/repo#7']);
+});
+
+test('preserves verified own pending-review comments absent in REST', async () => {
+  const f = fixture();
+  const result = await collect({ repo: 'o/r', number: 1 }, async r => {
+    const response = await f.request(r);
+    if (r.endpoint?.includes('/pulls/1/comments?')) return [[]];
+    if (r.query?.includes('PullRequestReviewThread'))
+      for (const c of response.data.node.comments.nodes) c.pullRequestReview.state = 'PENDING';
+    return response;
+  });
+  assert.equal(result.complete, true);
+  assert.equal(result.fileComments.length, 0);
+  assert.deepEqual(result.pendingComments.map(c => c.id), ['C11', 'C12']);
+  assert.equal(result.threads[0].comments.length, 2);
+});
+test('does not excuse published omissions alongside a pending comment', async () => {
+  const f = fixture();
+  await assert.rejects(collect({ repo: 'o/r', number: 1 }, async r => {
+    const response = await f.request(r);
+    if (r.endpoint?.includes('/pulls/1/comments?')) return [[]];
+    if (r.query?.includes('PullRequestReviewThread'))
+      for (const c of response.data.node.comments.nodes) if (c.id === 'C11') c.pullRequestReview.state = 'PENDING';
+    return response;
+  }), /sources differ/);
+});
+test('missing review state is unknown rather than assumed pending', async () => {
+  const f = fixture();
+  await assert.rejects(collect({ repo: 'o/r', number: 1 }, async r => {
+    const response = await f.request(r);
+    if (r.query?.includes('PullRequestReviewThread'))
+      for (const c of response.data.node.comments.nodes) delete c.pullRequestReview;
+    return response;
+  }), /review state incomplete/);
 });

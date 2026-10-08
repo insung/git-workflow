@@ -17,7 +17,7 @@ export function ghRequest({ host, endpoint, query, variables }) {
   if (result.errors?.length) throw new Error(`GraphQL errors: ${JSON.stringify(result.errors)}`);
   return result;
 }
-const commentFields = 'id url body author { login } createdAt updatedAt path line originalLine diffHunk commit { oid } originalCommit { oid } replyTo { id }';
+const commentFields = 'id url body author { login } createdAt updatedAt path line originalLine diffHunk commit { oid } originalCommit { oid } replyTo { id } pullRequestReview { state }';
 function connection(value, label) {
   if (!value || !Array.isArray(value.nodes) || !value.pageInfo || typeof value.pageInfo.hasNextPage !== 'boolean')
     throw new Error(`Incomplete connection: ${label}`);
@@ -79,7 +79,16 @@ export async function collect({ repo, number, host = 'github.com', issues = [] }
     }, `thread.comments:${thread.id}`);
   }
   const restIds = new Set(fileComments.map(c => c.node_id));
-  const graphIds = new Set(threads.flatMap(t => t.comments.map(c => c.id)));
+  const graphComments = threads.flatMap(t => t.comments);
+  const states = new Set(['PENDING', 'COMMENTED', 'APPROVED', 'CHANGES_REQUESTED', 'DISMISSED']);
+  if (graphComments.some(c => !c.id || !states.has(c.pullRequestReview?.state)))
+    throw new Error('File comment review state incomplete');
+  // Own draft-review comments can be visible through GraphQL but absent in REST.
+  // Exempt only explicitly verified PENDING nodes; every published node must match.
+  const pendingComments = graphComments.filter(c => c.pullRequestReview.state === 'PENDING');
+  const pendingIds = new Set(pendingComments.map(c => c.id));
+  const graphIds = new Set(graphComments.filter(c => !pendingIds.has(c.id)).map(c => c.id));
+  for (const id of pendingIds) restIds.delete(id);
   if (restIds.has(undefined) || graphIds.has(undefined) || restIds.size !== graphIds.size || [...restIds].some(id => !graphIds.has(id)))
     throw new Error('File comment sources differ; retry complete snapshot');
   const linked = await paginate(async cursor => {
@@ -99,7 +108,7 @@ export async function collect({ repo, number, host = 'github.com', issues = [] }
   const latest = await object(prPath);
   if (pr.head.sha !== latest.head?.sha || pr.base.sha !== latest.base?.sha || pr.body !== latest.body)
     throw new Error('HEAD/base/PR body changed during collection; retry');
-  const sources = { general, reviews, fileComments, threads, linkedIssues };
+  const sources = { general, reviews, fileComments, threads, pendingComments, linkedIssues };
   const fingerprint = createHash('sha256').update(JSON.stringify(sources)).digest('hex');
   return { complete: true, issueDiscovery: 'closing-links-and-explicit-only', host, repo, number,
     url: pr.html_url, head: pr.head.sha, base: pr.base.sha, prBody: pr.body,
