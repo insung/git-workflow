@@ -9,6 +9,7 @@
 
 ## Unreleased
 
+- git-history로 코드의 동작 기원과 당시 요청·결정·검증을 읽기 전용으로 추적한다. Refs 없는 커밋·Workflow 미채택 저장소·후속 변경·접근 제한을 구별한다. 근거: [Issue #46](https://github.com/insung/git-workflow/issues/46).
 - issue-close는 PR AC 결과·검토 결과로 충족이 확인된 task 항목을 승인 없이 체크한다. 미충족·미확인 항목은 지금처럼 사용자에게 알리고 completed를 막는다.
 - 원격 head 삭제를 pr-merge에서 issue-close로 옮겼다. 열린 Issue를 completed로 닫을 때 종료 승인 후·코멘트 게시 전에 머지된 PR의 원격 head를 승인 없이 삭제한다. 이미 닫힌 Issue는 상황을 설명하고 삭제할지 묻는다. 안전 조건은 그대로이고 로컬 브랜치는 지우지 않는다.
 - issue-close가 `Closes` 키워드 없이 Issue를 참조한 머지된 PR도 PR 본문 검색으로 찾는다.

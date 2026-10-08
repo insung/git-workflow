@@ -56,6 +56,8 @@ flowchart TD
 
 pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 head는 issue-close가 Issue를 닫을 때 삭제한다. issue-close는 근거로 충족된 task 항목을 승인 없이 체크한다. dirty·공유·잠금·보호·검토 후 작업은 보존하고 Codex 관리 worktree는 관리 기능으로 아카이브한다. [정리 정책](skills/pr-merge/references/post-merge-cleanup.md)을 적용한다. 종료 코멘트는 설치된 issue-close가 담당하며 없으면 로컬 handoff로 남긴다. 작은 후속 변경도 의도·범위·AC가 같은 열린 Issue만 재사용하고, 닫힌 범위와 다른 변경은 연결된 새 Issue로 추적한다.
 
+코드가 왜 현재 형태가 되었는지 조사하려면 [git-history](skills/git-history/SKILL.md)에 파일·함수·구간·동작을 요청한다. Refs나 Workflow 양식이 없어도 Git·GitHub·저장소 문서에서 조사하고, 확인된 의도와 추정·접근 제한을 구별한다.
+
 | 스킬 | 쓰는 때 |
 | --- | --- |
 | [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개와 다음 단계 선택 |
@@ -70,6 +72,7 @@ pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 hea
 | [issue-close](skills/issue-close/SKILL.md) | 종료 사유 선택과 결과 코멘트를 남기는 Issue 종료 |
 | [commit-rule](skills/commit-rule/SKILL.md) | 주제별 커밋과 커밋 메시지 작성 |
 | [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
+| [git-history](skills/git-history/SKILL.md) | 코드에서 Git 이력·PR·Issue·문서로 당시 요청·결정·검증을 읽기 전용 추적 |
 
 단순 작업은 Issue·PR 본문을 기본 기록으로 사용한다. [상세 설계 조건](skills/plan-create/references/plan.md#상세-plan-생성-조건)에 해당할 때만 docs/git-workflows에 plan을 만들고 독립 계약이 필요한 task만 추가한다. handoff·review·evidence·txt는 자동 생성하지 않는다. [증거 수명과 문서 허브 인계](skills/git-workflow/references/document-links.md)를 따르며 기존 작업 파일·고정 링크는 보존한다. [짧은 예시](docs/examples/issue-centered-records/README.md)를 참조한다. 독립 기준은 구현 전 고정하고 [리뷰 전용 위치](skills/plan-create/references/review-criteria.md#보관-위치)에 유지한다.
 
@@ -122,6 +125,7 @@ branch-strategy 스킬은 제거되었다. 이전 스킬 호출은 전략 기록
 
 ```text
 skills/
+├── git-history/       코드 변경 맥락 조사와 Git·GitHub 탐색
 ├── git-workflow/      라우터, 실행 경계, 표기·문체, 라벨, 문서 링크
 ├── issue-create/      Issue 본문 규칙
 ├── plan-create/       본문 계획·선택적 설계 양식
@@ -150,6 +154,8 @@ git diff --check
 ```
 
 이 검사는 패키지 구조, 매니페스트, 필수 파일, 상대 링크를 확인한다. 스킬 선택이나 검토 품질은 측정하지 않는다. 스킬 변경은 시나리오의 변경 전·후 비교로 확인하며, 실행 주체는 [검증 실행 주체](skills/git-workflow/references/execution-boundaries.md#검증-실행-주체)를 따른다.
+
+git-history의 Git 그래프·오프라인 GitHub 사례와 변경 전·후 결과는 [검증 재현](tests/fixtures/git-history/verification.md)에 있다. `python3 tests/git-history-fixture.test.py`는 fixture의 원자료를 검사하며 모델 행동을 판정하지 않는다.
 
 ## 예제
 
