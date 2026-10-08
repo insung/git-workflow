@@ -57,7 +57,7 @@ flowchart TD
 
 pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 head는 issue-close가 Issue를 닫을 때 삭제한다. issue-close는 근거로 충족된 task 항목을 승인 없이 체크한다. dirty·공유·잠금·보호·검토 후 작업은 보존하고 Codex 관리 worktree는 관리 기능으로 아카이브한다. [정리 정책](skills/pr-merge/references/post-merge-cleanup.md)을 적용한다. 종료 코멘트는 설치된 issue-close가 담당하며 없으면 로컬 handoff로 남긴다. 작은 후속 변경도 의도·범위·AC가 같은 열린 Issue만 재사용하고, 닫힌 범위와 다른 변경은 연결된 새 Issue로 추적한다.
 
-코드가 왜 현재 형태가 되었는지 조사하려면 [git-history](skills/git-history/SKILL.md)에 파일·함수·구간·동작을 요청한다. Refs나 Workflow 양식이 없어도 Git·GitHub·저장소 문서에서 조사하고, 확인된 의도와 추정·접근 제한을 구별한다.
+“왜 이렇게 구현했는지 알려줘”, “이 코드의 의도를 알려줘”, “맥락을 알고싶어”처럼 명시적으로 요청하면 [git-history](skills/git-history/SKILL.md)가 읽기 전용으로 설명한다. “바꾸면 어떤 영향이 있어?”는 현재 호출·설정·테스트의 예상 영향·유지 조건·검증안을 추가한다. 일반 수정·승인된 Issue 구현 전체의 자동 필수 단계는 아니다. Refs나 Workflow 양식이 없어도 근거를 찾으며 추정·접근 제한을 구별한다. [사용 설명과 흐름](docs/guides/code-context-investigation.md), [대표 예시](docs/examples/code-context-investigation/README.md)를 참고한다.
 
 | 스킬 | 쓰는 때 |
 | --- | --- |
@@ -71,7 +71,7 @@ pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 hea
 | [issue-close](skills/issue-close/SKILL.md) | 종료 사유 선택과 결과 코멘트를 남기는 Issue 종료 |
 | [commit-rule](skills/commit-rule/SKILL.md) | 주제별 커밋과 커밋 메시지 작성 |
 | [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
-| [git-history](skills/git-history/SKILL.md) | 코드에서 Git 이력·PR·Issue·문서로 당시 요청·결정·검증을 읽기 전용 추적 |
+| [git-history](skills/git-history/SKILL.md) | 명시 요청으로 코드 의도·맥락·변경 이유와 제안된 변경 영향을 읽기 전용 조사 |
 
 새 작업은 Issue·PR 본문에 계획·상세 설계·결과·검토를 기록하고 plan/task/handoff/review 파일을 만들지 않는다. 기본은 하나의 Issue다. [분리 기준](skills/issue-create/references/plan.md#sub-issue-분리-판단)의 독립 완료·검증과 별도 추적 필요가 모두 있을 때만 AI가 sub-issue를 제안한다. 복잡함·단계·파일·기존 task 수만으로 나누지 않는다. [관계 생성·확인](skills/issue-create/references/sub-issues.md)과 [증거 수명·기존 기록 보존](skills/git-workflow/references/document-links.md)을 따른다. [단일·독립 결과 예시](docs/examples/issue-centered-records/README.md)를 참조한다. 비공개 독립 입력은 구현 전 고정하고 [리뷰 전용 위치](skills/git-workflow/references/review-criteria.md#보관-위치)에 유지한다.
 
@@ -170,6 +170,7 @@ git-history의 Git 그래프·오프라인 GitHub 사례와 변경 전·후 결�
 
 | 예제 | 흐름 |
 | --- | --- |
+| [코드 의도·변경 영향 조사](docs/examples/code-context-investigation/README.md) | 의도 설명·현재 영향·승인된 구현 인계 구별 |
 | [Issue 중심 기록](docs/examples/issue-centered-records/README.md) | 별도 작업 파일 없이 요청·계획·실제 결과 연결 |
 | [git-workflow v0.3.0 개선 (실제 사례)](docs/examples/git-workflow-v0.3.0/README.md) | 리뷰, Issue, 계획과 코멘트, 검토 기준 고정, 구현 세션 분리, 독립 검토, 머지와 릴리즈 |
 | [파이썬 버전 업그레이드](docs/examples/python-version-upgrade/README.md) | Issue, plan, 단계별 todo, 구현 인계, PR, 검토 |

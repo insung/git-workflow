@@ -57,7 +57,7 @@ flowchart TD
 
 pr-merge reports local branches and worktrees separately; issue-close deletes the remote head when it closes the Issue and checks task items whose evidence shows they are met. Dirty, shared, locked, protected and post-review work is preserved. Codex managed worktrees use archive management. Read the [cleanup policy](skills/pr-merge/references/post-merge-cleanup.md). Closure comments belong to issue-close when installed; otherwise evidence remains in a local handoff. Small follow-up changes reuse an open Issue only when intent, scope and AC match; a different scope after closure needs a new linked Issue.
 
-To investigate why code has its current form, ask [git-history](skills/git-history/SKILL.md) about a file, function, range or behavior. It traces Git, GitHub and repository documents without requiring Refs or Workflow templates, distinguishing confirmed intent from inference and access limits.
+Ask [git-history](skills/git-history/SKILL.md) explicitly: “Why was this implemented this way?”, “Explain this code’s intent” or “Give me its context.” It explains the evidence without modifying the repository. “What would this change affect?” also compares current callers, settings and tests and reports expected impact, conditions to preserve and proposed checks. Ordinary edits and approved Issue implementation do not require this investigation automatically. It works without Refs or Workflow templates and distinguishes confirmed intent, inference and access limits. See the [usage and flow guide](docs/guides/code-context-investigation.md) and [representative examples](docs/examples/code-context-investigation/README.md).
 
 | Skill | Use it to |
 | --- | --- |
@@ -71,7 +71,7 @@ To investigate why code has its current form, ask [git-history](skills/git-histo
 | [issue-close](skills/issue-close/SKILL.md) | Close an Issue with a close reason and a result comment |
 | [commit-rule](skills/commit-rule/SKILL.md) | Make scoped commits and write commit messages |
 | [git-release](skills/git-release/SKILL.md) | Prepare release notes, tags and GitHub Releases |
-| [git-history](skills/git-history/SKILL.md) | Read-only tracing from code through Git, PRs, Issues and documents to requests, decisions and verification |
+| [git-history](skills/git-history/SKILL.md) | Explicit read-only investigation of code intent, context, change reasons and proposed change impact |
 
 New work records planning and detailed design in Issues and results and reviews in PRs or the authorized conversation; do not create per-work plan/task/handoff/review files. Default to one Issue. Split into sub-issues only when a result has independent acceptance and verification **and** needs separate delivery, ownership, scheduling, blocking or dependency tracking. Complexity, file counts and legacy task counts alone do not justify splitting. See the [split criteria](skills/issue-create/references/plan.md#sub-issue-분리-판단) and [relationship procedure](skills/issue-create/references/sub-issues.md). Follow the [evidence lifecycle and document hub handoff](skills/git-workflow/references/document-links.md), preserve existing records and fixed links, and use the [short example](docs/examples/issue-centered-records/README.md). Freeze independent criteria before implementation and keep them in a [review-only location](skills/git-workflow/references/review-criteria.md#보관-위치).
 
@@ -168,6 +168,7 @@ The [examples](docs/examples/README.md) show filled document sets and flows. The
 
 | Example | Flow |
 | --- | --- |
+| [Code intent and change impact](docs/examples/code-context-investigation/README.md) | Distinguish intent explanation, current impact and approved implementation handoff |
 | [Issue-centered records](docs/examples/issue-centered-records/README.md) | Connect the request, plan and actual results without separate work files |
 | [git-workflow v0.3.0 (real case)](docs/examples/git-workflow-v0.3.0/README.md) | Review, Issue, plan with comments, fixed review criteria, separate implementation session, independent review, merge and release |
 | [Python version upgrade](docs/examples/python-version-upgrade/README.md) | Issue, plan, step todos, handoff, PR and review |

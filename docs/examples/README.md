@@ -4,6 +4,7 @@
 
 | Issue 주제 / Topic | 내용 / Contents |
 | --- | --- |
+| [코드 의도·변경 영향 조사](code-context-investigation/README.md) | 명시 요청·기원과 후속 변화·현재 영향·승인된 구현 인계 |
 | [Issue 중심 기록](issue-centered-records/README.md) | 현재 기본: 모호한 요청·단순 작업·조건부 설계·증거 수명 |
 | [git-workflow v0.3.0 개선 (실제 사례)](git-workflow-v0.3.0/README.md) | 리뷰 → Issue → 계획·코멘트 → 검토 기준 고정 → 구현 세션 → 독립 검토 → 머지·릴리즈 |
 | [파이썬 버전 업그레이드](python-version-upgrade/README.md) | Issue → plan/todos → 구현·PR → 리뷰 → 승인 머지 문서 세트 |
