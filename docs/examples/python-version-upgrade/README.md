@@ -11,7 +11,7 @@ flowchart TD
     C --> C2[plan-create: review/draft 브랜치에 review-criteria·review-input]
     C2 --> D[task-implement: dev에서 feature 분기]
     D --> E[런타임·의존성 수정과 테스트]
-    E --> F[commit-rule·pr-create: dev PR과 handoff]
+    E --> F[commit-rule·pr-request: dev PR과 handoff]
     F --> G[리뷰 세션: pr-review·review]
     G -.->|고정 입력 재실행| C2
     G -->|보완 필요| E

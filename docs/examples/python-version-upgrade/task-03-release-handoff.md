@@ -16,7 +16,7 @@
 | 1 | 운영 쓰기 없는 fixture로 정상·실패·경계 입력의 산출물 계약 대조 | [ ] | |
 | 2 | 실제 배포 트리거·사전 점검·롤백 조건 확인과 기록 | [ ] | |
 | 3 | commit-rule로 요청 범위만 커밋하고 handoff에 HEAD·사례별 근거 기록 | [ ] | |
-| 4 | pr-create로 PR 준비, pr-review에 새 HEAD 전달 | [ ] | |
+| 4 | pr-request로 PR 준비, pr-review에 새 HEAD 전달 | [ ] | |
 
 ## 검증
 

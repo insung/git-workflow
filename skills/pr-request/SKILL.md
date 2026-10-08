@@ -1,5 +1,5 @@
 ---
-name: pr-create
+name: pr-request
 description: “PR을 만들어줘”, “PR 본문을 작성해줘”처럼 구현한 변경의 PR 생성·본문·리뷰 인계를 요청할 때 사용한다.
 ---
 

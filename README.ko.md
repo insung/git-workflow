@@ -26,7 +26,7 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 | 새 변경 | “만료 안내는 유지하고 재시도 안내를 위한 Issue를 만들어줘.” | issue-create |
 | 준비된 Issue | “Issue #12의 구현 계획을 작성해줘.” | issue-create |
 | 준비된 단계 | “Issue #12의 01 단계를 구현하고 검증 결과를 기록해줘.” | git-workflow |
-| 구현 완료 | “Issue #12의 인계와 PR을 준비해줘.” | pr-create |
+| 구현 완료 | “Issue #12의 인계와 PR을 준비해줘.” | pr-request |
 | 검토 필요 | “이 PR을 Issue·plan·실제 검증 근거와 대조해줘.” | pr-review |
 | 검토된 HEAD | “승인된 PR을 합의한 방식으로 머지해줘.” | pr-merge; 해당 PR·HEAD에 대한 승인 |
 | 작업 종료 | “확인된 결과와 종료 이유로 Issue #12를 닫아줘.” | issue-close; 종료·댓글의 별도 범위 |
@@ -44,7 +44,7 @@ flowchart TD
     A[요청] --> B[issue-create: 달성 조건을 갖춘 Issue]
     B --> C[issue-create: Issue 계획·필요한 sub-issue]
     C --> D[git-workflow: 단계별 구현·테스트·기록·커밋]
-    D --> E[pr-create: 실제 결과와 PR]
+    D --> E[pr-request: 실제 결과와 PR]
     E --> F[pr-review: 의도·구현·테스트 교차 확인]
     F -->|fail 또는 근거 부족| D
     F -->|pass| G[사용자가 PR·HEAD·머지 방식 승인]
@@ -63,7 +63,7 @@ pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 hea
 | [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개·구현·검증과 다음 단계 선택 |
 | [workflow-init](skills/workflow-init/SKILL.md) | 선택한 템플릿·AGENTS.md·라벨·릴리즈 분류·프로젝트 브랜치 전략 초기화 |
 | [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완·중복 확인·계획·작업 분해 |
-| [pr-create](skills/pr-create/SKILL.md) | AC별 구현·검증 결과와 PR 작성 |
+| [pr-request](skills/pr-request/SKILL.md) | AC별 구현·검증 결과와 PR 작성 |
 | [pr-review](skills/pr-review/SKILL.md) | 변경이 Issue 의도를 채우는지와 빠진 테스트 확인 |
 | [pr-comment-check](skills/pr-comment-check/SKILL.md) | PR·연결 Issue의 코멘트 확인·처리·원래 스레드 회신과 적용 결과 보고 |
 | [pr-merge](skills/pr-merge/SKILL.md) | 승인된 머지 확인·안전한 작업 정리·종료 근거 인계 |
@@ -109,6 +109,8 @@ codex plugin add git-workflow@git-workflow
 
 「git workflow 설치해줘」는 [workflow-init](skills/workflow-init/SKILL.md)으로 다섯 항목을 제시하고 선택을 기다린다. 「라벨만 설치해줘」 등 부분 요청은 해당 항목만 적용한다. 라벨은 기본 차이 미리보기와 승인된 누락 생성, release.yml은 기존 파일 보존을 따른다.
 
+PR 작성 스킬 이름은 `pr-create`에서 `pr-request`로 변경되었다. 이후 호출에는 `pr-request`를 사용한다. PR 작성과 리뷰 인계 절차는 유지한다.
+
 branch-strategy 스킬은 제거되었다. 이전 스킬 호출은 전략 기록이라면 workflow-init의 브랜치 전략 항목, 실제 브랜치 작업이라면 일반 요청과 공통 정책 읽기로 전환한다. 기존 프로젝트 정책 문서는 보존한다.
 
 브랜치 전략도 독립 선택 항목이다. 기존 관행을 먼저 확인하고 GitHub Flow·Trunk·Release Flow·Gitflow·기존 dev/prod 후보에서 필요한 전략을 제안한다. 승인한 단일 프로젝트 문서에 기록하고 AGENTS.md에는 최소 읽기 연결을 제안한다. README 기존 내용 수정은 별도 승인하며, 적용 직전 파일이 바뀌면 재승인한다. 문서 생성만으로 AI 준수를 보장하지 않으며 일반 브랜치·PR·hotfix 요청으로 검증한다. [전략 초기화](skills/workflow-init/references/branch-policy.md)와 [후보·공식 출처](skills/workflow-init/references/branch-options.md)를 참고한다.
@@ -126,7 +128,7 @@ skills/
 ├── git-history/       코드 변경 맥락 조사와 Git·GitHub 탐색
 ├── git-workflow/      라우터, 실행 경계, 표기·문체, 라벨, 문서 링크
 ├── issue-create/      Issue 본문 규칙
-├── pr-create/         PR 규칙과 구현 인계 양식
+├── pr-request/         PR 규칙과 구현 인계 양식
 ├── pr-review/         검토 양식과 spec-it 정책 검사
 ├── pr-merge/          승인된 머지
 ├── issue-close/       종료 사유와 종료 코멘트 양식

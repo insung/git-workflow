@@ -124,4 +124,4 @@ Issue 템플릿 front matter의 라벨(`enhancement`, `bug`)이 대상 저장소
 - 템플릿 외 항목의 미실행 상태
 
 커밋·push는 요청된 경우에 [commit-rule](../../commit-rule/SKILL.md)로 진행한다. 로컬 정본 갱신은 플러그인 버전 발행·호스트 재설치가 아니다.
-템플릿 절의 작성 기준은 [Issue 양식](../../issue-create/references/issue.md)과 [PR 양식](../../pr-create/references/pr.md)이다.
+템플릿 절의 작성 기준은 [Issue 양식](../../issue-create/references/issue.md)과 [PR 양식](../../pr-request/references/pr.md)이다.
