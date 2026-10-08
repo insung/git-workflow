@@ -79,6 +79,8 @@ PR과 연결 Issue의 코멘트를 확인·처리·회신할 때는 [pr-comment-
 
 수정 결과를 회신해 달라는 요청에는 git-workflow·pr-review·pr-merge가 [공통 회신 절차](skills/git-workflow/references/pr-comment-reply.md)를 재사용한다. 원래 스레드에 반영 근거·검증·남은 판단과 작성 AI를 표시하고, 기존 답글과 중복을 확인한 뒤 게시된 URL·본문을 다시 읽는다. 회신·resolve·머지 권한은 각각 구별한다.
 
+순수 릴리즈 준비 PR의 Issue 예외와 대체 기록, 릴리즈 중 추가 작업의 기록·분리는 [릴리즈 기록 기준](skills/git-release/references/release-context.md)을 따른다. 프로젝트의 명시적 Issue 필수 정책은 우선한다.
+
 ## 마일스톤 운영
 
 [workflow-init](skills/workflow-init/SKILL.md)의 여섯 번째 선택 항목으로 버전별 작업 범위를 설정한다. 저장소 기존 규칙을 우선하며, 없으면 태그와 같은 `vX.Y.Z` 이름·Issue 중심 연결·합의된 기한만 설정하는 안을 제시한다. 목표 버전이 정해진 Issue는 생성 시 연결하고, 미정이면 비워 둔다. 초기화 미선택 시 관련 파일·마일스톤을 변경하지 않는다.

@@ -79,6 +79,8 @@ Check PR and linked Issue feedback with [pr-comment-check](skills/pr-comment-che
 
 When the user requests a result reply, git-workflow, pr-review and pr-merge reuse the [shared reply procedure](skills/git-workflow/references/pr-comment-reply.md). Reply in the original review thread with implementation evidence, validation, remaining decisions and the actual AI author. Check existing replies and read back the saved URL and body. Posting, resolving threads and merging each require their own scope.
 
+Issue exceptions and request records for release-only preparation PRs, and the handling of additional release work, follow [release context](skills/git-release/references/release-context.md). Explicit project policies requiring Issues take precedence.
+
 ## Milestone operations
 
 Use the sixth [workflow-init](skills/workflow-init/SKILL.md) option to configure version scope. Existing repository rules take precedence. Otherwise propose tag-aligned `vX.Y.Z` names, Issue-only tracking and due dates only when agreed. Connect an Issue during creation when its target version is decided; leave undecided targets unassigned. Unselected initialization does not change milestone files or remote metadata.

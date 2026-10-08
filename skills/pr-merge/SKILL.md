@@ -7,18 +7,18 @@ description: “검토한 PR을 머지해줘”, “PR 머지 결과를 확인�
 
 [공통 실행 경계](../git-workflow/references/execution-boundaries.md)를 적용한다.
 
-## 실제 Issue 연결: 머지 필수 조건
+## Issue 연결 또는 릴리즈 준비 근거: 머지 필수 조건
 
-PR 본문의 Issue 항목에 [Issue 연결 검사](../git-workflow/references/issue-link.md)를 최종 검토 결과까지 포함해 적용한다.
+[Issue 연결 검사](../git-workflow/references/issue-link.md)를 최종 검토 결과까지 포함해 적용한다. 순수 릴리즈 준비 예외라면 Issue 항목 대신 확인된 요청·범위·검증의 대체 기록과 최신 diff를 대조한다.
 보류 조건에 해당하면 머지를 보류하고 원인을 보고한다.
 이 검사 통과는 사용자 머지 승인이 아니다.
-머지 직전 최신 본문과 Issue를 다시 확인한다.
+머지 직전 최신 본문과 Issue 또는 예외의 요청 근거를 다시 확인한다.
 
 ## 머지 전
 
 [프로젝트 전략 정본](../git-workflow/references/project-branch-policy.md)의 PR 대상과 hotfix 역반영 경로를 실제 PR과 대조한다. 정책 충돌·미정은 관련 머지 전에 확인하며 역반영도 별도 대상의 승인 범위를 따른다.
 
-Issue의 현재 계획, 필요한 연결 문서, PR URL, 검토한 HEAD와 결과, 검증 근거와 전달/배포 계획을 확인한다.
+Issue의 현재 계획 또는 순수 준비 PR의 요청 근거, 필요한 연결 문서, PR URL, 검토한 HEAD와 결과, 검증 근거와 전달/배포 계획을 확인한다.
 기록은 [문체](../git-workflow/references/writing-conventions.md), 원격 요약은 [document-links](../git-workflow/references/document-links.md)를 따른다.
 fail/human-review가 남아 있으면 수정·추가 증거 또는 명시적 인간 결정이 먼저다.
 spec-it을 채택한 프로젝트에서 정책 예외가 필요하면 spec-it의 예외 절차로 기록하며, 머지 승인만으로 예외를 만들지 않는다.
