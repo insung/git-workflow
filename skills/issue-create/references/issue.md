@@ -43,14 +43,14 @@ Issue는 요청·기준·계획의 정본이다. [표기](../../git-workflow/ref
 
 1. 변경 크기와 관계없이 열린/닫힌 기존 Issue의 의도·범위·AC를 대조한다. 열린 동일 범위는 재사용하고 닫힌 Issue와 다른 후속 범위는 배경 링크를 가진 새 Issue로 만든다.
 2. 초안을 작성·대조하고 대화에 제시한다. 기존 생성 승인이 있으면 재승인 없이 그 범위를 실행한다.
-3. 실제 라벨 목록을 확인하고 본문 파일로 생성한다.
+3. 실제 라벨 목록과 [마일스톤 기준·목표 버전](../../git-workflow/references/milestones.md)을 확인하고 본문 파일로 생성한다. 목표가 정해지고 대상이 확인됐으면 `--milestone '<실제 이름>'`을 추가한다. 버전 미정이면 생략하고 이유를 보고한다.
 
 ```bash
 gh issue create --repo owner/repo --title 'feat(search): 검색 조건 개선' \
   --label enhancement --assignee @me --body-file /tmp/issue-body.md
 ```
 
-예시 이름·라벨·계정은 실제 저장소 기준으로 확인한다. 인증 계정은 AGENTS.md를 따른다. 응답 불명은 재조회로 중복을 방지한다. 실제 URL·본문·라벨·assignee login을 재확인한다. assignee 실패 시 이미 생성된 Issue를 삭제/중복 생성하지 않고 승인 범위에서 추가만 재시도한다. 기존 assignee를 제거하지 않는다.
+예시 이름·라벨·계정은 실제 저장소 기준으로 확인한다. 인증 계정은 AGENTS.md를 따른다. 응답 불명은 재조회로 중복을 방지한다. 실제 URL·본문·라벨·assignee login·마일스톤 연결을 재확인한다. assignee나 마일스톤 연결 실패 시 이미 생성된 Issue를 삭제/중복 생성하지 않고 승인 범위에서 해당 연결만 재시도한다. 기존 assignee를 제거하지 않는다.
 
 ## 하위 이슈로 나누는 기준
 
