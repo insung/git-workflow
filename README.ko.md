@@ -22,6 +22,7 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 | 현재 상황 | 요청 예시 | 스킬 |
 | --- | --- | --- |
 | 새 저장소 | “이 저장소에 Issue·PR 템플릿을 설치해줘.” | workflow-init: 템플릿 |
+| 버전별 작업 범위 | “마일스톤 운영 기준과 v0.9.0 초기 생성을 설정해줘.” | workflow-init: 마일스톤 |
 | 워크플로 채택 | “AGENTS.md에 git-workflow 채택 선언을 제안해줘.” | workflow-init: AGENTS.md; 추가 전 명시적 승인 |
 | 새 변경 | “만료 안내는 유지하고 재시도 안내를 위한 Issue를 만들어줘.” | issue-create |
 | 준비된 Issue | “Issue #12의 구현 계획을 작성해줘.” | issue-create |
@@ -61,7 +62,7 @@ pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 hea
 | 스킬 | 쓰는 때 |
 | --- | --- |
 | [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개·구현·검증과 다음 단계 선택 |
-| [workflow-init](skills/workflow-init/SKILL.md) | 선택한 템플릿·AGENTS.md·라벨·릴리즈 분류·프로젝트 브랜치 전략 초기화 |
+| [workflow-init](skills/workflow-init/SKILL.md) | 선택한 템플릿·AGENTS.md·라벨·릴리즈 분류·프로젝트 브랜치 전략·마일스톤 운영 초기화 |
 | [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완·중복 확인·계획·작업 분해 |
 | [pr-create](skills/pr-create/SKILL.md) | AC별 구현·검증 결과와 PR 작성 |
 | [pr-review](skills/pr-review/SKILL.md) | 변경이 Issue 의도를 채우는지와 빠진 테스트 확인 |
@@ -77,6 +78,12 @@ pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 hea
 PR과 연결 Issue의 코멘트를 확인·처리·회신할 때는 [pr-comment-check](skills/pr-comment-check/SKILL.md)를 사용한다. pr-review·pr-merge도 같은 [조회·반영 확인 절차](skills/git-workflow/references/pr-comment-check.md)를 재사용한다. COMMENTED·resolved·outdated는 반영 근거가 아니며, 처리·회신을 맡긴 작업은 승인된 구현·회신까지 이어가고 적용 결과를 보고한다. 내용만 확인하는 요청은 읽기로 제한하며, 처리·회신도 스레드 resolve·머지 승인이 아니다. PENDING 리뷰는 보고만 하고 Submit 후 처리하며, 이미 게시된 PR·Issue 일반 댓글에는 별도 Submit을 요구하지 않는다.
 
 수정 결과를 회신해 달라는 요청에는 git-workflow·pr-review·pr-merge가 [공통 회신 절차](skills/git-workflow/references/pr-comment-reply.md)를 재사용한다. 원래 스레드에 반영 근거·검증·남은 판단과 작성 AI를 표시하고, 기존 답글과 중복을 확인한 뒤 게시된 URL·본문을 다시 읽는다. 회신·resolve·머지 권한은 각각 구별한다.
+
+## 마일스톤 운영
+
+[workflow-init](skills/workflow-init/SKILL.md)의 여섯 번째 선택 항목으로 버전별 작업 범위를 설정한다. 저장소 기존 규칙을 우선하며, 없으면 태그와 같은 `vX.Y.Z` 이름·Issue 중심 연결·합의된 기한만 설정하는 안을 제시한다. 목표 버전이 정해진 Issue는 생성 시 연결하고, 미정이면 비워 둔다. 초기화 미선택 시 관련 파일·마일스톤을 변경하지 않는다.
+
+[git-release](skills/git-release/SKILL.md)는 확정 범위의 모든 Issue 완료·마일스톤 100%를 발행 준비 조건으로 확인하고 실제 태그 포함과 검증을 대조한다. 미완료 필수 작업은 발행을 보류하고 연기 가능한 작업은 사용자 결정 후 차기 마일스톤으로 이월한다. 이미 머지된 코드는 마일스톤 이동만으로 빠지지 않는다. 100%와 Release 발행 완료는 구분하며, 발행 확인과 종료 승인 후 마일스톤을 닫는다. [공통 절차](skills/git-workflow/references/milestones.md)를 따른다.
 
 ## spec-it
 
@@ -107,7 +114,7 @@ codex plugin add git-workflow@git-workflow
 
 ### 대상 저장소 첫 실행
 
-「git workflow 설치해줘」는 [workflow-init](skills/workflow-init/SKILL.md)으로 다섯 항목을 제시하고 선택을 기다린다. 「라벨만 설치해줘」 등 부분 요청은 해당 항목만 적용한다. 라벨은 기본 차이 미리보기와 승인된 누락 생성, release.yml은 기존 파일 보존을 따른다.
+「git workflow 설치해줘」는 [workflow-init](skills/workflow-init/SKILL.md)으로 여섯 항목을 제시하고 선택을 기다린다. 「라벨만 설치해줘」 등 부분 요청은 해당 항목만 적용한다. 라벨은 기본 차이 미리보기와 승인된 누락 생성, release.yml은 기존 파일 보존을 따른다.
 
 branch-strategy 스킬은 제거되었다. 이전 스킬 호출은 전략 기록이라면 workflow-init의 브랜치 전략 항목, 실제 브랜치 작업이라면 일반 요청과 공통 정책 읽기로 전환한다. 기존 프로젝트 정책 문서는 보존한다.
 
