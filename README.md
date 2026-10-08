@@ -56,6 +56,8 @@ flowchart TD
 
 pr-merge reports local branches and worktrees separately; issue-close deletes the remote head when it closes the Issue and checks task items whose evidence shows they are met. Dirty, shared, locked, protected and post-review work is preserved. Codex managed worktrees use archive management. Read the [cleanup policy](skills/pr-merge/references/post-merge-cleanup.md). Closure comments belong to issue-close when installed; otherwise evidence remains in a local handoff. Small follow-up changes reuse an open Issue only when intent, scope and AC match; a different scope after closure needs a new linked Issue.
 
+To investigate why code has its current form, ask [git-history](skills/git-history/SKILL.md) about a file, function, range or behavior. It traces Git, GitHub and repository documents without requiring Refs or Workflow templates, distinguishing confirmed intent from inference and access limits.
+
 | Skill | Use it to |
 | --- | --- |
 | [git-workflow](skills/git-workflow/SKILL.md) | Start or resume an Issue-based change and choose the next stage |
@@ -69,6 +71,7 @@ pr-merge reports local branches and worktrees separately; issue-close deletes th
 | [issue-close](skills/issue-close/SKILL.md) | Close an Issue with a close reason and a result comment |
 | [commit-rule](skills/commit-rule/SKILL.md) | Make scoped commits and write commit messages |
 | [git-release](skills/git-release/SKILL.md) | Prepare release notes, tags and GitHub Releases |
+| [git-history](skills/git-history/SKILL.md) | Read-only tracing from code through Git, PRs, Issues and documents to requests, decisions and verification |
 
 Simple work uses the Issue and PR as its records. Create a plan only when [detailed design is needed](skills/plan-create/references/plan.md#상세-plan-생성-조건); add task contracts only for independent handoffs. Handoff, review, evidence and txt files are not automatic outputs. Follow the [evidence lifecycle and document hub handoff](skills/git-workflow/references/document-links.md), preserve existing records and fixed links, and use the [short example](docs/examples/issue-centered-records/README.md). Freeze independent criteria before implementation and keep them in a [review-only location](skills/plan-create/references/review-criteria.md#보관-위치).
 
@@ -117,6 +120,7 @@ See the [short workflow](skills/workflow-init/references/branch-policy.md#간략
 
 ```text
 skills/
+├── git-history/       code context investigation and Git/GitHub tracing
 ├── git-workflow/      router, execution boundaries, conventions, labels, links
 ├── issue-create/      Issue content rules
 ├── plan-create/       inline plan and optional design forms
@@ -145,6 +149,8 @@ git diff --check
 ```
 
 These checks cover package structure, manifests, required files and relative links. They do not measure skill selection or review quality; skill changes are checked with before-and-after scenarios, run as defined in [verification runners](skills/git-workflow/references/execution-boundaries.md#검증-실행-주체).
+
+The git-history Git graph, offline GitHub cases and before/after results are documented in [verification](tests/fixtures/git-history/verification.md). `python3 tests/git-history-fixture.test.py` checks fixture integrity, not model behavior.
 
 ## Examples
 
