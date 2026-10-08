@@ -28,6 +28,7 @@ Issue의 요청·기준·계획 → 구현·테스트·커밋 → PR → 검토 
 | 커밋 실행·메시지·범위 검토 요청 | [commit-rule](../commit-rule/SKILL.md) | 승인된 범위의 commit |
 | 프로젝트 브랜치 전략 초기화·기록 요청 | [workflow-init](../workflow-init/SKILL.md) | 기존 관행 요약·전략안·정본 위치와 최소 읽기 연결의 명시적 승인 |
 | 브랜치 전략 검토·분기·hotfix 요청 | [공통 브랜치 정책](references/project-branch-policy.md) | 프로젝트 정본 읽기·확정 규칙·분기 결과·미정 항목 |
+| 마일스톤 운영 설정·초기 생성 요청 | [workflow-init](../workflow-init/SKILL.md) | 저장소 기준·초기 대상·승인된 설정 |
 | 릴리즈 요청 | [git-release](../git-release/SKILL.md) | 고정 범위의 노트·발행 상태 |
 | 대상 저장소의 Issue·PR 템플릿 설치 요청 | [workflow-init](../workflow-init/SKILL.md) | 복사한 파일·기존 파일 차이·라벨 상태 |
 
