@@ -96,7 +96,7 @@ API v2와 소비자 전환을 각자 독립 PR·검증으로 전달하고 전환
 
 긴 호환성·데이터 전환·순차 배포·롤백 설계는 부모 본문에 기록하고 하위 Issue에서는 연결한다. 계획만 요청됐다면 구성 초안을 반환하고 생성하지 않는다. 생성과 작업 분해까지 승인됐다면 기존 중복을 확인하고 생성·연결 뒤 관계를 재조회한다.
 
-자식 두 개가 모두 닫혀도 부모의 최종 AC·통합 검증·필수 전달을 확인해야 완료다. 취소된 자식이나 미배포 상태를 진행률로 숨기지 않는다. 분리 기준과 실행 절차는 [plan-create](../../../skills/plan-create/references/plan.md)와 [sub-issue](../../../skills/plan-create/references/todos.md)를 따른다.
+자식 두 개가 모두 닫혀도 부모의 최종 AC·통합 검증·필수 전달을 확인해야 완료다. 취소된 자식이나 미배포 상태를 진행률로 숨기지 않는다. 분리 기준과 실행 절차는 [Issue 계획](../../../skills/issue-create/references/plan.md)와 [sub-issue](../../../skills/issue-create/references/sub-issues.md)를 따른다.
 
 ## 고유 증거
 
@@ -104,6 +104,6 @@ API v2와 소비자 전환을 각자 독립 PR·검증으로 전달하고 전환
 
 ## 기존 기록 재개와 문서 허브
 
-기존 plan/task/handoff는 [재개 규칙](../../../skills/plan-create/references/plan.md#기존-작업-재개)에 따라 보존·참조한다. 원격 최신 상태와 당시 기록을 구별한다.
+기존 plan/task/handoff는 [재개 규칙](../../../skills/issue-create/references/plan.md#기존-작업-재개)에 따라 보존·참조한다. 원격 최신 상태와 당시 기록을 구별한다.
 
 문서 허브에는 기획 링크·현재 구현과 결정 이유·인프라 정의·실제 배포 확인 또는 대기·운영/롤백·Issue/PR 근거를 전달한다. 배포 설정이나 머지만으로 실제 배포를 확인했다고 하지 않는다. 이 예시의 서버 배포 없음은 배포 확인 완료와 다르다.

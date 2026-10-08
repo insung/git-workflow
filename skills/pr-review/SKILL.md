@@ -20,7 +20,7 @@ Issue의 현재 기준·계획과 필요한 연결 문서로 사용자 의도를
 
 1. 담당 Issue의 원문·목표·영향·제약·달성 조건(AC ID)·현재 계획을 읽고, 부모·선행 관계가 있으면 공통 기준·AC 대응·선행 상태를 추가로 읽는다. 연결된 상세 plan·task와 기존 작업 기록은 필요한 범위에서 추가로 읽는다. 파일 부재 자체를 누락으로 판정하지 않는다.
 2. AC마다 해당하는 정상·실패·경계·유지 시나리오를 대조한다. 기대를 추측하거나 네 종류를 억지로 모두 만들지 않는다.
-3. [리뷰 전용 위치](../plan-create/references/review-criteria.md#보관-위치)의 고정 상태를 확인하고, 별도 기준이 있으면 읽고 AC별 기준으로 판정한다.
+3. [리뷰 전용 위치](../git-workflow/references/review-criteria.md#보관-위치)의 고정 상태를 확인하고, 별도 기준이 있으면 읽고 AC별 기준으로 판정한다.
 4. Issue가 없거나 의도가 부족하면 PR·요청자 설명의 확인된 부분과 추정을 구별하고 의도 부족을 기록한다. plan 파일이 없다는 이유로 의도를 추정으로 바꾸지 않는다.
 
 PR 제목·본문을 검토하면 [표기](../git-workflow/references/change-conventions.md)와 [문체](../git-workflow/references/writing-conventions.md)를 읽는다.
@@ -84,6 +84,6 @@ pass도 머지 승인이 아니다. 다음 단계는 [pr-merge](../pr-merge/SKIL
 
 대상 HEAD·판정·AC별 근거·조치·한계를 대화 또는 요청된 PR 리뷰 기록에 남긴다. 신규 review.md·docs 작업 기록 파일과 결과 보존 전용 커밋을 만들지 않는다. 임시 결과가 원격 검토 근거를 대신하면 안 된다.
 
-비공개 기준·고정 입력은 [보관 기준](../plan-create/references/review-criteria.md#보관-위치)에 따라 유지하고 pass·warn이어도 자동 반입하지 않는다. fail·human-review의 공개 범위는 [review 작성 규칙](references/review.md#작성-규칙)을 따른다.
+비공개 기준·고정 입력은 [보관 기준](../git-workflow/references/review-criteria.md#보관-위치)에 따라 유지하고 pass·warn이어도 자동 반입하지 않는다. fail·human-review의 공개 범위는 [review 작성 규칙](references/review.md#작성-규칙)을 따른다.
 
 요청된 문서-only 기록 커밋이 있으면 검토 코드 HEAD와 보존 commit을 구별한다. 공개 검토 기록만 추가했고 소스·테스트·계획이 바뀌지 않았으면 기존 판정을 유지하되 머지에서는 실제 최신 HEAD를 확인한다. 그 밖의 변경은 영향받는 범위를 다시 검토한다.

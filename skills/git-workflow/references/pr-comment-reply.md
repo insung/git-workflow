@@ -1,13 +1,13 @@
 # 수정 결과의 원래 스레드 회신
 
-수정 구현 단계(task-implement), pr-comment-check, pr-review, pr-merge가 재사용하는 처리 결과 회신의 정본이다. 받은 요청의 조회·반영 판단은 [공통 코멘트 확인](pr-comment-check.md), PR 전체 검토 요약 게시·수정은 [pr-comment.md](../../pr-review/references/pr-comment.md)를 적용한다. 이 절차는 요청별 처리 결과를 원래 리뷰 스레드에 돌려주는 절차이며 공식 Review 제출이 아니다.
+git-workflow의 [공통 구현 단계](implementation.md), pr-comment-check, pr-review, pr-merge가 재사용하는 처리 결과 회신의 정본이다. 받은 요청의 조회·반영 판단은 [공통 코멘트 확인](pr-comment-check.md), PR 전체 검토 요약 게시·수정은 [pr-comment.md](../../pr-review/references/pr-comment.md)를 적용한다. 이 절차는 요청별 처리 결과를 원래 리뷰 스레드에 돌려주는 절차이며 공식 Review 제출이 아니다.
 
 ## 1. 요청과 실행 단계
 
 | 호출 단계 | 회신 시점·내용 |
 | --- | --- |
 | pr-comment-check | 처리·회신이 승인된 작업이면 요청별 구현 또는 근거 있는 반려·보류 후 회신하고 적용 결과 보고 |
-| task-implement | 승인된 수정을 구현·검증하고 실제 커밋·파일 근거를 확인한 뒤 요청별 반영·부분 반영·미반영 결과 회신 |
+| git-workflow 공통 구현 | 승인된 수정을 구현·검증하고 실제 커밋·파일 근거를 확인한 뒤 요청별 반영·부분 반영·미반영 결과 회신 |
 | pr-review | 현재 요청·답글·반영 근거를 확인하고, 회신 요청이 있으면 미회신 결과나 새 판단을 같은 절차로 전달. 전체 리뷰 판정과 구현자 결과 구별 |
 | pr-merge | 머지 직전 새 요청·답글·HEAD를 재확인한 뒤, 회신 요청 범위의 미회신 처리 결과만 전달. 새 구현·전체 리뷰 판정을 만들지 않음 |
 

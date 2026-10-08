@@ -18,7 +18,7 @@ Issue 기반 기능 구현 단계에서는 의도·영향 범위·달성 조건�
 
 테스트와 검토 결과에는 대상 커밋을 적는다. 미커밋 변경이 있으면 변경 파일 목록과 안전하게 확인할 수 있는 patch 또는 digest를 함께 기록한다. 이를 확인할 수 없으면 한계를 적고 해당 작업본을 다시 대조한다. HEAD만으로 미커밋 변경을 식별했다고 하지 않는다.
 
-새 작업의 설계·작업 계약은 [Issue 계획·sub-issue 규칙](../../plan-create/references/plan.md)을 따른다. 신규 plan/task/handoff/review 작업 기록 파일을 만들지 않는다. 비밀값·원시 로그·머신 절대 경로는 공유 문서에 복사하지 않는다.
+새 작업의 설계·작업 계약은 [Issue 계획·sub-issue 규칙](../../issue-create/references/plan.md)을 따른다. 신규 plan/task/handoff/review 작업 기록 파일을 만들지 않는다. 비밀값·원시 로그·머신 절대 경로는 공유 문서에 복사하지 않는다.
 
 대상 저장소에 spec-it manifest/lock이 있으면 그 파일이 고정한 spec-it 원문을 읽는다. 규칙을 복제하거나 자동으로 최신판으로 바꾸지 않는다. 확인되지 않은 번호·테스트 결과·URL·머지·배포 상태를 만들지 않는다.
 
@@ -42,7 +42,7 @@ Issue 기반 기능 구현 단계에서는 의도·영향 범위·달성 조건�
 | 상태 | 조건 | 반환하는 스킬 |
 | --- | --- | --- |
 | issue-incomplete | Issue에 의도·영향 범위·달성 조건 중 하나가 없음 | issue-create |
-| local-draft | 원격 Issue를 만들거나 조회할 수 없는 로컬 파일럿. 원격 Issue를 대신하지 않음 | issue-create, plan-create |
+| local-draft | 원격 Issue를 만들거나 조회할 수 없는 로컬 파일럿. 원격 Issue를 대신하지 않음 | issue-create |
 | local-pr-draft | Issue 연결 검사 실패 또는 원격 접근 불가로 PR을 만들지 않은 본문 초안 | pr-create |
 | review-pending | 구현 인계 후 리뷰나 테스트 증거 보완 대기 | pr-create |
 | merge-unconfirmed | 머지 명령 후 실제 `state=MERGED`와 merge commit을 확인하지 못함 | pr-merge |
