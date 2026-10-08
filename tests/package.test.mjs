@@ -5,8 +5,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { validatePackage } from '../scripts/check-package.mjs';
 
-const names = ['git-workflow', 'workflow-init', 'issue-create', 'plan-create', 'task-implement', 'pr-create', 'pr-review', 'pr-merge', 'issue-close', 'commit-rule', 'git-release', 'git-history'];
-const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-close/references/closing-comment.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/labels.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/references/templates.md', 'workflow-init/references/agents.md', 'workflow-init/references/labels.md', 'workflow-init/references/release.md', 'workflow-init/references/branch-policy.md', 'workflow-init/references/branch-options.md', 'git-workflow/references/project-branch-policy.md', 'workflow-init/scripts/sync-labels.py', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'plan-create/references/review-criteria.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-merge/references/post-merge-cleanup.md', 'pr-review/references/review.md', 'pr-review/references/pr-comment.md', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'git-release/references/release-notes.md', 'git-history/references/investigation.md'];
+const names = ['git-workflow', 'workflow-init', 'issue-create', 'plan-create', 'task-implement', 'pr-create', 'pr-review', 'pr-comment-check', 'pr-merge', 'issue-close', 'commit-rule', 'git-release', 'git-history'];
+const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-close/references/closing-comment.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/labels.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/references/templates.md', 'workflow-init/references/agents.md', 'workflow-init/references/labels.md', 'workflow-init/references/release.md', 'workflow-init/references/branch-policy.md', 'workflow-init/references/branch-options.md', 'git-workflow/references/project-branch-policy.md', 'workflow-init/scripts/sync-labels.py', 'plan-create/references/plan.md', 'plan-create/references/todos.md', 'plan-create/references/review-criteria.md', 'pr-create/references/pr.md', 'pr-create/references/handoff.md', 'pr-merge/references/post-merge-cleanup.md', 'pr-review/references/review.md', 'pr-review/references/pr-comment.md', 'git-workflow/references/pr-comment-check.md', 'git-workflow/references/pr-comment-reply.md', 'git-workflow/scripts/verify-reply.mjs', 'pr-comment-check/scripts/collect-comments.mjs', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'git-release/references/release-notes.md', 'git-history/references/investigation.md'];
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'git-workflow-package-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
@@ -200,6 +200,14 @@ test('PR reports AC results without requiring separate plan, task or handoff fil
   assert.match(asset, /^## 완료 조건 확인과 검증 근거$/m);
   assert.doesNotMatch(asset, /^- (계획|작업·테스트 사례|구현 인계):/m);
 });
+
+for (const path of ['skills/git-workflow/scripts/verify-reply.mjs', 'skills/git-workflow/references/pr-comment-reply.md', 'skills/pr-comment-check/SKILL.md', 'skills/git-workflow/references/pr-comment-check.md', 'skills/pr-comment-check/scripts/collect-comments.mjs']) {
+  test(`rejects missing comment-check capability: ${path}`, t => {
+    const { root } = fixture(t);
+    rmSync(join(root, path));
+    assert.ok(validatePackage(root).some(e => e.includes(path.endsWith('SKILL.md') ? 'pr-comment-check' : path)));
+  });
+}
 
 // History must remain discoverable even if README/router links are removed.
 test('rejects missing git-history entrypoint without README links', t => {

@@ -1,5 +1,12 @@
 # Changelog
 
+## 미발행
+
+- 수정 구현·PR 검토·머지 단계의 공통 스레드 회신 절차와 작성 AI 표시, 중복 방지·게시 후 재조회와 읽기 응답 필드 검증
+
+- PR·연결 Issue 코멘트의 공통 조회·반영 근거 확인과 pr-comment-check 진입점 제공
+- pr-review·pr-merge의 피드백 재확인, 읽기 전용 수집과 페이지·HEAD 오류 검증
+
 ## Unreleased
 
 - git-history로 코드의 동작 기원과 당시 요청·결정·검증을 읽기 전용으로 추적한다. Refs 없는 커밋·Workflow 미채택 저장소·후속 변경·접근 제한을 구별한다. 근거: [Issue #46](https://github.com/insung/git-workflow/issues/46).

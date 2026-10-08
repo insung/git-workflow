@@ -1,7 +1,10 @@
 # PR 검토 댓글
 
 PR의 일반 대화 댓글에 최초 검토·재검토 결과 또는 머지 직전 확인을 남길 때 읽는다. 공식 Review 제출·approve·request changes와 인라인 댓글은 이 규칙의 대상이 아니다.
+원래 리뷰 스레드의 수정 결과 답글은 [공통 수정 결과 회신](../../git-workflow/references/pr-comment-reply.md)을 적용한다. 이 파일의 일반 PR 검토 요약을 스레드 답글로 임의 대체하지 않는다. AI가 작성한 기록의 본문에는 [AI 작성 표기](../../git-workflow/references/document-links.md#ai-작성-표기)를 적용한다.
 공통 원격 기록 형태·요약 범위·permalink·링크 대기·게시 권한의 정본은 [document-links](../../git-workflow/references/document-links.md)다. 아래는 그 공통 구조 안에 담는 PR 전용 내용이다. plan·todo·handoff·review 전문을 복사하지 않는다.
+
+받은 피드백의 조회·반영 판단은 [공통 코멘트 확인](../../git-workflow/references/pr-comment-check.md)을 먼저 적용한다. 이 파일은 결과 게시를 담당하며 읽기 요청으로 게시·스레드 resolve 권한을 만들지 않는다. 요청된 기록에는 확인 시점·현재 HEAD·코멘트별 남은 요청과 근거·미확인 범위를 공통 원격 요약 안에 포함한다.
 
 ## 담당과 시점
 
