@@ -27,7 +27,7 @@ Start with the result you want. The router reads the Issue and recorded work to 
 | New change | “Create an Issue for retry guidance; keep expired guidance unchanged.” | issue-create |
 | Ready Issue | “Write the implementation plan for Issue #12.” | issue-create |
 | Prepared step | “Implement step 01 of Issue #12 and record its tests.” | git-workflow |
-| Implementation ready | “Prepare the handoff and PR for Issue #12.” | pr-create |
+| Implementation ready | “Prepare the handoff and PR for Issue #12.” | pr-request |
 | Review needed | “Review this PR against its Issue, plan and actual test evidence.” | pr-review |
 | Reviewed HEAD | “Merge this approved PR using the agreed method.” | pr-merge; approval applies to that PR and HEAD |
 | Work ended | “Close Issue #12 with its confirmed outcome and close reason.” | issue-close; closure and comments have their own scope |
@@ -45,7 +45,7 @@ flowchart TD
     A[Request] --> B[issue-create: Issue with acceptance criteria]
     B --> C[issue-create: Issue plan and necessary sub-issues]
     C --> D[git-workflow: implement, test, record and commit each step]
-    D --> E[pr-create: results and PR]
+    D --> E[pr-request: results and PR]
     E --> F[pr-review: intent, implementation and test cross-check]
     F -->|fail or missing evidence| D
     F -->|pass| G[User approves PR, HEAD and merge method]
@@ -64,7 +64,7 @@ To investigate why code has its current form, ask [git-history](skills/git-histo
 | [git-workflow](skills/git-workflow/SKILL.md) | Start, resume, implement and verify an Issue-based change |
 | [workflow-init](skills/workflow-init/SKILL.md) | Initialize selected templates, AGENTS.md, labels, release categories, project branch policy and milestone operations |
 | [issue-create](skills/issue-create/SKILL.md) | Write or update Issues and plans, check duplicates and split necessary sub-issues |
-| [pr-create](skills/pr-create/SKILL.md) | Record AC results and verification evidence, and open the PR |
+| [pr-request](skills/pr-request/SKILL.md) | Record AC results and verification evidence, and open the PR |
 | [pr-review](skills/pr-review/SKILL.md) | Check that the change meets the Issue intent and that no test is missing |
 | [pr-comment-check](skills/pr-comment-check/SKILL.md) | Check and handle PR/Issue feedback, reply in the original thread, and report applied results |
 | [pr-merge](skills/pr-merge/SKILL.md) | Confirm the approved merge, safely clean up the work and hand off closure evidence |
@@ -133,7 +133,7 @@ skills/
 ├── git-history/       code context investigation and Git/GitHub tracing
 ├── git-workflow/      router, execution boundaries, conventions, labels, links
 ├── issue-create/      Issue content rules
-├── pr-create/         PR rules and handoff form
+├── pr-request/         PR rules and handoff form
 ├── pr-review/         review form and spec-it policy check
 ├── pr-merge/          approved merge
 ├── issue-close/       close reasons and closing comment form

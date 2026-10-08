@@ -20,7 +20,7 @@ Issue의 요청·기준·계획 → 구현·테스트·커밋 → PR → 검토 
 | Issue 없음/부족 | [issue-create](../issue-create/SKILL.md) | Issue, 의도·영향·달성 조건 |
 | Issue의 계획·작업 분해 | [issue-create](../issue-create/SKILL.md) | 담당·부모 Issue 본문 계획·필요한 sub-issue와 관계, 검증·배포 계획, 결정·승인 범위 |
 | 준비된 Issue 계획 또는 기존 plan·todo 구현 | [공통 구현 절차](references/implementation.md) | 코드·테스트·실제 결과·commit·PR 인계 |
-| 구현 후 PR 준비 | [pr-create](../pr-create/SKILL.md) | PR, AC 결과·검증 근거, HEAD |
+| 구현 후 PR 준비 | [pr-request](../pr-request/SKILL.md) | PR, AC 결과·검증 근거, HEAD |
 | PR·의도·정책·테스트 검증 | [pr-review](../pr-review/SKILL.md) | review, 검토 HEAD, 증거·판단 |
 | PR·연결 Issue의 코멘트 확인·처리·회신 | [pr-comment-check](../pr-comment-check/SKILL.md) | 요청별 판단·반영·회신 결과, 조회 완전성·HEAD·남은 행동 |
 | 승인·머지·작업 정리 | [pr-merge](../pr-merge/SKILL.md) | 실제 머지 상태·merge commit과 local/worktree별 정리 결과 |

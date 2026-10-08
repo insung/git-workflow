@@ -22,4 +22,4 @@ hotfix는 확정된 운영 기준에서 분기한다. 실제 배포된 커밋을
 
 전략을 검토하는 요청은 프로젝트 정본과 [전략 후보](../../workflow-init/references/branch-options.md)를 현재 문서·이력·배포 설정과 대조한다. 확인할 수 없는 인간 결정만 질문하고, 확정된 정책·제안·미정을 구별한다. 브랜치·보호 설정을 자동 변경하지 않는다. 지속 기록은 [workflow-init](../../workflow-init/SKILL.md)의 전략 항목으로 연결한다. 별도 전략 스킬 호출이 필요하지 않다.
 
-PR 작성은 [pr-create](../../pr-create/SKILL.md), 머지는 [pr-merge](../../pr-merge/SKILL.md), 태그·Release 발행은 [git-release](../../git-release/SKILL.md)를 따른다.
+PR 작성은 [pr-request](../../pr-request/SKILL.md), 머지는 [pr-merge](../../pr-merge/SKILL.md), 태그·Release 발행은 [git-release](../../git-release/SKILL.md)를 따른다.

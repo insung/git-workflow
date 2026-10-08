@@ -27,7 +27,7 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 | 새 변경 | “만료 안내는 유지하고 재시도 안내를 위한 Issue를 만들어줘.” | issue-create |
 | 준비된 Issue | “Issue #12의 구현 계획을 작성해줘.” | issue-create |
 | 준비된 단계 | “Issue #12의 01 단계를 구현하고 검증 결과를 기록해줘.” | git-workflow |
-| 구현 완료 | “Issue #12의 인계와 PR을 준비해줘.” | pr-create |
+| 구현 완료 | “Issue #12의 인계와 PR을 준비해줘.” | pr-request |
 | 검토 필요 | “이 PR을 Issue·plan·실제 검증 근거와 대조해줘.” | pr-review |
 | 검토된 HEAD | “승인된 PR을 합의한 방식으로 머지해줘.” | pr-merge; 해당 PR·HEAD에 대한 승인 |
 | 작업 종료 | “확인된 결과와 종료 이유로 Issue #12를 닫아줘.” | issue-close; 종료·댓글의 별도 범위 |
@@ -45,7 +45,7 @@ flowchart TD
     A[요청] --> B[issue-create: 달성 조건을 갖춘 Issue]
     B --> C[issue-create: Issue 계획·필요한 sub-issue]
     C --> D[git-workflow: 단계별 구현·테스트·기록·커밋]
-    D --> E[pr-create: 실제 결과와 PR]
+    D --> E[pr-request: 실제 결과와 PR]
     E --> F[pr-review: 의도·구현·테스트 교차 확인]
     F -->|fail 또는 근거 부족| D
     F -->|pass| G[사용자가 PR·HEAD·머지 방식 승인]
@@ -64,7 +64,7 @@ pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 hea
 | [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개·구현·검증과 다음 단계 선택 |
 | [workflow-init](skills/workflow-init/SKILL.md) | 선택한 템플릿·AGENTS.md·라벨·릴리즈 분류·프로젝트 브랜치 전략·마일스톤 운영 초기화 |
 | [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완·중복 확인·계획·작업 분해 |
-| [pr-create](skills/pr-create/SKILL.md) | AC별 구현·검증 결과와 PR 작성 |
+| [pr-request](skills/pr-request/SKILL.md) | AC별 구현·검증 결과와 PR 작성 |
 | [pr-review](skills/pr-review/SKILL.md) | 변경이 Issue 의도를 채우는지와 빠진 테스트 확인 |
 | [pr-comment-check](skills/pr-comment-check/SKILL.md) | PR·연결 Issue의 코멘트 확인·처리·원래 스레드 회신과 적용 결과 보고 |
 | [pr-merge](skills/pr-merge/SKILL.md) | 승인된 머지 확인·안전한 작업 정리·종료 근거 인계 |
@@ -133,7 +133,7 @@ skills/
 ├── git-history/       코드 변경 맥락 조사와 Git·GitHub 탐색
 ├── git-workflow/      라우터, 실행 경계, 표기·문체, 라벨, 문서 링크
 ├── issue-create/      Issue 본문 규칙
-├── pr-create/         PR 규칙과 구현 인계 양식
+├── pr-request/         PR 규칙과 구현 인계 양식
 ├── pr-review/         검토 양식과 spec-it 정책 검사
 ├── pr-merge/          승인된 머지
 ├── issue-close/       종료 사유와 종료 코멘트 양식
