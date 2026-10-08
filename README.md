@@ -4,7 +4,7 @@
 
 **English** · [한국어](README.ko.md) · [0.8.0 release preparation](docs/releases/v0.8.0.md)
 
-git-workflow is a Codex and Claude Code plugin for Issue-based changes. It records what the requester wants as Issue acceptance criteria, keeps the execution plan in the Issue and creates separate work files only when needed, and carries those IDs through implementation, tests, the PR and review. Each stage reads the previous stage's intent and actual results instead of a summary from memory.
+git-workflow is a Codex and Claude Code plugin for Issue-based changes. It records what the requester wants as Issue acceptance criteria, keeps execution plans and detailed design in Issues and uses sub-issues only for independently tracked results, and carries those IDs through implementation, tests, the PR and review. Each stage reads the previous stage's intent and actual results instead of a summary from memory.
 
 The plugin is a set of instructions, not a CI service. One chat can coordinate the workflow. A session that writes or reads independent review criteria or inputs cannot implement that change; use a separate implementation session.
 
@@ -33,7 +33,7 @@ Start with the result you want. The router reads the Issue and recorded work to 
 
 Use commit-rule for a scoped commit, workflow-init for branch policy setup, and git-release for a release. Ordinary branch, PR and hotfix requests read and follow the [project policy](skills/git-workflow/references/project-branch-policy.md). These requests do not authorize the other actions automatically. The skill table below links to each rule.
 
-The Issue owns the original request, behavior change, scope, constraints, AC, plan and required reference links. The PR owns actual implementation, verification and delivery results. Detailed plans and task contracts are conditional. Implementation does not receive private review inputs. See [document roles and handoff](skills/git-workflow/references/document-links.md).
+The Issue owns the original request, behavior change, scope, constraints, AC, plan and required reference links. The PR owns actual implementation, verification and delivery results. Planning and detailed design stay in the Issue; independent results use sub-issues only when separate tracking is needed. New work does not create plan/task/handoff/review record files. Implementation does not receive private review inputs. See [document roles and handoff](skills/git-workflow/references/document-links.md).
 
 Issue-based commits link the actual Issue through a [Refs footer](skills/commit-rule/references/commit-message.md#issue-출처-refs). From code, follow [commit → Issue request and decisions → PR results](skills/git-workflow/references/document-links.md#커밋에서-출발하는-읽기-순서). When using squash, [verify Refs in the final message](skills/pr-merge/SKILL.md#squash-최종-메시지).
 
@@ -42,7 +42,7 @@ Issue-based commits link the actual Issue through a [Refs footer](skills/commit-
 ```mermaid
 flowchart TD
     A[Request] --> B[issue-create: Issue with acceptance criteria]
-    B --> C[plan-create: inline plan and conditional design]
+    B --> C[plan-create: Issue plan and necessary sub-issues]
     C --> D[task-implement: implement, test, record and commit each step]
     D --> E[pr-create: results and PR]
     E --> F[pr-review: intent, implementation and test cross-check]
@@ -63,7 +63,7 @@ To investigate why code has its current form, ask [git-history](skills/git-histo
 | [git-workflow](skills/git-workflow/SKILL.md) | Start or resume an Issue-based change and choose the next stage |
 | [workflow-init](skills/workflow-init/SKILL.md) | Initialize selected templates, AGENTS.md, labels, release categories and project branch policy |
 | [issue-create](skills/issue-create/SKILL.md) | Write or complete an Issue, check for duplicates first |
-| [plan-create](skills/plan-create/SKILL.md) | Write an inline Issue plan and conditional detailed design |
+| [plan-create](skills/plan-create/SKILL.md) | Write Issue plans and necessary sub-issue contracts |
 | [task-implement](skills/task-implement/SKILL.md) | Implement the prepared plan, verify and record results, and make approved commits |
 | [pr-create](skills/pr-create/SKILL.md) | Record AC results and verification evidence, and open the PR |
 | [pr-review](skills/pr-review/SKILL.md) | Check that the change meets the Issue intent and that no test is missing |
@@ -74,7 +74,7 @@ To investigate why code has its current form, ask [git-history](skills/git-histo
 | [git-release](skills/git-release/SKILL.md) | Prepare release notes, tags and GitHub Releases |
 | [git-history](skills/git-history/SKILL.md) | Read-only tracing from code through Git, PRs, Issues and documents to requests, decisions and verification |
 
-Simple work uses the Issue and PR as its records. Create a plan only when [detailed design is needed](skills/plan-create/references/plan.md#상세-plan-생성-조건); add task contracts only for independent handoffs. Handoff, review, evidence and txt files are not automatic outputs. Follow the [evidence lifecycle and document hub handoff](skills/git-workflow/references/document-links.md), preserve existing records and fixed links, and use the [short example](docs/examples/issue-centered-records/README.md). Freeze independent criteria before implementation and keep them in a [review-only location](skills/plan-create/references/review-criteria.md#보관-위치).
+New work records planning and detailed design in Issues and results and reviews in PRs or the authorized conversation; do not create per-work plan/task/handoff/review files. Default to one Issue. Split into sub-issues only when a result has independent acceptance and verification **and** needs separate delivery, ownership, scheduling, blocking or dependency tracking. Complexity, file counts and legacy task counts alone do not justify splitting. See the [split criteria](skills/plan-create/references/plan.md#sub-issue-분리-판단) and [relationship procedure](skills/plan-create/references/todos.md). Follow the [evidence lifecycle and document hub handoff](skills/git-workflow/references/document-links.md), preserve existing records and fixed links, and use the [short example](docs/examples/issue-centered-records/README.md). Freeze independent criteria before implementation and keep them in a [review-only location](skills/plan-create/references/review-criteria.md#보관-위치).
 
 Check PR and linked Issue feedback with [pr-comment-check](skills/pr-comment-check/SKILL.md). pr-review and pr-merge reuse the same [read and evidence procedure](skills/git-workflow/references/pr-comment-check.md); COMMENTED, resolved and outdated do not prove a request was implemented. When handling and replying are authorized, continue through implementation, verification and reply read-back before reporting applied results. Explicit check-only requests remain read-only; handling and replying do not authorize resolving threads or merging. PENDING reviews are reported only; processing starts after submission. Already published PR/Issue comments need no separate review submission.
 
