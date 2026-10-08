@@ -7,7 +7,7 @@
 
 결과: <pass / warn / fail / human-review>. <판정 이유 한 문장과 다음 행동>
 
-- Issue / PR / 선택적 plan·task: <참조>
+- 담당·부모 Issue / PR / 기존 연결 기록: <참조>
 - base / 검토 HEAD / commit 범위 / 확인 시각: <실제로 확인한 대상>
 - 미커밋 변경: <없음 또는 파일과 patch/digest>
 - 의도 출처: <Issue의 기준·계획, 연결 문서 또는 의도 부족>

@@ -1,13 +1,13 @@
 ---
 name: git-workflow
-description: '“Issue #12 작업을 이어서 진행해줘”, “git workflow로 진행해줘”처럼 Issue 기반 변경의 시작·재개와 다음 단계 선택을 요청할 때 사용한다. 준비된 단계의 구현 자체에는 쓰지 않는다.'
+description: '“Issue #12 작업을 이어서 진행해줘”, “Issue #12의 계획을 구현하고 검증해줘”, “git workflow로 진행해줘”처럼 Issue 기반 변경의 시작·재개와 다음 단계 선택을 요청할 때 사용한다. 준비된 Issue 계획의 구현·검증과 결과 인계 요청에도 사용한다.'
 ---
 
 # Git 워크플로우
 
 Issue의 요청·기준·계획 → 구현·테스트·커밋 → PR → 검토 → 사용자 승인 → 머지 확인 → 안전 정리 → Issue 종료·결과 기록으로 연결한다.
 역할은 현재 대화 세션에서도 실행할 수 있다.
-단, 검토 기준·검증 입력을 작성하거나 읽은 세션은 그 Issue를 구현하지 않는다 ([보관 위치](../plan-create/references/review-criteria.md#보관-위치)).
+단, 검토 기준·검증 입력을 작성하거나 읽은 세션은 그 Issue를 구현하지 않는다 ([보관 위치](references/review-criteria.md#보관-위치)).
 스킬은 실행 지침이며 scheduler/정책 validator가 아니다.
 
 ## 단계 선택
@@ -18,8 +18,8 @@ Issue의 요청·기준·계획 → 구현·테스트·커밋 → PR → 검토 
 | 대상 프로젝트 AGENTS.md의 워크플로우 선언 초기화·추가 요청 | [workflow-init](../workflow-init/SKILL.md) | 대상 경로·추가 전문·위치 제안, 명시적 승인 후 추가 |
 | 파일·함수·구간·동작의 변경 의도·맥락 조사 | [git-history](../git-history/SKILL.md) | 기준 OID·동작 기원·요청/결정/검증 근거와 미확인 |
 | Issue 없음/부족 | [issue-create](../issue-create/SKILL.md) | Issue, 의도·영향·달성 조건 |
-| Issue의 계획·작업 분해 | [plan-create](../plan-create/SKILL.md) | Issue 본문 계획·필요한 상세 설계, 검증·배포 계획, 결정·승인 범위 |
-| 준비된 Issue 계획 또는 기존 plan·todo 구현 | [task-implement](../task-implement/SKILL.md) | 코드·테스트·실제 결과·commit·PR 인계 |
+| Issue의 계획·작업 분해 | [issue-create](../issue-create/SKILL.md) | 담당·부모 Issue 본문 계획·필요한 sub-issue와 관계, 검증·배포 계획, 결정·승인 범위 |
+| 준비된 Issue 계획 또는 기존 plan·todo 구현 | [공통 구현 절차](references/implementation.md) | 코드·테스트·실제 결과·commit·PR 인계 |
 | 구현 후 PR 준비 | [pr-create](../pr-create/SKILL.md) | PR, AC 결과·검증 근거, HEAD |
 | PR·의도·정책·테스트 검증 | [pr-review](../pr-review/SKILL.md) | review, 검토 HEAD, 증거·판단 |
 | PR·연결 Issue의 코멘트 확인·처리·회신 | [pr-comment-check](../pr-comment-check/SKILL.md) | 요청별 판단·반영·회신 결과, 조회 완전성·HEAD·남은 행동 |
@@ -39,6 +39,12 @@ Issue의 요청·기준·계획 → 구현·테스트·커밋 → PR → 검토 
 후속 변경은 [issue-create](../issue-create/SKILL.md)의 의도·범위·AC 대조로 열린 동일 범위 Issue를 재사용하고, 닫힌 범위와 다른 요구는 배경 링크를 가진 새 Issue로 분리한다.
 종료 코멘트의 양식·게시 검증은 issue-close가 담당하며 이 워크플로우에서 중복 구현하지 않는다.
 모든 파일을 한 번에 읽지 않고 현재 단계와 관련 기준만 읽는다.
+
+## 구현 진행
+
+구현 요청은 [공통 구현 절차](references/implementation.md)의 준비 확인·구현·검증·결과 인계를 실행한다. 역할 분리는 대상 AGENTS.md를 따른다. 메인과 구현자가 분리되면 담당·부모 Issue, 공개 계획·선행 조건, 범위·작업 위치·base/HEAD, 검증과 승인 범위를 인계하고 메인은 결과를 독립 확인한다. 부족한 결과는 같은 공개 근거와 실패 지적으로 수정을 인계한다. 비공개 입력을 읽은 세션은 구현하지 않는다.
+
+Issue 작성만 또는 계획만 요청되면 구현으로 확대하지 않는다. 사용자가 원하는 결과를 말하면 필요한 단계를 선택하며 스킬명·내부 단계 구분을 외우도록 요구하지 않는다.
 
 ## 실행 기준
 

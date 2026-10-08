@@ -28,7 +28,7 @@
 
 ## Issue 항목의 필수 검사
 
-[Issue 연결 검사](../../git-workflow/references/issue-link.md)를 적용한다. 같은 저장소 `#번호`, 다른 저장소 `owner/repo#번호` 또는 실제 URL을 쓰며 Closes만 쓰고 관련 Issue를 생략하지 않는다. 해결·종료 승인 범위가 아니거나 AC가 미완료면 Closes를 쓰지 않는다. 생성 전 실제 원격 Issue, 생성 후 같은 참조를 확인한다. 닫힌 Issue는 이번 PR과의 관계를 확인한다.
+[Issue 연결 검사](../../git-workflow/references/issue-link.md)를 적용한다. 같은 저장소 `#번호`, 다른 저장소 `owner/repo#번호` 또는 실제 URL을 쓰며 Closes만 쓰고 관련 Issue를 생략하지 않는다. sub-issue 구현 PR은 담당 Issue와 부모·기여 AC를 구별하고 부모 전체 완료 전에 부모를 Closes로 연결하지 않는다. 해결·종료 승인 범위가 아니거나 AC가 미완료면 Closes를 쓰지 않는다. 생성 전 실제 원격 Issue, 생성 후 같은 참조를 확인한다. 닫힌 Issue는 이번 PR과의 관계를 확인한다.
 
 ## 검증 상태와 확인 절
 

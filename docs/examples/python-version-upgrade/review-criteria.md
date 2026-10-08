@@ -1,6 +1,6 @@
 # 파이썬 버전 업그레이드 검토 기준
 
-구현 전에 고정한 pr-review 입력이다. 구현 세션은 이 파일과 검증 입력을 읽지 않는다. 이 파일은 `review/draft-python-version-upgrade` 브랜치에 있고, 작업 브랜치의 작업 디렉토리에는 pr-review의 [기록 커밋](../../../skills/pr-review/SKILL.md#7-기록-커밋) 뒤에 나타난다. 보관 규칙은 [검토 기준·검증 입력 양식](../../../skills/plan-create/references/review-criteria.md#보관-위치)을 따른다.
+구현 전에 고정한 pr-review 입력이다. 구현 세션은 이 파일과 검증 입력을 읽지 않는다. 이 파일은 `review/draft-python-version-upgrade` 브랜치에 있고, 작업 브랜치의 작업 디렉토리에는 pr-review의 [기록 커밋](../../../skills/pr-review/SKILL.md#7-기록-커밋) 뒤에 나타난다. 보관 규칙은 [검토 기준·검증 입력 양식](../../../skills/git-workflow/references/review-criteria.md#보관-위치)을 따른다.
 
 ## 사용 방법
 

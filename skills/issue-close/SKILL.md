@@ -9,6 +9,8 @@ description: '“Issue #12를 닫아줘”, “머지된 PR의 Issue에 결과 �
 기록은 [문체](../git-workflow/references/writing-conventions.md), 원격 요약은 [document-links](../git-workflow/references/document-links.md)를 따른다.
 코멘트는 [종료 코멘트 양식](references/closing-comment.md)으로 작성한다.
 
+부모 Issue 종료는 하위 Issue 상태·결과와 전체 AC·통합 검증·필수 전달을 대조한다. 모든 자식이 닫혔거나 진행률이 100%라는 이유만으로 completed를 판정하지 않는다. 취소·부분 완료 자식과 남은 전체 범위를 확인한다. 하위 Issue 종료는 부모 종료를 승인하지 않는다.
+
 ## 1. 상태 확인
 
 `gh issue view <Issue> --json state,stateReason,body,comments,closedByPullRequestsReferences`로 현재 상태·달성 조건·연결 PR을 조회한다.

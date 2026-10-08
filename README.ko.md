@@ -4,7 +4,7 @@
 
 [English](README.md) · **한국어** · [0.8.0 릴리즈 준비](docs/releases/v0.8.0.md)
 
-git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이다. 요청자가 원하는 결과를 Issue의 달성 조건으로 기록하고, Issue에 실행 계획을 작성하고, 그 ID를 구현·테스트·PR·검토까지 잇는다. 별도 작업 파일은 필요한 경우에만 만든다. 각 단계는 기억에 의존한 요약 대신 이전 단계의 의도와 실제 결과를 읽는다.
+git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이다. 요청자가 원하는 결과를 Issue의 달성 조건으로 기록하고, Issue에 실행 계획을 작성하고, 그 ID를 구현·테스트·PR·검토까지 잇는다. 새 작업의 계획·설계는 Issue에 두고 독립 추적이 필요한 결과만 sub-issue로 나눈다. 각 단계는 기억에 의존한 요약 대신 이전 단계의 의도와 실제 결과를 읽는다.
 
 이 플러그인은 지시 모음이며 CI 서비스가 아니다. 한 chat에서 전체 흐름을 조정할 수 있다. 독립 검토 기준이나 입력을 작성·열람한 세션은 해당 변경을 구현하지 않으며 별도 구현 세션에 인계한다.
 
@@ -24,8 +24,8 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 | 새 저장소 | “이 저장소에 Issue·PR 템플릿을 설치해줘.” | workflow-init: 템플릿 |
 | 워크플로 채택 | “AGENTS.md에 git-workflow 채택 선언을 제안해줘.” | workflow-init: AGENTS.md; 추가 전 명시적 승인 |
 | 새 변경 | “만료 안내는 유지하고 재시도 안내를 위한 Issue를 만들어줘.” | issue-create |
-| 준비된 Issue | “Issue #12의 구현 계획을 작성해줘.” | plan-create |
-| 준비된 단계 | “Issue #12의 01 단계를 구현하고 검증 결과를 기록해줘.” | task-implement |
+| 준비된 Issue | “Issue #12의 구현 계획을 작성해줘.” | issue-create |
+| 준비된 단계 | “Issue #12의 01 단계를 구현하고 검증 결과를 기록해줘.” | git-workflow |
 | 구현 완료 | “Issue #12의 인계와 PR을 준비해줘.” | pr-create |
 | 검토 필요 | “이 PR을 Issue·plan·실제 검증 근거와 대조해줘.” | pr-review |
 | 검토된 HEAD | “승인된 PR을 합의한 방식으로 머지해줘.” | pr-merge; 해당 PR·HEAD에 대한 승인 |
@@ -33,7 +33,7 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 
 범위를 정한 커밋은 commit-rule, 전략 초기화는 workflow-init, 릴리즈는 git-release에 요청한다. 일반 브랜치·PR·hotfix 작업은 [프로젝트 정책](skills/git-workflow/references/project-branch-policy.md)을 읽고 따른다. 각 요청이 다른 행동까지 자동 승인하지 않는다. 아래 스킬 표에서 정본 규칙을 읽는다.
 
-Issue는 원문·동작 차이·영향·제약·AC·계획·필수 참고 링크, PR은 실제 결과·검증·배포 상태의 진입점이다. 단순 작업은 별도 파일 없이 진행한다. 상세 plan과 역할별 task는 필요한 경우에만 연결한다. 독립 검토 입력은 구현자에게 전달하지 않는다. [문서 역할과 인계](skills/git-workflow/references/document-links.md)를 참조한다.
+Issue는 원문·동작 차이·영향·제약·AC·계획·필수 참고 링크, PR은 실제 결과·검증·배포 상태의 진입점이다. 새 작업은 별도 plan/task/handoff/review 파일 없이 진행한다. 공통 설계는 부모 Issue, 독립 추적이 필요한 결과는 sub-issue에 기록한다. 독립 검토 입력은 구현자에게 전달하지 않는다. [문서 역할과 인계](skills/git-workflow/references/document-links.md)를 참조한다.
 
 Issue 기반 커밋은 [Refs 푸터](skills/commit-rule/references/commit-message.md#issue-출처-refs)로 실제 Issue를 연결한다. 코드에서 시작할 때는 [커밋 → Issue의 원문·판단 → PR의 실제 결과](skills/git-workflow/references/document-links.md#커밋에서-출발하는-읽기-순서)를 읽는다. Squash를 사용하면 [최종 메시지의 Refs](skills/pr-merge/SKILL.md#squash-최종-메시지)를 확인한다.
 
@@ -42,8 +42,8 @@ Issue 기반 커밋은 [Refs 푸터](skills/commit-rule/references/commit-messag
 ```mermaid
 flowchart TD
     A[요청] --> B[issue-create: 달성 조건을 갖춘 Issue]
-    B --> C[plan-create: Issue 안의 계획·필요한 상세 설계]
-    C --> D[task-implement: 단계별 구현·테스트·기록·커밋]
+    B --> C[issue-create: Issue 계획·필요한 sub-issue]
+    C --> D[git-workflow: 단계별 구현·테스트·기록·커밋]
     D --> E[pr-create: 실제 결과와 PR]
     E --> F[pr-review: 의도·구현·테스트 교차 확인]
     F -->|fail 또는 근거 부족| D
@@ -60,11 +60,9 @@ pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 hea
 
 | 스킬 | 쓰는 때 |
 | --- | --- |
-| [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개와 다음 단계 선택 |
+| [git-workflow](skills/git-workflow/SKILL.md) | Issue 기반 변경의 시작·재개·구현·검증과 다음 단계 선택 |
 | [workflow-init](skills/workflow-init/SKILL.md) | 선택한 템플릿·AGENTS.md·라벨·릴리즈 분류·프로젝트 브랜치 전략 초기화 |
-| [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완과 그 전의 중복 확인 |
-| [plan-create](skills/plan-create/SKILL.md) | Issue 안의 계획과 조건부 상세 설계 작성 |
-| [task-implement](skills/task-implement/SKILL.md) | 준비된 계획 구현, 검증, 결과 기록과 승인된 커밋 |
+| [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완·중복 확인·계획·작업 분해 |
 | [pr-create](skills/pr-create/SKILL.md) | AC별 구현·검증 결과와 PR 작성 |
 | [pr-review](skills/pr-review/SKILL.md) | 변경이 Issue 의도를 채우는지와 빠진 테스트 확인 |
 | [pr-comment-check](skills/pr-comment-check/SKILL.md) | PR·연결 Issue의 코멘트 확인·처리·원래 스레드 회신과 적용 결과 보고 |
@@ -74,11 +72,11 @@ pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 hea
 | [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
 | [git-history](skills/git-history/SKILL.md) | 코드에서 Git 이력·PR·Issue·문서로 당시 요청·결정·검증을 읽기 전용 추적 |
 
-단순 작업은 Issue·PR 본문을 기본 기록으로 사용한다. [상세 설계 조건](skills/plan-create/references/plan.md#상세-plan-생성-조건)에 해당할 때만 docs/git-workflows에 plan을 만들고 독립 계약이 필요한 task만 추가한다. handoff·review·evidence·txt는 자동 생성하지 않는다. [증거 수명과 문서 허브 인계](skills/git-workflow/references/document-links.md)를 따르며 기존 작업 파일·고정 링크는 보존한다. [짧은 예시](docs/examples/issue-centered-records/README.md)를 참조한다. 독립 기준은 구현 전 고정하고 [리뷰 전용 위치](skills/plan-create/references/review-criteria.md#보관-위치)에 유지한다.
+새 작업은 Issue·PR 본문에 계획·상세 설계·결과·검토를 기록하고 plan/task/handoff/review 파일을 만들지 않는다. 기본은 하나의 Issue다. [분리 기준](skills/issue-create/references/plan.md#sub-issue-분리-판단)의 독립 완료·검증과 별도 추적 필요가 모두 있을 때만 AI가 sub-issue를 제안한다. 복잡함·단계·파일·기존 task 수만으로 나누지 않는다. [관계 생성·확인](skills/issue-create/references/sub-issues.md)과 [증거 수명·기존 기록 보존](skills/git-workflow/references/document-links.md)을 따른다. [단일·독립 결과 예시](docs/examples/issue-centered-records/README.md)를 참조한다. 비공개 독립 입력은 구현 전 고정하고 [리뷰 전용 위치](skills/git-workflow/references/review-criteria.md#보관-위치)에 유지한다.
 
 PR과 연결 Issue의 코멘트를 확인·처리·회신할 때는 [pr-comment-check](skills/pr-comment-check/SKILL.md)를 사용한다. pr-review·pr-merge도 같은 [조회·반영 확인 절차](skills/git-workflow/references/pr-comment-check.md)를 재사용한다. COMMENTED·resolved·outdated는 반영 근거가 아니며, 처리·회신을 맡긴 작업은 승인된 구현·회신까지 이어가고 적용 결과를 보고한다. 내용만 확인하는 요청은 읽기로 제한하며, 처리·회신도 스레드 resolve·머지 승인이 아니다. PENDING 리뷰는 보고만 하고 Submit 후 처리하며, 이미 게시된 PR·Issue 일반 댓글에는 별도 Submit을 요구하지 않는다.
 
-수정 결과를 회신해 달라는 요청에는 task-implement·pr-review·pr-merge가 [공통 회신 절차](skills/git-workflow/references/pr-comment-reply.md)를 재사용한다. 원래 스레드에 반영 근거·검증·남은 판단과 작성 AI를 표시하고, 기존 답글과 중복을 확인한 뒤 게시된 URL·본문을 다시 읽는다. 회신·resolve·머지 권한은 각각 구별한다.
+수정 결과를 회신해 달라는 요청에는 git-workflow·pr-review·pr-merge가 [공통 회신 절차](skills/git-workflow/references/pr-comment-reply.md)를 재사용한다. 원래 스레드에 반영 근거·검증·남은 판단과 작성 AI를 표시하고, 기존 답글과 중복을 확인한 뒤 게시된 URL·본문을 다시 읽는다. 회신·resolve·머지 권한은 각각 구별한다.
 
 ## spec-it
 
@@ -128,8 +126,6 @@ skills/
 ├── git-history/       코드 변경 맥락 조사와 Git·GitHub 탐색
 ├── git-workflow/      라우터, 실행 경계, 표기·문체, 라벨, 문서 링크
 ├── issue-create/      Issue 본문 규칙
-├── plan-create/       본문 계획·선택적 설계 양식
-├── task-implement/    계획 구현과 결과 기록 규칙
 ├── pr-create/         PR 규칙과 구현 인계 양식
 ├── pr-review/         검토 양식과 spec-it 정책 검사
 ├── pr-merge/          승인된 머지
@@ -177,3 +173,5 @@ git-history의 Git 그래프·오프라인 GitHub 사례와 변경 전·후 결�
 ## 라이선스
 
 [MIT](LICENSE)
+
+사용자는 원하는 결과를 요청하면 된다. issue-create는 Issue·계획·작업 분해를, git-workflow는 승인된 구현·검증·결과 인계를 담당한다. plan-create·task-implement 호출 스킬은 제거한다.
