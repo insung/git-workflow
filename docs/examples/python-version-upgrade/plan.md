@@ -43,7 +43,7 @@ created: "2026-10-01"
 
 ## 검토 기준
 
-구현 전에 `review/draft-python-version-upgrade` 브랜치에 고정한다. 구현 세션은 읽지 않으며, 작업 디렉토리에는 기록 커밋 뒤에 나타난다. 보관 규칙은 [검토 기준·검증 입력 양식](../../../skills/plan-create/references/review-criteria.md#보관-위치)을 따른다.
+구현 전에 `review/draft-python-version-upgrade` 브랜치에 고정한다. 구현 세션은 읽지 않으며, 작업 디렉토리에는 기록 커밋 뒤에 나타난다. 보관 규칙은 [검토 기준·검증 입력 양식](../../../skills/git-workflow/references/review-criteria.md#보관-위치)을 따른다.
 
 | 파일 | 내용 |
 | --- | --- |
