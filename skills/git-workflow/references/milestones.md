@@ -41,8 +41,8 @@ gh issue view NUMBER --repo OWNER/REPO --json number,state,milestone
 3. 이월 이유·기존/새 마일스톤·남은 범위를 Issue의 계획 또는 남은 결정에 기록한다. 본문 갱신과 연결 교체도 승인 범위에서 처리하고 원문·기존 완료 결과를 보존한다. 이월은 Issue 완료가 아니다.
 4. 이미 머지된 코드는 마일스톤을 옮겨도 대상 태그에서 빠지지 않는다. 일부만 머지된 Issue는 포함된 결과와 남은 범위를 대조한다. 코드 제외가 필요하면 별도 변경과 검증·승인을 거치며 자동 revert나 공개 이력 재작성은 하지 않는다.
 5. 범위 조정 후 마일스톤과 대상 commit을 다시 확인한다. 미완료·미포함·출처 누락과 조회 실패는 필요한 수정·결정으로 보고하며 숫자만 맞춰 발행하지 않는다.
-6. 태그·Release의 실제 발행과 대상 commit을 확인한 뒤, 해당 마일스톤 종료 승인이 있는 경우만 `PATCH /repos/OWNER/REPO/milestones/NUMBER`의 `state=closed`를 적용한다. 발행 승인은 종료 승인을 대신하지 않는다. 이미 종료된 대상은 무변경이며 재조회로 확인한다. 발행 확인 실패·종료 승인 미확인·새 미완료 작업이 있으면 종료를 보류한다.
+6. 종료 승인은 발행 승인 요청에서 대상 마일스톤의 이름·번호·완료율과 함께 별도 항목으로 묻는다. 태그·Release의 실제 발행과 대상 commit을 확인한 뒤, 해당 마일스톤 종료 승인이 있는 경우만 `PATCH /repos/OWNER/REPO/milestones/NUMBER`의 `state=closed`를 적용한다. 발행 승인은 종료 승인을 대신하지 않는다. 이미 종료된 대상은 무변경이며 재조회로 확인한다. 발행 확인 실패·종료 승인 미확인·새 미완료 작업이 있으면 종료를 보류한다.
 
-발행 성공과 마일스톤 종료 결과는 별도로 보고한다. 종료만 실패하면 Release를 중복 발행하거나 태그를 바꾸지 않고 종료 재확인·재시도만 처리한다.
+발행 성공과 마일스톤 종료 결과는 별도로 보고한다. 종료 승인이 없어 닫지 않은 마일스톤은 열린 상태와 「마일스톤 종료 승인 대기」를 다음 행동으로 보고한다. 종료만 실패하면 Release를 중복 발행하거나 태그를 바꾸지 않고 종료 재확인·재시도만 처리한다.
 
 공식 기준: [마일스톤 개요](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-milestones), [REST API](https://docs.github.com/en/rest/issues/milestones), [Issue 생성](https://cli.github.com/manual/gh_issue_create), [Issue 편집](https://cli.github.com/manual/gh_issue_edit).
