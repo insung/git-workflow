@@ -185,7 +185,11 @@ for (const path of ['workflow-init/assets/labels.yml', 'workflow-init/assets/.gi
 test('canonical adoption declaration carries role separation and approval boundary', () => {
   const declaration = readFileSync(join(import.meta.dirname, '..', 'skills/workflow-init/assets/agents-declaration.md'), 'utf8');
   assert.ok(declaration.startsWith('## Git workflow\n\n이 프로젝트는 git-workflow를 따른다.'));
-  assert.equal(declaration.split('\n').filter(line => line.startsWith('- ')).length, 4);
+  // The declaration delegates details to shipped canonical procedures.
+  for (const target of ['skills/git-workflow/references/implementation.md', 'skills/git-workflow/references/review-criteria.md', 'skills/git-workflow/references/execution-boundaries.md']) {
+    assert.ok(declaration.includes(target), target);
+    assert.ok(existsSync(join(import.meta.dirname, '..', target)), target);
+  }
   for (const clause of ['사용자 승인 후 머지', '직접 구현하지 않으며', '이전 대화를 상속하지 않는 별도 구현 에이전트', '비공개 검토 기준·검증 입력은 구현자에게 전달하지 않는다', '읽기 전용 질문·Issue 작성만 요청한 경우에는 구현으로 확대하지 않는다']) {
     assert.ok(declaration.includes(clause), clause);
   }
