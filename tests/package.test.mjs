@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { validatePackage } from '../scripts/check-package.mjs';
 
 const names = ['git-workflow', 'workflow-init', 'issue-create', 'pr-request', 'pr-review', 'pr-comment-check', 'pr-merge', 'issue-close', 'commit-rule', 'git-release', 'git-history'];
-const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-close/references/closing-comment.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/labels.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/references/templates.md', 'workflow-init/references/agents.md', 'workflow-init/references/labels.md', 'workflow-init/references/release.md', 'workflow-init/references/branch-policy.md', 'workflow-init/references/branch-options.md', 'workflow-init/references/milestones.md', 'git-workflow/references/milestones.md', 'git-workflow/references/project-branch-policy.md', 'workflow-init/scripts/sync-labels.py', 'issue-create/references/plan.md', 'issue-create/references/sub-issues.md', 'git-workflow/references/review-criteria.md', 'git-workflow/references/implementation.md', 'pr-request/references/pr.md', 'pr-request/references/handoff.md', 'pr-merge/references/post-merge-cleanup.md', 'pr-review/references/review.md', 'pr-review/references/pr-comment.md', 'git-workflow/references/pr-comment-check.md', 'git-workflow/references/pr-comment-reply.md', 'git-workflow/scripts/verify-reply.mjs', 'pr-comment-check/scripts/collect-comments.mjs', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'git-release/references/release-notes.md', 'git-release/references/release-context.md', 'git-history/references/investigation.md'];
+const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-close/references/closing-comment.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/labels.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/references/templates.md', 'workflow-init/references/agents.md', 'workflow-init/references/labels.md', 'workflow-init/references/release.md', 'workflow-init/references/branch-policy.md', 'workflow-init/references/branch-options.md', 'workflow-init/references/milestones.md', 'git-workflow/references/milestones.md', 'git-workflow/references/project-branch-policy.md', 'workflow-init/scripts/sync-labels.py', 'issue-create/references/plan.md', 'issue-create/references/sub-issues.md', 'git-workflow/references/review-criteria.md', 'git-workflow/references/implementation.md', 'pr-request/references/pr.md', 'pr-request/references/handoff.md', 'pr-merge/references/post-merge-cleanup.md', 'pr-review/references/review.md', 'pr-review/references/pr-comment.md', 'git-workflow/references/pr-comment-check.md', 'git-workflow/references/pr-comment-reply.md', 'git-workflow/scripts/verify-reply.mjs', 'pr-comment-check/scripts/collect-comments.mjs', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'git-release/references/release-notes.md', 'git-release/references/release-context.md', 'git-history/references/investigation.md', 'git-history/references/change-impact.md'];
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'git-workflow-package-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
@@ -17,6 +17,7 @@ function fixture(t) {
   }
   for (const name of names) put(`skills/${name}/SKILL.md`, `---\nname: ${name}\ndescription: Use when testing ${name}.\n---\n\n# Skill\n`);
   for (const path of references) put(`skills/${path}`, path.includes('ISSUE_TEMPLATE') ? '---\nname: n\nabout: a\ntitle: "t"\nlabels: l\n---\n' : '# Reference\n');
+  for (const path of ['docs/guides/code-context-investigation.md', 'docs/examples/code-context-investigation/README.md']) put(path, '# Usage\n');
   for (const path of ['plugin.json', '.codex-plugin/plugin.json', '.claude-plugin/plugin.json'])
     put(path, JSON.stringify({ name: 'git-workflow', version: '0.2.0', ...(path.includes('codex') ? { skills: './skills/' } : {}) }));
   put('.claude-plugin/marketplace.json', JSON.stringify({ name: 'git-workflow', plugins: [{ name: 'git-workflow', source: '.' }] }));
@@ -257,3 +258,17 @@ test('rejects missing release-context guidance without README links', t => {
   rmSync(join(root, 'skills/git-release/references/release-context.md'));
   assert.ok(validatePackage(root).some(e => e.includes('missing reference: skills/git-release/references/release-context.md')));
 });
+
+test('rejects missing change-impact guidance even when no entrypoint links to it', t => {
+  const { root } = fixture(t);
+  rmSync(join(root, 'skills/git-history/references/change-impact.md'));
+  assert.ok(validatePackage(root).includes('missing reference: skills/git-history/references/change-impact.md'));
+});
+
+for (const path of ['docs/guides/code-context-investigation.md', 'docs/examples/code-context-investigation/README.md']) {
+  test(`rejects missing code-context usage document: ${path}`, t => {
+    const { root } = fixture(t);
+    rmSync(join(root, path));
+    assert.ok(validatePackage(root).includes(`missing usage document: ${path}`));
+  });
+}
