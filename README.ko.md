@@ -55,7 +55,7 @@ flowchart TD
     H -. 별도 승인 .-> I[git-release: 노트·태그·Release]
 ```
 
-pr-merge는 로컬 브랜치·worktree 결과를 각각 보고하고, 원격 head는 issue-close가 Issue를 닫을 때 삭제한다. issue-close는 근거로 충족된 task 항목을 승인 없이 체크한다. dirty·공유·잠금·보호·검토 후 작업은 보존하고 Codex 관리 worktree는 관리 기능으로 아카이브한다. [정리 정책](skills/pr-merge/references/post-merge-cleanup.md)을 적용한다. 종료 코멘트는 설치된 issue-close가 담당하며 없으면 로컬 handoff로 남긴다. 작은 후속 변경도 의도·범위·AC가 같은 열린 Issue만 재사용하고, 닫힌 범위와 다른 변경은 연결된 새 Issue로 추적한다.
+pr-merge는 머지 직후 머지된 PR의 원격 head를 삭제하고 worktree를 제거한다. Issue 종료 여부와 관계없으며 원격·로컬 브랜치·worktree 결과를 각각 보고한다. issue-close는 원격 head를 삭제하지 않고 남은 대상을 보고하며, 근거로 충족된 task 항목을 승인 없이 체크한다. dirty·공유·잠금·보호·검토 후 작업은 보존하고 Codex 관리 worktree는 관리 기능으로 아카이브한다. [정리 정책](skills/pr-merge/references/post-merge-cleanup.md)을 적용한다. 종료 코멘트는 설치된 issue-close가 담당하며 없으면 로컬 handoff로 남긴다. 작은 후속 변경도 의도·범위·AC가 같은 열린 Issue만 재사용하고, 닫힌 범위와 다른 변경은 연결된 새 Issue로 추적한다.
 
 “왜 이렇게 구현했는지 알려줘”, “이 코드의 의도를 알려줘”, “맥락을 알고싶어”처럼 명시적으로 요청하면 [git-history](skills/git-history/SKILL.md)가 읽기 전용으로 설명한다. “바꾸면 어떤 영향이 있어?”는 현재 호출·설정·테스트의 예상 영향·유지 조건·검증안을 추가한다. 일반 수정·승인된 Issue 구현 전체의 자동 필수 단계는 아니다. Refs나 Workflow 양식이 없어도 근거를 찾으며 추정·접근 제한을 구별한다. [사용 설명과 흐름](docs/guides/code-context-investigation.md), [대표 예시](docs/examples/code-context-investigation/README.md)를 참고한다.
 
