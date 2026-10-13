@@ -54,7 +54,37 @@ test('rejects broken relative handoff links', t => {
 });
 test('allows external URLs and local fragments without fetching them', t => {
   const { root, put } = fixture(t);
-  put('README.md', '[web](https://example.invalid/x) [anchor](#test) [issue](skills/issue-create/SKILL.md#input)');
+  put('README.md', '# Readme\n\n[web](https://example.invalid/x) [anchor](#readme) [issue](skills/issue-create/SKILL.md#skill)');
+  assert.deepEqual(validatePackage(root), []);
+});
+test('rejects a local link whose anchor is not in the target file', t => {
+  const { root, put } = fixture(t);
+  put('README.md', '[issue](skills/issue-create/SKILL.md#input)');
+  assert.ok(validatePackage(root).includes('broken anchor: README.md -> skills/issue-create/SKILL.md#input'));
+});
+test('rejects a same-file anchor that has no heading', t => {
+  const { root, put } = fixture(t);
+  put('README.md', '# Readme\n\n[anchor](#missing)');
+  assert.ok(validatePackage(root).includes('broken anchor: README.md -> #missing'));
+});
+test('resolves anchors with GitHub heading rules', t => {
+  const { root, put } = fixture(t);
+  put('docs/target.md', '# 7. 검토 기록 보존\n\n## `code` and [link](../README.md) *Mixed* Case!\n\n## 반복\n\n## 반복\n\n<a id="custom-id"></a>\n<a name="named"></a>\n');
+  put('README.md', ['7-검토-기록-보존', 'code-and-link-mixed-case', '반복', '반복-1', 'custom-id', 'named', '7-%EA%B2%80%ED%86%A0-%EA%B8%B0%EB%A1%9D-%EB%B3%B4%EC%A1%B4']
+    .map(anchor => `[a](docs/target.md#${anchor})`).join(' '));
+  assert.deepEqual(validatePackage(root), []);
+  put('README.md', '[a](docs/target.md#7-기록-커밋) [b](docs/target.md#반복-2)');
+  assert.deepEqual(validatePackage(root), ['broken anchor: README.md -> docs/target.md#7-기록-커밋', 'broken anchor: README.md -> docs/target.md#반복-2']);
+});
+test('ignores headings inside code blocks when resolving anchors', t => {
+  const { root, put } = fixture(t);
+  put('docs/target.md', '# Real\n\n```md\n## Fenced\n```\n');
+  put('README.md', '[a](docs/target.md#real) [b](docs/target.md#fenced)');
+  assert.deepEqual(validatePackage(root), ['broken anchor: README.md -> docs/target.md#fenced']);
+});
+test('does not check anchors of non-Markdown targets', t => {
+  const { root, put } = fixture(t);
+  put('README.md', '[script](skills/git-workflow/scripts/verify-reply.mjs#L10)');
   assert.deepEqual(validatePackage(root), []);
 });
 test('rejects a Codex manifest that loads the wrong skill directory', t => {
