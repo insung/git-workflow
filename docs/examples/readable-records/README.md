@@ -1,6 +1,6 @@
 # 읽기 쉬운 작업 기록: 개선 전후
 
-아래는 가상 편집 예시다. 번호·커밋·결과는 실제 작업의 증거가 아니다. 다섯 문서가 결론과 다음 행동을 전달하면서 같은 사실을 보존하는 방식을 보여준다. [공통 편집 기준](../../../skills/git-workflow/references/writing-conventions.md#정보-단위와-작성-후-편집), [문서 역할](../../../skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서)을 적용한다.
+아래는 가상 편집 예시다. Issue 부분은 「한눈에」·단계 표·접은 원문을 도입하기 전의 양식이다. 새 Issue의 절 순서와 계획은 [Issue 본문 작성](../../../skills/issue-create/references/issue.md)과 [Issue 중심 기록 예시](../issue-centered-records/README.md)를 따른다. 번호·커밋·결과는 실제 작업의 증거가 아니다. 다섯 문서가 결론과 다음 행동을 전달하면서 같은 사실을 보존하는 방식을 보여준다. [공통 편집 기준](../../../skills/git-workflow/references/writing-conventions.md#정보-단위와-작성-후-편집), [문서 역할](../../../skills/git-workflow/references/document-links.md#문서별-역할과-읽기-순서)을 적용한다.
 
 ## 공통 원문
 
