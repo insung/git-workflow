@@ -87,17 +87,43 @@ export function validatePackage(root) {
       const description = frontmatter?.match(/^description:[ \t]*([^\r\n]*)$/m)?.[1] ?? '';
       if (!/^['"]/.test(description) && /\s#/.test(description)) errors.push(`unquoted description truncated at " #": ${label}`);
     }
-    const prose = source.replace(/^(```|~~~)[^\n]*\n[\s\S]*?^\1[^\n]*(?:\n|$)/gm, '');
+    const prose = stripCode(source);
     for (const match of prose.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)) {
       const target = match[1].trim().replace(/^<|>$/g, '');
-      if (/^(?:[a-z][a-z0-9+.-]*:|#)/i.test(target)) continue;
+      if (/^[a-z][a-z0-9+.-]*:/i.test(target)) continue;
       const local = target.split(/[?#]/)[0];
-      if (!local) continue;
-      let decoded;
-      try { decoded = decodeURIComponent(local); }
-      catch { errors.push(`invalid link: ${label} -> ${target}`); continue; }
-      if (!existsSync(resolve(dirname(path), decoded))) errors.push(`broken link: ${label} -> ${target}`);
+      const fragment = target.match(/#(.*)$/)?.[1];
+      let decoded, anchor;
+      try {
+        decoded = decodeURIComponent(local);
+        anchor = fragment && decodeURIComponent(fragment);
+      } catch { errors.push(`invalid link: ${label} -> ${target}`); continue; }
+      const file = local ? resolve(dirname(path), decoded) : path;
+      if (!existsSync(file)) { errors.push(`broken link: ${label} -> ${target}`); continue; }
+      if (anchor && file.endsWith('.md') && !anchorsOf(file).has(anchor.toLowerCase()))
+        errors.push(`broken anchor: ${label} -> ${target}`);
     }
+  }
+  const anchorCache = new Map();
+  // GitHub heading anchors: lowercase, drop punctuation except - and _, spaces to -, -1/-2 suffix for repeats.
+  function anchorsOf(file) {
+    if (anchorCache.has(file)) return anchorCache.get(file);
+    const prose = stripCode(readFileSync(file, 'utf8'));
+    const anchors = new Set();
+    const seen = new Map();
+    for (const [, heading] of prose.matchAll(/^ {0,3}#{1,6}[ \t]+(.+?)[ \t]*#*[ \t]*$/gm)) {
+      const text = heading.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/<[^>]+>/g, '').replace(/`/g, '');
+      const slug = text.toLowerCase().replace(/[^\p{L}\p{M}\p{N}\s_-]/gu, '').replace(/\s/g, '-');
+      const count = seen.get(slug) ?? 0;
+      seen.set(slug, count + 1);
+      anchors.add(count ? `${slug}-${count}` : slug);
+    }
+    for (const [, id] of prose.matchAll(/<a\s[^>]*\b(?:id|name)=["']([^"']+)["']/gi)) anchors.add(id.toLowerCase());
+    anchorCache.set(file, anchors);
+    return anchors;
+  }
+  function stripCode(source) {
+    return source.replace(/^(```|~~~)[^\n]*\n[\s\S]*?^\1[^\n]*(?:\n|$)/gm, '');
   }
   scan(root);
   return errors;
@@ -108,5 +134,5 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   if (errors.length) {
     for (const error of errors) console.error(error);
     process.exitCode = 1;
-  } else console.log('Package structure valid (skills, manifests, local links). Semantic review and host loading not checked.');
+  } else console.log('Package structure valid (skills, manifests, local links and anchors). Semantic review and host loading not checked.');
 }
