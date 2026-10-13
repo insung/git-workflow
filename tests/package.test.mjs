@@ -208,7 +208,7 @@ test('Issue templates require the original request, inline plan and reference li
   const rows = readFileSync(join(root, 'references/templates.md'), 'utf8').split('\n').filter(l => /^\| (기능 Issue|버그 Issue) \|/.test(l));
   for (const row of rows) {
     const required = row.split('|')[2].split(',').map(s => s.trim());
-    for (const heading of ['사용자 요청 원문', '계획', '참고 링크']) assert.ok(required.includes(heading), `${row.split('|')[1]}: ${heading}`);
+    for (const heading of ['한눈에', '사용자 요청 원문', '계획', '참고 링크']) assert.ok(required.includes(heading), `${row.split('|')[1]}: ${heading}`);
   }
 });
 
