@@ -1,6 +1,6 @@
 # PR 검토 댓글
 
-PR의 일반 대화 댓글에 최초 검토·재검토 결과 또는 머지 직전 확인을 남길 때 읽는다. 공식 Review 제출·approve·request changes와 인라인 댓글은 이 규칙의 대상이 아니다.
+PR의 일반 대화 댓글에 최초 검토·재검토 결과 또는 머지 직전 확인을 남기거나, 최초 검토·재검토 결과를 [줄 코멘트 Review](#줄-코멘트-review)로 남길 때 읽는다. 공식 Review의 `APPROVE`·`REQUEST_CHANGES` 이벤트와 자동 봇 실행은 이 규칙의 대상이 아니다.
 원래 리뷰 스레드의 수정 결과 답글은 [공통 수정 결과 회신](../../git-workflow/references/pr-comment-reply.md)을 적용한다. 이 파일의 일반 PR 검토 요약을 스레드 답글로 임의 대체하지 않는다. AI가 작성한 기록의 본문에는 [AI 작성 표기](../../git-workflow/references/document-links.md#ai-작성-표기)를 적용한다.
 공통 원격 기록 형태·요약 범위·permalink·링크 대기·게시 권한의 정본은 [document-links](../../git-workflow/references/document-links.md)다. 아래는 그 공통 구조 안에 담는 PR 전용 내용이다. plan·todo·handoff·review 전문을 복사하지 않는다.
 
@@ -27,7 +27,7 @@ pr-request의 기본 기록은 PR 본문이다. 필요한 기존 handoff는 추�
 - 대상 PR: <실제 PR URL>
 - 검토 HEAD: <전체 commit hash>
 - 결과: <pass / warn / fail / human-review>
-- 이전 기록: <재검토인 경우 확인된 이전 댓글 URL; 최초면 없음>
+- 이전 기록: <재검토인 경우 확인된 이전 댓글 또는 Review URL; 최초면 없음>
 
 | AC | 결과 요약 | 근거 |
 | --- | --- | --- |
@@ -39,7 +39,7 @@ pr-request의 기본 기록은 PR 본문이다. 필요한 기존 handoff는 추�
 ```
 
 공통 「근거 문서」에는 확인된 PR 검증 결과·리뷰 기록 또는 필요한 상세 자료의 링크를 넣고, 「남은 일」에는 보완·재검토·미실행을 적는다. 없으면 없음으로 쓴다. 링크가 준비되지 않았으면 링크 대기/접근 제한으로 표시하고 로컬 경로·허구 URL·전문 복사로 대체하지 않는다. 링크를 위한 자동 commit/push도 하지 않는다.
-머지 직전 확인은 기존 검토 댓글/근거를 연결하고 같은 검토 HEAD의 현재 결과·남은 위험·승인 상태와 실제 PR HEAD 일치를 요약한다. 모든 AC 검토를 새로 했다고 주장하지 않는다. 검토 HEAD 뒤 커밋은 [기록 커밋](../SKILL.md#7-기록-커밋) 규칙으로 먼저 대조한다. 인정되는 기록 커밋은 검토 HEAD와 확인한 PR HEAD를 구분해 표시한다. 그 밖의 HEAD 변경이면 재검토 필요와 실제 HEAD를 보고하고 pr-review로 인계한다.
+머지 직전 확인은 기존 검토 댓글 또는 줄 코멘트 Review/근거를 연결하고 같은 검토 HEAD의 현재 결과·남은 위험·승인 상태와 실제 PR HEAD 일치를 요약한다. 모든 AC 검토를 새로 했다고 주장하지 않는다. 검토 HEAD 뒤 커밋은 [기록 커밋](../SKILL.md#7-기록-커밋) 규칙으로 먼저 대조한다. 인정되는 기록 커밋은 검토 HEAD와 확인한 PR HEAD를 구분해 표시한다. 그 밖의 HEAD 변경이면 재검토 필요와 실제 HEAD를 보고하고 pr-review로 인계한다.
 
 ## 신규 게시·수정·생략
 
@@ -54,6 +54,44 @@ pr-request의 기본 기록은 PR 본문이다. 필요한 기존 handoff는 추�
 | 인간 또는 다른 작업의 댓글 | 보존; 수정 대상으로 선택하지 않음 |
 
 단순 링크 보정은 같은 증거에 대한 주소 보정이다. 새로운 실행 증거·새 판단을 추가하거나 링크 대기에서 확인된 증거로 판단이 바뀌면 실질 변경으로 취급한다. 최초 검토와 머지 직전 확인은 종류가 다르므로 서로 덮어쓰지 않는다. 과거 PR 댓글을 일괄 소급 수정하지 않는다.
+
+## 줄 코멘트 Review
+
+최초 검토·재검토 결과를 줄 코멘트로 게시하라는 요청이 있을 때만 적용한다. 요청이 없으면 위 일반 댓글 경로를 그대로 쓴다. 머지 직전 확인은 줄 코멘트 Review로 게시하지 않는다.
+검토 결과 하나는 Review 하나로 게시한다. 지적마다 Review를 따로 만들지 않고, 같은 결과의 일반 댓글도 따로 게시하지 않는다.
+
+| 필드 | 값 |
+| --- | --- |
+| `event` | `COMMENT` |
+| `commit_id` | 검토 HEAD 전체 hash |
+| `body` | 위 「PR 전용 내용」 요약(모든 AC ID)과 「줄 없는 지적」 |
+| `comments[]` | 판정이 fail·warn·human-review인 지적 중 PR diff 안의 줄에 붙일 수 있는 것. pass는 요약 표에만 남김 |
+
+- `comments[]` 항목의 위치는 [구현 위치와 줄 코멘트](review.md#작성-규칙) 규칙으로 만든다. 게시 전에 항목마다 검토 HEAD의 PR diff 안 줄인지 대조한다. GitHub는 diff 밖 줄이 하나라도 있으면 Review 전체를 422로 거부한다.
+- 줄 코멘트 본문은 지적 하나만 담는다. AC ID·판정·근거를 적는다.
+- diff 밖의 지적과 줄이 없는 지적(테스트 누락, 빠진 작업)은 `body`의 「줄 없는 지적」에 같은 형식으로 쓴다. 없으면 없음으로 쓴다.
+- AI 작성 표기는 `body`에 적용한다.
+
+```markdown
+<AC ID> · <fail / warn / human-review>: <관찰한 실패 동작과 필요한 조치>
+근거: <확인한 참조>
+```
+
+중복 방지·새 HEAD는 위 「신규 게시·수정·생략」 표를 댓글 대신 Review 단위로 적용한다. 기존 기록 조회에는 일반 댓글과 함께 `pulls/PR/reviews`의 모든 페이지와 각 Review의 줄 코멘트를 포함한다. 대조 대상은 `commit_id`·기록 종류·본문의 판정·AC 요약과 줄 코멘트의 위치·본문이다.
+
+- 같은 검토 HEAD·종류·결과·근거의 자기 Review가 있으면 그 Review URL을 반환하고 다시 게시하지 않는다.
+- 새 HEAD면 이전 Review와 줄 코멘트를 보존하고, 「이전 기록」에 이전 Review 또는 일반 댓글 URL을 연결한 새 Review를 게시한다.
+
+```bash
+# review.json은 {"commit_id","event":"COMMENT","body","comments":[{"path","line","side","body"}]}를 JSON 직렬화한 파일
+# 승인된 신규 Review만 한 번 실행
+gh api --hostname HOST --method POST repos/OWNER/REPO/pulls/PR/reviews --input review.json
+# 응답의 실제 Review ID로 저장된 Review와 줄 코멘트 전체를 재조회
+gh api --hostname HOST --method GET repos/OWNER/REPO/pulls/PR/reviews/REVIEW_ID > stored-review.json
+gh api --hostname HOST --method GET --paginate repos/OWNER/REPO/pulls/PR/reviews/REVIEW_ID/comments > stored-review-comments.json
+```
+
+문자열을 shell 본문에 보간하지 않는다. 사후 확인은 아래 「실행과 확인」 5단계를 Review에 적용한다. 저장된 Review의 URL·`commit_id`·state `COMMENTED`·본문과, 줄 코멘트의 개수·`path`·`line`·`side`·본문이 `review.json`과 모두 일치할 때만 완료를 보고한다. 422 등 실패 응답이면 미게시를 재조회로 확인한 뒤 위치를 다시 대조하고 승인 범위에서 재시도한다. 성공 응답이어도 저장된 Review나 줄 코멘트가 `review.json`과 다르면(줄 코멘트 누락 등) 완료를 보고하지 않는다. Review를 다시 게시하거나 빠진 줄 코멘트를 따로 더하지 않고, 저장된 URL·일치한 항목·빠진 항목을 보고한 뒤 다음 행동을 사용자에게 묻는다.
 
 ## 실행과 확인
 

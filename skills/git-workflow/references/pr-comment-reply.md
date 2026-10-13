@@ -1,6 +1,6 @@
 # 수정 결과의 원래 스레드 회신
 
-git-workflow의 [공통 구현 단계](implementation.md), pr-comment-check, pr-review, pr-merge가 재사용하는 처리 결과 회신의 정본이다. 받은 요청의 조회·반영 판단은 [공통 코멘트 확인](pr-comment-check.md), PR 전체 검토 요약 게시·수정은 [pr-comment.md](../../pr-review/references/pr-comment.md)를 적용한다. 이 절차는 요청별 처리 결과를 원래 리뷰 스레드에 돌려주는 절차이며 공식 Review 제출이 아니다.
+git-workflow의 [공통 구현 단계](implementation.md), pr-comment-check, pr-review, pr-merge가 재사용하는 처리 결과 회신의 정본이다. 받은 요청의 조회·반영 판단은 [공통 코멘트 확인](pr-comment-check.md), PR 전체 검토 요약과 검토 결과의 줄 코멘트 Review 게시·수정은 [pr-comment.md](../../pr-review/references/pr-comment.md)를 적용한다. 이 절차는 요청별 처리 결과를 원래 리뷰 스레드에 돌려주는 절차이며 공식 Review 제출이 아니다.
 
 ## 1. 요청과 실행 단계
 
