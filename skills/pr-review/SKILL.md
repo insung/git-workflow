@@ -75,6 +75,7 @@ live·유료·credential 실행은 해당 승인이 있을 때만 하고, 실행
 AC·todo·정책 근거가 없는 의견은 advisory로 분리한다.
 기본은 대화로 반환하고 게시가 요청됐으면 PR 리뷰/댓글에 기록한다. 신규 review.md 작업 기록은 만들지 않는다.
 최초 검토·재검토는 검토 HEAD와 결과를 고정한 뒤, 댓글 신규 게시·수정이 요청된 경우에만 [PR 댓글](references/pr-comment.md)의 양식·승인·조회·중복 방지·사후 확인 절차를 따른다.
+줄 코멘트 게시가 요청되면 일반 댓글 대신 [줄 코멘트 Review](references/pr-comment.md#줄-코멘트-review) 하나로 게시한다.
 댓글 요청이 없으면 위 대화 반환으로 끝낸다. PR 생성·검토·머지 승인은 댓글 승인으로 확대하지 않는다.
 Issue 원격 요약은 요청된 경우 [document-links](../git-workflow/references/document-links.md), 라벨은 [labels](../git-workflow/references/labels.md)를 따른다.
 
