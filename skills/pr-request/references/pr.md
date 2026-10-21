@@ -1,3 +1,5 @@
+제목은 `[PR] <이번 전달 결과>`로 쓰고 [공통 표기](../../git-workflow/references/change-conventions.md)를 따른다.
+
 # PR 본문 작성
 
 [표기](../../git-workflow/references/change-conventions.md), [문체](../../git-workflow/references/writing-conventions.md), [라벨](../../git-workflow/references/labels.md), [기록 위치](../../git-workflow/references/document-links.md)를 적용한다. 정본은 [PR 템플릿](../../workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md)이다.

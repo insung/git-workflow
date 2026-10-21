@@ -1,7 +1,7 @@
 ---
 name: 버그 보고
 about: 기대와 다르게 동작하는 문제 보고
-title: "fix(<scope>): "
+title: "[Issue] "
 labels: bug
 ---
 

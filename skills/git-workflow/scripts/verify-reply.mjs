@@ -11,6 +11,13 @@ export function verifyReply(expected, response) {
       !id(expected.pr) || !id(expected.parentId) || !id(expected.replyId) ||
       typeof expected.author !== 'string' || !expected.author || typeof expected.body !== 'string' || !expected.body)
     return { confirmed: false, errors: ['incomplete expected target/body'] };
+  // Only validate the declared attribution shape; authorship itself needs execution evidence.
+  const attribution = /^\*\*회신 유형: (수정 결과|검토 결과|질문 답변|반려·보류 사유) · 작성 AI: ([^*<>\r\n]+)\*\*$/;
+  for (const [label, body] of [['expected', expected.body], ['stored', response?.body]]) {
+    const match = typeof body === 'string' && normalize(body).split('\n')[0].match(attribution);
+    if (!match || !match[2].trim() || /^(미확인|실제 작성 도구|도구명|unknown)$/i.test(match[2].trim()))
+      errors.push(label + ' AI attribution missing/invalid');
+  }
   if (!response || !id(response.id) || String(response.id) !== String(expected.replyId)) errors.push('reply ID missing/different');
   if (typeof response?.body !== 'string' || normalize(response.body) !== normalize(expected.body)) errors.push('stored body missing/different');
   if (response?.user?.login !== expected.author) errors.push('stored author missing/different');

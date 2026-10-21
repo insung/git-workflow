@@ -1,4 +1,4 @@
-# feat(crawler-runtime): 파이썬 실행 버전 업그레이드
+# [Issue] 파이썬 실행 버전 업그레이드
 
 상태: local-draft. 원격 Issue 번호·URL 없음.
 
