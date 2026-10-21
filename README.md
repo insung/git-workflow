@@ -183,3 +183,5 @@ The [examples](docs/examples/README.md) show filled document sets and flows. The
 [MIT](LICENSE)
 
 Users describe the desired result; issue-create prepares Issues and plans, and git-workflow implements and verifies approved work. Separate plan-create and task-implement entrypoints are removed.
+
+Use `[Issue] <goal>` and `[PR] <delivered change>` for titles; commits retain `type(scope)`. AI comments and replies begin with an emphasized reply type and actual AI tool, checked before posting and after read-back. Follow the [title rules](skills/git-workflow/references/change-conventions.md) and [AI attribution](skills/git-workflow/references/document-links.md#ai-작성-표기).

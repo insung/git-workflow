@@ -1,7 +1,7 @@
 ---
 name: 기능 요청
 about: 새 기능이나 기존 동작의 개선 요청
-title: "feat(<scope>): "
+title: "[Issue] "
 labels: enhancement
 ---
 

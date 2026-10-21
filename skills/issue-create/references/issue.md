@@ -94,7 +94,7 @@ AI 답변 요약: 원문 절에 AI 답변을 둘 자리가 없다. `AI 답변 �
 3. 실제 라벨 목록과 [마일스톤 기준·목표 버전](../../git-workflow/references/milestones.md)을 확인하고 본문 파일로 생성한다. 목표가 정해지고 대상이 확인됐으면 `--milestone '<실제 이름>'`을 추가한다. 버전 미정이면 생략하고 이유를 보고한다.
 
 ```bash
-gh issue create --repo owner/repo --title 'feat(search): 검색 조건 개선' \
+gh issue create --repo owner/repo --title '[Issue] 검색 조건 개선' \
   --label enhancement --assignee @me --body-file /tmp/issue-body.md
 ```
 

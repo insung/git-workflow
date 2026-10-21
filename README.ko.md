@@ -185,3 +185,5 @@ git-history의 Git 그래프·오프라인 GitHub 사례와 변경 전·후 결�
 [MIT](LICENSE)
 
 사용자는 원하는 결과를 요청하면 된다. issue-create는 Issue·계획·작업 분해를, git-workflow는 승인된 구현·검증·결과 인계를 담당한다. plan-create·task-implement 호출 스킬은 제거한다.
+
+Issue 제목은 `[Issue] <작업 목표>`, PR 제목은 `[PR] <실제 변경>`으로 구별한다. 커밋의 `type(scope)` 표기는 유지한다. AI 댓글·답글은 첫 줄에 회신 유형과 실제 작성 AI를 강조하고 저장 본문을 대조한다. [제목 규칙](skills/git-workflow/references/change-conventions.md)과 [AI 표기](skills/git-workflow/references/document-links.md#ai-작성-표기)를 따른다.

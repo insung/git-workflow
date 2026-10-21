@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { verifyReply } from '../skills/git-workflow/scripts/verify-reply.mjs';
-const expected = { host: 'github.com', repo: 'o/r', pr: 7, parentId: 100, replyId: 101, author: 'insung', body: '部分反映\n작성 AI: Codex' };
+const expected = { host: 'github.com', repo: 'o/r', pr: 7, parentId: 100, replyId: 101, author: 'insung', body: '**회신 유형: 수정 결과 · 작성 AI: Codex**\n\n부분 반영' };
 function actual() { return { id: 101, html_url: 'https://github.com/o/r/pull/7#discussion_r101', body: expected.body, user: { login: 'insung' }, pull_request_url: 'https://api.github.com/repos/o/r/pulls/7', in_reply_to_id: 100 }; }
 test('confirms only the complete stored response and returns its actual URL', () => {
   assert.deepEqual(verifyReply(expected, actual()), { confirmed: true, id: 101, url: actual().html_url });
@@ -43,3 +43,23 @@ test('accepts a verified enterprise host without borrowing github.com URLs', () 
   response.pull_request_url = 'https://git.example.com/api/v3/repos/o/r/pulls/7';
   assert.equal(verifyReply(contract, response).confirmed, true);
 });
+
+for (const body of ['반영 완료', '작성 AI: Codex', '회신 유형: 수정 결과', '**회신 유형: 수정 결과 · 작성 AI: <실제 작성 도구>**', '**회신 유형: 승인 완료 · 작성 AI: Codex**']) {
+  test('rejects an identical stored body with missing or invalid AI attribution: ' + body, () => {
+    const contract = { ...expected, body }, response = { ...actual(), body };
+    assert.equal(verifyReply(contract, response).confirmed, false);
+  });
+}
+test('does not accept AI attribution hidden in a quote or fenced example', () => {
+  for (const body of ['> ' + expected.body, '\x60\x60\x60markdown\n' + expected.body + '\n\x60\x60\x60'])
+    assert.equal(verifyReply({ ...expected, body }, { ...actual(), body }).confirmed, false);
+});
+
+for (const kind of ['수정 결과', '검토 결과', '질문 답변', '반려·보류 사유']) {
+  test('accepts real-tool attribution for ' + kind, () => {
+    for (const tool of ['Claude', 'Codex (GPT-6)']) {
+      const body = '**회신 유형: ' + kind + ' · 작성 AI: ' + tool + '**\n\n결과와 남은 판단';
+      assert.equal(verifyReply({ ...expected, body }, { ...actual(), body }).confirmed, true);
+    }
+  });
+}

@@ -18,3 +18,5 @@ PR base/head 결정 전에 [프로젝트 전략 정본](../git-workflow/referenc
 ## 출력
 
 PR URL·실제 headRefOid·라벨·assignee login·검증 상태·남은 검토·미적용 사유를 반환한다.
+
+AI가 작성하여 게시하는 댓글·리뷰·답글은 [AI 작성 표기](../git-workflow/references/document-links.md#ai-작성-표기)의 필수 첫 줄을 게시 전과 실제 저장 본문에서 확인한다. 누락을 발견하면 완료로 보고하거나 자동 재게시하지 않는다.
