@@ -1,5 +1,7 @@
 # 계획의 위치와 작성 규칙
 
+작업 단위·경미한 예외·보고 종료는 [공통 기준](../../git-workflow/references/outcome-scope.md)을 먼저 적용한다.
+
 ## Issue 안의 계획
 
 계획 작성 단계는 유지한다. 새 작업은 Issue 본문에 계획·상세 설계·중요한 결정 이유를 기록하고, 독립 추적이 필요한 결과만 sub-issue로 나눈다. 신규 plan.md·task-*.md·handoff.md·review.md 작업 기록을 만들지 않는다. 이 참조 파일은 스킬 지침이며 작업별 계획 파일이 아니다.
@@ -97,4 +99,4 @@ Issue에는 무엇을 하고 언제 끝나는지만 쓴다. 명령·SQL·옵션 
 
 ## 로컬 파일럿 디렉토리 규칙
 
-원격 접근 불가일 때만 Issue·PR 초안을 접근 가능한 작업용 임시 위치에 두고 local-draft/local-pr-draft로 표시한다. 새 docs/git-workflows 기록은 만들지 않는다. 실제 원격 PR 전에 실제 Issue와 관계를 확인하며 초안 번호·임시 경로를 원격 링크로 만들지 않는다.
+원격 접근 불가일 때만 Issue·PR 초안을 접근 가능한 작업용 임시 위치에 두고 local-draft/local-pr-draft로 표시한다. 새 docs/git-workflows 기록은 만들지 않는다. 실제 원격 PR 전에 [Issue 연결 또는 승인된 예외](../../git-workflow/references/issue-link.md)를 확인하며 초안 번호·임시 경로를 원격 링크로 만들지 않는다.

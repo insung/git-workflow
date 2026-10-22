@@ -17,7 +17,7 @@ Issue의 요청·기준·계획 → 구현·테스트·커밋 → PR → 검토 
 | git-workflow 설치·초기화 또는 선택 항목 설치 | [workflow-init](../workflow-init/SKILL.md) | 항목 선택, 선택한 범위만 적용 |
 | 대상 프로젝트 AGENTS.md의 워크플로우 선언 초기화·추가 요청 | [workflow-init](../workflow-init/SKILL.md) | 대상 경로·추가 전문·위치 제안, 명시적 승인 후 추가 |
 | 코드의 의도·맥락·변경 이유 또는 제안된 변경 영향의 명시 조사 요청 | [git-history](../git-history/SKILL.md) | 읽기 전용 설명; 영향 요청이면 현재 호출·설정·테스트와 유지 조건·검증안 |
-| Issue 없음/부족 | [issue-create](../issue-create/SKILL.md) | Issue, 의도·영향·달성 조건 |
+| Issue 없음/부족 (경미한 예외는 [공통 기준](references/outcome-scope.md) 먼저 확인) | [issue-create](../issue-create/SKILL.md) | Issue, 의도·영향·달성 조건 |
 | Issue의 계획·작업 분해 | [issue-create](../issue-create/SKILL.md) | 담당·부모 Issue 본문 계획·필요한 sub-issue와 관계, 검증·배포 계획, 결정·승인 범위 |
 | 준비된 Issue 계획 또는 기존 plan·todo 구현 | [공통 구현 절차](references/implementation.md) | 코드·테스트·실제 결과·commit·PR 인계 |
 | 구현 후 PR 준비 | [pr-request](../pr-request/SKILL.md) | PR, AC 결과·검증 근거, HEAD |
@@ -37,7 +37,7 @@ Issue의 요청·기준·계획 → 구현·테스트·커밋 → PR → 검토 
 
 개념·상태·이력·변경 영향 질문은 읽기 전용이다. “왜 이렇게 구현했는지 알려줘”처럼 조사 의미가 명시된 요청을 git-history로 연결하며, 일반 수정·승인된 Issue 구현 전체에 필수 조사나 반복 승인을 추가하지 않는다.
 기존 작업의 late-entry는 현재 상태부터 Issue·plan·증거를 연결한다.
-후속 변경은 [issue-create](../issue-create/SKILL.md)의 의도·범위·AC 대조로 열린 동일 범위 Issue를 재사용하고, 닫힌 범위와 다른 요구는 배경 링크를 가진 새 Issue로 분리한다.
+후속 변경은 [작업 단위·Issue 예외·완료 보고](references/outcome-scope.md)를 먼저 적용한다. 실제 관련 Issue의 의도·범위·AC를 대조해 재사용하고 독립 추적이 필요한 새 결과만 분리를 제안한다.
 종료 코멘트의 양식·게시 검증은 issue-close가 담당하며 이 워크플로우에서 중복 구현하지 않는다.
 모든 파일을 한 번에 읽지 않고 현재 단계와 관련 기준만 읽는다.
 

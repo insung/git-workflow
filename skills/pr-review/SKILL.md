@@ -21,7 +21,7 @@ Issue의 현재 기준·계획과 필요한 연결 문서로 사용자 의도를
 1. 담당 Issue의 원문·목표·영향·제약·달성 조건(AC ID)·현재 계획을 읽고, 부모·선행 관계가 있으면 공통 기준·AC 대응·선행 상태를 추가로 읽는다. 연결된 상세 plan·task와 기존 작업 기록은 필요한 범위에서 추가로 읽는다. 파일 부재 자체를 누락으로 판정하지 않는다.
 2. AC마다 해당하는 정상·실패·경계·유지 시나리오를 대조한다. 기대를 추측하거나 네 종류를 억지로 모두 만들지 않는다.
 3. [검증 준비 상태](../git-workflow/references/execution-boundaries.md#검증-준비)를 확인한다. 공개 AC·계획으로 충분하면 별도 입력·리뷰 위치를 요구하지 않는다. 필요한 별도 기준은 [리뷰 전용 위치](../git-workflow/references/review-criteria.md#보관-위치)에서 고정 상태를 확인하고 읽어 판정한다. 필요한 자료가 미준비·접근 불가면 해당 판단의 미확인을 남긴다.
-4. Issue 없는 순수 릴리즈 준비 PR은 [Issue 연결 검사의 예외](../git-workflow/references/issue-link.md#순수-릴리즈-준비-예외)와 대체 기록의 실제 요청·범위·검증을 대조한다. 조건을 충족하면 Issue 부재만으로 의도 부족으로 판단하지 않는다. 새 정책·동작이 섞였거나 대체 기록이 부족하면 일반 연결 기준으로 보완한다.
+4. Issue 없는 경미한 정합성 보완 PR은 [공통 조건과 대체 기록](../git-workflow/references/outcome-scope.md#경미한-정합성-보완의-issue-없는-pr)을 먼저 대조하고 요청·범위·검증을 AC 대신 사용한다. 조건을 충족하면 Issue 부재만으로 의도 부족이나 테스트 누락을 판정하지 않는다. 순수 릴리즈 준비 PR은 [Issue 연결 검사의 예외](../git-workflow/references/issue-link.md#순수-릴리즈-준비-예외)와 대체 기록의 실제 요청·범위·검증을 대조한다. 조건을 충족하면 Issue 부재만으로 의도 부족으로 판단하지 않는다. 새 정책·동작이 섞였거나 대체 기록이 부족하면 일반 연결 기준으로 보완한다.
 5. 위 예외에 해당하지 않으면서 Issue가 없거나, 실제 요청 근거가 부족하면 PR·요청자 설명의 확인된 부분과 추정을 구별하고 의도 부족을 기록한다. plan 파일이 없다는 이유로 의도를 추정으로 바꾸지 않는다.
 
 PR 제목·본문을 검토하면 [표기](../git-workflow/references/change-conventions.md)와 [문체](../git-workflow/references/writing-conventions.md)를 읽는다.
@@ -72,7 +72,7 @@ live·유료·credential 실행은 해당 승인이 있을 때만 하고, 실행
 | warn | 머지를 막지 않는 위험 |
 | pass | 모든 AC 시나리오가 구현·테스트·실행 증거로 확인됨 |
 
-AC·todo·정책 근거가 없는 의견은 advisory로 분리한다.
+AC·todo·정책 근거가 없는 의견은 advisory로 구별하되 [발견과 남은 일](../git-workflow/references/outcome-scope.md#발견과-남은-일)에 따라 영향 낮은 선택 개선을 자동 후속 과제로 반환하거나 반복 보고하지 않는다.
 기본은 대화로 반환하고 게시가 요청됐으면 PR 리뷰/댓글에 기록한다. 신규 review.md 작업 기록은 만들지 않는다.
 최초 검토·재검토는 검토 HEAD와 결과를 고정한 뒤, 댓글 신규 게시·수정이 요청된 경우에만 [PR 댓글](references/pr-comment.md)의 양식·승인·조회·중복 방지·사후 확인 절차를 따른다.
 줄 코멘트 게시가 요청되면 일반 댓글 대신 [줄 코멘트 Review](references/pr-comment.md#줄-코멘트-review) 하나로 게시한다.
