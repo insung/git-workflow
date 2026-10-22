@@ -51,9 +51,11 @@ flowchart TD
     F -->|pass| G[User approves PR, HEAD and merge method]
     G --> H[pr-merge: merge and confirm MERGED]
     H --> J[Authorized cleanup with preservation checks]
-    J --> K[issue-close: close reason and result comment]
+    J --> K[issue-close: verify body and result comment, then authorized closure]
     H -. separate approval .-> I[git-release: notes, tag and Release]
 ```
+
+PRs [use Refs by default](skills/git-workflow/references/issue-link.md#참조와-종료); automatic closure on merge requires an explicit user request. issue-close updates the overview, plan status, AC and remaining actions from evidence, saves and reads back the body, then posts and verifies the result comment before authorized closure. Already auto-closed Issues also receive body and result updates.
 
 pr-merge deletes the merged PR's remote head and removes the worktree right after merge, whether or not the Issue is closed, and reports remote, local branch and worktree results separately. issue-close does not delete remote heads; it reports any that remain, and checks task items whose evidence shows they are met. Dirty, shared, locked, protected and post-review work is preserved. Codex managed worktrees use archive management. Read the [cleanup policy](skills/pr-merge/references/post-merge-cleanup.md). Closure comments belong to issue-close when installed; otherwise evidence remains in a local handoff. Small follow-up changes reuse an open Issue only when intent, scope and AC match; a different scope after closure needs a new linked Issue.
 

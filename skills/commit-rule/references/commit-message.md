@@ -43,7 +43,7 @@ Issue 기반 작업의 새 커밋에는 실제 관련 Issue를 `Refs:` 트레일
 1. 커밋을 게시할 host·저장소와 관련 Issue를 확인한다. 같은 저장소는 `#번호`, 다른 저장소는 `owner/repository#번호` 또는 실제 Issue URL을 쓴다. 다른 host는 전체 URL로 구별한다. `#번호`를 임의의 checkout이나 fork 저장소 기준으로 해석하지 않는다.
 2. 참조 대상이 실제 Issue인지 조회한다. Issues API 응답에 `pull_request` 키가 있으면 PR이므로 Issue로 기록하지 않는다. 해당 Issue의 의도·범위와 이번 변경의 관련성을 확인하고, 닫힌 Issue는 현재 작업과의 관계를 확인한다.
 3. Issue 기반 작업에서 번호 누락·접근 실패·잘못된 대상·범위 불일치가 있으면 참조 확정과 커밋 실행을 보류하고 필요한 확인을 보고한다. 조회 실패를 부재로 해석하지 않는다. local-draft나 예시 번호를 실제 참조로 만들지 않는다.
-4. 단순 출처 기록에는 `Refs:`를 쓴다. 초안에 `Fixes`, `Closes`, `Resolves` 등 자동 종료 키워드가 섞였으면 출처 참조로 고친다. 커밋 작성 승인으로 Issue 종료를 추정하지 않는다. PR의 종료 키워드는 기존 해결 범위·완료·승인 기준을 따른다.
+4. 단순 출처 기록에는 `Refs:`를 쓴다. 초안에 `Fixes`, `Closes`, `Resolves` 등 자동 종료 키워드가 섞였으면 출처 참조로 고친다. 커밋 작성 승인으로 Issue 종료를 추정하지 않는다. PR의 기본 연결과 자동 종료 예외는 [참조와 종료](../../git-workflow/references/issue-link.md#참조와-종료)를 따른다.
 
 다음은 이 저장소의 실제 [Issue #41](https://github.com/insung/git-workflow/issues/41)을 사용한 표기 예다. 다른 작업에 번호를 복사하지 않고 그 작업의 실제 Issue를 확인한다.
 

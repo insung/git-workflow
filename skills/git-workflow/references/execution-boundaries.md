@@ -74,4 +74,4 @@ Issue 기반 기능 구현 단계에서는 의도·영향 범위·달성 조건�
 | local-pr-draft | Issue 연결 검사 실패 또는 원격 접근 불가로 PR을 만들지 않은 본문 초안 | pr-request |
 | review-pending | 구현 인계 후 리뷰나 테스트 증거 보완 대기 | pr-request |
 | merge-unconfirmed | 머지 명령 후 실제 `state=MERGED`와 merge commit을 확인하지 못함 | pr-merge |
-| close-unconfirmed | 종료 명령 후 실제 `state=CLOSED`, 기대한 stateReason, 종료 코멘트를 확인하지 못함 | issue-close |
+| close-unconfirmed | 종료·기존 CLOSED 결과 보완 후 실제 `state=CLOSED`, 기대한 stateReason, 종료 코멘트 또는 최종 본문 정합성을 확인하지 못함 | issue-close |
