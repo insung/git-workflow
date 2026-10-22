@@ -34,7 +34,7 @@
 
 ## Issue 항목의 필수 검사
 
-[Issue 연결 검사](../../git-workflow/references/issue-link.md)를 적용한다. 같은 저장소 `#번호`, 다른 저장소 `owner/repo#번호` 또는 실제 URL을 쓰며 Closes만 쓰고 관련 Issue를 생략하지 않는다. sub-issue 구현 PR은 담당 Issue와 부모·기여 AC를 구별하고 부모 전체 완료 전에 부모를 Closes로 연결하지 않는다. 해결·종료 승인 범위가 아니거나 AC가 미완료면 Closes를 쓰지 않는다. Issue 「전달」에 배포 뒤 확인이 남아 있으면 Closes 대신 Refs를 쓴다. 일반 연결에서는 생성 전 실제 원격 Issue, 생성 후 같은 참조를 확인한다. 닫힌 Issue는 이번 PR과의 관계를 확인한다.
+[Issue 연결 검사와 참조·종료 정본](../../git-workflow/references/issue-link.md)을 적용한다. 기본은 `Refs: #번호`이며 다른 저장소는 `Refs: owner/repo#번호` 또는 실제 Issue URL을 쓴다. 관련 Issue와 이번 해결 AC를 함께 기록한다. 자동 종료는 정본의 명시 요청 예외만 허용한다. sub-issue 구현 PR은 담당 Issue와 부모·기여 AC를 구별한다. 일반 연결에서는 생성 전 실제 원격 Issue, 생성 후 같은 참조와 자동 종료 경로를 확인한다. 닫힌 Issue는 이번 PR과의 관계를 확인한다.
 
 ## 검증 상태와 확인 절
 

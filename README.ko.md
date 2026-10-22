@@ -51,9 +51,11 @@ flowchart TD
     F -->|pass| G[사용자가 PR·HEAD·머지 방식 승인]
     G --> H[pr-merge: 머지와 MERGED 확인]
     H --> J[승인 범위와 보존 조건을 확인한 작업 정리]
-    J --> K[issue-close: 종료 사유와 결과 코멘트]
+    J --> K[issue-close: 본문·결과 댓글 확인 후 승인된 종료]
     H -. 별도 승인 .-> I[git-release: 노트·태그·Release]
 ```
+
+PR은 [Refs를 기본 연결](skills/git-workflow/references/issue-link.md#참조와-종료)로 쓰고, 머지 시 자동 종료를 사용자가 명시 요청한 경우만 예외로 허용한다. issue-close는 「한눈에」·계획·AC·남은 조치를 근거에 맞게 갱신하고 저장·조회한 뒤 결과 댓글을 게시·확인하고 승인된 종료를 실행한다. 이미 자동 종료된 Issue도 본문과 결과를 보완한다.
 
 pr-merge는 머지 직후 머지된 PR의 원격 head를 삭제하고 worktree를 제거한다. Issue 종료 여부와 관계없으며 원격·로컬 브랜치·worktree 결과를 각각 보고한다. issue-close는 원격 head를 삭제하지 않고 남은 대상을 보고하며, 근거로 충족된 task 항목을 승인 없이 체크한다. dirty·공유·잠금·보호·검토 후 작업은 보존하고 Codex 관리 worktree는 관리 기능으로 아카이브한다. [정리 정책](skills/pr-merge/references/post-merge-cleanup.md)을 적용한다. 종료 코멘트는 설치된 issue-close가 담당하며 없으면 로컬 handoff로 남긴다. 작은 후속 변경도 의도·범위·AC가 같은 열린 Issue만 재사용하고, 닫힌 범위와 다른 변경은 연결된 새 Issue로 추적한다.
 

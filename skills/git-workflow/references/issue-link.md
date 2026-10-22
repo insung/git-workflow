@@ -28,4 +28,14 @@ gh api --hostname HOST repos/OWNER/REPOSITORY/issues/NUMBER \
 
 `is_pr`가 false인 실제 Issue의 본문을 읽고 의도·영향·달성 조건을 대조한다. 권한·네트워크 문제나 조회 실패 시 보류한다. 필요한 검토 근거는 승인된 docs 인계/검토 기록에 Issue URL·연결된 AC·검토 HEAD·판단으로 남긴다. 머지 직전 PR 본문과 Issue를 다시 읽으며 참조나 의도가 바뀌었으면 기존 검토의 적용 여부를 재확인한다.
 
-GitHub Issues API가 PR도 반환하고 `pull_request` 키로 구분한다는 점은 [공식 API 문서](https://docs.github.com/en/rest/issues/issues#get-an-issue)에 따른다. Issue 참조와 자동 닫기는 별개다. `Closes` 같은 키워드는 해결 완료와 저장소 정책에 맞는 경우에만 사용하며, 단순 연결 검사에 강제하지 않는다. 키워드의 저장소 표기와 기본 브랜치 조건은 [공식 연결 문서](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue)를 따른다.
+GitHub Issues API가 PR도 반환하고 `pull_request` 키로 구분한다는 점은 [공식 API 문서](https://docs.github.com/en/rest/issues/issues#get-an-issue)에 따른다.
+
+## 참조와 종료
+
+PR의 기본 연결은 `Refs: #123`이다. 다른 저장소는 `Refs: owner/repository#123` 또는 실제 Issue URL을 쓴다. Refs는 출처·해결 범위의 참조이며 이슈 자동 종료를 요청하지 않는다. AC 충족, 배포 불필요, PR 생성·검토·머지 승인만으로 종료 승인을 추정하지 않는다.
+
+기본 순서는 머지 확인 → [issue-close](../../issue-close/SKILL.md)의 본문 최종 갱신·조회 → 결과 댓글 게시·조회 → 승인된 종료 → 사후 조회다. `Closes`·`Fixes`·`Resolves`와 그 변형은 사용자가 해당 Issue를 **머지 시 자동 종료**하도록 명시적으로 요청한 경우만 예외로 사용한다. 이때도 전체 AC·필수 전달 조건이 충족돼야 하며, 남은 배포 뒤 확인이나 부모 전체 범위가 있으면 예외를 적용하지 않는다. 종료 승인만 있는 경우에도 자동 종료 방식을 임의 선택하지 않는다.
+
+생성·머지 전에 PR 본문, 포함될 커밋 메시지와 최종 머지 메시지, Development의 수동 연결 등 자동 종료 경로를 확인한다. 의도하지 않은 자동 종료가 있으면 해당 원인과 필요한 수정을 제시하고, 승인된 수정·재조회 뒤 진행한다. 공개 커밋 이력을 임의 재작성하지 않는다. Refs만 썼다는 이유로 다른 종료 경로가 없다고 가정하지 않는다.
+
+키워드의 저장소 표기·기본 브랜치 조건과 수동 연결 동작은 [공식 연결 문서](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue)를 따른다.
