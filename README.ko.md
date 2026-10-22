@@ -8,6 +8,8 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 
 이 플러그인은 지시 모음이며 CI 서비스가 아니다. 한 chat에서 전체 흐름을 조정할 수 있다. 독립 검토 기준이나 입력을 작성·열람한 세션은 해당 변경을 구현하지 않으며 별도 구현 세션에 인계한다.
 
+같은 결과의 코드·테스트·문서·주석 보완은 묶는다. [작업 단위와 완료 보고](skills/git-workflow/references/outcome-scope.md)는 경미한 정합성 보완의 Issue 없는 PR 조건, 실제 Issue 재사용, 단순 배경 링크, 차단 위험과 기존 예정/선택 개선의 구별 및 완료 뒤 탐색 종료를 정의한다. workflow-init은 채택 선언에 이 정본을 읽는 한 줄만 연결하며 기존 강제 규칙을 승인 없이 바꾸지 않는다.
+
 ## 왜 쓰는가
 
 - **의도와 근거가 이어진다** — Issue의 달성 조건 ID를 본문 계획, 테스트 사례, PR 결과와 검토가 참조한다.
@@ -45,19 +47,20 @@ flowchart TD
     A[요청] --> B[issue-create: 달성 조건을 갖춘 Issue]
     B --> C[issue-create: Issue 계획·필요한 sub-issue]
     C --> D[git-workflow: 단계별 구현·테스트·기록·커밋]
+    A -->|경미한 정합성 예외: 요청 근거와 검증| D
     D --> E[pr-request: 실제 결과와 PR]
     E --> F[pr-review: 의도·구현·테스트 교차 확인]
     F -->|fail 또는 근거 부족| D
     F -->|pass| G[사용자가 PR·HEAD·머지 방식 승인]
     G --> H[pr-merge: 머지와 MERGED 확인]
     H --> J[승인 범위와 보존 조건을 확인한 작업 정리]
-    J --> K[issue-close: 본문·결과 댓글 확인 후 승인된 종료]
+    J -->|Issue 있음·종료 승인| K[issue-close: 본문·결과 댓글 확인 후 승인된 종료]
     H -. 별도 승인 .-> I[git-release: 노트·태그·Release]
 ```
 
 PR은 [Refs를 기본 연결](skills/git-workflow/references/issue-link.md#참조와-종료)로 쓰고, 머지 시 자동 종료를 사용자가 명시 요청한 경우만 예외로 허용한다. issue-close는 「한눈에」·계획·AC·남은 조치를 근거에 맞게 갱신하고 저장·조회한 뒤 결과 댓글을 게시·확인하고 승인된 종료를 실행한다. 이미 자동 종료된 Issue도 본문과 결과를 보완한다.
 
-pr-merge는 머지 직후 머지된 PR의 원격 head를 삭제하고 worktree를 제거한다. Issue 종료 여부와 관계없으며 원격·로컬 브랜치·worktree 결과를 각각 보고한다. issue-close는 원격 head를 삭제하지 않고 남은 대상을 보고하며, 근거로 충족된 task 항목을 승인 없이 체크한다. dirty·공유·잠금·보호·검토 후 작업은 보존하고 Codex 관리 worktree는 관리 기능으로 아카이브한다. [정리 정책](skills/pr-merge/references/post-merge-cleanup.md)을 적용한다. 종료 코멘트는 설치된 issue-close가 담당하며 없으면 로컬 handoff로 남긴다. 작은 후속 변경도 의도·범위·AC가 같은 열린 Issue만 재사용하고, 닫힌 범위와 다른 변경은 연결된 새 Issue로 추적한다.
+pr-merge는 머지 직후 머지된 PR의 원격 head를 삭제하고 worktree를 제거한다. Issue 종료 여부와 관계없으며 원격·로컬 브랜치·worktree 결과를 각각 보고한다. issue-close는 원격 head를 삭제하지 않고 남은 대상을 보고하며, 근거로 충족된 task 항목을 승인 없이 체크한다. dirty·공유·잠금·보호·검토 후 작업은 보존하고 Codex 관리 worktree는 관리 기능으로 아카이브한다. [정리 정책](skills/pr-merge/references/post-merge-cleanup.md)을 적용한다. 종료 코멘트는 설치된 issue-close가 담당하며 없으면 로컬 handoff로 남긴다. 후속 보완은 [공통 작업 단위·예외 기준](skills/git-workflow/references/outcome-scope.md)을 먼저 적용하고 실제 관련 Issue를 재사용하며 독립 추적이 필요한 새 결과만 분리를 제안한다.
 
 “왜 이렇게 구현했는지 알려줘”, “이 코드의 의도를 알려줘”, “맥락을 알고싶어”처럼 명시적으로 요청하면 [git-history](skills/git-history/SKILL.md)가 읽기 전용으로 설명한다. “바꾸면 어떤 영향이 있어?”는 현재 호출·설정·테스트의 예상 영향·유지 조건·검증안을 추가한다. 일반 수정·승인된 Issue 구현 전체의 자동 필수 단계는 아니다. Refs나 Workflow 양식이 없어도 근거를 찾으며 추정·접근 제한을 구별한다. [사용 설명과 흐름](docs/guides/code-context-investigation.md), [대표 예시](docs/examples/code-context-investigation/README.md)를 참고한다.
 

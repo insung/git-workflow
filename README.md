@@ -8,6 +8,8 @@ git-workflow is a Codex and Claude Code plugin for Issue-based changes. It recor
 
 The plugin is a set of instructions, not a CI service. One chat can coordinate the workflow. A session that writes or reads independent review criteria or inputs cannot implement that change; use a separate implementation session.
 
+Keep code, tests, docs and comments that complete the same result together. [Outcome scope and completion reporting](skills/git-workflow/references/outcome-scope.md) defines the narrow Issue-free PR exception for minor consistency fixes, actual Issue reuse, background links, blocking risks versus existing plans or optional improvements, and stopping after delivery. workflow-init adds one reading link to the adoption declaration; existing mandatory rules need an approved replacement.
+
 ## Why
 
 - **Intent and evidence stay connected** — acceptance criteria IDs connect the inline plan, test cases, PR results and review.
@@ -45,19 +47,20 @@ flowchart TD
     A[Request] --> B[issue-create: Issue with acceptance criteria]
     B --> C[issue-create: Issue plan and necessary sub-issues]
     C --> D[git-workflow: implement, test, record and commit each step]
+    A -->|minor consistency exception: request and verification| D
     D --> E[pr-request: results and PR]
     E --> F[pr-review: intent, implementation and test cross-check]
     F -->|fail or missing evidence| D
     F -->|pass| G[User approves PR, HEAD and merge method]
     G --> H[pr-merge: merge and confirm MERGED]
     H --> J[Authorized cleanup with preservation checks]
-    J --> K[issue-close: verify body and result comment, then authorized closure]
+    J -->|Issue present and closure authorized| K[issue-close: verify body and result comment, then authorized closure]
     H -. separate approval .-> I[git-release: notes, tag and Release]
 ```
 
 PRs [use Refs by default](skills/git-workflow/references/issue-link.md#참조와-종료); automatic closure on merge requires an explicit user request. issue-close updates the overview, plan status, AC and remaining actions from evidence, saves and reads back the body, then posts and verifies the result comment before authorized closure. Already auto-closed Issues also receive body and result updates.
 
-pr-merge deletes the merged PR's remote head and removes the worktree right after merge, whether or not the Issue is closed, and reports remote, local branch and worktree results separately. issue-close does not delete remote heads; it reports any that remain, and checks task items whose evidence shows they are met. Dirty, shared, locked, protected and post-review work is preserved. Codex managed worktrees use archive management. Read the [cleanup policy](skills/pr-merge/references/post-merge-cleanup.md). Closure comments belong to issue-close when installed; otherwise evidence remains in a local handoff. Small follow-up changes reuse an open Issue only when intent, scope and AC match; a different scope after closure needs a new linked Issue.
+pr-merge deletes the merged PR's remote head and removes the worktree right after merge, whether or not the Issue is closed, and reports remote, local branch and worktree results separately. issue-close does not delete remote heads; it reports any that remain, and checks task items whose evidence shows they are met. Dirty, shared, locked, protected and post-review work is preserved. Codex managed worktrees use archive management. Read the [cleanup policy](skills/pr-merge/references/post-merge-cleanup.md). Closure comments belong to issue-close when installed; otherwise evidence remains in a local handoff. For follow-up work, apply the [shared scope and exception criteria](skills/git-workflow/references/outcome-scope.md) first, reuse an actual related Issue, and propose separation only for new results needing independent tracking.
 
 Ask [git-history](skills/git-history/SKILL.md) explicitly: “Why was this implemented this way?”, “Explain this code’s intent” or “Give me its context.” It explains the evidence without modifying the repository. “What would this change affect?” also compares current callers, settings and tests and reports expected impact, conditions to preserve and proposed checks. Ordinary edits and approved Issue implementation do not require this investigation automatically. It works without Refs or Workflow templates and distinguishes confirmed intent, inference and access limits. See the [usage and flow guide](docs/guides/code-context-investigation.md) and [representative examples](docs/examples/code-context-investigation/README.md).
 

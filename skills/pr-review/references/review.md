@@ -1,5 +1,7 @@
 # PR 검토 결과 양식
 
+승인된 [경미한 정합성 보완 예외](../../git-workflow/references/outcome-scope.md#경미한-정합성-보완의-issue-없는-pr)는 아래 Issue·AC 자리에 확인 가능한 요청 근거·범위·검증을 대응시킨다. 이 부재만으로 의도 부족·테스트 누락을 만들지 않으며 실제 검증·미실행·위험·승인 판단은 유지한다.
+
 [공통 작성·편집 기준](../../git-workflow/references/writing-conventions.md#정보-단위와-작성-후-편집)을 적용한다. review는 독립 판정과 필요한 조치를 전달한다. task 작업·검증 표나 handoff 실행 이력을 다시 복사하지 않는다. 짧아도 대상·판정·근거·한계는 남긴다.
 
 ```markdown
