@@ -24,7 +24,7 @@ description: '“이슈를 만들어줘”, “이슈 본문을 보완해줘”,
    실제 관련 Issue가 없고 경미한 예외를 모두 충족하면 PR의 대체 기록으로 진행하며 새 Issue를 강제하지 않는다. 그 외에는 [Issue 상세·양식](references/issue.md)으로 의도·영향/제외 범위·검증 가능한 달성 조건을 작성한다.
    코드·문서에서 알 수 있는 것은 조사하고 인간 결정만 질문한다.
    제시 전 [본문 작성·편집 순서](references/issue.md#본문-작성편집-순서)로 목표·범위·AC·확인된 사실·링크를 구별하고 원문 의미를 대조한다.
-2. 생성이 요청 범위에 있고 접근 가능하면 본문 파일로 Issue를 만들고 URL/번호를 확인한다.
+2. [Issue 생성 승인](../git-workflow/references/execution-boundaries.md#issue-생성-승인)이 있고 접근 가능하면 본문 파일로 Issue를 만들고 URL/번호를 확인한다. 승인이 없으면 [Issue 필요 판정](../git-workflow/references/outcome-scope.md#issue-필요-판정-기록)과 초안을 보고하고 승인을 받는다. 「없으면 Issue 하나」 같은 조건부 지시는 승인이 아니다.
    인증 불가인 로컬 파일럿만 local-draft를 허용한다.
    경미한 정합성 보완 예외 외의 일반 원격 PR 전에는 실제 Issue가 필요하다. [순수 릴리즈 준비 예외](../git-release/references/release-context.md#issue-없는-릴리즈와-준비-pr)는 별도 조건·대체 기록을 적용하며 이슈 생성을 강제하지 않는다.
 3. 실제 URL/번호·본문·라벨과 assignee login, 실제 마일스톤 연결 또는 미지정 사유를 재확인한다.
