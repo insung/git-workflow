@@ -58,6 +58,6 @@ type만으로 릴리즈 포함·버전을 확정하지 않는다. 다른 type이
 | feat(backend): 순위 수집 추가 | feat(app-ranking): Roblox 게임 순위를 수집 대상에 포함 |
 | fix: 404 반환하도록 수정 | fix(app-ranking): 앱 ID 누락 시 500 대신 404 응답 |
 | fix(navigation): 선택 유지되도록 수정 | fix(navigation): 화면 이동 후에도 선택한 앱 유지 |
-| docs(document): 자료 11곳 정리 | docs(document-hub): 원천 자료와 설명 문서 연결 |
+| docs(document): 자료 11곳 정리 | docs(document-hub): 원본 데이터와 설명 문서 연결 |
 
 type이 이미 뜻하는 추가·수정으로 끝내지 않는다. 단, `feat(dashboard): 위젯을 드래그해 순서 변경`처럼 사용자의 기능 자체를 설명하는 동사는 허용한다. 개수보다 무엇이 달라졌는지 적는다. 커밋 본문·푸터는 [commit-message.md](../../commit-rule/references/commit-message.md)를 따른다.
