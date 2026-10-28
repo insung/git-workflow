@@ -12,7 +12,7 @@ description: “커밋해줘”, “커밋 메시지 다듬어줘”처럼 커�
 2. [공통 변경 표기](../git-workflow/references/change-conventions.md)와 [커밋 메시지](references/commit-message.md)에 따라 주제별 메시지를 준비한다.
    Issue 기반 작업은 메시지 정본의 Refs 규칙으로 실제 관련 Issue를 확인하며, 확인 실패 시 참조 확정과 커밋을 보류한다.
    본문 작성 시 [공통 문체](../git-workflow/references/writing-conventions.md)를 따른다.
-3. 저장소에 커밋 전 검사 명령(테스트·lint·hook)이 정해져 있으면 실행한다. staged diff를 확인한다.
+3. 저장소에 커밋 전 검사 명령(테스트·lint·hook)이 정의되어 있으면 실행한다. staged diff를 확인한다.
    메시지나 범위 검토만 요청됐으면 결과를 반환하고 커밋하지 않는다.
 4. 커밋이 요청됐으면 승인된 범위만 커밋한다.
    AGENTS.md에 댓글 포함 규칙이 있으면 댓글 상태와 추적 여부를 확인한다.
@@ -21,4 +21,4 @@ description: “커밋해줘”, “커밋 메시지 다듬어줘”처럼 커�
    인계 문서에 결과를 기록하고 다른 작업의 변경이 보존됐는지 확인한다.
 
 커밋 요청을 push나 PR 생성 권한으로 확대하지 않는다.
-자기 hash를 문서에 넣기 위한 amend 반복은 하지 않는다.
+자기 hash를 문서에 기록하기 위한 amend 반복은 하지 않는다.

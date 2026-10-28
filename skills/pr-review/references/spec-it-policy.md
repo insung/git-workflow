@@ -7,7 +7,7 @@
 1. 대상 AGENTS.md, manifest, lock, 예외 기록과 lock이 고정한 규칙 원문을 읽는다.
 2. 설치된 spec-it-check를 적용한다. 설치되지 않았으면 lock이 고정한 정책 소스의 `skills/spec-it-check/SKILL.md`를 직접 읽는다.
 3. 영향 조사가 필요하면 같은 방식으로 spec-it-impact를 찾는다.
-4. 설치와 고정 소스 모두 접근할 수 없으면 검사하지 못한 정책 범위를 human-review로 남긴다.
+4. 설치와 고정 소스 모두 접근할 수 없으면 검사하지 못한 정책 범위를 human-review로 기록한다.
 
 `../spec-it/skills/`는 후보 위치일 뿐이며 모든 환경에 있다고 가정하지 않는다. 임의 설치나 설정 변경을 하지 않는다. 실행하지 않은 검사를 실행했다고 적지 않는다.
 

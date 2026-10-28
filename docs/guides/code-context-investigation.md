@@ -1,6 +1,6 @@
 # 명시적으로 요청하는 코드 의도·변경 영향 조사
 
-필요한 때 `git-history`에 코드의 의도·맥락 또는 제안된 변경 영향을 요청한다. AGENTS.md에는 호출 안내만 두고 상세 실행 지침은 스킬을 정본으로 유지한다. 모든 구현마다 전체 Git 이력 조사와 새 승인을 추가하는 방식은 아니다.
+필요한 때 `git-history`에 코드의 의도·맥락 또는 제안된 변경 영향을 요청한다. AGENTS.md에는 호출 안내만 작성하고 상세 실행 지침은 스킬을 정본으로 유지한다. 모든 구현마다 전체 Git 이력 조사와 새 승인을 추가하는 방식은 아니다.
 
 이 문서는 사용 목적과 흐름을 설명한다. [대표 사용 예시](../examples/code-context-investigation/README.md)는 요청과 보고의 차이를 보여주며, [git-history](../../skills/git-history/SKILL.md)는 실제 실행 지침이다. 변경 계약·사용자 요청 원문·설계 경과는 [Issue #60](https://github.com/insung/git-workflow/issues/60)에 있다.
 

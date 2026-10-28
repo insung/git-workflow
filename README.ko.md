@@ -1,21 +1,21 @@
 # git-workflow
 
-**하나의 변경을 Issue의 의도부터 승인된 머지까지 같은 근거로 잇는다.**
+**하나의 변경을 Issue의 의도부터 승인된 머지까지 같은 근거로 추적한다.**
 
 [English](README.md) · **한국어** · [0.8.0 릴리즈 준비](docs/releases/v0.8.0.md)
 
-git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이다. 요청자가 원하는 결과를 Issue의 달성 조건으로 기록하고, Issue에 실행 계획을 작성하고, 그 ID를 구현·테스트·PR·검토까지 잇는다. 새 작업의 계획·설계는 Issue에 두고 독립 추적이 필요한 결과만 sub-issue로 나눈다. 각 단계는 기억에 의존한 요약 대신 이전 단계의 의도와 실제 결과를 읽는다.
+git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이다. 요청자가 원하는 결과를 Issue의 달성 조건으로 기록하고, Issue에 실행 계획을 작성하고, 그 ID를 구현·테스트·PR·검토에서 참조한다. 새 작업의 계획·설계는 Issue에 작성하고 독립 추적이 필요한 결과만 sub-issue로 나눈다. 각 단계는 기억에 의존한 요약 대신 이전 단계의 의도와 실제 결과를 읽는다.
 
 이 플러그인은 지시 모음이며 CI 서비스가 아니다. 한 chat에서 전체 흐름을 조정할 수 있다. 독립 검토 기준이나 입력을 작성·열람한 세션은 해당 변경을 구현하지 않으며 별도 구현 세션에 인계한다.
 
-같은 결과의 코드·테스트·문서·주석 보완은 묶는다. [작업 단위와 완료 보고](skills/git-workflow/references/outcome-scope.md)는 경미한 정합성 보완의 Issue 없는 PR 조건, 실제 Issue 재사용, 단순 배경 링크, 차단 위험과 기존 예정/선택 개선의 구별 및 완료 뒤 탐색 종료를 정의한다. workflow-init은 채택 선언에 이 정본을 읽는 한 줄만 연결하며 기존 강제 규칙을 승인 없이 바꾸지 않는다.
+같은 결과의 코드·테스트·문서·주석 보완은 하나의 작업(Issue·PR)으로 처리한다. [작업 단위와 완료 보고](skills/git-workflow/references/outcome-scope.md)는 경미한 정합성 보완의 Issue 없는 PR 조건, 실제 Issue 재사용, 단순 배경 링크, 차단 위험과 기존 예정/선택 개선의 구별 및 완료 뒤 탐색 종료를 정의한다. workflow-init은 채택 선언에 이 정본을 읽는 한 줄만 연결하며 기존 강제 규칙을 승인 없이 바꾸지 않는다.
 
 ## 왜 쓰는가
 
 - **의도와 근거가 이어진다** — Issue의 달성 조건 ID를 본문 계획, 테스트 사례, PR 결과와 검토가 참조한다.
-- **검토가 빠진 테스트를 교차 확인한다** — pr-review는 달성 조건의 시나리오마다 구현과 assertion을 대응시키고, 테스트가 없는 시나리오를 보고한다.
-- **위험한 단계마다 승인이 따로 있다** — 커밋·push·PR·머지·배포·릴리즈는 각각 다른 행동이며, 한 승인이 다른 행동이나 새 HEAD로 넘어가지 않는다.
-- **대상 저장소가 같은 양식을 쓴다** — workflow-init이 스킬이 요구하는 항목을 갖춘 Issue·PR 템플릿을 설치한다.
+- **검토 단계에서 테스트 누락을 교차 확인한다** — pr-review는 달성 조건의 시나리오마다 구현과 assertion을 대응시키고, 테스트가 없는 시나리오를 보고한다.
+- **위험한 단계마다 승인이 따로 있다** — 커밋·push·PR·머지·배포·릴리즈는 각각 다른 행동이며, 한 승인이 다른 행동이나 새 HEAD에 적용되지 않는다.
+- **대상 저장소가 같은 양식을 쓴다** — workflow-init이 스킬이 요구하는 항목을 포함한 Issue·PR 템플릿을 설치한다.
 
 ## 다음 요청 선택
 
@@ -34,7 +34,7 @@ git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이
 | 검토된 HEAD | “승인된 PR을 합의한 방식으로 머지해줘.” | pr-merge; 해당 PR·HEAD에 대한 승인 |
 | 작업 종료 | “확인된 결과와 종료 이유로 Issue #12를 닫아줘.” | issue-close; 종료·댓글의 별도 범위 |
 
-범위를 정한 커밋은 commit-rule, 전략 초기화는 workflow-init, 릴리즈는 git-release에 요청한다. 일반 브랜치·PR·hotfix 작업은 [프로젝트 정책](skills/git-workflow/references/project-branch-policy.md)을 읽고 따른다. 각 요청이 다른 행동까지 자동 승인하지 않는다. 아래 스킬 표에서 정본 규칙을 읽는다.
+커밋 범위 결정과 커밋 실행은 commit-rule, 전략 초기화는 workflow-init, 릴리즈는 git-release에 요청한다. 일반 브랜치·PR·hotfix 작업은 [프로젝트 정책](skills/git-workflow/references/project-branch-policy.md)을 읽고 따른다. 각 요청이 다른 행동까지 자동 승인하지 않는다. 아래 스킬 표에서 정본 규칙을 읽는다.
 
 Issue는 원문·동작 차이·영향·제약·AC·계획·필수 참고 링크, PR은 실제 결과·검증·배포 상태의 진입점이다. 새 작업은 별도 plan/task/handoff/review 파일 없이 진행한다. 공통 설계는 부모 Issue, 독립 추적이 필요한 결과는 sub-issue에 기록한다. 독립 검토 입력은 구현자에게 전달하지 않는다. [문서 역할과 인계](skills/git-workflow/references/document-links.md)를 참조한다.
 
@@ -44,7 +44,7 @@ Issue 기반 커밋은 [Refs 푸터](skills/commit-rule/references/commit-messag
 
 ```mermaid
 flowchart TD
-    A[요청] --> B[issue-create: 달성 조건을 갖춘 Issue]
+    A[요청] --> B[issue-create: 달성 조건을 포함한 Issue]
     B --> C[issue-create: Issue 계획·필요한 sub-issue]
     C --> D[git-workflow: 단계별 구현·테스트·기록·커밋]
     A -->|경미한 정합성 예외: 요청 근거와 검증| D
@@ -60,7 +60,7 @@ flowchart TD
 
 PR은 [Refs를 기본 연결](skills/git-workflow/references/issue-link.md#참조와-종료)로 쓰고, 머지 시 자동 종료를 사용자가 명시 요청한 경우만 예외로 허용한다. issue-close는 「한눈에」·계획·AC·남은 조치를 근거에 맞게 갱신하고 저장·조회한 뒤 결과 댓글을 게시·확인하고 승인된 종료를 실행한다. 이미 자동 종료된 Issue도 본문과 결과를 보완한다.
 
-pr-merge는 머지 직후 머지된 PR의 원격 head를 삭제하고 worktree를 제거한다. Issue 종료 여부와 관계없으며 원격·로컬 브랜치·worktree 결과를 각각 보고한다. issue-close는 원격 head를 삭제하지 않고 남은 대상을 보고하며, 근거로 충족된 task 항목을 승인 없이 체크한다. dirty·공유·잠금·보호·검토 후 작업은 보존하고 Codex 관리 worktree는 관리 기능으로 아카이브한다. [정리 정책](skills/pr-merge/references/post-merge-cleanup.md)을 적용한다. 종료 코멘트는 설치된 issue-close가 담당하며 없으면 로컬 handoff로 남긴다. 후속 보완은 [공통 작업 단위·예외 기준](skills/git-workflow/references/outcome-scope.md)을 먼저 적용하고 실제 관련 Issue를 재사용하며 독립 추적이 필요한 새 결과만 분리를 제안한다.
+pr-merge는 머지 직후 머지된 PR의 원격 head를 삭제하고 worktree를 제거한다. Issue 종료 여부와 관계없으며 원격·로컬 브랜치·worktree 결과를 각각 보고한다. issue-close는 원격 head를 삭제하지 않고 남은 대상을 보고하며, 근거로 충족된 task 항목을 승인 없이 체크한다. dirty·공유·잠금·보호·검토 후 작업은 보존하고 Codex 관리 worktree는 관리 기능으로 아카이브한다. [정리 정책](skills/pr-merge/references/post-merge-cleanup.md)을 적용한다. 종료 코멘트는 설치된 issue-close가 담당하며 없으면 로컬 handoff 파일에 기록한다. 후속 보완은 [공통 작업 단위·예외 기준](skills/git-workflow/references/outcome-scope.md)을 먼저 적용하고 실제 관련 Issue를 재사용하며 독립 추적이 필요한 새 결과만 분리를 제안한다.
 
 “왜 이렇게 구현했는지 알려줘”, “이 코드의 의도를 알려줘”, “맥락을 알고싶어”처럼 명시적으로 요청하면 [git-history](skills/git-history/SKILL.md)가 읽기 전용으로 설명한다. “바꾸면 어떤 영향이 있어?”는 현재 호출·설정·테스트의 예상 영향·유지 조건·검증안을 추가한다. 일반 수정·승인된 Issue 구현 전체의 자동 필수 단계는 아니다. Refs나 Workflow 양식이 없어도 근거를 찾으며 추정·접근 제한을 구별한다. [사용 설명과 흐름](docs/guides/code-context-investigation.md), [대표 예시](docs/examples/code-context-investigation/README.md)를 참고한다.
 
@@ -70,17 +70,17 @@ pr-merge는 머지 직후 머지된 PR의 원격 head를 삭제하고 worktree�
 | [workflow-init](skills/workflow-init/SKILL.md) | 선택한 템플릿·AGENTS.md·라벨·릴리즈 분류·프로젝트 브랜치 전략·마일스톤 운영 초기화 |
 | [issue-create](skills/issue-create/SKILL.md) | Issue 작성·보완·중복 확인·계획·작업 분해 |
 | [pr-request](skills/pr-request/SKILL.md) | AC별 구현·검증 결과와 PR 작성 |
-| [pr-review](skills/pr-review/SKILL.md) | 변경이 Issue 의도를 채우는지와 빠진 테스트 확인 |
+| [pr-review](skills/pr-review/SKILL.md) | 변경이 Issue 의도를 충족하는지와 누락된 테스트 확인 |
 | [pr-comment-check](skills/pr-comment-check/SKILL.md) | PR·연결 Issue의 코멘트 확인·처리·원래 스레드 회신과 적용 결과 보고 |
 | [pr-merge](skills/pr-merge/SKILL.md) | 승인된 머지 확인·안전한 작업 정리·종료 근거 인계 |
-| [issue-close](skills/issue-close/SKILL.md) | 종료 사유 선택과 결과 코멘트를 남기는 Issue 종료 |
+| [issue-close](skills/issue-close/SKILL.md) | 종료 사유 선택과 결과 코멘트를 게시하는 Issue 종료 |
 | [commit-rule](skills/commit-rule/SKILL.md) | 주제별 커밋과 커밋 메시지 작성 |
 | [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
 | [git-history](skills/git-history/SKILL.md) | 명시 요청으로 코드 의도·맥락·변경 이유와 제안된 변경 영향을 읽기 전용 조사 |
 
 새 작업은 Issue·PR 본문에 계획·상세 설계·결과·검토를 기록하고 plan/task/handoff/review 파일을 만들지 않는다. 기본은 하나의 Issue다. [분리 기준](skills/issue-create/references/plan.md#sub-issue-분리-판단)의 독립 완료·검증과 별도 추적 필요가 모두 있을 때만 AI가 sub-issue를 제안한다. 복잡함·단계·파일·기존 task 수만으로 나누지 않는다. [관계 생성·확인](skills/issue-create/references/sub-issues.md)과 [증거 수명·기존 기록 보존](skills/git-workflow/references/document-links.md)을 따른다. [단일·독립 결과 예시](docs/examples/issue-centered-records/README.md)를 참조한다. [공개 기준이 충분하면 별도 입력 없이 진행](skills/git-workflow/references/execution-boundaries.md#검증-준비)하며, 필요한 비공개 독립 입력만 구현 전 고정하고 [리뷰 전용 위치](skills/git-workflow/references/review-criteria.md#보관-위치)에 유지한다.
 
-PR과 연결 Issue의 코멘트를 확인·처리·회신할 때는 [pr-comment-check](skills/pr-comment-check/SKILL.md)를 사용한다. pr-review·pr-merge도 같은 [조회·반영 확인 절차](skills/git-workflow/references/pr-comment-check.md)를 재사용한다. COMMENTED·resolved·outdated는 반영 근거가 아니며, 처리·회신을 맡긴 작업은 승인된 구현·회신까지 이어가고 적용 결과를 보고한다. 내용만 확인하는 요청은 읽기로 제한하며, 처리·회신도 스레드 resolve·머지 승인이 아니다. PENDING 리뷰는 보고만 하고 Submit 후 처리하며, 이미 게시된 PR·Issue 일반 댓글에는 별도 Submit을 요구하지 않는다.
+PR과 연결 Issue의 코멘트를 확인·처리·회신할 때는 [pr-comment-check](skills/pr-comment-check/SKILL.md)를 사용한다. pr-review·pr-merge도 같은 [조회·반영 확인 절차](skills/git-workflow/references/pr-comment-check.md)를 재사용한다. COMMENTED·resolved·outdated는 반영 근거가 아니며, 처리·회신을 요청한 작업은 승인된 구현·회신까지 진행하고 적용 결과를 보고한다. 내용만 확인하는 요청은 읽기로 제한하며, 처리·회신도 스레드 resolve·머지 승인이 아니다. PENDING 리뷰는 보고만 하고 Submit 후 처리하며, 이미 게시된 PR·Issue 일반 댓글에는 별도 Submit을 요구하지 않는다.
 
 수정 결과를 회신해 달라는 요청에는 git-workflow·pr-review·pr-merge가 [공통 회신 절차](skills/git-workflow/references/pr-comment-reply.md)를 재사용한다. 원래 스레드에 반영 근거·검증·남은 판단과 작성 AI를 표시하고, 기존 답글과 중복을 확인한 뒤 게시된 URL·본문을 다시 읽는다. 회신·resolve·머지 권한은 각각 구별한다.
 
@@ -90,7 +90,7 @@ PR과 연결 Issue의 코멘트를 확인·처리·회신할 때는 [pr-comment-
 
 [workflow-init](skills/workflow-init/SKILL.md)의 여섯 번째 선택 항목으로 버전별 작업 범위를 설정한다. 저장소 기존 규칙을 우선하며, 없으면 태그와 같은 `vX.Y.Z` 이름·Issue 중심 연결·합의된 기한만 설정하는 안을 제시한다. 목표 버전이 정해진 Issue는 생성 시 연결하고, 미정이면 비워 둔다. 초기화 미선택 시 관련 파일·마일스톤을 변경하지 않는다.
 
-[git-release](skills/git-release/SKILL.md)는 확정 범위의 모든 Issue 완료·마일스톤 100%를 발행 준비 조건으로 확인하고 실제 태그 포함과 검증을 대조한다. 미완료 필수 작업은 발행을 보류하고 연기 가능한 작업은 사용자 결정 후 차기 마일스톤으로 이월한다. 이미 머지된 코드는 마일스톤 이동만으로 빠지지 않는다. 100%와 Release 발행 완료는 구분하며, 발행 승인 요청에서 마일스톤 종료 여부를 별도 항목으로 함께 묻는다. 발행 확인과 종료 승인 후 마일스톤을 닫고, 종료 승인이 없으면 열린 마일스톤과 「마일스톤 종료 승인 대기」를 다음 행동으로 보고한다. [공통 절차](skills/git-workflow/references/milestones.md)를 따른다.
+[git-release](skills/git-release/SKILL.md)는 확정 범위의 모든 Issue 완료·마일스톤 100%를 발행 준비 조건으로 확인하고 실제 태그 포함과 검증을 대조한다. 미완료 필수 작업은 발행을 보류하고 연기 가능한 작업은 사용자 결정 후 차기 마일스톤으로 이월한다. 이미 머지된 코드는 마일스톤 이동만으로 릴리즈에서 제외되지 않는다. 100%와 Release 발행 완료는 구분하며, 발행 승인 요청에서 마일스톤 종료 여부를 별도 항목으로 함께 묻는다. 발행 확인과 종료 승인 후 마일스톤을 닫고, 종료 승인이 없으면 열린 마일스톤과 「마일스톤 종료 승인 대기」를 다음 행동으로 보고한다. [공통 절차](skills/git-workflow/references/milestones.md)를 따른다.
 
 ## spec-it
 
@@ -149,7 +149,7 @@ skills/
 └── workflow-init/     선택 설치·정본 자산·라벨 도구
 ```
 
-규칙마다 정본 파일은 하나다. SKILL.md는 reference를 다시 쓰지 않고 링크한다.
+규칙마다 정본 파일은 하나다. SKILL.md는 reference 내용을 중복 작성하지 않고 링크한다.
 
 ## 개발
 
@@ -171,7 +171,7 @@ git-history의 Git 그래프·오프라인 GitHub 사례와 변경 전·후 결�
 
 [문서 개선 전후](docs/examples/readable-records/README.md)는 의미를 보존하며 결론과 다음 행동을 쉽게 찾는 편집 예시다.
 
-[예제](docs/examples/README.md)는 채운 문서 세트와 흐름을 보여준다.
+[예제](docs/examples/README.md)는 템플릿 항목을 작성한 문서 세트와 흐름을 보여준다.
 
 | 예제 | 흐름 |
 | --- | --- |
