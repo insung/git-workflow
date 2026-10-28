@@ -77,6 +77,9 @@ pr-merge는 머지 직후 머지된 PR의 원격 head를 삭제하고 worktree�
 | [commit-rule](skills/commit-rule/SKILL.md) | 주제별 커밋과 커밋 메시지 작성 |
 | [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
 | [git-history](skills/git-history/SKILL.md) | 명시 요청으로 코드 의도·맥락·변경 이유와 제안된 변경 영향을 읽기 전용 조사 |
+| [issue-flow](skills/issue-flow/SKILL.md) | 목표 하나의 Issue·PR·결정을 순서도로 그리고 지난 보고 대비 진행 위치와 변경을 보고 |
+
+기본 흐름은 채팅 하나가 변경 하나를 조율한다. [issue-flow](skills/issue-flow/SKILL.md)는 목표 하나가 여러 Issue·저장소·세션에 걸칠 때 쓴다.
 
 새 작업은 Issue·PR 본문에 계획·상세 설계·결과·검토를 기록하고 plan/task/handoff/review 파일을 만들지 않는다. 기본은 하나의 Issue다. [분리 기준](skills/issue-create/references/plan.md#sub-issue-분리-판단)의 독립 완료·검증과 별도 추적 필요가 모두 있을 때만 AI가 sub-issue를 제안한다. 복잡함·단계·파일·기존 task 수만으로 나누지 않는다. [관계 생성·확인](skills/issue-create/references/sub-issues.md)과 [증거 수명·기존 기록 보존](skills/git-workflow/references/document-links.md)을 따른다. [단일·독립 결과 예시](docs/examples/issue-centered-records/README.md)를 참조한다. [공개 기준이 충분하면 별도 입력 없이 진행](skills/git-workflow/references/execution-boundaries.md#검증-준비)하며, 필요한 비공개 독립 입력만 구현 전 고정하고 [리뷰 전용 위치](skills/git-workflow/references/review-criteria.md#보관-위치)에 유지한다.
 
@@ -138,6 +141,7 @@ branch-strategy 스킬은 제거되었다. 이전 스킬 호출은 전략 기록
 ```text
 skills/
 ├── git-history/       코드 변경 맥락 조사와 Git·GitHub 탐색
+├── issue-flow/        목표 단위 진행 순서도와 변경 보고
 ├── git-workflow/      라우터, 실행 경계, 표기·문체, 라벨, 문서 링크
 ├── issue-create/      Issue 본문 규칙
 ├── pr-request/         PR 규칙과 구현 인계 양식
