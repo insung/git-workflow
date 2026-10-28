@@ -2,7 +2,7 @@
 
 # PR 본문 작성
 
-[경미한 정합성 보완 예외와 완료 보고](../../git-workflow/references/outcome-scope.md)를 먼저 적용한다. 해당 예외는 Issue 항목·AC 대신 `## 요청 근거와 해결 범위`의 확인 가능한 요청·이유·범위·검증·Issue 미필요 근거로 대응한다. 나머지 실제 결과·위험·승인 정보는 동일하게 유지한다.
+[경미한 정합성 보완 예외와 완료 보고](../../git-workflow/references/outcome-scope.md)를 먼저 적용한다. 해당 예외는 Issue 항목·AC 대신 `## 요청 근거와 해결 범위`의 확인 가능한 요청·이유·범위·검증과 [Issue 필요 판정](../../git-workflow/references/outcome-scope.md#issue-필요-판정-기록)(불필요)으로 대응한다. 나머지 실제 결과·위험·승인 정보는 동일하게 유지한다.
 
 [표기](../../git-workflow/references/change-conventions.md), [문체](../../git-workflow/references/writing-conventions.md), [라벨](../../git-workflow/references/labels.md), [기록 위치](../../git-workflow/references/document-links.md)를 적용한다. 정본은 [PR 템플릿](../../workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md)이다.
 
@@ -23,7 +23,7 @@
 
 ## 본문 작성·편집 순서
 
-1. 실제 Issue 또는 승인된 경미한 정합성 보완/아래 순수 준비 예외의 요청 근거·현재 diff·공개 계획·검증 근거를 읽는다. 문서 체크나 실행자의 완료 주장만 믿지 않는다.
+1. 실제 Issue 또는 [승인된 경미한 정합성 보완](../../git-workflow/references/execution-boundaries.md#issue-생성-승인)/아래 순수 준비 예외의 요청 근거·현재 diff·공개 계획·검증 근거를 읽는다. 문서 체크나 실행자의 완료 주장만 믿지 않는다.
 2. 첫 문장에 실제 변경 후 동작을 쓴다. 같은 결과의 파일·커밋은 묶되 다른 조건을 한 문장에 압축하지 않는다. 전체 파일 목록은 diff에 두고 본문에는 변경 이유가 필요한 경로만 쓴다.
 3. AC별로 기대와 실제 결과, 명령/확인 방법·대상 commit·필요한 환경·시각·미실행 이유를 정리한다. 과거 통과는 현재 통과로 바꾸지 않는다. 세부 결과가 길면 재현에 필요한 최소 자료만 분리한다.
 4. 실제 구현 선택·계획 차이·제약 이탈과 승인 여부를 기록한다. AI 제안을 합의로 쓰지 않는다. 준수한 제약 전문을 복사하지 않는다.
@@ -56,7 +56,7 @@ AC 결과에 현재 base/HEAD, 미커밋이면 파일과 patch/digest, 실행 �
 
 ## PR을 여는 절차
 
-실제 Issue 또는 승인된 경미한 정합성 보완/순수 준비 예외의 요청 근거·본문 초안·base/head·기존 동일 PR·라벨·승인 범위를 확인하고 `--body-file`로 생성한다. 생성 승인·댓글·머지·배포는 서로 다르며 기존 동일 행동 승인만 재사용한다. 생성 후 URL·headRefOid·본문·Issue 참조·라벨·assignee login을 확인한다. 응답 불명은 먼저 조회하고, assignee 실패 시 삭제/중복 생성 없이 승인 범위에서 추가만 재시도한다.
+실제 Issue 또는 [승인된 경미한 정합성 보완](../../git-workflow/references/execution-boundaries.md#issue-생성-승인)/순수 준비 예외의 요청 근거·본문 초안·base/head·기존 동일 PR·라벨·승인 범위를 확인하고 `--body-file`로 생성한다. 생성 승인·댓글·머지·배포는 서로 다르며 기존 동일 행동 승인만 재사용한다. 생성 후 URL·headRefOid·본문·Issue 참조·라벨·assignee login을 확인한다. 응답 불명은 먼저 조회하고, assignee 실패 시 삭제/중복 생성 없이 승인 범위에서 추가만 재시도한다.
 
 ## 릴리즈 노트가 label로 만들어질 때
 
