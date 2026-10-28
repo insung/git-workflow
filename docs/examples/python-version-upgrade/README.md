@@ -27,7 +27,7 @@ flowchart TD
 | [task-02-runtime-upgrade.md](task-02-runtime-upgrade.md) | 런타임·의존성 구현과 테스트 |
 | [task-03-release-handoff.md](task-03-release-handoff.md) | 배포 준비·PR 인계·독립 검토 |
 | [review-criteria.md](review-criteria.md) | 구현 전에 `review/draft-python-version-upgrade` 브랜치에 고정하는 AC별 판정 기준. 작업 디렉토리에는 pr-review의 기록 커밋 뒤에 나타남. [보관 위치](../../../skills/git-workflow/references/review-criteria.md#보관-위치) |
-| [review-input-runtime-compat.md](review-input-runtime-compat.md) | TC-02를 pr-review가 다시 실행하는 고정 입력. review-criteria.md와 같은 브랜치·같은 반입 시점 |
+| [review-input-runtime-compat.md](review-input-runtime-compat.md) | TC-02를 pr-review가 다시 실행하는 고정 입력. review-criteria.md와 같은 브랜치에 있고, 같은 기록 커밋으로 작업 브랜치에 포함됨 |
 | [handoff.md](handoff.md) | 실제 구현 커밋·테스트 결과를 리뷰 세션에 인계 |
 | [pr.md](pr.md) | 실제 Issue 연결과 변경/검증 요약·docs 링크 |
 | [review.md](review.md) | 검토 HEAD·의도·정책·테스트 근거 판단 |

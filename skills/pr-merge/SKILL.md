@@ -5,7 +5,7 @@ description: “검토한 PR을 머지해줘”, “PR 머지 결과를 확인�
 
 # PR 머지
 
-결과와 다음 행동은 [발견과 남은 일](../git-workflow/references/outcome-scope.md#발견과-남은-일)로 범위를 정한다.
+결과와 다음 행동은 [발견과 남은 일](../git-workflow/references/outcome-scope.md#발견과-남은-일) 기준으로 범위를 결정한다.
 
 [공통 실행 경계](../git-workflow/references/execution-boundaries.md)를 적용한다.
 
@@ -28,7 +28,7 @@ spec-it을 채택한 프로젝트에서 정책 예외가 필요하면 spec-it의
 
 머지 직전 [공통 코멘트 확인](../git-workflow/references/pr-comment-check.md)을 다시 실행해 모든 소스의 새·편집된 코멘트·답글·Issue 합의와 HEAD를 이전 확인과 대조한다. 미처리 요청의 완료 조건·합의 영향을 판단한다. 조회 미완료·필수 증거 부족·중요 새 요청은 보류와 재검토로 인계하며, 합의된 보류·철회·범위 밖과 영향 없는 의견은 unresolved 표시만으로 차단하지 않는다. 확인 댓글이 없다는 사실과 미처리 요청이 없다는 판단은 별개다. 승인 뒤 조회를 완료하고 실제 실행 직전 변화를 다시 확인한다.
 
-수정 결과의 회신 요청이 있으면 [공통 수정 결과 회신](../git-workflow/references/pr-comment-reply.md)을 재사용해 미회신·실질 변경 결과를 원래 스레드에 돌려준다. 기존 같은 회신은 생략하고 URL을 반환한다. 회신 요청 없이 머지 승인만으로 게시하지 않으며, 회신 성공으로 resolve·머지나 새 검토 판정을 만들지 않는다. 미처리·부분 반영은 완료 조건·합의 영향과 함께 재검토로 인계한다.
+수정 결과의 회신 요청이 있으면 [공통 수정 결과 회신](../git-workflow/references/pr-comment-reply.md)을 재사용해 미회신·실질 변경 결과를 원래 스레드에 답글로 게시한다. 기존 같은 회신은 생략하고 URL을 반환한다. 회신 요청 없이 머지 승인만으로 게시하지 않으며, 회신 성공으로 resolve·머지나 새 검토 판정을 만들지 않는다. 미처리·부분 반영은 완료 조건·합의 영향과 함께 재검토로 인계한다.
 
 1. 위 Issue 연결 검사가 통과했는지 확인하고 PR headRefOid를 다시 조회해 검토 HEAD와 일치하는지 확인한다.
    검토 HEAD 뒤 커밋은 [기록 커밋](../pr-review/SKILL.md#7-검토-기록-보존) 규칙으로 판단한다.
@@ -37,7 +37,7 @@ spec-it을 채택한 프로젝트에서 정책 예외가 필요하면 spec-it의
    PR 생성·리뷰 요청이나 에이전트의 pass는 사용자 머지 승인이 아니다.
    이미 같은 범위의 명시 승인이 있으면 다시 묻지 않는다.
 3. 검토 HEAD와 실제 PR HEAD의 일치 여부·기록 커밋 해당 여부·현재 결과·남은 위험·머지 승인 상태를 확인한 뒤, 댓글 게시/수정 요청이 있으면 [PR 댓글](../pr-review/references/pr-comment.md)에 따라 머지 직전 확인 결과만 기록한다.
-   요청이 없으면 대화로 반환한다. 댓글 부재만으로 머지를 막지 않으며, 기존 fail/human-review·승인·보호 규칙은 유지한다.
+   요청이 없으면 대화로 반환한다. 댓글 부재만으로 머지를 차단하지 않으며, 기존 fail/human-review·승인·보호 규칙은 유지한다.
    기록 커밋으로 인정되지 않은 HEAD 불일치도 요청된 확인 결과로 기록할 수 있다. 검토 HEAD와 실제 PR HEAD를 모두 적고 머지 보류·pr-review 인계를 기록한다. 이전 pass·승인을 새 소스 HEAD에 적용하거나 새 판정을 만들지 않는다.
    댓글 요청과 머지 승인은 별개이고, 확인 댓글은 새 검토나 머지 완료를 뜻하지 않는다.
 4. 승인 범위 안에서 저장소의 머지 방식과 보호 규칙을 따른다.
@@ -53,12 +53,12 @@ spec-it을 채택한 프로젝트에서 정책 예외가 필요하면 spec-it의
 
 승인된 머지 방식이 Squash인 경우 적용한다. [커밋 메시지 정본](../commit-rule/references/commit-message.md#issue-출처-refs)의 Refs·Co-authored-by 규칙을 최종 메시지에도 적용한다. 이 절은 머지 방식을 새로 선택하는 근거가 아니다.
 
-1. 최신 PR의 실제 해결 Issue를 확인해 필요한 Refs를 정한다. 단순히 모든 커밋의 참조를 복사하지 않고 이번 해결 범위와 대조한다. 참조 표기는 최종 커밋이 게시될 PR base 저장소 기준으로 확인한다.
+1. 최신 PR의 실제 해결 Issue를 확인해 필요한 Refs를 결정한다. 단순히 모든 커밋의 참조를 복사하지 않고 이번 해결 범위와 대조한다. 참조 표기는 최종 커밋이 게시될 PR base 저장소 기준으로 확인한다.
 2. 최종 제목은 PR의 `[PR]` 접두사를 제거하고 커밋의 `type(scope): 요약` 규칙으로 작성한다. 최종 본문·Refs·실제 기여자의 Co-authored-by를 준비한다. GitHub 기본 Squash 메시지는 커밋 수·저장소 설정에 따라 달라지므로 원래 커밋의 푸터가 자동 보존된다고 가정하지 않는다. 출처 참조에 의도하지 않은 자동 종료 키워드가 있는지도 확인한다.
 3. CLI에서는 확인한 제목을 `--subject`, 본문·푸터를 임시 파일의 `--body-file`로 지정하고, 기존 `--match-head-commit`과 승인된 `--squash`를 함께 사용한다. UI에서는 최종 메시지 입력란을 대조한다. 필요한 최종 메시지를 반영할 수 없는 실행 경로는 머지를 보류하고 이유를 보고한다.
 4. 실제 MERGED·mergedAt·mergeCommit을 확보한 뒤 그 OID의 메시지를 다시 읽어 준비한 Refs와 대조한다. 명령 성공이나 원래 HEAD의 푸터만으로 보존 완료라 하지 않는다.
 
-사후 보고는 `머지: 완료/미확인`과 `Refs: 확인/누락/미확인`을 구별한다. 실제 MERGED와 mergeCommit을 확인했지만 메시지 조회만 실패한 경우 머지는 완료, Refs는 미확인이다. 누락 또는 조회 실패는 관련 Issue·mergeCommit·남은 확인을 보고하고 후속 조치로 남긴다. 완료된 머지를 재실행하거나 공개 커밋을 amend·rebase·force push로 고치지 않는다.
+사후 보고는 `머지: 완료/미확인`과 `Refs: 확인/누락/미확인`을 구별한다. 실제 MERGED와 mergeCommit을 확인했지만 메시지 조회만 실패한 경우 머지는 완료, Refs는 미확인이다. 누락 또는 조회 실패는 관련 Issue·mergeCommit·남은 확인을 보고하고 후속 조치로 기록한다. 완료된 머지를 재실행하거나 공개 커밋을 amend·rebase·force push로 고치지 않는다.
 
 GitHub의 기본 메시지 구성은 [공식 Squash 설정 문서](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests)를 참조한다.
 
@@ -68,11 +68,11 @@ GitHub의 기본 메시지 구성은 [공식 Squash 설정 문서](https://docs.
 머지가 확인되지 않으면 merge-unconfirmed와 확인이 필요한 항목을 반환한다.
 실제 MERGED 확인 뒤 [머지 후 작업 정리](references/post-merge-cleanup.md)를 읽어
 정확한 대상·권한·보존 조건을 확인한다. PR 머지 승인은 해당 PR의 원격 head 삭제와 작업 worktree 정리도 포함하므로 안전 조건을 충족하면 별도 질문 없이 삭제·제거하고 사후 조회한다. Issue 종료 여부와 관계없이 머지된 PR마다 적용한다. 머지 결과 조회만 요청했거나 명시적 보존 요청이 있으면 삭제·제거하지 않는다. 로컬 브랜치 삭제와 댓글 게시는 별도 승인 범위로 유지하고 원격/local/worktree 결과를 각각 보고한다.
-설치된 [issue-close](../issue-close/SKILL.md)에 연결 Issue의 종료·결과 코멘트와 머지·정리 근거를 인계하고, 미설치면 대화 또는 작업용 임시 인계에 남긴다.
+설치된 [issue-close](../issue-close/SKILL.md)에 연결 Issue의 종료·결과 코멘트와 머지·정리 근거를 인계하고, 미설치면 대화 또는 작업용 임시 인계에 기록한다.
 자동 종료가 명시 요청된 예외나 기존 연결로 이미 닫힌 Issue도 본문 최종 상태·결과 댓글 보완 경로로 인계한다. CLOSED만으로 AC·전달·기록 완료를 보고하지 않는다.
 
 머지와 배포는 별도다.
 Issue/PR의 배포·롤백 조건/권한과 실제 배포 workflow를 확인한다.
 배포 승인이 없거나 환경이 미확인이면 필요한 다음 행동을 기록한다.
-Issue 「전달」에 배포 뒤 확인 항목이 남아 있으면 항목과 확인 시점을 Issue 링크와 함께 머지 결과에 포함하고 issue-close로 넘긴다.
+Issue 「전달」에 배포 뒤 확인 항목이 남아 있으면 항목과 확인 시점을 Issue 링크와 함께 머지 결과에 포함하고 issue-close에 인계한다.
 승인된 배포가 필요하면 해당 실행 절차로 인계하고, 배포 결과를 머지 완료와 구분한다.
