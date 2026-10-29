@@ -2,7 +2,7 @@
 
 **하나의 변경을 Issue의 의도부터 승인된 머지까지 같은 근거로 추적한다.**
 
-[English](README.md) · **한국어** · [0.8.0 릴리즈 준비](docs/releases/v0.8.0.md)
+[English](README.md) · **한국어**
 
 git-workflow는 Issue 기반 변경을 위한 Codex·Claude Code 플러그인이다. 요청자가 원하는 결과를 Issue의 달성 조건으로 기록하고, Issue에 실행 계획을 작성하고, 그 ID를 구현·테스트·PR·검토에서 참조한다. 새 작업의 계획·설계는 Issue에 작성하고 독립 추적이 필요한 결과만 sub-issue로 나눈다. 각 단계는 기억에 의존한 요약 대신 이전 단계의 의도와 실제 결과를 읽는다.
 
