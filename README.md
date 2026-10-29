@@ -77,6 +77,7 @@ Ask [git-history](skills/git-history/SKILL.md) explicitly: “Why was this imple
 | [commit-rule](skills/commit-rule/SKILL.md) | Make scoped commits and write commit messages |
 | [git-release](skills/git-release/SKILL.md) | Prepare release notes, tags and GitHub Releases |
 | [git-history](skills/git-history/SKILL.md) | Explicit read-only investigation of code intent, context, change reasons and proposed change impact |
+| [goal-flowchart](skills/goal-flowchart/SKILL.md) | A managing session rechecks sub-session reports against source data, judges whether the goal is reachable, and reports done and remaining work as a flowchart. Use when one goal involves several Issues, repositories or sessions; work without an Issue is included |
 
 New work records planning and detailed design in Issues and results and reviews in PRs or the authorized conversation; do not create per-work plan/task/handoff/review files. Default to one Issue. Split into sub-issues only when a result has independent acceptance and verification **and** needs separate delivery, ownership, scheduling, blocking or dependency tracking. Complexity, file counts and legacy task counts alone do not justify splitting. See the [split criteria](skills/issue-create/references/plan.md#sub-issue-분리-판단) and [relationship procedure](skills/issue-create/references/sub-issues.md). Follow the [evidence lifecycle and document hub handoff](skills/git-workflow/references/document-links.md), preserve existing records and fixed links, and use the [short example](docs/examples/issue-centered-records/README.md). When public criteria suffice, [proceed without separate inputs](skills/git-workflow/references/execution-boundaries.md#검증-준비). Freeze any required private inputs before implementation and keep them in a [review-only location](skills/git-workflow/references/review-criteria.md#보관-위치).
 
@@ -138,6 +139,7 @@ See the [short workflow](skills/workflow-init/references/branch-policy.md#간략
 ```text
 skills/
 ├── git-history/       code context investigation and Git/GitHub tracing
+├── goal-flowchart/    goal review and progress flowchart across sessions
 ├── git-workflow/      router, execution boundaries, conventions, labels, links
 ├── issue-create/      Issue content rules
 ├── pr-request/         PR rules and handoff form
