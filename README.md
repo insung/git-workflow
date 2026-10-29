@@ -2,7 +2,7 @@
 
 **Carry one change from Issue intent to an approved merge on the same evidence.**
 
-**English** · [한국어](README.ko.md) · [0.8.0 release preparation](docs/releases/v0.8.0.md)
+**English** · [한국어](README.ko.md)
 
 git-workflow is a Codex and Claude Code plugin for Issue-based changes. It records what the requester wants as Issue acceptance criteria, keeps execution plans and detailed design in Issues and uses sub-issues only for independently tracked results, and carries those IDs through implementation, tests, the PR and review. Each stage reads the previous stage's intent and actual results instead of a summary from memory.
 
