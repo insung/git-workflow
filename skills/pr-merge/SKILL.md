@@ -11,11 +11,9 @@ description: “검토한 PR을 머지해줘”, “PR 머지 결과를 확인�
 
 ## Issue 연결 또는 예외의 요청 근거: 머지 필수 조건
 
-[Issue 연결 검사](../git-workflow/references/issue-link.md)를 최종 검토 결과까지 포함해 적용한다. 경미한 정합성 보완 또는 순수 릴리즈 준비 예외라면 Issue 항목 대신 확인된 요청·범위·검증의 대체 기록과 최신 diff를 대조한다.
+[Issue 연결 검사](../git-workflow/references/issue-link.md)를 최종 검토 결과까지 포함해 머지 직전에 적용한다. Issue 없는 PR 예외(경미한 정합성 보완·순수 릴리즈 준비)도 같은 문서의 조건과 대체 기록을 최신 diff와 대조한다.
 보류 조건에 해당하면 머지를 보류하고 원인을 보고한다.
-이 검사 통과는 사용자 머지 승인이 아니다.
-머지 직전 최신 본문과 Issue 또는 예외의 요청 근거를 다시 확인한다.
-연결 Issue는 [참조와 종료](../git-workflow/references/issue-link.md#참조와-종료)를 적용해 Refs를 기본으로 유지한다. PR 본문·포함될 커밋과 최종 머지 메시지·Development 수동 연결의 자동 종료 경로와 명시 요청을 대조한다. 이 확인은 Squash 외 머지 방식에도 적용한다. 의도하지 않은 자동 종료가 있으면 머지를 보류하고 승인된 수정 뒤 재조회한다. 머지 승인으로 Issue 종료·결과 댓글 게시를 추정하지 않는다.
+연결 Issue의 참조와 자동 종료 경로는 [참조와 종료](../git-workflow/references/issue-link.md#참조와-종료)로 확인한다. 이 확인은 Squash 외 머지 방식에도 적용한다. 의도하지 않은 자동 종료가 있으면 머지를 보류하고 승인된 수정 뒤 재조회한다.
 
 ## 머지 전
 
@@ -24,22 +22,17 @@ description: “검토한 PR을 머지해줘”, “PR 머지 결과를 확인�
 Issue의 현재 계획 또는 승인된 예외 PR의 요청 근거, 필요한 연결 문서, PR URL, 검토한 HEAD와 결과, 검증 근거와 전달/배포 계획을 확인한다.
 기록은 [문체](../git-workflow/references/writing-conventions.md), 원격 요약은 [document-links](../git-workflow/references/document-links.md)를 따른다.
 fail/human-review가 남아 있으면 수정·추가 증거 또는 명시적 인간 결정이 먼저다.
-spec-it을 채택한 프로젝트에서 정책 예외가 필요하면 spec-it의 예외 절차로 기록하며, 머지 승인만으로 예외를 만들지 않는다.
 
-머지 직전 [공통 코멘트 확인](../git-workflow/references/pr-comment-check.md)을 다시 실행해 모든 소스의 새·편집된 코멘트·답글·Issue 합의와 HEAD를 이전 확인과 대조한다. 미처리 요청의 완료 조건·합의 영향을 판단한다. 조회 미완료·필수 증거 부족·중요 새 요청은 보류와 재검토로 인계하며, 합의된 보류·철회·범위 밖과 영향 없는 의견은 unresolved 표시만으로 차단하지 않는다. 확인 댓글이 없다는 사실과 미처리 요청이 없다는 판단은 별개다. 승인 뒤 조회를 완료하고 실제 실행 직전 변화를 다시 확인한다.
+머지 직전 [공통 코멘트 확인의 머지 직전 다시 확인](../git-workflow/references/pr-comment-check.md#4-머지-직전-다시-확인)을 실행한다.
 
-수정 결과의 회신 요청이 있으면 [공통 수정 결과 회신](../git-workflow/references/pr-comment-reply.md)을 재사용해 미회신·실질 변경 결과를 원래 스레드에 답글로 게시한다. 기존 같은 회신은 생략하고 URL을 반환한다. 회신 요청 없이 머지 승인만으로 게시하지 않으며, 회신 성공으로 resolve·머지나 새 검토 판정을 만들지 않는다. 미처리·부분 반영은 완료 조건·합의 영향과 함께 재검토로 인계한다.
+수정 결과의 회신 요청이 있으면 [공통 수정 결과 회신](../git-workflow/references/pr-comment-reply.md)을 적용한다.
 
 1. 위 Issue 연결 검사가 통과했는지 확인하고 PR headRefOid를 다시 조회해 검토 HEAD와 일치하는지 확인한다.
-   검토 HEAD 뒤 커밋은 [기록 커밋](../pr-review/SKILL.md#7-검토-기록-보존) 규칙으로 판단한다.
-   그 밖의 변경이면 [pr-review](../pr-review/SKILL.md)로 재검토를 인계하고 새 HEAD에 대한 승인을 받는다. 이전 pass·승인을 새 소스 HEAD에 재사용하지 않는다.
+   검토 HEAD 뒤 커밋은 `pr-review` 스킬의 기록 커밋 규칙(「6. 검토 기록 보존」)으로 판단한다.
+   그 밖의 변경이면 `pr-review` 스킬로 재검토를 인계하고 새 HEAD에 대한 승인을 받는다. 이전 pass·승인을 새 소스 HEAD에 재사용하지 않는다.
 2. 사용자에게 검토 결과·남은 위험·머지 방식·대상 PR/HEAD를 제시한다.
    PR 생성·리뷰 요청이나 에이전트의 pass는 사용자 머지 승인이 아니다.
-   이미 같은 범위의 명시 승인이 있으면 다시 묻지 않는다.
-3. 검토 HEAD와 실제 PR HEAD의 일치 여부·기록 커밋 해당 여부·현재 결과·남은 위험·머지 승인 상태를 확인한 뒤, 댓글 게시/수정 요청이 있으면 [PR 댓글](../pr-review/references/pr-comment.md)에 따라 머지 직전 확인 결과만 기록한다.
-   요청이 없으면 대화로 반환한다. 댓글 부재만으로 머지를 차단하지 않으며, 기존 fail/human-review·승인·보호 규칙은 유지한다.
-   기록 커밋으로 인정되지 않은 HEAD 불일치도 요청된 확인 결과로 기록할 수 있다. 검토 HEAD와 실제 PR HEAD를 모두 적고 머지 보류·pr-review 인계를 기록한다. 이전 pass·승인을 새 소스 HEAD에 적용하거나 새 판정을 만들지 않는다.
-   댓글 요청과 머지 승인은 별개이고, 확인 댓글은 새 검토나 머지 완료를 뜻하지 않는다.
+3. 댓글 게시/수정 요청이 있으면 `pr-review` 스킬의 PR 댓글 규칙으로 머지 직전 확인 결과만 기록하고, 요청이 없으면 대화로 반환한다. 댓글 부재만으로 머지를 차단하지 않으며, 기존 fail/human-review·승인·보호 규칙은 유지한다. 확인 댓글은 새 검토나 머지 완료를 뜻하지 않는다.
 4. 승인 범위 안에서 저장소의 머지 방식과 보호 규칙을 따른다.
    `gh pr merge <PR> --match-head-commit <확인한HEAD> <승인된머지방식>`처럼 HEAD 일치를 실행 시에도 요구한다.
    Squash를 사용하는 경우 아래 [최종 메시지 확인](#squash-최종-메시지)을 먼저 적용한다.
@@ -51,7 +44,7 @@ spec-it을 채택한 프로젝트에서 정책 예외가 필요하면 spec-it의
 
 ## Squash 최종 메시지
 
-승인된 머지 방식이 Squash인 경우 적용한다. [커밋 메시지 정본](../commit-rule/references/commit-message.md#issue-출처-refs)의 Refs·Co-authored-by 규칙을 최종 메시지에도 적용한다. 이 절은 머지 방식을 새로 선택하는 근거가 아니다.
+승인된 머지 방식이 Squash인 경우 적용한다. `commit-rule` 스킬의 커밋 메시지 규칙 중 Issue 출처 Refs·Co-authored-by 규칙을 최종 메시지에도 적용한다. 이 절은 머지 방식을 새로 선택하는 근거가 아니다.
 
 1. 최신 PR의 실제 해결 Issue를 확인해 필요한 Refs를 결정한다. 단순히 모든 커밋의 참조를 복사하지 않고 이번 해결 범위와 대조한다. 참조 표기는 최종 커밋이 게시될 PR base 저장소 기준으로 확인한다.
 2. 최종 제목은 PR의 `[PR]` 접두사를 제거하고 커밋의 `type(scope): 요약` 규칙으로 작성한다. 최종 본문·Refs·실제 기여자의 Co-authored-by를 준비한다. GitHub 기본 Squash 메시지는 커밋 수·저장소 설정에 따라 달라지므로 원래 커밋의 푸터가 자동 보존된다고 가정하지 않는다. 출처 참조에 의도하지 않은 자동 종료 키워드가 있는지도 확인한다.
@@ -66,9 +59,8 @@ GitHub의 기본 메시지 구성은 [공식 Squash 설정 문서](https://docs.
 
 실제 머지가 확인되면 PR URL, mergedAt, mergeCommit과 검토·승인한 HEAD를 보고한다. Squash인 경우 최종 메시지의 Refs 확인 결과도 함께 보고한다.
 머지가 확인되지 않으면 merge-unconfirmed와 확인이 필요한 항목을 반환한다.
-실제 MERGED 확인 뒤 [머지 후 작업 정리](references/post-merge-cleanup.md)를 읽어
-정확한 대상·권한·보존 조건을 확인한다. PR 머지 승인은 해당 PR의 원격 head 삭제와 작업 worktree 정리도 포함하므로 안전 조건을 충족하면 별도 질문 없이 삭제·제거하고 사후 조회한다. Issue 종료 여부와 관계없이 머지된 PR마다 적용한다. 머지 결과 조회만 요청했거나 명시적 보존 요청이 있으면 삭제·제거하지 않는다. 로컬 브랜치 삭제와 댓글 게시는 별도 승인 범위로 유지하고 원격/local/worktree 결과를 각각 보고한다.
-설치된 [issue-close](../issue-close/SKILL.md)에 연결 Issue의 종료·결과 코멘트와 머지·정리 근거를 인계하고, 미설치면 대화 또는 작업용 임시 인계에 기록한다.
+실제 MERGED 확인 뒤 [머지 후 작업 정리](references/post-merge-cleanup.md)를 머지된 PR마다 적용하고 원격/local/worktree 결과를 각각 보고한다.
+설치된 `issue-close` 스킬에 연결 Issue의 종료·결과 코멘트와 머지·정리 근거를 인계하고, 미설치면 같은 근거와 게시 권한 상태를 대화 또는 작업용 임시 인계에 기록한다.
 자동 종료가 명시 요청된 예외나 기존 연결로 이미 닫힌 Issue도 본문 최종 상태·결과 댓글 보완 경로로 인계한다. CLOSED만으로 AC·전달·기록 완료를 보고하지 않는다.
 
 머지와 배포는 별도다.

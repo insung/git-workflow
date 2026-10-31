@@ -79,7 +79,7 @@ pr-merge는 머지 직후 머지된 PR의 원격 head를 삭제하고 worktree�
 | [git-history](skills/git-history/SKILL.md) | 명시 요청으로 코드 의도·맥락·변경 이유와 제안된 변경 영향을 읽기 전용 조사 |
 | [goal-flowchart](skills/goal-flowchart/SKILL.md) | 관리 세션이 하위 세션 보고를 원본 데이터로 재확인해 목표 달성 여부를 판정하고, 한 작업과 남은 작업을 순서도로 보고. 목표 하나에 여러 Issue·저장소·세션이 관련될 때 쓰며 Issue 가 없는 작업도 포함 |
 
-새 작업은 Issue·PR 본문에 계획·상세 설계·결과·검토를 기록하고 plan/task/handoff/review 파일을 만들지 않는다. 기본은 하나의 Issue다. [분리 기준](skills/issue-create/references/plan.md#sub-issue-분리-판단)의 독립 완료·검증과 별도 추적 필요가 모두 있을 때만 AI가 sub-issue를 제안한다. 복잡함·단계·파일·기존 task 수만으로 나누지 않는다. [관계 생성·확인](skills/issue-create/references/sub-issues.md)과 [증거 수명·기존 기록 보존](skills/git-workflow/references/document-links.md)을 따른다. [단일·독립 결과 예시](docs/examples/issue-centered-records/README.md)를 참조한다. [공개 기준이 충분하면 별도 입력 없이 진행](skills/git-workflow/references/execution-boundaries.md#검증-준비)하며, 필요한 비공개 독립 입력만 구현 전 고정하고 [리뷰 전용 위치](skills/git-workflow/references/review-criteria.md#보관-위치)에 유지한다.
+새 작업은 Issue·PR 본문에 계획·상세 설계·결과·검토를 기록하고 plan/task/handoff/review 파일을 만들지 않는다. 기본은 하나의 Issue다. [분리 기준](skills/issue-create/references/plan.md#sub-issue-분리-판단)의 독립 완료·검증과 별도 추적 필요가 모두 있을 때만 AI가 sub-issue를 제안한다. 복잡함·단계·파일·기존 task 수만으로 나누지 않는다. [관계 생성·확인](skills/issue-create/references/sub-issues.md)과 [증거 수명·기존 기록 보존](skills/git-workflow/references/document-links.md)을 따른다. [단일·독립 결과 예시](docs/examples/issue-centered-records/README.md)를 참조한다. [공개 기준이 충분하면 별도 입력 없이 진행](skills/git-workflow/references/execution-boundaries.md#검증-준비)하며, 필요한 숨긴 검증 입력만 구현 전 고정하고 [리뷰 전용 위치](skills/git-workflow/references/review-criteria.md#보관-위치)에 유지한다.
 
 PR과 연결 Issue의 코멘트를 확인·처리·회신할 때는 [pr-comment-check](skills/pr-comment-check/SKILL.md)를 사용한다. pr-review·pr-merge도 같은 [조회·반영 확인 절차](skills/git-workflow/references/pr-comment-check.md)를 재사용한다. COMMENTED·resolved·outdated는 반영 근거가 아니며, 처리·회신을 요청한 작업은 승인된 구현·회신까지 진행하고 적용 결과를 보고한다. 내용만 확인하는 요청은 읽기로 제한하며, 처리·회신도 스레드 resolve·머지 승인이 아니다. PENDING 리뷰는 보고만 하고 Submit 후 처리하며, 이미 게시된 PR·Issue 일반 댓글에는 별도 Submit을 요구하지 않는다.
 
@@ -93,14 +93,18 @@ PR과 연결 Issue의 코멘트를 확인·처리·회신할 때는 [pr-comment-
 
 [git-release](skills/git-release/SKILL.md)는 확정 범위의 모든 Issue 완료·마일스톤 100%를 발행 준비 조건으로 확인하고 실제 태그 포함과 검증을 대조한다. 미완료 필수 작업은 발행을 보류하고 연기 가능한 작업은 사용자 결정 후 차기 마일스톤으로 이월한다. 이미 머지된 코드는 마일스톤 이동만으로 릴리즈에서 제외되지 않는다. 100%와 Release 발행 완료는 구분하며, 발행 승인 요청에서 마일스톤 종료 여부를 별도 항목으로 함께 묻는다. 발행 확인과 종료 승인 후 마일스톤을 닫고, 종료 승인이 없으면 열린 마일스톤과 「마일스톤 종료 승인 대기」를 다음 행동으로 보고한다. [공통 절차](skills/git-workflow/references/milestones.md)를 따른다.
 
-## spec-it
+## 용어
 
-[spec-it](https://github.com/insung/spec-it)은 프로젝트의 아키텍처·제품 정책을 고정하는 별도 플러그인이다. 프로젝트는 `.architecture/manifest.yaml`과 `.architecture/lock.yaml`을 커밋해 spec-it을 채택한다. git-workflow는 spec-it 없이도 동작한다.
-
-| 프로젝트 상태 | pr-review 동작 |
+| 용어 | 뜻 |
 | --- | --- |
-| 채택(manifest·lock 있음) | 의도·구현·테스트 교차 확인 뒤 고정된 규칙으로 [spec-it 정책 검사](skills/pr-review/references/spec-it-policy.md)를 적용하고 규칙 ID별 판정을 기록 |
-| 미채택 | 의도·구현·테스트 교차 확인만 하고 「spec-it 미채택」을 기록. 정책 판정 없음 |
+| 정본 | 같은 규칙을 한 곳에만 쓰는 기준 문서. 다른 문서는 링크만 둔다 |
+| 숨긴 검증 기준 | 구현 결과를 보기 전에 고정하고 구현 세션에는 보여 주지 않는 검증 기준. 머신러닝의 held-out 평가셋과 같은 목적 |
+| 고정 입력 | 숨긴 검증 기준과 함께 미리 고정한 테스트 사례(fixture) |
+| 인계 | 다음 단계나 다른 세션에 넘기는 작업 정보(handoff) |
+| 판정 | 기준과 결과를 비교한 결론(pass·warn·fail·human-review 등) |
+| 대조 | 두 자료를 나란히 놓고 일치하는지 확인하는 일 |
+| 조회 미완료 | API 조회가 오류로 끝나 결과를 모르는 상태. 「없음」과 구별한다 |
+| 재조회(read-back) | GitHub 에 댓글·본문을 작성한 다음 API 로 다시 조회해 저장된 내용을 확인하는 일 |
 
 ## 설치
 
@@ -142,8 +146,8 @@ skills/
 ├── goal-flowchart/    여러 세션에 걸친 목표 재검토와 진행 순서도
 ├── git-workflow/      라우터, 실행 경계, 표기·문체, 라벨, 문서 링크
 ├── issue-create/      Issue 본문 규칙
-├── pr-request/         PR 규칙과 구현 인계 양식
-├── pr-review/         검토 양식과 spec-it 정책 검사
+├── pr-request/         PR 규칙
+├── pr-review/         검토 양식과 결과 게시
 ├── pr-merge/          승인된 머지
 ├── issue-close/       종료 사유와 종료 코멘트 양식
 ├── commit-rule/       커밋 메시지·범위 규칙
@@ -165,7 +169,7 @@ claude plugin validate .claude-plugin/marketplace.json
 git diff --check
 ```
 
-이 검사는 패키지 구조, 매니페스트, 필수 파일, 상대 링크를 확인한다. 스킬 선택이나 검토 품질은 측정하지 않는다. 스킬 지시 변경은 [행동 주장별 검증](skills/git-workflow/references/execution-boundaries.md#검증-방법과-비교)으로 확인하며 정적 검사·행동 실행·효과 측정을 구별한다. 실행 주체는 [검증 실행 주체](skills/git-workflow/references/execution-boundaries.md#검증-실행-주체)를 따른다.
+이 검사는 패키지 구조, 매니페스트, 필수 파일, 상대 링크를 확인한다. 스킬 선택이나 검토 품질은 측정하지 않는다. 스킬 지시 변경은 [스킬 변경 검증 안내](docs/guides/skill-change-verification.md)로 확인하며 정적 검사·행동 실행·효과 측정을 구별한다. 실행 주체는 [검증 실행 주체](skills/git-workflow/references/execution-boundaries.md#검증-실행-주체)를 따른다.
 
 git-history의 Git 그래프·오프라인 GitHub 사례와 변경 전·후 결과는 [검증 재현](tests/fixtures/git-history/verification.md)에 있다. `python3 tests/git-history-fixture.test.py`는 fixture의 원자료를 검사하며 모델 행동을 판정하지 않는다.
 

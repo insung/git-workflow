@@ -8,7 +8,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Git Workflow",
-    "shortDescription": "Issue-first Git delivery with spec-it review.",
+    "shortDescription": "Issue-first Git delivery with intent and test review.",
     "longDescription": "Issue-first implementation, intent and test review, approved merge, GitHub templates, scoped commits and releases.",
     "developerName": "insung",
     "category": "Productivity",

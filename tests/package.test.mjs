@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { validatePackage } from '../scripts/check-package.mjs';
 
 const names = ['git-workflow', 'workflow-init', 'issue-create', 'pr-request', 'pr-review', 'pr-comment-check', 'pr-merge', 'issue-close', 'commit-rule', 'git-release', 'git-history', 'goal-flowchart'];
-const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-close/references/closing-comment.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/labels.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/references/templates.md', 'workflow-init/references/agents.md', 'workflow-init/references/labels.md', 'workflow-init/references/release.md', 'workflow-init/references/branch-policy.md', 'workflow-init/references/branch-options.md', 'workflow-init/references/milestones.md', 'git-workflow/references/milestones.md', 'git-workflow/references/project-branch-policy.md', 'workflow-init/scripts/sync-labels.py', 'issue-create/references/plan.md', 'issue-create/references/sub-issues.md', 'git-workflow/references/review-criteria.md', 'git-workflow/references/implementation.md', 'pr-request/references/pr.md', 'pr-request/references/handoff.md', 'pr-merge/references/post-merge-cleanup.md', 'pr-review/references/review.md', 'pr-review/references/pr-comment.md', 'git-workflow/references/pr-comment-check.md', 'git-workflow/references/pr-comment-reply.md', 'git-workflow/scripts/verify-reply.mjs', 'pr-comment-check/scripts/collect-comments.mjs', 'pr-review/references/spec-it-policy.md', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'git-release/references/release-notes.md', 'git-release/references/release-context.md', 'git-history/references/investigation.md', 'git-history/references/change-impact.md'];
+const references = ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/change-conventions.md', 'git-workflow/references/writing-conventions.md', 'git-workflow/references/labels.md', 'git-workflow/references/document-links.md', 'git-workflow/references/issue-link.md', 'issue-create/references/issue.md', 'issue-close/references/closing-comment.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'workflow-init/assets/.github/release.yml', 'workflow-init/assets/labels.yml', 'workflow-init/assets/agents-declaration.md', 'workflow-init/references/templates.md', 'workflow-init/references/agents.md', 'workflow-init/references/labels.md', 'workflow-init/references/release.md', 'workflow-init/references/branch-policy.md', 'workflow-init/references/branch-options.md', 'workflow-init/references/milestones.md', 'git-workflow/references/milestones.md', 'git-workflow/references/project-branch-policy.md', 'workflow-init/scripts/sync-labels.py', 'issue-create/references/plan.md', 'issue-create/references/sub-issues.md', 'git-workflow/references/review-criteria.md', 'git-workflow/references/implementation.md', 'pr-request/references/pr.md', 'pr-merge/references/post-merge-cleanup.md', 'pr-review/references/review.md', 'pr-review/references/pr-comment.md', 'git-workflow/references/pr-comment-check.md', 'git-workflow/references/pr-comment-reply.md', 'git-workflow/scripts/verify-reply.mjs', 'pr-comment-check/scripts/collect-comments.mjs', 'commit-rule/references/commit-message.md', 'commit-rule/references/scope.md', 'git-release/references/release-notes.md', 'git-release/references/release-context.md', 'git-history/references/investigation.md', 'git-history/references/change-impact.md'];
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'git-workflow-package-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
@@ -108,7 +108,7 @@ test('rejects missing shared label guidance', t => {
   assert.ok(validatePackage(root).some(e => e.includes('git-workflow/references/labels.md')));
 });
 
-for (const path of ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/issue-link.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'pr-review/references/spec-it-policy.md', 'pr-review/references/pr-comment.md']) {
+for (const path of ['git-workflow/references/execution-boundaries.md', 'git-workflow/references/issue-link.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md', 'workflow-init/assets/.github/ISSUE_TEMPLATE/BUG_REPORT.md', 'workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md', 'pr-review/references/pr-comment.md']) {
   test(`rejects missing required form or contract: ${path}`, t => {
     const { root } = fixture(t);
     rmSync(join(root, 'skills', path));
@@ -220,7 +220,7 @@ test('canonical adoption declaration carries role separation and approval bounda
     assert.ok(declaration.includes(target), target);
     assert.ok(existsSync(join(import.meta.dirname, '..', target)), target);
   }
-  for (const clause of ['사용자 승인 후 머지', '직접 구현하지 않으며', '이전 대화를 상속하지 않는 별도 구현 에이전트', '비공개 검토 기준·검증 입력은 구현자에게 전달하지 않는다', '읽기 전용 질문·Issue 작성만 요청한 경우에는 구현으로 확대하지 않는다']) {
+  for (const clause of ['사용자 승인 후 머지', '직접 구현하지 않으며', '이전 대화를 상속하지 않는 별도 구현 에이전트', '숨긴 검증 기준(구현 세션에 보여 주지 않는 검증 기준)·검증 입력은 구현자에게 전달하지 않는다', '읽기 전용 질문·Issue 작성만 요청한 경우에는 구현으로 확대하지 않는다']) {
     assert.ok(declaration.includes(clause), clause);
   }
 });
@@ -283,7 +283,7 @@ test('routes planning and implementation to their combined entrypoints', () => {
   assert.ok(issue.includes('계획만 요청됐으면 구성 초안을 반환'));
   assert.ok(issue.includes('Issue 작성만 요청된 경우 계획이나 구현을 자동 시작하지 않는다'));
   const implementation = readFileSync(join(root, 'git-workflow/references/implementation.md'), 'utf8');
-  for (const clause of ['작업 위치·기준 브랜치·base/HEAD', '비공개 검토 기준·고정 입력', '변경 전 소스(RED)', '원래 리뷰 스레드']) assert.ok(implementation.includes(clause), clause);
+  for (const clause of ['작업 위치·기준 브랜치·base/HEAD', '숨긴 검증 기준·고정 입력', '변경 전 소스(RED)', '원래 리뷰 스레드']) assert.ok(implementation.includes(clause), clause);
 });
 
 test('rejects the previous PR skill alongside pr-request', t => {
