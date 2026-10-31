@@ -98,6 +98,8 @@ Use the sixth [workflow-init](skills/workflow-init/SKILL.md) option to configure
 | Term (Korean) | Meaning |
 | --- | --- |
 | 정본 (canonical source) | The one document that states a rule; other documents only link to it |
+| 달성 조건 (acceptance criteria, AC) | The completion result the user approves, written as a yes/no question a requester can answer. Example: "After 3 wrong passwords, is login blocked for 5 minutes?" |
+| 확인 사례 (test case, TC) | How the AI will check an AC — cases and test types written before implementation. Not an approval item. Example: "Rejected at 4:59, allowed at 5:00 — unit" |
 | 숨긴 검증 기준 (hidden verification criteria) | Criteria fixed before seeing the implementation and never shown to the implementing session, like a held-out evaluation set |
 | 고정 입력 (fixed input) | Test cases (fixtures) pinned together with the hidden criteria |
 | 인계 (handoff) | Work information passed to the next step or another session |
