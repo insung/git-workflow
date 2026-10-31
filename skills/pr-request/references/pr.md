@@ -1,62 +1,52 @@
-제목은 `[PR] <이번 전달 결과>`로 쓰고 [공통 표기](../../git-workflow/references/change-conventions.md)를 따른다.
-
 # PR 본문 작성
 
-[경미한 정합성 보완 예외와 완료 보고](../../git-workflow/references/outcome-scope.md)를 먼저 적용한다. 해당 예외는 Issue 항목·AC 대신 `## 요청 근거와 해결 범위`의 확인 가능한 요청·이유·범위·검증과 [Issue 필요 판정](../../git-workflow/references/outcome-scope.md#issue-필요-판정-기록)(불필요)으로 대응한다. 나머지 실제 결과·위험·승인 정보는 동일하게 유지한다.
+제목은 `[PR] <이번 전달 결과>`로 쓰고 [공통 표기](../../git-workflow/references/change-conventions.md)를 따른다. 본문 절의 정본은 `workflow-init` 스킬의 PR 템플릿(`assets/.github/PULL_REQUEST_TEMPLATE.md`)이다.
 
-[표기](../../git-workflow/references/change-conventions.md), [문체](../../git-workflow/references/writing-conventions.md), [라벨](../../git-workflow/references/labels.md), [기록 위치](../../git-workflow/references/document-links.md)를 적용한다. 정본은 [PR 템플릿](../../workflow-init/assets/.github/PULL_REQUEST_TEMPLATE.md)이다.
+Issue 없는 PR 예외 중 [경미한 정합성 보완](../../git-workflow/references/outcome-scope.md#경미한-정합성-보완의-issue-없는-pr)은 Issue 항목·AC 대신 `## 요청 근거와 해결 범위`에 확인 가능한 요청·이유·범위·검증과 [Issue 필요 판정](../../git-workflow/references/outcome-scope.md#issue-필요-판정-기록)(불필요)을 쓴다. 순수 릴리즈 준비는 아래 절을 따른다. 예외 조건은 [Issue 연결 검사](../../git-workflow/references/issue-link.md)를 따른다. 나머지 실제 결과·위험·승인 정보는 동일하게 유지한다.
 
 ## 본문과 필수 리뷰 인계
 
-일반 PR의 필수 정보는 실제 Issue와 해결 AC, 실제 변경, AC별 확인 결과·검증 근거, 위험·배포·다음 조치다. Issue의 완료 조건·원문·제약·계획을 재정의하거나 전문 복사하지 않는다. 별도 handoff·task·review 파일을 요구하지 않는다.
+일반 PR의 필수 정보는 실제 Issue와 해결 AC, 실제 변경, AC별 확인 결과·검증 근거, 위험·배포·다음 조치다. Issue의 완료 조건·원문·제약·계획을 재정의하거나 전문 복사하지 않는다. PR 본문이 리뷰 인계이며, PR 생성 전에는 같은 내용을 대화나 작업용 임시 초안에 한 번 작성해 본문에 재사용한다.
 
 | 절 | 내용 |
 | --- | --- |
 | Issue와 해결 범위 | 실제 Issue 참조와 이번 AC ID |
 | 변경 내용 | 실제 바뀐 동작과 구현 방향을 이해할 만큼 설명 |
 | 완료 조건 확인과 검증 근거 | AC별 충족/충족(배포 뒤 확인 대기)/부분 충족/미충족/미검증과 현재 대상의 근거 |
-| 위험·배포·다음 조치 | 남은 위험, 배포 계획과 실제 확인, 롤백, 후속 조치·승인 |
+| 위험·배포·다음 조치 | 남은 위험, 배포 계획과 실제 확인, 롤백, 후속 조치·승인. 남은 일의 범위는 [발견과 남은 일](../../git-workflow/references/outcome-scope.md#발견과-남은-일)을 따른다 |
 | 중요한 결정과 계획 대비 차이 (선택) | 실제 선택과 이유·제약 준수·계획 이탈·승인 |
 | 화면 (선택) | 실제 화면 변화 |
 
-기존 대상 템플릿의 같은 뜻 절을 유지한다. 예전 `Issue`, `검증 상태`, `계획과 검토 근거`, `위험과 전달`도 대응 정보를 포함하면 된다. 배포·검증 정보를 여러 절에서 반복하지 않는다. 기존 파일을 자동 교체하지 않는다.
+선택 절은 실제 내용이 있을 때만 쓴다. 배포·롤백은 필수 정보이며 해당 없음은 확인한 이유를 쓴다. 배포·검증 정보를 여러 절에서 반복하지 않는다.
 
 ## 본문 작성·편집 순서
 
-1. 실제 Issue 또는 [승인된 경미한 정합성 보완](../../git-workflow/references/execution-boundaries.md#issue-생성-승인)/아래 순수 준비 예외의 요청 근거·현재 diff·공개 계획·검증 근거를 읽는다. 문서 체크나 실행자의 완료 주장만 믿지 않는다.
+1. 실제 Issue 또는 Issue 없는 PR 예외의 요청 근거·현재 diff·공개 계획·검증 근거를 읽는다. 문서 체크나 실행자의 완료 주장만 믿지 않는다.
 2. 첫 문장에 실제 변경 후 동작을 쓴다. 같은 결과의 파일·커밋은 한 항목으로 설명하되 다른 조건을 한 문장에 압축하지 않는다. 전체 파일 목록은 본문에 나열하지 않고(diff에서 확인한다) 본문에는 변경 이유가 필요한 경로만 쓴다.
 3. AC별로 기대와 실제 결과, 명령/확인 방법·대상 commit·필요한 환경·시각·미실행 이유를 정리한다. 과거 통과는 현재 통과로 바꾸지 않는다. 세부 결과가 길면 재현에 필요한 최소 자료만 분리한다.
 4. 실제 구현 선택·계획 차이·제약 이탈과 승인 여부를 기록한다. AI 제안을 합의로 쓰지 않는다. 준수한 제약 전문을 복사하지 않는다.
-5. 위험·배포·롤백·다음 행동을 기록한다. 설정 존재·머지·테스트를 실제 배포 완료로 쓰지 않는다. 구현 검증과 환경 적용 확인을 구별한다. 구현 검증을 마치고 Issue 「전달」의 배포 뒤 확인만 남은 AC는 「충족(배포 뒤 확인 대기)」로 쓰고 그 Issue를 링크한다. 새 배포 뒤 확인 기준은 PR에서 정의하지 않고 Issue 「전달」에 먼저 기록한다.
+5. 위험·배포·롤백·다음 행동을 기록한다. 실제 배포 완료는 [배포 증거 기준](../../git-workflow/references/document-links.md#문서-허브-인계)을 따른다. 구현 검증과 환경 적용 확인을 구별한다. 구현 검증을 마치고 Issue 「전달」의 배포 뒤 확인만 남은 AC는 「충족(배포 뒤 확인 대기)」로 쓰고 그 Issue를 링크한다. 새 배포 뒤 확인 기준은 PR에서 정의하지 않고 Issue 「전달」에 먼저 기록한다.
 6. 각 주장과 근거·승인을 대조한다. 필요한 조건·한계·이유가 보존됐는지 원문과 비교한다. 빈 선택 절은 삭제한다.
 
 ## 순수 릴리즈 준비 PR
 
-[릴리즈 준비 예외](../../git-release/references/release-context.md#issue-없는-릴리즈와-준비-pr)를 충족하고 실제 관련 Issue가 없는 경우 `## 릴리즈 준비와 요청 근거`를 Issue 항목 대신 사용한다. 사용자 요청·이유·범위·검증·남은 승인과 실제 diff를 대조하고 Closes를 쓰지 않는다. 새 동작·정책 변경 등이 섞이면 일반 Issue 연결을 적용한다.
+실제 관련 Issue가 없는 순수 릴리즈 준비 PR은 [순수 릴리즈 준비 예외](../../git-workflow/references/issue-link.md#순수-릴리즈-준비-예외)를 충족하면 `## 릴리즈 준비와 요청 근거`를 Issue 항목 대신 사용한다. 사용자 요청·이유·범위·검증·남은 승인과 실제 diff를 대조하고 Closes를 쓰지 않는다.
 
 ## Issue 항목의 필수 검사
 
-[Issue 연결 검사와 참조·종료 정본](../../git-workflow/references/issue-link.md)을 적용한다. 기본은 `Refs: #번호`이며 다른 저장소는 `Refs: owner/repo#번호` 또는 실제 Issue URL을 쓴다. 관련 Issue와 이번 해결 AC를 함께 기록한다. 자동 종료는 정본의 명시 요청 예외만 허용한다. sub-issue 구현 PR은 담당 Issue와 부모·기여 AC를 구별한다. 일반 연결에서는 생성 전 실제 원격 Issue, 생성 후 같은 참조와 자동 종료 경로를 확인한다. 닫힌 Issue는 이번 PR과의 관계를 확인한다.
+[Issue 연결 검사와 참조·종료 정본](../../git-workflow/references/issue-link.md)을 적용한다. 관련 Issue와 이번 해결 AC를 함께 기록한다. sub-issue 구현 PR은 담당 Issue와 부모·기여 AC를 구별한다.
 
 ## 검증 상태와 확인 절
 
-AC 결과에 현재 base/HEAD, 미커밋이면 파일과 patch/digest, 실행 근거를 기록한다. unit test가 없으면 이유와 대체 검사를 쓴다. 별도 handoff가 없다는 이유로 PR을 거절하지 않는다. 임시 로그만으로 공유 가능한 증거를 대신하지 않는다 ([증거 기준](../../git-workflow/references/document-links.md#증거와-실행-로그)).
-
-## 쓸 내용이 있을 때만 작성하는 절
-
-중요한 선택·계획 차이와 화면은 실제 내용이 있을 때만 쓴다. 예전 템플릿의 「바뀐 곳」·「확인」·「머지 뒤 조치」 절이 있으면 필요한 정보를 해당 절에 배치하고 새 절에 반복하지 않는다. 배포·롤백은 필수 정보이며 해당 없음은 확인한 이유를 쓴다.
+AC 결과에 현재 base/HEAD, 미커밋이면 파일과 patch/digest, 실행 근거를 기록한다. unit test가 없으면 이유와 대체 검사를 쓴다. 임시 로그만으로 공유 가능한 증거를 대신하지 않는다 ([증거 기준](../../git-workflow/references/document-links.md#증거와-실행-로그)).
 
 ## 배포 PR 본문
 
-개별 작업 전문 대신 실제 함께 배포되는 변경과 출처, 배포 순서·주의 사항·확인·롤백을 적는다. 변경 선정은 [release-notes](../../git-release/references/release-notes.md)를 따른다. 빈 분류는 지우고 type만으로 운영 영향 없음이라 하지 않는다.
+개별 작업 전문 대신 실제 함께 배포되는 변경과 출처, 배포 순서·주의 사항·확인·롤백을 적는다. 변경 선정은 `git-release` 스킬의 릴리즈 노트 기준(release-notes)을 따른다. 빈 분류는 지우고 type만으로 운영 영향 없음이라 하지 않는다.
 
 ## 저장소에 이미 PR 템플릿 파일이 있을 때
 
-기존 파일과 `PULL_REQUEST_TEMPLATE/` 폴더의 같은 뜻 절을 우선한다. 필요한 정보만 보완하고 기존 파일을 자동 덮어쓰지 않는다. 폴더 템플릿은 생성 URL의 template 선택을 확인한다. 새 자산과 다른 절 이름 자체는 누락이 아니다.
-
-## PR을 여는 절차
-
-실제 Issue 또는 [승인된 경미한 정합성 보완](../../git-workflow/references/execution-boundaries.md#issue-생성-승인)/순수 준비 예외의 요청 근거·본문 초안·base/head·기존 동일 PR·라벨·승인 범위를 확인하고 `--body-file`로 생성한다. 생성 승인·댓글·머지·배포는 서로 다르며 기존 동일 행동 승인만 재사용한다. 생성 후 URL·headRefOid·본문·Issue 참조·라벨·assignee login을 확인한다. 응답 불명은 먼저 조회하고, assignee 실패 시 삭제/중복 생성 없이 승인 범위에서 추가만 재시도한다.
+기존 파일과 `PULL_REQUEST_TEMPLATE/` 폴더의 같은 뜻 절을 우선한다. 예전 `Issue`·`검증 상태`·`계획과 검토 근거`·`위험과 전달`, 「바뀐 곳」·「확인」·「머지 뒤 조치」 절도 대응 정보를 담으면 되며 새 절에 반복하지 않는다. 필요한 정보만 보완하고 기존 파일을 자동 덮어쓰지 않는다. 폴더 템플릿은 생성 URL의 template 선택을 확인한다. 새 자산과 다른 절 이름 자체는 누락이 아니다.
 
 ## 릴리즈 노트가 label로 만들어질 때
 

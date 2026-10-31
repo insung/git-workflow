@@ -8,9 +8,7 @@ auto-merge 등록·merge queue 진입·exit 0·응답 미확인은 정리 시작
 
 사용자의 PR 머지 승인은 해당 PR·승인 HEAD에 정확히 대응하는 원격 head 삭제와 작업 worktree 정리도 포함한다. 실제 MERGED와 아래 안전 조건을 확인하면 별도 정리 승인을 다시 묻지 않고 원격 head를 삭제하고 worktree를 제거한다. Issue 종료 여부나 순수 릴리즈 준비 PR처럼 연결 Issue가 없는지와 관계없다. 머지된 branch는 재사용하지 않으므로 정리는 Issue 종료 시점이 아니라 머지 직후에 실행한다. 머지 결과 조회만 요청했거나 사용자가 branch·worktree 보존을 명시했으면 삭제하지 않고 조회와 인계까지 진행한다. 대상 대응이나 권한이 불명확하면 그 범위만 확인한다.
 
-로컬 브랜치 삭제와 외부 코멘트 게시는 별도 승인 대상이다. 머지 승인이나 worktree 정리 승인으로 이 권한을 확대하지 않는다. 같은 행동·정확한 대상에 이미 받은 승인은 재사용한다.
-
-[issue-close](../../issue-close/SKILL.md#원격-head-잔여-확인)는 원격 head를 삭제하지 않고 남은 대상을 조회해 보고한다.
+로컬 브랜치 삭제와 외부 코멘트 게시는 별도 승인 대상이다. 머지 승인이나 worktree 정리 승인으로 이 권한을 확대하지 않는다.
 
 `gh pr merge --delete-branch`는 로컬 branch까지 지우고 아래 대상 대응·조건부 삭제·사후 조회를 수행하지 않으므로 머지 명령에 추가하지 않는다. worktree 제거 증거도 아니다. 원격 자동 삭제 설정을 활성화하거나 보호 규칙을 우회하지 않는다.
 
@@ -39,7 +37,7 @@ auto-merge 등록·merge queue 진입·exit 0·응답 미확인은 정리 시작
 | --- | --- | --- |
 | 일반 linked worktree | 보존된 checkout에서 `git worktree remove <정확한경로>` (force 없음) | `git worktree list --porcelain`와 해당 경로 존재 여부 모두 확인 |
 | Codex 관리 worktree | 해당 작업의 `list_artifacts`로 정확한 identityKey와 primary/pinned/shared 여부를 확인한 뒤 `archive_worktree` 사용. 관리 기능이 없거나 대상 연결이 불명확하면 인계 | 관리 artifact가 archived인지와 반환된 checkout 제거 결과 확인. 관리 snapshot은 보존 근거로 기록하며 local branch 삭제를 추정하지 않음 |
-| 로컬 branch | worktree 제거 후 보존된 checkout에서 `git branch -d -- <작업branch>` | `git show-ref --verify refs/heads/<작업branch>`의 ref 부재 확인. 오류/조회 실패를 부재와 구분 |
+| 로컬 branch | worktree 제거 후 보존된 checkout에서 `git branch -d -- <작업branch>` | `git show-ref --verify refs/heads/<작업branch>`의 ref 부재 확인. 조회가 오류로 끝나면 '없음'으로 판단하지 않음 |
 | 원격 head | 정확한 head remote에서 현재 OID가 고정 OID인지 재조회 후 `git push --force-with-lease=refs/heads/<head>:<고정OID> <headRemote> :refs/heads/<head>` | `git ls-remote --heads <headRemote> refs/heads/<head>` 조회 성공·빈 결과 확인 |
 
 원격 명령의 lease는 동시 ref 갱신을 보존하는 조건부 삭제이며 force 삭제/보호 우회 허가가 아니다. 서버가 조건부 삭제를 지원하지 않으면 보류한다. remote·branch 입력은 검증하고 shell 인자로 안전하게 인용한다. 실행 순서는 대상 사이 의존 관계에 따라 결정하되 local branch보다 worktree를 먼저 처리한다. 하나가 실패하면 종속 삭제를 멈추고 나머지를 각각 보류/미확인으로 기록한다.
@@ -52,4 +50,4 @@ auto-merge 등록·merge queue 진입·exit 0·응답 미확인은 정리 시작
 | 실패 | 삭제 명령의 오류와 후속 조회 결과 |
 | 미확인 | 응답/조회 실패 또는 관리 metadata와 경로 상태 불일치; 재실행 전 조회 |
 
-머지 PR URL·mergedAt·mergeCommit·검토/승인 HEAD, 각 원격/local/worktree의 식별값·전후 조회·결과·보류 이유를 인계한다. 실제 Issue 종료/결과 코멘트는 issue-close가 설치돼 있으면 그 스킬에 전달한다. 자동 닫기로 이미 CLOSED인 Issue도 결과 코멘트 보완 경로로 인계한다. 설치돼 있지 않으면 동일 근거와 게시 권한을 대화 또는 작업용 임시 인계에 기록하고 issue-close를 사용할 수 있을 때 인계한다. 종료 스킬이나 새 코멘트 양식은 여기서 구현하지 않는다.
+머지 PR URL·mergedAt·mergeCommit·검토/승인 HEAD, 각 원격/local/worktree의 식별값·전후 조회·결과·보류 이유를 Issue 종료 인계에 포함한다. 종료 스킬이나 새 코멘트 양식은 여기서 구현하지 않는다.

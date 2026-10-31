@@ -93,14 +93,17 @@ Use the sixth [workflow-init](skills/workflow-init/SKILL.md) option to configure
 
 [git-release](skills/git-release/SKILL.md) requires all Issues in the confirmed scope to be complete and the milestone to reach 100% before publication, then checks actual tag inclusion and verification. Required unfinished work blocks publication; deferred work moves only after the user decides its destination. Moving a milestone does not remove merged code. A 100% milestone does not prove Release publication. The publication approval request also asks, as a separate item, whether to close the milestone. Close it only after verified publication and closure authorization; without that authorization, report the open milestone with "milestone closure awaiting approval" as the next action. Follow the [shared procedure](skills/git-workflow/references/milestones.md).
 
-## spec-it
+## Terms
 
-[spec-it](https://github.com/insung/spec-it) is a separate plugin that pins a project's architecture and product policies. A project adopts it by committing `.architecture/manifest.yaml` and `.architecture/lock.yaml`. git-workflow does not require spec-it.
-
-| Project state | pr-review behavior |
+| Term (Korean) | Meaning |
 | --- | --- |
-| Adopted (manifest and lock present) | Runs the intent, implementation and test cross-check, then applies the [spec-it policy check](skills/pr-review/references/spec-it-policy.md) against the pinned rules and records verdicts by rule ID |
-| Not adopted | Runs the intent, implementation and test cross-check only, records "spec-it not adopted", and makes no policy verdict |
+| 정본 (canonical source) | The one document that states a rule; other documents only link to it |
+| 숨긴 검증 기준 (hidden verification criteria) | Criteria fixed before seeing the implementation and never shown to the implementing session, like a held-out evaluation set |
+| 고정 입력 (fixed input) | Test cases (fixtures) pinned together with the hidden criteria |
+| 인계 (handoff) | Work information passed to the next step or another session |
+| 판정 (verdict) | The conclusion of comparing results with criteria (pass, warn, fail, human-review) |
+| 조회 미완료 (incomplete lookup) | An API lookup ended in an error, so the result is unknown; distinct from "none" |
+| 재조회 (read-back) | Re-reading a posted comment or body through the API to confirm what was stored |
 
 ## Installation
 
@@ -142,8 +145,8 @@ skills/
 ├── goal-flowchart/    goal review and progress flowchart across sessions
 ├── git-workflow/      router, execution boundaries, conventions, labels, links
 ├── issue-create/      Issue content rules
-├── pr-request/         PR rules and handoff form
-├── pr-review/         review form and spec-it policy check
+├── pr-request/         PR rules
+├── pr-review/         review form and result posting
 ├── pr-merge/          approved merge
 ├── issue-close/       close reasons and closing comment form
 ├── commit-rule/       commit message and scope rules
@@ -165,7 +168,7 @@ claude plugin validate .claude-plugin/marketplace.json
 git diff --check
 ```
 
-These checks cover package structure, manifests, required files and relative links. They do not measure skill selection or review quality; instruction changes use [claim-based validation](skills/git-workflow/references/execution-boundaries.md#검증-방법과-비교), separating static checks, behavior runs and effect measurements. Runners follow [verification runners](skills/git-workflow/references/execution-boundaries.md#검증-실행-주체).
+These checks cover package structure, manifests, required files and relative links. They do not measure skill selection or review quality; instruction changes follow the [skill change verification guide](docs/guides/skill-change-verification.md), separating static checks, behavior runs and effect measurements. Runners follow [verification runners](skills/git-workflow/references/execution-boundaries.md#검증-실행-주체).
 
 The git-history Git graph, offline GitHub cases and before/after results are documented in [verification](tests/fixtures/git-history/verification.md). `python3 tests/git-history-fixture.test.py` checks fixture integrity, not model behavior.
 
