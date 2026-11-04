@@ -51,9 +51,13 @@ gh api --hostname "$host" --paginate "repos/$owner_repo/pulls/$pr/reviews"
 gh api --hostname "$host" --paginate "repos/$owner_repo/pulls/$pr/comments"
 gh api --hostname "$host" "repos/$issue_repo/issues/$issue"
 gh api --hostname "$host" --paginate "repos/$issue_repo/issues/$issue/comments"
+# 하위 Issue 이면 부모 번호를 얻는다(404 는 부모 없음).
+gh api --hostname "$host" "repos/$issue_repo/issues/$issue/parent"
 ```
 
 참조 대상이 실제 Issue인지는 [필수 확인](../../git-workflow/references/issue-link.md#필수-확인)의 조회 방법으로 확인하고 PR을 Issue 원문이라고 기록하지 않는다. PR 커밋 목록의 포함, merge SHA, 기준 코드와 diff, Issue의 요청 범위·관련 코멘트를 조합해 연결한다. 커밋 관련 PR API는 기본 브랜치의 도입 PR을 제공하며 기본 브랜치에 없는 커밋에는 열린·머지 PR도 반환할 수 있다. 여러 결과는 각각 범위를 대조하고 열린 PR을 기준 코드의 반영 증거로 쓰지 않는다. GitHub 이외 host의 URL이면 해당 기록 방식과 제공 도구로 읽으며 GitHub API에 강제로 대입하지 않는다.
+
+Issue 에 부모가 있으면(위 조회 또는 본문의 「부모: #N」 줄) 부모 Issue 도 읽는다. 하위가 가리킨 부모 결정 ID(`#N D3`, 「부모 D3」)는 부모의 결정 기록에서 그 줄을 찾아 근거로 쓰고, 여러 하위에 걸친 공통 설계·제약은 부모의 설계 절에서 질문에 필요한 부분만 읽는다. 부모를 읽지 않아 결정을 찾지 못했다면 「결정 기록 없음」이라고 하지 않는다. 같은 PR 이 여러 하위를 묶어 부모를 가리키는 통합 PR 이면, 커밋의 Refs 가 가리키는 하위의 범위만 그 PR 의 근거로 쓴다.
 
 PR 본문은 계획·변경 설명, diff는 구현, 코멘트·실행 링크는 당시 검증 보고의 근거다. 리뷰 의견은 채택·해결 또는 후속 diff가 확인돼야 결정으로 연결한다. 연결된 원문·ADR·계획·문서 허브에서 질문에 필요한 부분을 읽는다. 현재 본문이 사후 편집됐거나 문서가 개정됐다면 created/updated 시각·고정 revision을 구별하고 당시 원문 복원 불가를 한계로 기록한다.
 

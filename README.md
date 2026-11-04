@@ -176,7 +176,7 @@ The git-history Git graph, offline GitHub cases and before/after results are doc
 
 ## Examples
 
-The [examples](docs/examples/README.md) show filled document sets and flows. The [before-and-after records](docs/examples/readable-records/README.md) show how to preserve meaning while making the conclusion and next action easier to find.
+The [examples](docs/examples/README.md) show filled document sets and flows. The [before-and-after records](docs/examples/readable-records/README.md) show how to preserve meaning while making the conclusion and next action easier to find. The [parent and sub-issue design example](docs/examples/parent-sub-issue-design/README.md) shows impact and design sections written as tables, with details kept in sub-issues.
 
 | Example | Flow |
 | --- | --- |
