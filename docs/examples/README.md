@@ -11,6 +11,7 @@
 | [기존 Issue 재개](resume-existing-issue/README.md) | 다른 세션으로 작업과 증거 인계 |
 | [리뷰 보완](review-rework/README.md) | 테스트 보완·새 HEAD 재검토 |
 | [크롤러 시작 장애](crawler-startup-hotfix/README.md) | prod hotfix와 dev 역반영 |
+| [상위·하위 Issue 설계 전후](parent-sub-issue-design/README.md) | 영향 범위 표·DB/엔드포인트 설계 표·상위와 하위의 상세도 배분 |
 | [문서 가독성 개선 전후](readable-records/README.md) | Issue·PR·plan·task·review의 의미 보존과 역할별 인계 |
 | [운영 릴리즈](production-release/README.md) | dev → prod, 배포와 태그·Release 구분 |
 

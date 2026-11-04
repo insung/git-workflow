@@ -177,7 +177,7 @@ git-history의 Git 그래프·오프라인 GitHub 사례와 변경 전·후 결�
 
 ## 예제
 
-[문서 개선 전후](docs/examples/readable-records/README.md)는 의미를 보존하며 결론과 다음 행동을 쉽게 찾는 편집 예시다.
+[문서 개선 전후](docs/examples/readable-records/README.md)는 의미를 보존하며 결론과 다음 행동을 쉽게 찾는 편집 예시다. [상위·하위 Issue 설계 전후](docs/examples/parent-sub-issue-design/README.md)는 영향 범위·DB·엔드포인트 설계를 표로 쓰고 상세를 하위 Issue 에 두는 예시다.
 
 [예제](docs/examples/README.md)는 템플릿 항목을 작성한 문서 세트와 흐름을 보여준다.
 
