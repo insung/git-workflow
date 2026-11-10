@@ -1,6 +1,6 @@
 # 종료 코멘트 양식
 
-Issue를 닫거나 이미 닫힌 Issue에 결과를 보완할 때 읽는다. 코멘트는 결과 요약과 근거 링크만 포함한다. plan·todo·handoff 전문은 복사하지 않는다. 링크 규칙은 [document-links](../../git-workflow/references/document-links.md)를 따른다.
+Issue를 닫거나 이미 닫힌 Issue에 결과를 보완할 때 읽는다. 코멘트는 결과 요약과 근거 링크만 포함한다. Issue 코멘트는 알림 채널로 그대로 나가므로, 「종료 결과」·「종료 사유」 첫 문단은 작업을 모르는 팀원이 읽을 수 있게 AC·D·단계 번호 없이 쓴다. plan·todo·handoff 전문은 복사하지 않는다. 링크 규칙은 [document-links](../../git-workflow/references/document-links.md)를 따른다.
 
 ## completed
 
