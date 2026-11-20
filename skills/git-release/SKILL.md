@@ -27,11 +27,12 @@ git log --first-parent --pretty=format:'%s' <이전-태그>..<현재-태그>
 - 검증된 커밋에만 배포 태그를 붙인다.
 - type별 버전 후보는 [공통 표기의 type 표](../git-workflow/references/change-conventions.md#제목)를 따른다.
   저장소에 버전 정책이나 자동화가 있으면 그 규칙이 우선이다.
+- 저장소 기준이 prod 배포마다 태그를 정하면 그 이름 규칙으로 후보를 제시한다. 예: 정기 배포 `vX.Y.0`, 그 사이의 prod 배포 패치 `vX.Y.Z`.
 - hotfix 분기·머지는 [공통 브랜치 정책](../git-workflow/references/project-branch-policy.md)을 따른다.
 
 ### 릴리즈 노트 작성
 
-커밋 이력에서 릴리즈 노트나 배포 PR의 변경 요약을 만들 때 [release-notes.md](references/release-notes.md)를 적용한다. 완성 형태는 [간결한 공개 노트 예시](references/release-notes-example.md)를 참고한다.
+커밋 이력에서 릴리즈 노트나 배포 PR의 변경 요약을 만들 때 [release-notes.md](references/release-notes.md)를 적용한다. 완성 형태는 [간결한 공개 노트 예시](references/release-notes-example.md)를 참고한다. 정기 마일스톤에 먼저 나간 핫픽스·선배포 Issue가 있으면 [핫픽스·선배포](../git-workflow/references/milestones.md#핫픽스선배포)에 따라 「핫픽스·선배포」 절에 적는다.
 
 ### 발행
 

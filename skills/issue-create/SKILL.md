@@ -9,7 +9,7 @@ description: '“이슈를 만들어줘”, “이슈 본문을 보완해줘”,
 
 [공통 실행 경계](../git-workflow/references/execution-boundaries.md)를 적용한다.
 제목은 [change-conventions](../git-workflow/references/change-conventions.md), 기록은 [writing-conventions](../git-workflow/references/writing-conventions.md), 라벨은 [labels](../git-workflow/references/labels.md), 외부 기록은 [document-links](../git-workflow/references/document-links.md)를 읽는다.
-목표 버전과 마일스톤은 [공통 마일스톤 절차](../git-workflow/references/milestones.md)를 적용한다. 저장소 기준과 목표가 결정됐으면 생성 시 연결하고, 미정이면 임의 지정하지 않는다.
+목표 버전과 마일스톤은 [공통 마일스톤 절차](../git-workflow/references/milestones.md)를 적용한다. 저장소 기준과 목표가 결정됐으면 생성 시 연결하고, 미정이면 임의 지정하지 않는다. 저장소 기준이 마일스톤 없음을 허용하면 미정 사유를 묻거나 요구하지 않는다.
 
 릴리즈 중 추가 작업은 `git-release` 스킬의 릴리즈 기록 기준(릴리즈 중 추가 작업)을 적용한다.
 
@@ -27,7 +27,7 @@ description: '“이슈를 만들어줘”, “이슈 본문을 보완해줘”,
 2. [Issue 생성 승인](../git-workflow/references/execution-boundaries.md#issue-생성-승인)이 있고 접근 가능하면 본문 파일로 Issue를 만들고 URL/번호를 확인한다. 승인이 없으면 [Issue 필요 판정](../git-workflow/references/outcome-scope.md#issue-필요-판정-기록)과 초안을 보고하고 승인을 받는다.
    인증 불가인 로컬 파일럿만 local-draft를 허용한다.
    경미한 정합성 보완 예외 외의 일반 원격 PR 전에는 실제 Issue가 필요하다. [순수 릴리즈 준비 예외](../git-workflow/references/issue-link.md#순수-릴리즈-준비-예외)는 별도 조건·대체 기록을 적용하며 이슈 생성을 강제하지 않는다.
-3. 실제 URL/번호·본문·라벨과 assignee login, 실제 마일스톤 연결 또는 미지정 사유를 재확인한다.
+3. 실제 URL/번호·본문·라벨과 assignee login, 실제 마일스톤 연결 또는 미지정 상태를 재확인한다. 미지정 사유는 마일스톤 없음 허용 기준이 없을 때만 적는다.
    assignee나 마일스톤 연결만 실패하면 이미 만든 Issue를 지우거나 다시 만들지 않고 승인 범위에서 그 연결만 재시도한다. 기존 assignee를 제거하지 않는다.
    Issue가 존재하더라도 의도·영향 범위·달성 조건이 부족하면 보완한다.
 4. 요약·진행 상황·원문·계획·참고 링크 절은 필수이며 정보가 없으면 미확인/미작성 상태를 표시한다. 원문 절은 본문 맨 아래에 작성하고 인용을 `<details>`로 접는다. 최초 요청과 후속 주석·확장·승인은 사용자가 실제 말한 문구와 선택한 설명의 맥락을 함께 보존한다. 직전 AI 답변에 반응한 발화는 그 답변의 요약을 [`AI 답변 요약:` 줄](references/issue.md#사용자-요청과-사실)로 그 발화 인용 바로 앞에 작성한다. AI의 해석·제안·결정을 원문으로 만들지 않는다.
@@ -45,7 +45,7 @@ description: '“이슈를 만들어줘”, “이슈 본문을 보완해줘”,
 
 ## 출력
 
-Issue URL/번호 또는 local-draft, 변경 의도·영향 범위·달성 조건, 적용 라벨과 실제 assignee login·미적용 사유, 마일스톤 이름·번호·연결 결과 또는 미지정/실패/미확인 사유, 남은 결정을 반환한다.
+Issue URL/번호 또는 local-draft, 변경 의도·영향 범위·달성 조건, 적용 라벨과 실제 assignee login·미적용 사유, 마일스톤 이름·번호·연결 결과 또는 미지정(허용 기준이 없을 때만 사유)/실패/미확인 사유, 남은 결정을 반환한다.
 필수 입력이 없으면 issue-incomplete다.
 Issue 존재만으로 구현 준비 완료라 하지 않는다.
 계획 요청에는 부모·담당 Issue URL, 본문 계획, 분리/미분리 이유·실제 관계·부모 AC 대응, 검증 사례, 독립 기준의 접근 경계·고정 상태, 준비된 범위·남은 결정·승인 범위도 반환한다. 계획 준비는 구현·배포 완료가 아니다. 구현까지 요청되면 `git-workflow` 스킬의 [공통 구현 절차](../git-workflow/references/implementation.md)에 인계한다.
