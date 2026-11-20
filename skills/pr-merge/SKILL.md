@@ -60,7 +60,7 @@ GitHub의 기본 메시지 구성은 [공식 Squash 설정 문서](https://docs.
 실제 머지가 확인되면 PR URL, mergedAt, mergeCommit과 검토·승인한 HEAD를 보고한다. 핫픽스·선배포 PR이면 연결 Issue의 마일스톤 확인 결과(연결됨·연결 질문 대기·대상 없음)와 패치 태그 인계 여부도 보고한다. Squash인 경우 최종 메시지의 Refs 확인 결과도 함께 보고한다.
 머지가 확인되지 않으면 merge-unconfirmed와 확인이 필요한 항목을 반환한다.
 실제 MERGED 확인 뒤 [머지 후 작업 정리](references/post-merge-cleanup.md)를 머지된 PR마다 적용하고 원격/local/worktree 결과를 각각 보고한다.
-실제 MERGED 확인 뒤 base가 [프로젝트 전략 정본](../git-workflow/references/project-branch-policy.md)의 운영 브랜치이고 정기 릴리즈 PR이 아니면 핫픽스·선배포로 보고 [핫픽스·선배포 확인](../git-workflow/references/milestones.md#핫픽스선배포)을 한 번 적용한다. 연결 Issue가 열린 정기 마일스톤에 없으면 연결할지 사용자에게 묻고, 답을 받기 전에는 연결하지 않는다. 패치 태그 기준이 저장소에 있으면 그 기준대로 `git-release` 스킬에 인계하며 머지 승인으로 태그를 만들지 않는다.
+실제 MERGED 확인 뒤 저장소 기준이 핫픽스·선배포 처리를 정했고 base가 [프로젝트 전략 정본](../git-workflow/references/project-branch-policy.md)의 운영 브랜치이고 정기 릴리즈 PR이 아니면 핫픽스·선배포로 보고 [핫픽스·선배포 확인](../git-workflow/references/milestones.md#핫픽스선배포)을 한 번 적용한다. 연결 Issue가 열린 정기 마일스톤에 없으면 연결할지 사용자에게 묻고, 답을 받기 전에는 연결하지 않는다. 패치 태그 기준이 저장소에 있으면 그 기준대로 `git-release` 스킬에 인계하며 머지 승인으로 태그를 만들지 않는다.
 설치된 `issue-close` 스킬에 연결 Issue의 종료·결과 코멘트와 머지·정리 근거를 인계하고, 미설치면 같은 근거와 게시 권한 상태를 대화 또는 작업용 임시 인계에 기록한다.
 자동 종료가 명시 요청된 예외나 기존 연결로 이미 닫힌 Issue도 본문 최종 상태·결과 댓글 보완 경로로 인계한다. CLOSED만으로 AC·전달·기록 완료를 보고하지 않는다.
 
