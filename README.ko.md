@@ -77,7 +77,7 @@ pr-merge는 머지 직후 머지된 PR의 원격 head를 삭제하고 worktree�
 | [commit-rule](skills/commit-rule/SKILL.md) | 주제별 커밋과 커밋 메시지 작성 |
 | [git-release](skills/git-release/SKILL.md) | 릴리즈 노트·태그·GitHub Release 준비 |
 | [git-history](skills/git-history/SKILL.md) | 명시 요청으로 코드 의도·맥락·변경 이유와 제안된 변경 영향을 읽기 전용 조사 |
-| [goal-flowchart](skills/goal-flowchart/SKILL.md) | 관리 세션이 하위 세션 보고를 원본 데이터로 재확인해 목표 달성 여부를 판정하고, 한 작업과 남은 작업을 순서도로 보고. 목표 하나에 여러 Issue·저장소·세션이 관련될 때 쓰며 Issue 가 없는 작업도 포함 |
+| [goal-flowchart](skills/goal-flowchart/SKILL.md) | 관리 세션이 하위 세션 보고를 원본 데이터로 재확인해 목표 달성 여부를 판정하고, 한 작업과 남은 작업을 순서도로 보고. 목표 하나에 여러 Issue·저장소·세션이 관련될 때 쓰며 Issue 가 없는 작업도 포함. 같은 세션에서 다시 부르면 이전 순서도를 이어 그리고 달라진 점과 이전 시점을 보여 줌 |
 
 새 작업은 Issue·PR 본문에 계획·상세 설계·결과·검토를 기록하고 plan/task/handoff/review 파일을 만들지 않는다. 기본은 하나의 Issue다. [분리 기준](skills/issue-create/references/plan.md#sub-issue-분리-판단)의 독립 완료·검증과 별도 추적 필요가 모두 있을 때만 AI가 sub-issue를 제안한다. 복잡함·단계·파일·기존 task 수만으로 나누지 않는다. [관계 생성·확인](skills/issue-create/references/sub-issues.md)과 [증거 수명·기존 기록 보존](skills/git-workflow/references/document-links.md)을 따른다. [단일·독립 결과 예시](docs/examples/issue-centered-records/README.md)를 참조한다. [공개 기준이 충분하면 별도 입력 없이 진행](skills/git-workflow/references/execution-boundaries.md#검증-준비)하며, 필요한 숨긴 검증 입력만 구현 전 고정하고 [리뷰 전용 위치](skills/git-workflow/references/review-criteria.md#보관-위치)에 유지한다.
 
